@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 60" role="img">
+  <title>Therabody</title>
+  <!-- T mark in a rounded square -->
+  <rect x="2" y="8" width="44" height="44" rx="8" ry="8" fill="#ffffff"/>
+  <line x1="11" y1="22" x2="35" y2="22" stroke="#000000" stroke-width="4" stroke-linecap="round"/>
+  <line x1="23" y1="22" x2="23" y2="42" stroke="#000000" stroke-width="4" stroke-linecap="round"/>
+  <!-- therabody wordmark in lowercase -->
+  <text x="58" y="39" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" letter-spacing="1.5" fill="#ffffff">therabody</text>
+</svg>

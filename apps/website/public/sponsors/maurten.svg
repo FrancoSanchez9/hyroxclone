@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" role="img">
+  <title>Maurten</title>
+  <!-- M geometric mark: two triangles forming an M shape -->
+  <polygon points="4,42 18,18 24,30 30,18 44,42" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- MAURTEN wordmark -->
+  <text x="58" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="3" fill="#ffffff">MAURTEN</text>
+</svg>
