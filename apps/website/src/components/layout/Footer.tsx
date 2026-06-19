@@ -31,7 +31,7 @@ export function Footer() {
                 <ul className="mt-1 space-y-1 pl-2">
                   <li>
                     <Link
-                      to="/"
+                      to="/la-carrera"
                       className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                     >
                       Singles
@@ -39,7 +39,7 @@ export function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/la-carrera"
                       className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                     >
                       Doubles
@@ -47,7 +47,7 @@ export function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/la-carrera"
                       className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                     >
                       Relays
@@ -55,7 +55,7 @@ export function Footer() {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/la-carrera"
                       className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                     >
                       Adaptativo
@@ -65,7 +65,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/faq"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   FAQs
@@ -73,7 +73,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/eventos"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Inscripciones
@@ -81,7 +81,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/contacto"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Cambios de evento
@@ -105,7 +105,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/"
+                  to="/afiliaciones"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Programa de afiliación
@@ -113,7 +113,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/gimnasios"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Buscador de gimnasios
@@ -137,15 +137,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/"
-                  className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
-                >
-                  Bases legales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
+                  to="/terminos"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Términos y condiciones
@@ -153,15 +145,15 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/privacidad"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
-                  Política de privacidad
+                  Aviso de privacidad
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/"
+                  to="/cookies"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Política de cookies
@@ -169,26 +161,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/"
-                  className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
-                >
-                  Aviso legal
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
+                  to="/contacto"
                   className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
                 >
                   Contacto
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
-                >
-                  Blog
                 </Link>
               </li>
             </ul>

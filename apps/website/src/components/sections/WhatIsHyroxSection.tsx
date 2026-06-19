@@ -48,8 +48,8 @@ export function WhatIsHyroxSection() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&h=600&q=80&fit=crop&auto=format"
-              alt="Atletas corriendo en HYROX"
+              src="https://images.unsplash.com/photo-1743993414654-0be2b73a9620?w=900&h=600&q=80&fit=crop&auto=format"
+              alt="Atletas compitiendo en una estación de un evento HYROX"
               loading="lazy"
               className="h-full w-full object-cover object-center"
             />

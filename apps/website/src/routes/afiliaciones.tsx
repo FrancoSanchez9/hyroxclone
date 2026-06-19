@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { TrendingUp, Award, BookOpen, Package, Users, Zap, ChevronRight } from "lucide-react";
@@ -476,5 +477,12 @@ function AfiliacionesPage() {
 }
 
 export const Route = createFileRoute("/afiliaciones")({
+  head: () => ({
+    meta: seo({
+      title: "Afiliación de Gimnasios",
+      description:
+        "Convierte tu gimnasio en sede afiliada HYROX. Conoce los beneficios del programa y regístrate.",
+    }),
+  }),
   component: AfiliacionesPage,
 });

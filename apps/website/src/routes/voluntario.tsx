@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { motion } from "framer-motion";
@@ -461,5 +462,12 @@ function VoluntarioPage() {
 }
 
 export const Route = createFileRoute("/voluntario")({
+  head: () => ({
+    meta: seo({
+      title: "Hazte Voluntario",
+      description:
+        "Únete al equipo de voluntarios HYROX y vive el evento desde adentro. Conoce los beneficios y regístrate.",
+    }),
+  }),
   component: VoluntarioPage,
 });

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion, useInView } from "framer-motion";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { stations } from "@/data/stations";
@@ -444,5 +445,12 @@ function LaCarreraPage() {
 }
 
 export const Route = createFileRoute("/la-carrera")({
+  head: () => ({
+    meta: seo({
+      title: "La Carrera: Formato y Estaciones",
+      description:
+        "Conoce el formato HYROX: 8 km de running combinados con 8 estaciones funcionales. Así se vive la carrera de fitness.",
+    }),
+  }),
   component: LaCarreraPage,
 });

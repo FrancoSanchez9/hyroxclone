@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 
 function NotFoundPage() {
@@ -29,5 +30,14 @@ function NotFoundPage() {
 }
 
 export const Route = createFileRoute("/$")({
+  head: () => ({
+    meta: [
+      ...seo({
+        title: "Página no encontrada",
+        description: "La página que buscas no existe o fue movida.",
+      }),
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: NotFoundPage,
 });

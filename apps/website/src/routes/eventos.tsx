@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { upcomingEvents, divisions } from "@/data/events";
@@ -274,5 +275,12 @@ function EventosPage() {
 }
 
 export const Route = createFileRoute("/eventos")({
+  head: () => ({
+    meta: seo({
+      title: "Eventos y Calendario",
+      description:
+        "Calendario de competencias HYROX en México. Consulta fechas, sedes y categorías, y asegura tu lugar en la próxima carrera.",
+    }),
+  }),
   component: EventosPage,
 });

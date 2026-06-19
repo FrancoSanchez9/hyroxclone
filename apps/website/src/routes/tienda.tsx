@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -211,5 +212,11 @@ function TiendaPage() {
 }
 
 export const Route = createFileRoute("/tienda")({
+  head: () => ({
+    meta: seo({
+      title: "Tienda Oficial",
+      description: "Equípate con la indumentaria y accesorios oficiales de HYROX México.",
+    }),
+  }),
   component: TiendaPage,
 });

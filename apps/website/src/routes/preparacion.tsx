@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion, useInView } from "framer-motion";
 import { Zap, Dumbbell, Activity, Calendar } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -389,5 +390,12 @@ function PreparacionPage() {
 }
 
 export const Route = createFileRoute("/preparacion")({
+  head: () => ({
+    meta: seo({
+      title: "Preparación y Entrenamiento",
+      description:
+        "Guías, rutinas y consejos para preparar tu HYROX. Llega listo a la línea de salida.",
+    }),
+  }),
   component: PreparacionPage,
 });

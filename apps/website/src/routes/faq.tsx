@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -277,5 +278,12 @@ function FAQPage() {
 }
 
 export const Route = createFileRoute("/faq")({
+  head: () => ({
+    meta: seo({
+      title: "Preguntas Frecuentes",
+      description:
+        "Resolvemos las dudas más comunes sobre los eventos HYROX: inscripciones, categorías, formato y más.",
+    }),
+  }),
   component: FAQPage,
 });

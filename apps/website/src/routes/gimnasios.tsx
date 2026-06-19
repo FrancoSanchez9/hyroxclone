@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, MapPin, Award, Star, Trophy, Zap } from "lucide-react";
@@ -270,5 +271,12 @@ function GimnasiasPage() {
 }
 
 export const Route = createFileRoute("/gimnasios")({
+  head: () => ({
+    meta: seo({
+      title: "Gimnasios Afiliados",
+      description:
+        "Encuentra un gimnasio afiliado HYROX cerca de ti y entrena con equipo y coaches certificados.",
+    }),
+  }),
   component: GimnasiasPage,
 });

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion, useInView } from "framer-motion";
 import { divisions } from "@/data/events";
 import { PageHero } from "@/components/ui/PageHero";
@@ -539,5 +540,12 @@ function TuNivelPage() {
 }
 
 export const Route = createFileRoute("/tu-nivel")({
+  head: () => ({
+    meta: seo({
+      title: "Encuentra tu Nivel",
+      description:
+        "Descubre qué división HYROX es para ti —Open, Pro, Doubles o Relay— y entrena con un objetivo claro.",
+    }),
+  }),
   component: TuNivelPage,
 });

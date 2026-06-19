@@ -15,19 +15,3 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </StrictMode>,
 );
-
-if (import.meta.env.DEV) {
-  const { ReactQueryDevtools } = await import("@tanstack/react-query-devtools");
-  const { TanStackRouterDevtools } = await import("@tanstack/router-devtools");
-  const { createRoot: createDevRoot } = await import("react-dom/client");
-
-  const devContainer = document.createElement("div");
-  document.body.appendChild(devContainer);
-
-  createDevRoot(devContainer).render(
-    <>
-      <ReactQueryDevtools />
-      <TanStackRouterDevtools router={router} />
-    </>,
-  );
-}

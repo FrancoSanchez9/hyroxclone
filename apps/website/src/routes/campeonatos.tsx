@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { seo } from "@/lib/seo";
 import { motion, useInView } from "framer-motion";
 import { PageHero } from "@/components/ui/PageHero";
 import { Badge } from "@/components/ui/Badge";
@@ -427,5 +428,12 @@ function CampeonatosPage() {
 }
 
 export const Route = createFileRoute("/campeonatos")({
+  head: () => ({
+    meta: seo({
+      title: "Campeonatos y Rankings",
+      description:
+        "Resultados, rankings y los campeonatos HYROX. Sigue a los mejores atletas de la temporada.",
+    }),
+  }),
   component: CampeonatosPage,
 });

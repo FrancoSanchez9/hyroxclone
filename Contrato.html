@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contrato de Desarrollo Web – Sitio de Eventos de Fitness</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.7;
+        color: #1a1a1a;
+        background: #f5f5f0;
+      }
+
+      .page {
+        max-width: 820px;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 72px 80px;
+        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Header */
+      .header {
+        border-bottom: 3px solid #0a0a0a;
+        padding-bottom: 28px;
+        margin-bottom: 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .logo-block .brand {
+        font-size: 28pt;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: #0a0a0a;
+        line-height: 1;
+      }
+
+      .logo-block .brand span {
+        display: inline-block;
+        background: #0a0a0a;
+        color: #e5f93a;
+        padding: 2px 8px;
+        margin-left: 4px;
+      }
+
+      .logo-block .subtitle {
+        font-size: 8pt;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #888;
+        margin-top: 6px;
+      }
+
+      .header-right {
+        text-align: right;
+        font-size: 8.5pt;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .header-right .doc-id {
+        font-weight: 700;
+        color: #0a0a0a;
+        font-size: 9pt;
+      }
+
+      /* Title */
+      .doc-title {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+
+      .doc-title h1 {
+        font-size: 14pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0a0a0a;
+      }
+
+      .doc-title .doc-type {
+        font-size: 9pt;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-top: 4px;
+      }
+
+      /* Yellow highlight bar */
+      .highlight-bar {
+        background: #e5f93a;
+        border-left: 4px solid #0a0a0a;
+        padding: 14px 20px;
+        margin: 28px 0;
+        font-size: 10pt;
+        font-weight: 600;
+      }
+
+      /* Sections */
+      .section {
+        margin-bottom: 32px;
+      }
+
+      .section-title {
+        font-size: 10pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #0a0a0a;
+        border-bottom: 1.5px solid #e0e0e0;
+        padding-bottom: 6px;
+        margin-bottom: 14px;
+        counter-increment: section;
+      }
+
+      .section-title::before {
+        content: counter(section, decimal-leading-zero) ". ";
+        color: #e5c000;
+      }
+
+      body {
+        counter-reset: section;
+      }
+
+      p {
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      /* Parties table */
+      .parties-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 16px 0;
+      }
+
+      .party-box {
+        border: 1.5px solid #e0e0e0;
+        padding: 16px 20px;
+        border-radius: 2px;
+      }
+
+      .party-box .party-role {
+        font-size: 8pt;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #888;
+        margin-bottom: 8px;
+      }
+
+      .party-box .party-name {
+        font-weight: 700;
+        font-size: 11pt;
+        color: #0a0a0a;
+        margin-bottom: 4px;
+      }
+
+      .party-box p {
+        font-size: 10pt;
+        color: #555;
+        margin-bottom: 3px;
+      }
+
+      /* Deliverables table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0 20px;
+        font-size: 10pt;
+      }
+
+      thead tr {
+        background: #0a0a0a;
+        color: #fff;
+      }
+
+      thead th {
+        padding: 10px 14px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #f9f9f7;
+      }
+
+      tbody td {
+        padding: 10px 14px;
+        border-bottom: 1px solid #ebebeb;
+        vertical-align: top;
+        color: #333;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .td-amount {
+        font-weight: 700;
+        white-space: nowrap;
+        color: #0a0a0a;
+      }
+
+      .total-row td {
+        background: #e5f93a !important;
+        font-weight: 700;
+        color: #0a0a0a;
+        font-size: 10.5pt;
+      }
+
+      /* Payment milestone */
+      .milestone-list {
+        list-style: none;
+        margin: 10px 0;
+      }
+
+      .milestone-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 10.5pt;
+      }
+
+      .milestone-list li:last-child {
+        border-bottom: none;
+      }
+
+      .milestone-pct {
+        display: inline-block;
+        background: #0a0a0a;
+        color: #e5f93a;
+        font-weight: 700;
+        font-size: 9pt;
+        padding: 2px 8px;
+        flex-shrink: 0;
+      }
+
+      /* Alert box */
+      .alert-box {
+        border: 1.5px solid #0a0a0a;
+        padding: 14px 20px;
+        margin: 16px 0;
+        font-size: 10pt;
+      }
+
+      .alert-box strong {
+        color: #0a0a0a;
+      }
+
+      /* Signatures */
+      .signatures {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .sig-block {
+        padding-top: 16px;
+      }
+
+      .sig-line {
+        border-top: 1.5px solid #0a0a0a;
+        margin-bottom: 8px;
+      }
+
+      .sig-label {
+        font-size: 9pt;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .sig-name {
+        font-weight: 700;
+        font-size: 10.5pt;
+        color: #0a0a0a;
+        margin-top: 4px;
+      }
+
+      .sig-role {
+        font-size: 9.5pt;
+        color: #555;
+      }
+
+      .sig-date {
+        margin-top: 20px;
+        font-size: 9.5pt;
+        color: #888;
+      }
+
+      .sig-date span {
+        display: inline-block;
+        border-bottom: 1px solid #ccc;
+        min-width: 180px;
+        margin-left: 8px;
+      }
+
+      /* Footer */
+      .doc-footer {
+        margin-top: 48px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 8.5pt;
+        color: #aaa;
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin: 8px 0 12px;
+      }
+
+      ul li {
+        margin-bottom: 6px;
+        color: #444;
+        font-size: 10.5pt;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+        .page {
+          box-shadow: none;
+          margin: 0;
+          padding: 48px 60px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          font-size: 10pt;
+        }
+
+        .page {
+          margin: 0;
+          padding: 28px 20px;
+          box-shadow: none;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .logo-block .brand {
+          font-size: 22pt;
+        }
+
+        .header-right {
+          text-align: left;
+          font-size: 8pt;
+        }
+
+        .doc-title h1 {
+          font-size: 11pt;
+        }
+
+        .parties-grid {
+          grid-template-columns: 1fr;
+        }
+
+        table {
+          font-size: 9pt;
+        }
+
+        thead th,
+        tbody td {
+          padding: 8px 10px;
+        }
+
+        /* Stack table rows as cards on very small screens */
+        .table-responsive {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .milestone-list li {
+          flex-direction: column;
+          gap: 4px;
+          font-size: 10pt;
+        }
+
+        .signatures {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          margin-top: 32px;
+        }
+
+        .sig-date span {
+          min-width: 120px;
+        }
+
+        .highlight-bar {
+          font-size: 9.5pt;
+          padding: 12px 14px;
+        }
+
+        ul {
+          padding-left: 16px;
+        }
+
+        ul li {
+          font-size: 10pt;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="logo-block">
+          <div class="brand">fsanchezt<span>dev</span></div>
+          <div class="subtitle">Desarrollo Web · Diseño de Interfaces · Automatización de IA</div>
+        </div>
+        <div class="header-right">
+          <div>Fecha de emisión: 18 de junio de 2026</div>
+          <div>Vigencia de oferta: 15 días naturales</div>
+          <div>Versión: 1.0</div>
+        </div>
+      </div>
+
+      <!-- TITLE -->
+      <div class="doc-title">
+        <h1>Contrato de Desarrollo y Entrega de Sitio Web</h1>
+        <div class="doc-type">Servicio Profesional de Tecnología · Mercado México</div>
+      </div>
+
+      <div class="highlight-bar">
+        Este documento constituye un acuerdo legalmente vinculante entre las partes descritas a
+        continuación. Léalo completo antes de firmarlo.
+      </div>
+
+      <!-- 01. PARTES -->
+      <div class="section">
+        <div class="section-title">Partes del Contrato</div>
+        <p>
+          El presente contrato de prestación de servicios profesionales de desarrollo web se celebra
+          entre:
+        </p>
+        <div class="parties-grid">
+          <div class="party-box">
+            <div class="party-role">Proveedor de Servicios</div>
+            <div class="party-name">Franco Alessandro Sanchez Trinidad</div>
+            <p>RFC: SATF0309258N0</p>
+            <p>Correo: contacto@fsanchezt.dev</p>
+            <p>En adelante: <strong>"El Desarrollador"</strong></p>
+          </div>
+          <div class="party-box">
+            <div class="party-role">Cliente</div>
+            <div class="party-name">___________________________</div>
+            <p>Razón social: ___________________</p>
+            <p>RFC: ___________________________</p>
+            <p>Representante legal: ____________</p>
+            <p>En adelante: <strong>"El Cliente"</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02. OBJETO -->
+      <div class="section">
+        <div class="section-title">Objeto del Contrato</div>
+        <p>
+          El Desarrollador se compromete a entregar al Cliente una aplicación web en español para la
+          operación de eventos de fitness funcional, bajo la marca y los contenidos definidos por El
+          Cliente, compuesta por las siguientes secciones y funcionalidades:
+        </p>
+        <ul>
+          <li>
+            <strong>12 secciones de la aplicación:</strong> Una experiencia completa y guiada para
+            el atleta y el visitante. <em>Inicio</em> (primera impresión de la marca, convierte
+            visitas en registros), <em>Eventos</em> (calendario y detalle de competencias, el
+            corazón operativo del sitio), <em>La Carrera</em> (explica el formato y dinámica del
+            evento para atraer a nuevos competidores), <em>FAQ</em> (reduce la carga de atención al
+            cliente respondiendo dudas frecuentes), <em>Campeonatos</em> (resultados y rankings que
+            generan engagement y fidelidad), <em>Preparación</em> (guías y entrenamientos que
+            posicionan la marca como autoridad en fitness), <em>Tu Nivel</em> (evaluación del
+            atleta, herramienta de captación y retención de usuarios),
+            <em>Gimnasios</em> (directorio de sedes afiliadas que genera valor para la red de
+            socios), <em>Afiliaciones</em> (registro de gimnasios, canal de crecimiento del
+            ecosistema), <em>Voluntario</em> (inscripción de voluntarios para la operación logística
+            de cada evento) y página de error 404 personalizada.
+          </li>
+          <li>
+            <strong>Diseño visual completo:</strong> La imagen lo es todo en el mercado fitness. Se
+            entrega una identidad visual coherente con tipografía, paleta de colores y animaciones
+            de interfaz con calidad de producción — el nivel visual que genera confianza, diferencia
+            la marca de la competencia y hace que los atletas quieran compartir el sitio.
+          </li>
+          <li>
+            <strong>Panel de administración (CMS):</strong> El Cliente tiene control total del
+            contenido sin depender de un desarrollador. Actualizar fechas, eventos, resultados y
+            textos toma minutos desde cualquier dispositivo — lo que se traduce en agilidad
+            operativa y ahorro continuo en costos de mantenimiento.
+          </li>
+          <li>
+            <strong>Integración de sistema de registro:</strong> Los atletas pueden inscribirse
+            directamente desde la plataforma mediante conexión con Eventbrite u otra acordada.
+            Elimina fricciones en el proceso de registro, aumenta la tasa de conversión y centraliza
+            la gestión de participantes.
+          </li>
+          <li>
+            <strong>Formularios funcionales con backend real:</strong> Los formularios de contacto,
+            voluntariado y afiliaciones envían datos reales y quedan registrados en la base de
+            datos. No se pierde ninguna solicitud y el equipo puede dar seguimiento a cada
+            interacción.
+          </li>
+          <li>
+            <strong>Configuración de dominio, hosting y base de datos:</strong> La aplicación se
+            despliega en infraestructura profesional (Vercel + Supabase) con alta disponibilidad,
+            tiempos de carga optimizados y escalabilidad para soportar picos de tráfico durante
+            eventos. El Cliente no necesita preocuparse por la infraestructura técnica.
+          </li>
+          <li>
+            <strong>SEO técnico básico:</strong> Configuración de metadatos, Open Graph (para que
+            los enlaces se vean bien al compartirse en redes sociales), sitemap y robots.txt. Esto
+            asegura que la plataforma sea encontrable en Google desde el primer día y que cada
+            evento compartido en redes genere una vista previa atractiva.
+          </li>
+          <li>
+            <strong>Documentación de administración:</strong> Manual práctico y claro para que
+            cualquier integrante del equipo del Cliente pueda operar el panel sin necesidad de
+            conocimientos técnicos. Garantiza la autonomía total del Cliente a largo plazo.
+          </li>
+        </ul>
+      </div>
+
+      <!-- 03. ENTREGABLES Y PRECIO -->
+      <div class="section">
+        <div class="section-title">Entregables y Precio</div>
+        <p>
+          El precio total del proyecto es fijo y se desglosa de la siguiente manera. Los precios
+          están expresados en Pesos Mexicanos (MXN) y <strong>no incluyen IVA</strong>. En caso de
+          que El Cliente requiera factura (CFDI), se adicionará el IVA (16%) correspondiente
+          conforme a la legislación fiscal mexicana vigente.
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Entregable</th>
+                <th>Descripción</th>
+                <th>Precio (MXN)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sitio Web Base</strong></td>
+                <td>
+                  13 rutas, design system, animaciones, responsive móvil/desktop, prototipo
+                  funcional desarrollado
+                </td>
+                <td class="td-amount">$5,000</td>
+              </tr>
+              <tr>
+                <td><strong>CMS + Integraciones</strong></td>
+                <td>
+                  Panel de administración ligero (Sanity), integración con sistema de registro,
+                  formularios con backend funcional
+                </td>
+                <td class="td-amount">$3,000</td>
+              </tr>
+              <tr>
+                <td><strong>Infraestructura</strong></td>
+                <td>
+                  Configuración de dominio, hosting (Vercel), base de datos (Supabase), SEO técnico
+                  básico, SSL, documentación de administración
+                </td>
+                <td class="td-amount">$2,000</td>
+              </tr>
+              <tr>
+                <td><strong>Soporte y Garantía (6 meses)</strong></td>
+                <td>
+                  Corrección de errores y soporte técnico durante los 6 meses posteriores al
+                  lanzamiento
+                </td>
+                <td class="td-amount" style="color: #16a34a">Incluido</td>
+              </tr>
+              <tr>
+                <td><strong>Subtotal</strong></td>
+                <td>Valor de mercado del proyecto completo</td>
+                <td
+                  class="td-amount"
+                  style="text-decoration: line-through; color: #999; font-weight: 400"
+                >
+                  $10,500
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Descuento por Primera Compra</strong></td>
+                <td>
+                  Descuento exclusivo por tratarse de la primera contratación con El Cliente. Aplica
+                  únicamente a este proyecto inicial.
+                </td>
+                <td class="td-amount" style="color: #16a34a">− $3,000</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>TOTAL A PAGAR</strong></td>
+                <td>
+                  <strong
+                    >Entrega completa lista para producción + 6 meses de soporte incluido · Precio
+                    sin IVA</strong
+                  >
+                </td>
+                <td class="td-amount"><strong>$7,500 MXN</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          El precio total acordado es <strong>$7,500 MXN</strong> (valor de lista $10,500 MXN con
+          descuento por primera compra de $3,000 MXN), e incluye 6 meses de soporte técnico sin
+          costo. Los $7,500 MXN <strong>no incluyen IVA</strong>; en caso de requerirse factura
+          (CFDI), se adicionará el IVA (16%) correspondiente. Este precio es fijo e inamovible para
+          el alcance definido en la Cláusula 2. Cualquier adición fuera del alcance se cotiza por
+          separado (ver Cláusula 7).
+        </p>
+      </div>
+
+      <!-- 04. ESQUEMA DE PAGOS -->
+      <div class="section">
+        <div class="section-title">Esquema de Pagos</div>
+        <ul class="milestone-list">
+          <li>
+            <span class="milestone-pct">50%</span>
+            <span
+              ><strong>$4,250 MXN</strong> — Al momento de la firma del presente contrato. El
+              Desarrollador no iniciará la adaptación al contenido real del Cliente hasta recibir
+              este anticipo.</span
+            >
+          </li>
+          <li>
+            <span class="milestone-pct">25%</span>
+            <span
+              ><strong>$2,125 MXN</strong> — Al aprobarse el prototipo final con contenido real del
+              Cliente, previo al lanzamiento en producción.</span
+            >
+          </li>
+          <li>
+            <span class="milestone-pct">25%</span>
+            <span
+              ><strong>$2,125 MXN</strong> — Al quedar el sitio listo para producción (aprobado y
+              desplegable en el dominio final). Este pago es exigible una vez que el sitio está
+              listo para publicarse, aun si El Cliente posterga la fecha de lanzamiento por causas
+              ajenas a El Desarrollador.</span
+            >
+          </li>
+        </ul>
+        <p>
+          Forma de pago: transferencia bancaria o depósito a cuenta indicada por El Desarrollador.
+          El Desarrollador emitirá factura en los plazos establecidos por la legislación fiscal
+          mexicana.
+        </p>
+      </div>
+
+      <!-- 05. MANTENIMIENTO MENSUAL -->
+      <div class="section">
+        <div class="section-title">Soporte Incluido y Mantenimiento Mensual</div>
+        <div class="highlight-bar">
+          Incluido sin costo: <strong>6 meses de soporte</strong> a partir del lanzamiento en
+          producción y <strong>1 rediseño gratuito</strong>. Cubre la corrección de errores o
+          defectos técnicos atribuibles al trabajo de El Desarrollador (bugs y fallas de
+          funcionamiento del código entregado). NO incluye actualizaciones de contenido, nuevas
+          funcionalidades ni fallas de servicios de terceros, los cuales se rigen por las Cláusulas
+          5 y 7.
+        </div>
+        <p>
+          Concluido el periodo de soporte gratuito, El Cliente podrá contratar el servicio de
+          mantenimiento mensual con las siguientes condiciones:
+        </p>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Incluye</th>
+                <th>Precio Mensual (MXN)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Plan Estándar</strong></td>
+                <td>
+                  Actualizaciones de contenido (hasta 4 por mes), monitoreo de uptime,
+                  actualizaciones de dependencias de seguridad, soporte vía correo (respuesta en 48
+                  hrs)
+                </td>
+                <td class="td-amount">$5,500</td>
+              </tr>
+              <tr>
+                <td><strong>Plan Premium</strong></td>
+                <td>
+                  Todo lo anterior + hasta 8 actualizaciones de contenido, soporte prioritario
+                  (respuesta en 12 hrs), reporte mensual de analytics
+                </td>
+                <td class="td-amount">$7,500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          Contrato de mantenimiento mínimo: <strong>4 meses.</strong> El servicio de mantenimiento
+          se activa mediante acuerdo escrito separado una vez completada la entrega del proyecto.
+        </p>
+        <p>
+          El mantenimiento NO incluye: desarrollo de nuevas funcionalidades, rediseño de secciones,
+          integraciones con nuevos sistemas, ni soporte de infraestructura de terceros (servidor de
+          correo, plataformas de pago externas).
+        </p>
+      </div>
+
+      <!-- 06. TIMELINE -->
+      <div class="section">
+        <div class="section-title">Plazo y Calendario de Entrega</div>
+        <div class="highlight-bar">
+          Plazo de entrega: <strong>3 a 5 días hábiles</strong> para la adaptación e integración del
+          contenido real, contados a partir de que se cumplan AMBAS condiciones: (1) recepción del
+          anticipo del 50%, y (2) entrega completa del contenido del Cliente. El reloj se pausa si
+          el contenido llega incompleto y se reanuda al recibir lo faltante.
+        </div>
+        <p>
+          El proyecto parte de un prototipo funcional ya desarrollado por El Desarrollador. El
+          trabajo contratado consiste en la adaptación de dicho prototipo al contenido y la marca
+          reales del Cliente, su configuración y su publicación, conforme a las siguientes etapas:
+        </p>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Etapa</th>
+                <th>Actividad</th>
+                <th>Responsable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Día 0</strong></td>
+                <td>
+                  Firma del contrato, pago del anticipo del 50% y entrega de materiales del Cliente
+                  (logos oficiales, textos, fotos, colores de marca definidos por El Cliente y
+                  accesos a plataformas de terceros).
+                </td>
+                <td>Cliente</td>
+              </tr>
+              <tr>
+                <td><strong>Días 1–3</strong></td>
+                <td>
+                  Integración del contenido real al prototipo, configuración del CMS, integraciones
+                  de registro y formularios. Entrega del prototipo final con contenido real para
+                  revisión.
+                </td>
+                <td>Desarrollador</td>
+              </tr>
+              <tr>
+                <td><strong>Día 4</strong></td>
+                <td>
+                  Ronda de correcciones (máximo 2 iteraciones dentro del alcance). Pruebas de
+                  compatibilidad y aprobación del Cliente.
+                </td>
+                <td>Cliente + Desarrollador</td>
+              </tr>
+              <tr>
+                <td><strong>Día 5</strong></td>
+                <td>
+                  Configuración de dominio, hosting, SEO técnico y publicación en producción.
+                  Entrega de documentación al equipo del Cliente.
+                </td>
+                <td>Desarrollador + Cliente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert-box">
+          <strong>Materiales que debe entregar El Cliente.</strong> Para iniciar, El Cliente
+          entregará: textos finales de todas las secciones, logotipos oficiales en alta resolución,
+          fotografías, colores de marca definidos por El Cliente, y los accesos necesarios a las
+          plataformas de terceros (Eventbrite, Sanity, dominio/DNS). Si el contenido no se entrega
+          completo dentro de los <strong>10 días hábiles</strong> posteriores a la firma, las fechas
+          se recalendarizan sin penalización para El Desarrollador, quien podrá facturar las etapas
+          ya completadas.
+        </div>
+        <p>
+          El plazo inicia a partir de la fecha de firma del contrato y recepción del anticipo del
+          50%. Retrasos causados por falta de entrega de materiales, demoras en aprobaciones o
+          dependencias de terceros por parte del Cliente extenderán el plazo proporcionalmente sin
+          penalización para El Desarrollador.
+        </p>
+      </div>
+
+      <!-- 07. CAMBIOS FUERA DEL ALCANCE -->
+      <div class="section">
+        <div class="section-title">Cambios Fuera del Alcance</div>
+        <p>
+          Todo trabajo adicional no contemplado en la Cláusula 2 será cotizado y acordado por
+          escrito antes de ejecutarse. La tarifa base es:
+        </p>
+        <div class="highlight-bar">
+          Tarifa por hora para trabajo fuera del alcance: <strong>$700 MXN / hora</strong>. Mínimo
+          facturable: 2 horas. El Cliente aprobará por escrito (correo electrónico) cualquier
+          trabajo adicional antes de su inicio.
+        </div>
+        <p>
+          Ejemplos de trabajo considerado fuera del alcance: nuevas páginas o secciones, integración
+          con sistemas no mencionados en este contrato, cambios de identidad visual o estructura de
+          navegación, desarrollo de funcionalidades de comercio electrónico complejo.
+        </p>
+      </div>
+
+      <!-- 08. PROPIEDAD INTELECTUAL -->
+      <div class="section">
+        <div class="section-title">Propiedad Intelectual</div>
+        <p>
+          <strong>8.1 Código fuente.</strong> El código fuente del sitio permanece en propiedad de
+          El Desarrollador hasta que El Cliente realice el pago completo acordado en la Cláusula 4.
+          Una vez liquidado el total, El Cliente obtiene licencia perpetua de uso del código para el
+          dominio y propósito acordados en este contrato.
+        </p>
+        <p>
+          <strong>8.2 Marca y elementos de identidad del Cliente.</strong> El Desarrollador no es
+          titular de la marca, el nombre comercial, los logotipos ni los elementos de identidad que
+          El Cliente utilice o aporte para el sitio. El Cliente declara y garantiza ser titular o
+          contar con los derechos suficientes sobre dichos elementos, y que tiene derecho a
+          contratar este servicio y a publicar el sitio bajo su propia marca.
+        </p>
+        <p>
+          <strong>8.3 Contenidos del Cliente.</strong> Textos, fotografías, logotipos y materiales
+          entregados por El Cliente para integrar al sitio son responsabilidad exclusiva del Cliente
+          en cuanto a derechos de uso.
+        </p>
+        <p>
+          <strong>8.4 Portafolio.</strong> El Desarrollador podrá mencionar este proyecto en su
+          portafolio profesional, mostrando capturas de pantalla, salvo que El Cliente solicite
+          expresamente confidencialidad por escrito.
+        </p>
+      </div>
+
+      <!-- 09. GARANTÍA DE DERECHOS DE MARCA Y CONTENIDOS -->
+      <div class="section">
+        <div class="section-title">
+          Garantía de Derechos de Marca y Contenidos — Obligación del Cliente
+        </div>
+        <div class="alert-box">
+          <strong>Cláusula crítica.</strong> El Cliente es el único responsable de la marca, el
+          nombre comercial, el diseño de identidad y los contenidos bajo los cuales se publica y
+          opera el sitio web. El Cliente declara y garantiza que cuenta con todos los derechos
+          necesarios para usarlos y que su uso no infringe marcas, derechos de autor, patentes,
+          diseños ni cualquier otro derecho de propiedad intelectual o industrial de terceros.
+        </div>
+        <p>
+          El Desarrollador no realiza ni está obligado a realizar búsquedas, verificaciones de
+          disponibilidad o registro de marca, ni asesoría legal en materia de propiedad intelectual,
+          y no será responsable por reclamaciones, demandas, sanciones o daños derivados de la
+          titularidad, el registro o el uso de la marca, el nombre, el diseño o los contenidos
+          proporcionados o definidos por El Cliente. El Cliente se obliga a sacar en paz y a salvo e
+          indemnizar a El Desarrollador frente a cualquier reclamación de terceros relacionada con
+          dichos elementos.
+        </p>
+        <p>
+          En caso de que El Cliente requiera modificaciones al sitio ya entregado por motivos de
+          identidad, rebranding o cumplimiento de marca, dichas modificaciones se cotizarán como
+          trabajo fuera del alcance conforme a la Cláusula 7.
+        </p>
+      </div>
+
+      <!-- 10. CONFIDENCIALIDAD -->
+      <div class="section">
+        <div class="section-title">Confidencialidad</div>
+        <p>
+          Ambas partes se comprometen a mantener confidencial cualquier información sensible
+          compartida durante la ejecución del proyecto, incluyendo estrategias de negocio, datos de
+          usuarios, credenciales de sistemas y términos comerciales de este contrato. Esta
+          obligación permanece vigente por <strong>2 años</strong> posteriores a la terminación del
+          contrato.
+        </p>
+        <p>
+          El Desarrollador no compartirá credenciales, accesos o datos del Cliente con terceros sin
+          autorización escrita expresa.
+        </p>
+      </div>
+
+      <!-- PROTECCIÓN DE DATOS PERSONALES -->
+      <div class="section">
+        <div class="section-title">Protección de Datos Personales</div>
+        <p>
+          El sitio recaba datos personales de usuarios a través de formularios (contacto,
+          voluntariado, afiliaciones) y del sistema de registro. El Cliente actúa como
+          <strong>responsable</strong> del tratamiento de dichos datos conforme a la Ley Federal de
+          Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), y es responsable
+          de definir las finalidades del tratamiento, publicar un Aviso de Privacidad y cumplir las
+          obligaciones legales aplicables. El Desarrollador implementará el sitio de modo que pueda
+          alojar dicho Aviso de Privacidad, pero no determina las finalidades del tratamiento ni
+          asume la calidad de responsable de los datos.
+        </p>
+      </div>
+
+      <!-- 11. LIMITACIÓN DE RESPONSABILIDAD -->
+      <div class="section">
+        <div class="section-title">Limitación de Responsabilidad</div>
+        <p>
+          <strong>11.1</strong> El Desarrollador garantiza que el sitio funcionará correctamente en
+          las condiciones de infraestructura acordadas (hosting en Vercel o plataforma pactada)
+          durante los primeros 30 días posteriores al lanzamiento.
+        </p>
+        <p>
+          <strong>11.2</strong> El Desarrollador no será responsable por: fallas en servicios de
+          terceros (plataformas de pago, Eventbrite, Sanity, DNS), pérdida de datos por negligencia
+          del Cliente, ataques informáticos externos, ni por resultados de negocio (inscripciones,
+          ventas, tráfico) derivados del uso del sitio.
+        </p>
+        <p>
+          <strong>11.3</strong> La responsabilidad máxima del Desarrollador ante cualquier
+          reclamación no excederá el monto total pagado por El Cliente en virtud de este contrato.
+        </p>
+      </div>
+
+      <!-- 12. TERMINACIÓN -->
+      <div class="section">
+        <div class="section-title">Terminación del Contrato</div>
+        <p>
+          <strong>Terminación por el Cliente:</strong> El Cliente podrá cancelar el proyecto en
+          cualquier momento notificando por escrito con 7 días de anticipación. Los pagos realizados
+          hasta esa fecha no son reembolsables, ya que corresponden a trabajo ya ejecutado. El
+          Desarrollador entregará el trabajo avanzado hasta la fecha de cancelación efectiva.
+        </p>
+        <p>
+          <strong>Terminación por el Desarrollador:</strong> El Desarrollador podrá rescindir el
+          contrato ante falta de pago de cualquier hito con más de 10 días de retraso, reteniendo
+          los pagos recibidos como compensación por el trabajo realizado.
+        </p>
+      </div>
+
+      <!-- 13. LEY APLICABLE -->
+      <div class="section">
+        <div class="section-title">Ley Aplicable y Jurisdicción</div>
+        <p>
+          El presente contrato se rige por las leyes vigentes de los
+          <strong>Estados Unidos Mexicanos</strong>. Para cualquier controversia derivada del mismo,
+          las partes se someten a la jurisdicción de los tribunales competentes de la Ciudad de
+          México, renunciando expresamente a cualquier otro fuero que pudiera corresponderles.
+        </p>
+      </div>
+
+      <!-- FIRMAS -->
+      <div class="signatures">
+        <div class="sig-block">
+          <div class="sig-line"></div>
+          <div class="sig-label">Firma del Desarrollador</div>
+          <div class="sig-name">Franco Alessandro Sanchez Trinidad</div>
+          <div class="sig-role">Desarrollador Web Independiente</div>
+          <div class="sig-date">Fecha: <span></span></div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-line"></div>
+          <div class="sig-label">Firma del Cliente</div>
+          <div class="sig-name">___________________________</div>
+          <div class="sig-role">Representante Legal / Cargo</div>
+          <div class="sig-date">Fecha: <span></span></div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="doc-footer">
+        <p>
+          Franco Alessandro Sanchez Trinidad — Desarrollo Web Independiente · contacto@fsanchezt.dev
+        </p>
+        <p>Tel. 222 321 7136</p>
+      </div>
+    </div>
+  </body>
+</html>
