@@ -1,26 +1,24 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-
-const STORAGE_KEY = "runluv-cookies-accepted";
+import { hasDecision, setConsent } from "@/lib/consent";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem(STORAGE_KEY);
-    if (!accepted) {
+    if (!hasDecision()) {
       setVisible(true);
     }
   }, []);
 
   const accept = () => {
-    localStorage.setItem(STORAGE_KEY, "all");
+    setConsent("all");
     setVisible(false);
   };
 
   const necessary = () => {
-    localStorage.setItem(STORAGE_KEY, "necessary");
+    setConsent("necessary");
     setVisible(false);
   };
 
