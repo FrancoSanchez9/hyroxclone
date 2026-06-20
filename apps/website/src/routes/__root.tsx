@@ -8,11 +8,11 @@ import { seo } from "@/lib/seo";
 export const Route = createRootRoute({
   head: () => ({
     meta: seo({
-      title: "HYROX México — La Carrera de Fitness",
+      title: "runluv® — Eventos de Running en Autódromos",
       description:
-        "HYROX México: la competencia de fitness para todos. 8 km de running + 8 estaciones funcionales. Encuentra tu carrera más cercana e inscríbete.",
+        "runluv® transforma el running en desarrollo económico para ciudades. Eventos en autódromos con 15,000 asistentes y 7x retorno por peso invertido. Modelo llave en mano para gobiernos de México.",
       keywords:
-        "HYROX, HYROX México, fitness funcional, competencia fitness, carrera de fitness, eventos deportivos México",
+        "runluv, eventos de running, running en autódromos, desarrollo económico, turismo deportivo, eventos B2G, gobiernos México, La Última Vuelta",
     }),
   }),
   component: () => (

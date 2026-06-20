@@ -1,10 +1,10 @@
-export const SITE_NAME = "HYROX México";
+export const SITE_NAME = "runluv®";
 
 // Dominio de producción. Ajustar cuando se confirme el dominio final.
-export const SITE_URL = "https://hyrox.mx";
+export const SITE_URL = "https://runluv.mx";
 
 interface SeoInput {
-  /** Título de la página. Se le añade " | HYROX México" salvo que ya incluya el nombre del sitio. */
+  /** Título de la página. Se le añade " | runluv®" salvo que ya incluya el nombre del sitio. */
   title: string;
   description?: string;
   keywords?: string;
