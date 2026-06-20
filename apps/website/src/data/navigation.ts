@@ -6,37 +6,24 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   {
-    label: "¿Qué es HYROX?",
-    children: [
-      { label: "La Carrera de Fitness", href: "/la-carrera" },
-      { label: "Mejor Preparación", href: "/preparacion" },
-      { label: "Encuentra tu nivel", href: "/tu-nivel" },
-      { label: "Campeonatos", href: "/campeonatos" },
-      { label: "FAQs", href: "/faq" },
-    ],
+    label: "¿Qué es?",
+    href: "/#que-es",
   },
   {
-    label: "Training Clubs",
-    children: [
-      { label: "Buscar gimnasio", href: "/gimnasios" },
-      { label: "Afiliaciones", href: "/afiliaciones" },
-    ],
+    label: "Modalidades",
+    href: "/#modalidades",
   },
   {
-    label: "Tienda",
-    href: "/tienda",
+    label: "Impacto",
+    href: "/#impacto",
   },
   {
-    label: "Eventos",
-    href: "/eventos",
-  },
-  {
-    label: "Voluntario",
-    href: "/voluntario",
+    label: "Modelo",
+    href: "/#modelo",
   },
 ];
 
 export const topRightLinks = [
-  { label: "Afiliaciones", href: "/afiliaciones" },
-  { label: "Inscripciones", href: "/eventos" },
+  { label: "Descarga dossier", href: "/" },
+  { label: "Contacto", href: "/" },
 ];

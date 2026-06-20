@@ -4,8 +4,176 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- title/description y Open Graph se gestionan por ruta vía TanStack Router (HeadContent). Ver src/lib/seo.ts -->
-    <title>HYROX México</title>
+
+    <!-- Primary SEO -->
+    <title>runluv® — Eventos de Running en Autódromos | Desarrollo para Ciudades de México</title>
+    <meta
+      name="description"
+      content="runluv® transforma el running en desarrollo económico para ciudades. Eventos en autódromos con 15,000 asistentes y 7x retorno por peso invertido. Modelo llave en mano para gobiernos de México."
+    />
+    <link rel="canonical" href="https://runluv.mx/" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://runluv.mx/" />
+    <meta property="og:site_name" content="runluv®" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content="runluv® — Eventos de Running para Gobiernos de México" />
+    <meta
+      property="og:description"
+      content="Transformamos el running en desarrollo para ciudades. 15,000 asistentes por evento. 7x retorno económico. Plataforma B2G para gobiernos municipales y estatales de México."
+    />
+    <meta property="og:image" content="https://runluv.mx/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="runluv® — Resiste hasta el final" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@runluvmx" />
+    <meta name="twitter:title" content="runluv® — Eventos de Running para Ciudades de México" />
+    <meta
+      name="twitter:description"
+      content="Transformamos el running en desarrollo económico para ciudades. 7x retorno económico por evento."
+    />
+    <meta name="twitter:image" content="https://runluv.mx/og-image.jpg" />
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://runluv.mx/#organization",
+        "name": "runluv",
+        "legalName": "runluv®",
+        "url": "https://runluv.mx",
+        "description": "Plataforma mexicana de eventos de running en autódromos que genera impacto económico, turístico y social para ciudades mediante un modelo de colaboración público-privada llave en mano. Cada evento convoca entre 3,000 y 5,000 corredores, 15,000 asistentes totales y produce un retorno de 7 pesos por cada peso invertido.",
+        "slogan": "Resiste hasta el final",
+        "address": { "@type": "PostalAddress", "addressCountry": "MX" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contacto@runluv.mx",
+          "contactType": "sales",
+          "areaServed": "MX",
+          "availableLanguage": "Spanish"
+        },
+        "areaServed": { "@type": "Country", "name": "México" },
+        "knowsAbout": [
+          "eventos deportivos en autódromos",
+          "carreras de running en México",
+          "turismo deportivo",
+          "desarrollo económico urbano mediante eventos",
+          "colaboración público-privada en eventos deportivos"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/runluv",
+          "https://www.instagram.com/runluv.mx",
+          "https://twitter.com/runluvmx",
+          "https://www.youtube.com/@runluv"
+        ]
+      }
+    </script>
+
+    <!-- WebSite Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://runluv.mx/#website",
+        "name": "runluv®",
+        "url": "https://runluv.mx",
+        "publisher": { "@id": "https://runluv.mx/#organization" },
+        "inLanguage": "es-MX"
+      }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://runluv.mx/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué es runluv®?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "runluv® es una plataforma mexicana de eventos de running en autódromos. Combina carrera, resistencia y festival en un formato de 6 a 8 horas diseñado para generar impacto económico, turístico y social en las ciudades donde opera. Bajo el lema 'Resiste hasta el final', transforma el running en una herramienta de desarrollo urbano."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo funciona el modelo de colaboración de runluv® con los gobiernos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "runluv® opera bajo un modelo de colaboración público-privada llave en mano. El gobierno municipal o estatal aporta infraestructura, permisos, seguridad, difusión y coinversión. runluv® aporta la producción integral del evento, comercialización, operación completa y la marca."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuál es el impacto económico de un evento runluv® para una ciudad?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cada evento runluv® genera un retorno de 7 pesos por cada peso invertido. Atrae entre 3,000 y 5,000 corredores y hasta 15,000 asistentes totales. Entre el 20% y el 35% son visitantes foráneos, generando entre 1,500 y 3,500 noches de hotel y un impacto visible durante más de 90 días post-evento."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué modalidades de carrera ofrece runluv®?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "runluv® ofrece tres formatos: (1) La Última Vuelta® (LUV), formato de eliminación progresiva exclusivo; (2) Endurance 4H, donde los participantes acumulan distancia en 4 horas; y (3) 5K / 10K clásico."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia a runluv® de una carrera tradicional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Las carreras tradicionales terminan en la meta. runluv® empieza ahí. El formato incluye 6-8 horas de evento, público activo, festival gastronómico-musical y es el único formato de este tipo en México."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Por qué las ciudades deben adoptar el formato runluv® ahora?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "México tiene más de 15 millones de corredores con crecimiento del 8-12% anual. Los formatos tradicionales están saturados. Las primeras ciudades en adoptar runluv® se posicionarán como sede insignia con retorno económico medible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo contactar a runluv® para llevar un evento a mi ciudad?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Escribe a contacto@runluv.mx o visita runluv.mx para agendar una reunión. runluv® trabaja con gobiernos municipales, estatales y secretarías de turismo en México."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- WebPage + Speakable -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://runluv.mx/#webpage",
+        "name": "runluv® — Transformamos el running en desarrollo para ciudades",
+        "url": "https://runluv.mx",
+        "isPartOf": { "@id": "https://runluv.mx/#website" },
+        "about": { "@id": "https://runluv.mx/#organization" },
+        "inLanguage": "es-MX",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["#que-es", "#impacto", "#modelo", "#contacto"]
+        }
+      }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

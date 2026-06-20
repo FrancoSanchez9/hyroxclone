@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* HYROX Brand Colors */
-  --color-hyrox-black: #0a0a0a;
-  --color-hyrox-dark: #111111;
-  --color-hyrox-card: #1a1a1a;
-  --color-hyrox-yellow: #e5f93a;
-  --color-hyrox-yellow-dark: #c8dc20;
-  --color-hyrox-white: #f5f5f5;
-  --color-hyrox-muted: #888888;
-  --color-hyrox-border: #2a2a2a;
+  /* runluv Brand Colors */
+  --color-rl-black: #060608;
+  --color-rl-dark: #0f0f14;
+  --color-rl-card: #16161f;
+  --color-rl-card2: #1c1c28;
+  --color-rl-purple: #a855f7;
+  --color-rl-purple-light: #c084fc;
+  --color-rl-purple-dark: #7c3aed;
+  --color-rl-white: #f5f5f5;
+  --color-rl-muted: #888888;
+  --color-rl-border: #2a2a3a;
 
   /* Typography */
   --font-display: "Bebas Neue", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Easing (Emil Kowalski) */
+  /* Easing */
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -30,8 +32,8 @@
   }
 
   body {
-    background-color: var(--color-hyrox-black);
-    color: var(--color-hyrox-white);
+    background-color: var(--color-rl-black);
+    color: var(--color-rl-white);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -46,19 +48,18 @@
     letter-spacing: 0.02em;
   }
 
-  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-hyrox-black);
+    background: var(--color-rl-black);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-hyrox-border);
+    background: var(--color-rl-border);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-hyrox-muted);
+    background: var(--color-rl-muted);
   }
 }
 
@@ -69,12 +70,12 @@
     letter-spacing: 0.02em;
   }
 
-  .hyrox-gradient {
-    background: linear-gradient(135deg, var(--color-hyrox-black) 0%, #1a1a1a 100%);
+  .purple-glow {
+    box-shadow: 0 0 60px rgba(168, 85, 247, 0.2);
   }
 
-  .yellow-glow {
-    box-shadow: 0 0 40px rgba(229, 249, 58, 0.15);
+  .purple-glow-sm {
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.25);
   }
 
   .transition-smooth {
