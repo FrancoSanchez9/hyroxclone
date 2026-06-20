@@ -56,7 +56,7 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Si tienes preguntas sobre el uso de cookies, escríbenos a{" "}
-        <a href="mailto:info@hyrox.mx">info@hyrox.mx</a>. Consulta también nuestro{" "}
+        <a href="mailto:contacto@runluv.mx">contacto@runluv.mx</a>. Consulta también nuestro{" "}
         <a href="/privacidad">Aviso de Privacidad</a>.
       </p>
     ),
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/cookies")({
   head: () => ({
     meta: seo({
       title: "Política de Cookies",
-      description: "Qué cookies utiliza HYROX México y cómo puedes gestionarlas.",
+      description: "Qué cookies utiliza runluv® y cómo puedes gestionarlas.",
     }),
   }),
   component: CookiesPage,

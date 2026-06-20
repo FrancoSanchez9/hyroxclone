@@ -17,161 +17,76 @@ interface FAQCategory {
 
 const faqData: FAQCategory[] = [
   {
-    title: "La Carrera",
+    title: "Sobre runluv®",
     items: [
       {
-        question: "¿Qué es HYROX?",
+        question: "¿Qué es runluv®?",
         answer:
-          "HYROX es la competencia de fitness que combina 8 km de running con 8 estaciones de ejercicio funcional, todo en formato de carrera contrarreloj.",
+          "runluv® es una plataforma mexicana de eventos de running en autódromos. Combina carrera, resistencia y festival en un formato de 6 a 8 horas diseñado para generar impacto económico, turístico y social en las ciudades donde opera. Bajo el lema 'Resiste hasta el final', transforma el running en una herramienta de desarrollo urbano.",
       },
       {
-        question: "¿Cuánto tiempo dura una carrera HYROX?",
+        question: "¿Qué diferencia a runluv® de una carrera tradicional?",
         answer:
-          "El tiempo promedio de los competidores es de 90 minutos. Los atletas élite terminan entre 55–75 minutos.",
+          "Las carreras tradicionales terminan en la meta. runluv® empieza ahí. El formato incluye 6-8 horas de evento, público activo, festival gastronómico-musical y es el único formato de este tipo en México.",
       },
       {
-        question: "¿Cuáles son las 8 estaciones?",
+        question: "¿Qué modalidades de carrera ofrece runluv®?",
         answer: (
           <ul className="space-y-2">
             {[
-              { name: "SkiErg", desc: "1,000 m en máquina de remo nórdico" },
-              { name: "Sled Push", desc: "50 m empujando trineo con peso" },
-              { name: "Sled Pull", desc: "50 m jalando trineo con peso" },
-              { name: "Burpee Broad Jumps", desc: "80 m de burpees con salto frontal" },
-              { name: "Rowing", desc: "1,000 m en remo ergómetro" },
-              { name: "Farmers Carry", desc: "200 m cargando pesas en cada mano" },
-              { name: "Sandbag Lunges", desc: "100 m de lunges con sandbag al hombro" },
-              { name: "Wall Balls", desc: "75–100 repeticiones de wall ball shots" },
-            ].map((station) => (
-              <li key={station.name} className="flex items-start gap-2">
-                <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#e5f93a]" />
+              {
+                name: "La Última Vuelta® (LUV)",
+                desc: "Formato de eliminación progresiva exclusivo: completa cada vuelta antes del tiempo límite o quedas eliminado. Gana quien resiste hasta el final.",
+              },
+              {
+                name: "Endurance 4H",
+                desc: "Cuatro horas para acumular la mayor distancia posible. Corre, trota, camina o descansa: cada kilómetro cuenta.",
+              },
+              {
+                name: "5K / 10K",
+                desc: "Formato clásico para velocidad, marca personal o primera experiencia runluv.",
+              },
+            ].map((modalidad) => (
+              <li key={modalidad.name} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#a855f7]" />
                 <span>
-                  <span className="font-semibold text-white">{station.name}:</span>{" "}
-                  <span className="text-white/70">{station.desc}</span>
+                  <span className="font-semibold text-white">{modalidad.name}:</span>{" "}
+                  <span className="text-white/70">{modalidad.desc}</span>
                 </span>
               </li>
             ))}
           </ul>
         ),
       },
+    ],
+  },
+  {
+    title: "Modelo y Gobiernos",
+    items: [
       {
-        question: "¿Puedo participar si soy principiante?",
+        question: "¿Cómo funciona el modelo de colaboración de runluv® con los gobiernos?",
         answer:
-          "Sí. La categoría Open está diseñada para todos los niveles. No necesitas experiencia previa en competencias; cualquier persona con una base de condición física puede completar un HYROX.",
+          "runluv® opera bajo un modelo de colaboración público-privada llave en mano. El gobierno municipal o estatal aporta infraestructura, permisos, seguridad, difusión y coinversión. runluv® aporta la producción integral del evento, comercialización, operación completa y la marca.",
+      },
+      {
+        question: "¿Por qué las ciudades deben adoptar el formato runluv® ahora?",
+        answer:
+          "México tiene más de 15 millones de corredores con crecimiento del 8-12% anual. Los formatos tradicionales están saturados. Las primeras ciudades en adoptar runluv® se posicionarán como sede insignia con retorno económico medible.",
       },
     ],
   },
   {
-    title: "Registro e Inscripción",
+    title: "Impacto y Contacto",
     items: [
       {
-        question: "¿Cómo me registro?",
+        question: "¿Cuál es el impacto económico de un evento runluv® para una ciudad?",
         answer:
-          "Ingresa a nuestra página de eventos, elige el evento de tu interés y haz clic en 'Registrarse'. Completa el formulario y realiza el pago en línea para confirmar tu lugar.",
+          "Cada evento runluv® genera un retorno de 7 pesos por cada peso invertido. Atrae entre 3,000 y 5,000 corredores y hasta 15,000 asistentes totales. Entre el 20% y el 35% son visitantes foráneos, generando entre 1,500 y 3,500 noches de hotel y un impacto visible durante más de 90 días post-evento.",
       },
       {
-        question: "¿Puedo cambiar mi categoría después de registrarme?",
+        question: "¿Cómo contactar a runluv® para llevar un evento a mi ciudad?",
         answer:
-          "Sí. Puedes solicitar un cambio de categoría hasta 4 semanas antes del evento. Después de esa fecha no se aceptan modificaciones.",
-      },
-      {
-        question: "¿Qué incluye la inscripción?",
-        answer:
-          "La inscripción incluye número de pecho (bib number), chip de cronometraje, medalla de finisher y acceso a los resultados oficiales publicados en plataforma.",
-      },
-    ],
-  },
-  {
-    title: "El Día de la Carrera",
-    items: [
-      {
-        question: "¿Qué debo llevar el día de la carrera?",
-        answer:
-          "Trae calzado deportivo para correr, ropa cómoda de entrenamiento, agua o hidratación personal y tu confirmación de registro (digital o impresa). Se recomienda llegar al menos 45 minutos antes de tu wave de inicio.",
-      },
-      {
-        question: "¿Hay estacionamiento?",
-        answer:
-          "La disponibilidad de estacionamiento depende del venue de cada evento. Consulta la página específica del evento para conocer las opciones de acceso y estacionamiento cercano.",
-      },
-      {
-        question: "¿Puedo entrenar en el venue antes de la carrera?",
-        answer:
-          "No hay zona de calentamiento con acceso al circuito oficial. Sin embargo, se ofrece un recorrido de reconocimiento (walkthrough) del venue para que puedas familiarizarte con las estaciones antes de tu salida.",
-      },
-    ],
-  },
-  {
-    title: "Tickets y Precios",
-    items: [
-      {
-        question: "¿Cómo compro tickets para un evento?",
-        answer:
-          'Visita la sección de Eventos en nuestra página, selecciona tu evento y haz clic en "Registrarse". Elige tu categoría (atleta o espectador) y completa la compra en línea. Si un evento está agotado, puedes unirte a la lista de espera.',
-      },
-      {
-        question: "¿Cuándo debo personalizar mi ticket?",
-        answer:
-          "Todos los tickets de atletas deben personalizarse al menos dos semanas antes del evento para recibir tu asignación de hora de inicio y código QR descargable.",
-      },
-      {
-        question: "¿Puedo transferir mi ticket a otra carrera o división?",
-        answer:
-          "No es posible transferir tickets a otra carrera o división, incluyendo cambios de día de competencia.",
-      },
-      {
-        question: "¿Cómo funciona el reembolso?",
-        answer:
-          "Con el Complemento Flex, tienes reembolso del 100% hasta 42 días antes de la carrera y del 50% hasta 7 días antes (a las 7:59 AM). Sin el Flex, no aplican reembolsos.",
-      },
-      {
-        question: "¿Qué es el Complemento Flex?",
-        answer:
-          "El Complemento Flex es un add-on comprable durante la inscripción que permite cambios de nombre y/o reembolso según el tier elegido (Lite Flex o Flex). Solo disponible durante la compra del ticket.",
-      },
-    ],
-  },
-  {
-    title: "Espectadores",
-    items: [
-      {
-        question: "¿Se permite la entrada de espectadores?",
-        answer:
-          "Sí. Los tickets de espectador se compran a través de las páginas del evento según disponibilidad. No se venden en el lugar el día del evento.",
-      },
-      {
-        question: "¿Mis acompañantes pueden grabar mi carrera?",
-        answer: "Sí, desde las zonas de espectadores con su ticket correspondiente.",
-      },
-      {
-        question: "¿Se permiten mascotas en el evento?",
-        answer:
-          "Solo se permiten animales de servicio. No se permiten mascotas regulares. Las restricciones pueden variar por venue.",
-      },
-      {
-        question: "¿Hay servicio de guardarropa para espectadores?",
-        answer:
-          "No. El guardarropa es exclusivo para atletas. Los espectadores deben llevar consigo todos sus objetos personales.",
-      },
-    ],
-  },
-  {
-    title: "Resultados y Rankings",
-    items: [
-      {
-        question: "¿Dónde puedo ver mis resultados?",
-        answer:
-          "Los resultados oficiales se publican en results.hyrox.com organizados por evento, nombre y división. Estarán disponibles el mismo día de la carrera.",
-      },
-      {
-        question: "¿Qué es el Elite 15?",
-        answer:
-          "El Elite 15 es el circuito de alto rendimiento de HYROX donde los mejores atletas acumulan puntos durante la temporada para clasificar al Campeonato Mundial. Más información en /campeonatos.",
-      },
-      {
-        question: "¿Cómo funcionan los grupos de edad?",
-        answer:
-          "Los grupos de edad van desde Sub-24 (16-24 años) hasta 85-89. En Doubles, se promedia la edad de ambos competidores. En Relay, los grupos son Sub-40 y 40+.",
+          "Escribe a contacto@runluv.mx o visita runluv.mx para agendar una reunión. runluv® trabaja con gobiernos municipales, estatales y secretarías de turismo en México.",
       },
     ],
   },
@@ -183,8 +98,8 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] transition-colors duration-150",
-        open && "border-[#3a3a3a]",
+        "overflow-hidden rounded-lg border border-[#2a2a3a] bg-[#16161f] transition-colors duration-150",
+        open && "border-[#3a3a4a]",
       )}
     >
       <button
@@ -196,7 +111,7 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
         <span className="text-sm font-medium text-white sm:text-base">{item.question}</span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-[#e5f93a] transition-transform duration-200 ease-out",
+            "h-4 w-4 shrink-0 text-[#a855f7] transition-transform duration-200 ease-out",
             open && "rotate-180",
           )}
           aria-hidden="true"
@@ -219,7 +134,7 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
               transition: { duration: 0.15, ease: [0.23, 1, 0.32, 1] },
             }}
           >
-            <div className="border-t border-[#2a2a2a] px-5 py-4 text-sm leading-relaxed text-white/70">
+            <div className="border-t border-[#2a2a3a] px-5 py-4 text-sm leading-relaxed text-white/70">
               {item.answer}
             </div>
           </motion.div>
@@ -231,14 +146,14 @@ function FAQAccordionItem({ item }: { item: FAQItem }) {
 
 function FAQPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] px-4 pb-24 pt-20">
+    <main className="min-h-screen bg-[#060608] px-4 pb-24 pt-20">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p
-            className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#e5f93a]"
+            className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#a855f7]"
             style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.3em" }}
           >
-            HYROX MÉXICO
+            RUNLUV®
           </p>
           <h1
             className="text-[clamp(2.5rem,8vw,5rem)] font-normal leading-none tracking-tight text-white"
@@ -247,7 +162,7 @@ function FAQPage() {
             PREGUNTAS FRECUENTES
           </h1>
           <p className="mt-4 text-base text-white/50">
-            Todo lo que necesitas saber antes de tu primera carrera HYROX.
+            Todo lo que gobiernos, corredores y aliados necesitan saber sobre runluv®.
           </p>
         </div>
 
@@ -255,14 +170,14 @@ function FAQPage() {
           {faqData.map((category) => (
             <section key={category.title}>
               <div className="mb-4 flex items-center gap-3">
-                <span className="h-px flex-1 bg-[#2a2a2a]" />
+                <span className="h-px flex-1 bg-[#2a2a3a]" />
                 <h2
-                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e5f93a]"
+                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#a855f7]"
                   style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.2em" }}
                 >
                   {category.title}
                 </h2>
-                <span className="h-px flex-1 bg-[#2a2a2a]" />
+                <span className="h-px flex-1 bg-[#2a2a3a]" />
               </div>
               <div className="space-y-2">
                 {category.items.map((item) => (
@@ -282,7 +197,7 @@ export const Route = createFileRoute("/faq")({
     meta: seo({
       title: "Preguntas Frecuentes",
       description:
-        "Resolvemos las dudas más comunes sobre los eventos HYROX: inscripciones, categorías, formato y más.",
+        "Resolvemos las dudas más comunes sobre runluv®: modalidades de carrera, modelo de colaboración con gobiernos, impacto económico y cómo llevar un evento a tu ciudad.",
     }),
   }),
   component: FAQPage,

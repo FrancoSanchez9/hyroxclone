@@ -86,7 +86,7 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Para cualquier duda sobre estos Términos, escríbenos a{" "}
-        <a href="mailto:info@hyrox.mx">info@hyrox.mx</a> o visita nuestra{" "}
+        <a href="mailto:contacto@runluv.mx">contacto@runluv.mx</a> o visita nuestra{" "}
         <a href="/contacto">página de contacto</a>.
       </p>
     ),
@@ -109,7 +109,7 @@ export const Route = createFileRoute("/terminos")({
     meta: seo({
       title: "Términos y Condiciones",
       description:
-        "Términos y condiciones de uso del sitio y de participación en los eventos de HYROX México.",
+        "Términos y condiciones de uso del sitio y de participación en los eventos de runluv®.",
     }),
   }),
   component: TerminosPage,

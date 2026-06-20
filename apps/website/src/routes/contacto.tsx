@@ -17,10 +17,10 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-function FacebookIcon({ className }: { className?: string }) {
+function LinkedInIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
     </svg>
   );
 }
@@ -29,8 +29,8 @@ const channels = [
   {
     icon: Mail,
     label: "Correo",
-    value: "info@hyrox.mx",
-    href: "mailto:info@hyrox.mx",
+    value: "contacto@runluv.mx",
+    href: "mailto:contacto@runluv.mx",
   },
   {
     icon: MessageCircle,
@@ -41,14 +41,14 @@ const channels = [
   {
     icon: InstagramIcon,
     label: "Instagram",
-    value: "@hyroxmexico",
-    href: "https://www.instagram.com/hyroxmexico",
+    value: "@runluv.mx",
+    href: "https://www.instagram.com/runluv.mx",
   },
   {
-    icon: FacebookIcon,
-    label: "Facebook",
-    value: "/hyroxmexico",
-    href: "https://www.facebook.com/hyroxmexico",
+    icon: LinkedInIcon,
+    label: "LinkedIn",
+    value: "/company/runluv",
+    href: "https://www.linkedin.com/company/runluv",
   },
 ];
 
@@ -59,10 +59,10 @@ const sectionVariants = {
 
 const subjects = [
   "Información general",
+  "Llevar runluv® a mi ciudad (gobiernos)",
   "Inscripciones a eventos",
-  "Afiliación de gimnasios",
-  "Voluntariado",
-  "Patrocinios y prensa",
+  "Patrocinios y aliados comerciales",
+  "Prensa y medios",
   "Otro",
 ];
 
@@ -87,11 +87,11 @@ function ContactoPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
+    <main className="min-h-screen bg-[#060608] text-white">
       <PageHero
         badge="CONTACTO"
         title="HABLEMOS"
-        subtitle="¿Tienes una duda, propuesta o quieres llevar HYROX a tu ciudad? Escríbenos."
+        subtitle="¿Tienes una duda, propuesta o quieres llevar runluv® a tu ciudad? Escríbenos."
       />
 
       <motion.section
@@ -99,12 +99,12 @@ function ContactoPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={sectionVariants}
-        className="py-20 px-6 border-t border-[#2a2a2a]"
+        className="py-20 px-6 border-t border-[#2a2a3a]"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.2fr]">
           {/* Canales de contacto */}
           <div>
-            <Badge variant="dark" className="mb-4 border border-[#3a3a3a]">
+            <Badge variant="dark" className="mb-4 border border-[#3a3a4a]">
               CANALES
             </Badge>
             <h2
@@ -121,25 +121,25 @@ function ContactoPage() {
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
                   rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-4 border border-[#2a2a2a] bg-[#1a1a1a] px-5 py-4 transition-colors duration-150 hover:border-[#e5f93a]"
+                  className="group flex items-center gap-4 border border-[#2a2a3a] bg-[#16161f] px-5 py-4 transition-colors duration-150 hover:border-[#a855f7]"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#e5f93a]/10">
-                    <channel.icon className="h-5 w-5 text-[#e5f93a]" />
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#a855f7]/10">
+                    <channel.icon className="h-5 w-5 text-[#a855f7]" />
                   </span>
                   <span className="min-w-0">
                     <span className="block text-xs uppercase tracking-widest text-white/40">
                       {channel.label}
                     </span>
-                    <span className="block truncate text-sm font-medium text-white group-hover:text-[#e5f93a]">
+                    <span className="block truncate text-sm font-medium text-white group-hover:text-[#a855f7]">
                       {channel.value}
                     </span>
                   </span>
                 </a>
               ))}
 
-              <div className="flex items-center gap-4 border border-[#2a2a2a] bg-[#1a1a1a] px-5 py-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#e5f93a]/10">
-                  <MapPin className="h-5 w-5 text-[#e5f93a]" />
+              <div className="flex items-center gap-4 border border-[#2a2a3a] bg-[#16161f] px-5 py-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#a855f7]/10">
+                  <MapPin className="h-5 w-5 text-[#a855f7]" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs uppercase tracking-widest text-white/40">
@@ -153,7 +153,7 @@ function ContactoPage() {
 
           {/* Formulario */}
           <div>
-            <Badge variant="yellow" className="mb-4">
+            <Badge variant="outline" className="mb-4 text-[#a855f7]">
               FORMULARIO
             </Badge>
             <h2
@@ -168,10 +168,10 @@ function ContactoPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="rounded-lg border border-[#e5f93a]/30 bg-[#e5f93a]/5 px-6 py-8 text-center"
+                className="rounded-lg border border-[#a855f7]/30 bg-[#a855f7]/5 px-6 py-8 text-center"
               >
                 <p
-                  className="mb-2 text-2xl text-[#e5f93a]"
+                  className="mb-2 text-2xl text-[#a855f7]"
                   style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.05em" }}
                 >
                   ¡MENSAJE ENVIADO!
@@ -196,7 +196,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
                       >
-                        Nombre completo <span className="text-[#e5f93a]">*</span>
+                        Nombre completo <span className="text-[#a855f7]">*</span>
                       </label>
                       <input
                         id={field.name}
@@ -205,7 +205,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#e5f93a]"
+                        className="w-full border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
                         placeholder="Tu nombre completo"
                       />
                     </div>
@@ -219,7 +219,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
                       >
-                        Email <span className="text-[#e5f93a]">*</span>
+                        Email <span className="text-[#a855f7]">*</span>
                       </label>
                       <input
                         id={field.name}
@@ -229,7 +229,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#e5f93a]"
+                        className="w-full border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -243,7 +243,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
                       >
-                        Asunto <span className="text-[#e5f93a]">*</span>
+                        Asunto <span className="text-[#a855f7]">*</span>
                       </label>
                       <select
                         id={field.name}
@@ -252,7 +252,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full appearance-none border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-[#e5f93a]"
+                        className="w-full appearance-none border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-[#a855f7]"
                       >
                         <option value="" disabled>
                           Selecciona un tema
@@ -274,7 +274,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
                       >
-                        Mensaje <span className="text-[#e5f93a]">*</span>
+                        Mensaje <span className="text-[#a855f7]">*</span>
                       </label>
                       <textarea
                         id={field.name}
@@ -284,7 +284,7 @@ function ContactoPage() {
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
                         rows={5}
-                        className="w-full resize-none border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#e5f93a]"
+                        className="w-full resize-none border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
                         placeholder="Cuéntanos en qué podemos ayudarte..."
                       />
                     </div>
@@ -307,7 +307,7 @@ function ContactoPage() {
 
                 <p className="text-center text-xs text-white/40">
                   Al enviar aceptas nuestro{" "}
-                  <a href="/privacidad" className="text-[#e5f93a] hover:underline">
+                  <a href="/privacidad" className="text-[#a855f7] hover:underline">
                     Aviso de Privacidad
                   </a>
                   .
@@ -326,7 +326,7 @@ export const Route = createFileRoute("/contacto")({
     meta: seo({
       title: "Contacto",
       description:
-        "¿Tienes dudas o una propuesta? Contacta al equipo de HYROX México por correo, WhatsApp o redes sociales.",
+        "¿Tienes dudas o una propuesta? Contacta al equipo de runluv® por correo, WhatsApp, Instagram o LinkedIn.",
     }),
   }),
   component: ContactoPage,

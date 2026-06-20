@@ -2,14 +2,103 @@ import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/seo";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { upcomingEvents, divisions } from "@/data/events";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@tanstack/react-router";
 
-const FILTERS = ["Todos", "Open", "Pro", "Doubles", "Relay"] as const;
-type Filter = (typeof FILTERS)[number];
+const MODALIDADES = ["Todas", "La Última Vuelta®", "Endurance 4H", "5K / 10K"] as const;
+type Modalidad = (typeof MODALIDADES)[number];
+
+interface RunluvEvent {
+  id: string;
+  name: string;
+  city: string;
+  venue: string;
+  date: string;
+  endDate?: string;
+  modalidades: string[];
+  status: "Confirmada" | "En gestión";
+  imageUrl?: string;
+  featured?: boolean;
+}
+
+const upcomingEvents: RunluvEvent[] = [
+  {
+    id: "cdmx-2027",
+    name: "runluv® Ciudad de México",
+    city: "Ciudad de México",
+    venue: "Autódromo Hermanos Rodríguez",
+    date: "2027-03-13",
+    endDate: "2027-03-14",
+    modalidades: ["La Última Vuelta®", "Endurance 4H", "5K / 10K"],
+    status: "En gestión",
+    imageUrl:
+      "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800&h=500&q=80&fit=crop&auto=format",
+    featured: true,
+  },
+  {
+    id: "queretaro-2027",
+    name: "runluv® Querétaro",
+    city: "Querétaro",
+    venue: "Autódromo de Querétaro",
+    date: "2027-05-08",
+    modalidades: ["La Última Vuelta®", "Endurance 4H"],
+    status: "En gestión",
+    imageUrl:
+      "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=800&h=500&q=80&fit=crop&auto=format",
+  },
+  {
+    id: "monterrey-2027",
+    name: "runluv® Monterrey",
+    city: "Monterrey",
+    venue: "Autódromo Monterrey",
+    date: "2027-07-17",
+    modalidades: ["La Última Vuelta®", "5K / 10K"],
+    status: "En gestión",
+    imageUrl:
+      "https://images.unsplash.com/photo-1486218119243-13883505764c?w=800&h=500&q=80&fit=crop&auto=format",
+  },
+  {
+    id: "guadalajara-2027",
+    name: "runluv® Guadalajara",
+    city: "Guadalajara",
+    venue: "Autódromo Guadalajara",
+    date: "2027-09-11",
+    modalidades: ["La Última Vuelta®", "Endurance 4H", "5K / 10K"],
+    status: "En gestión",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&h=500&q=80&fit=crop&auto=format",
+  },
+];
+
+const categorias = [
+  {
+    name: "Individual Open",
+    description: "Para cualquier persona que quiera vivir la experiencia runluv®.",
+    color: "#a855f7",
+  },
+  {
+    name: "Individual Pro",
+    description: "Para corredores experimentados que buscan el reto máximo.",
+    color: "#c084fc",
+  },
+  {
+    name: "Doubles",
+    description: "Parejas femenil, varonil o mixta que comparten el recorrido.",
+    color: "#d8b4fe",
+  },
+  {
+    name: "Teams",
+    description: "Equipos de 3 a 5 integrantes que avanzan por relevos.",
+    color: "#a855f7",
+  },
+  {
+    name: "Corporate Teams",
+    description: "Hasta 6 integrantes empresariales: activación de marca y team building.",
+    color: "#c084fc",
+  },
+];
 
 function formatDateSpanish(dateStr: string, endDateStr?: string): string {
   const months = [
@@ -51,32 +140,25 @@ function formatDateSpanish(dateStr: string, endDateStr?: string): string {
   return `${startDay} ${startMonth} ${startYear} – ${endDay} ${endMonth} ${endYear}`;
 }
 
-const divisionColors: Record<string, string> = {
-  Open: "#e5f93a",
-  Pro: "#ffffff",
-  Doubles: "#aaaaaa",
-  Relay: "#666666",
-};
-
 function EventosPage() {
-  const [activeFilter, setActiveFilter] = useState<Filter>("Todos");
+  const [activeFilter, setActiveFilter] = useState<Modalidad>("Todas");
 
   const filteredEvents =
-    activeFilter === "Todos"
+    activeFilter === "Todas"
       ? upcomingEvents
-      : upcomingEvents.filter((e) => e.categories.includes(activeFilter));
+      : upcomingEvents.filter((e) => e.modalidades.includes(activeFilter));
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      <section className="pt-24 pb-12 px-6 border-b border-[#2a2a2a]">
+    <main className="min-h-screen bg-[#060608] text-white">
+      <section className="pt-24 pb-12 px-6 border-b border-[#2a2a3a]">
         <div className="max-w-7xl mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="text-[#e5f93a] text-xs font-semibold uppercase tracking-[0.2em] mb-3"
+            className="text-[#a855f7] text-xs font-semibold uppercase tracking-[0.2em] mb-3"
           >
-            Temporada 2026–2027
+            Próximas sedes 2027
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -84,14 +166,23 @@ function EventosPage() {
             transition={{ duration: 0.5, delay: 0.05, ease: [0.23, 1, 0.32, 1] }}
             className="font-display text-6xl md:text-8xl leading-none tracking-wider uppercase text-white"
           >
-            Eventos Oficiales México
+            Eventos runluv® en autódromos
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+            className="text-[#888899] text-base mt-4 max-w-2xl"
+          >
+            Sedes en gestión con gobiernos municipales y estatales. ¿Quieres que runluv® llegue a tu
+            ciudad? Escríbenos.
+          </motion.p>
         </div>
       </section>
 
-      <section className="py-8 px-6 border-b border-[#2a2a2a] sticky top-0 z-10 bg-[#0a0a0a]/95 backdrop-blur-sm">
+      <section className="py-8 px-6 border-b border-[#2a2a3a] sticky top-0 z-10 bg-[#060608]/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex gap-2 flex-wrap">
-          {FILTERS.map((filter) => {
+          {MODALIDADES.map((filter) => {
             const isActive = activeFilter === filter;
             return (
               <button
@@ -99,10 +190,10 @@ function EventosPage() {
                 onClick={() => setActiveFilter(filter)}
                 className={[
                   "px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-150",
-                  "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e5f93a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
+                  "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a855f7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060608]",
                   isActive
-                    ? "bg-[#e5f93a] text-[#0a0a0a] border-[#e5f93a]"
-                    : "bg-transparent text-[#888888] border-[#2a2a2a] hover:border-[#e5f93a] hover:text-white",
+                    ? "bg-[#a855f7] text-white border-[#a855f7]"
+                    : "bg-transparent text-[#888899] border-[#2a2a3a] hover:border-[#a855f7] hover:text-white",
                 ].join(" ")}
               >
                 {filter}
@@ -118,9 +209,9 @@ function EventosPage() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-[#888888] text-center py-20 text-sm uppercase tracking-widest"
+              className="text-[#888899] text-center py-20 text-sm uppercase tracking-widest"
             >
-              No hay eventos para esta categoría
+              No hay sedes con esta modalidad
             </motion.p>
           ) : (
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -152,15 +243,15 @@ function EventosPage() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
                         {event.featured && (
-                          <div className="absolute top-0 left-0 right-0 h-1 bg-[#e5f93a]" />
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-[#a855f7]" />
                         )}
                       </div>
                     )}
                     {!event.imageUrl && event.featured && (
-                      <div className="h-1 w-full bg-[#e5f93a]" />
+                      <div className="h-1 w-full bg-[#a855f7]" />
                     )}
                     <CardHeader className="pb-3">
-                      <p className="text-[#e5f93a] text-xs font-semibold uppercase tracking-widest">
+                      <p className="text-[#a855f7] text-xs font-semibold uppercase tracking-widest">
                         {formatDateSpanish(event.date, event.endDate)}
                       </p>
                       <h2 className="font-bold text-lg leading-tight text-white mt-1">
@@ -170,44 +261,30 @@ function EventosPage() {
 
                     <CardContent className="flex-1 flex flex-col gap-4">
                       <div>
-                        <p className="text-[#888888] text-sm">{event.city}</p>
+                        <p className="text-[#888899] text-sm">{event.city}</p>
                         <p className="text-white/60 text-xs mt-0.5">{event.venue}</p>
                       </div>
 
                       <div className="flex flex-wrap gap-1.5">
-                        {event.categories.map((cat) => (
+                        {event.modalidades.map((mod) => (
                           <Badge
-                            key={cat}
-                            variant={cat === "Open" ? "yellow" : "outline"}
-                            style={
-                              cat !== "Open"
-                                ? {
-                                    color: divisionColors[cat] ?? "#ffffff",
-                                    borderColor: divisionColors[cat] ?? "#ffffff",
-                                  }
-                                : undefined
-                            }
+                            key={mod}
+                            variant="outline"
+                            style={{ color: "#c084fc", borderColor: "#3a2a4a" }}
                           >
-                            {cat}
+                            {mod}
                           </Badge>
                         ))}
-                        {event.soldOut && (
-                          <Badge variant="dark" className="border-[#444444] text-[#888888]">
-                            Agotado
-                          </Badge>
-                        )}
+                        <Badge variant="dark" className="border-[#444455] text-[#888899]">
+                          {event.status}
+                        </Badge>
                       </div>
                     </CardContent>
 
                     <CardFooter>
-                      <Link to={event.registrationUrl as never} className="block w-full">
-                        <Button
-                          size="md"
-                          variant="primary"
-                          className="w-full"
-                          disabled={event.soldOut}
-                        >
-                          {event.soldOut ? "Agotado" : "Registrarse"}
+                      <Link to="/contacto" className="block w-full">
+                        <Button size="md" variant="primary" className="w-full">
+                          Quiero runluv® en mi ciudad
                         </Button>
                       </Link>
                     </CardFooter>
@@ -219,7 +296,7 @@ function EventosPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 border-t border-[#2a2a2a]">
+      <section className="py-20 px-6 border-t border-[#2a2a3a]">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 12 }}
@@ -228,13 +305,13 @@ function EventosPage() {
             transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
             className="font-display text-5xl md:text-6xl uppercase tracking-wider text-white mb-12"
           >
-            Categorías
+            Categorías de participación
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {divisions.map((div, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {categorias.map((cat, i) => (
               <motion.div
-                key={div.name}
+                key={cat.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
@@ -245,24 +322,17 @@ function EventosPage() {
                 }}
                 whileHover={{ y: -4 }}
               >
-                <Card className="h-full border-t-2" style={{ borderTopColor: div.color }}>
+                <Card className="h-full border-t-2" style={{ borderTopColor: cat.color }}>
                   <CardHeader>
                     <span
                       className="font-display text-3xl uppercase tracking-widest"
-                      style={{ color: div.color }}
+                      style={{ color: cat.color }}
                     >
-                      {div.name}
+                      {cat.name}
                     </span>
                   </CardHeader>
-                  <CardContent className="flex flex-col gap-4">
-                    <p className="text-[#888888] text-sm leading-relaxed">{div.description}</p>
-                    <div className="flex flex-col gap-1">
-                      <p className="text-xs text-white/40 uppercase tracking-wider font-semibold">
-                        Pesos
-                      </p>
-                      <p className="text-xs text-white/70">Mujeres: {div.weights.women}</p>
-                      <p className="text-xs text-white/70">Hombres: {div.weights.men}</p>
-                    </div>
+                  <CardContent>
+                    <p className="text-[#888899] text-sm leading-relaxed">{cat.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -277,9 +347,9 @@ function EventosPage() {
 export const Route = createFileRoute("/eventos")({
   head: () => ({
     meta: seo({
-      title: "Eventos y Calendario",
+      title: "Eventos y Sedes",
       description:
-        "Calendario de competencias HYROX en México. Consulta fechas, sedes y categorías, y asegura tu lugar en la próxima carrera.",
+        "Próximas sedes de runluv® en autódromos de México. Conoce las ciudades en gestión, las modalidades de carrera y las categorías de participación, y lleva runluv® a tu ciudad.",
     }),
   }),
   component: EventosPage,

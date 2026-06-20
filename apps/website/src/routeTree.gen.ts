@@ -9,33 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VoluntarioRouteImport } from './routes/voluntario'
-import { Route as TuNivelRouteImport } from './routes/tu-nivel'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
-import { Route as PreparacionRouteImport } from './routes/preparacion'
-import { Route as LaCarreraRouteImport } from './routes/la-carrera'
-import { Route as GimnasiosRouteImport } from './routes/gimnasios'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as CampeonatosRouteImport } from './routes/campeonatos'
-import { Route as AfiliacionesRouteImport } from './routes/afiliaciones'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 
-const VoluntarioRoute = VoluntarioRouteImport.update({
-  id: '/voluntario',
-  path: '/voluntario',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TuNivelRoute = TuNivelRouteImport.update({
-  id: '/tu-nivel',
-  path: '/tu-nivel',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TiendaRoute = TiendaRouteImport.update({
   id: '/tienda',
   path: '/tienda',
@@ -49,21 +32,6 @@ const TerminosRoute = TerminosRouteImport.update({
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
   path: '/privacidad',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PreparacionRoute = PreparacionRouteImport.update({
-  id: '/preparacion',
-  path: '/preparacion',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LaCarreraRoute = LaCarreraRouteImport.update({
-  id: '/la-carrera',
-  path: '/la-carrera',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GimnasiosRoute = GimnasiosRouteImport.update({
-  id: '/gimnasios',
-  path: '/gimnasios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -86,16 +54,6 @@ const ContactoRoute = ContactoRouteImport.update({
   path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CampeonatosRoute = CampeonatosRouteImport.update({
-  id: '/campeonatos',
-  path: '/campeonatos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AfiliacionesRoute = AfiliacionesRouteImport.update({
-  id: '/afiliaciones',
-  path: '/afiliaciones',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -110,150 +68,87 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/afiliaciones': typeof AfiliacionesRoute
-  '/campeonatos': typeof CampeonatosRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
   '/eventos': typeof EventosRoute
   '/faq': typeof FaqRoute
-  '/gimnasios': typeof GimnasiosRoute
-  '/la-carrera': typeof LaCarreraRoute
-  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
-  '/tu-nivel': typeof TuNivelRoute
-  '/voluntario': typeof VoluntarioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/afiliaciones': typeof AfiliacionesRoute
-  '/campeonatos': typeof CampeonatosRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
   '/eventos': typeof EventosRoute
   '/faq': typeof FaqRoute
-  '/gimnasios': typeof GimnasiosRoute
-  '/la-carrera': typeof LaCarreraRoute
-  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
-  '/tu-nivel': typeof TuNivelRoute
-  '/voluntario': typeof VoluntarioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/afiliaciones': typeof AfiliacionesRoute
-  '/campeonatos': typeof CampeonatosRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
   '/eventos': typeof EventosRoute
   '/faq': typeof FaqRoute
-  '/gimnasios': typeof GimnasiosRoute
-  '/la-carrera': typeof LaCarreraRoute
-  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
-  '/tu-nivel': typeof TuNivelRoute
-  '/voluntario': typeof VoluntarioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/$'
-    | '/afiliaciones'
-    | '/campeonatos'
     | '/contacto'
     | '/cookies'
     | '/eventos'
     | '/faq'
-    | '/gimnasios'
-    | '/la-carrera'
-    | '/preparacion'
     | '/privacidad'
     | '/terminos'
     | '/tienda'
-    | '/tu-nivel'
-    | '/voluntario'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
-    | '/afiliaciones'
-    | '/campeonatos'
     | '/contacto'
     | '/cookies'
     | '/eventos'
     | '/faq'
-    | '/gimnasios'
-    | '/la-carrera'
-    | '/preparacion'
     | '/privacidad'
     | '/terminos'
     | '/tienda'
-    | '/tu-nivel'
-    | '/voluntario'
   id:
     | '__root__'
     | '/'
     | '/$'
-    | '/afiliaciones'
-    | '/campeonatos'
     | '/contacto'
     | '/cookies'
     | '/eventos'
     | '/faq'
-    | '/gimnasios'
-    | '/la-carrera'
-    | '/preparacion'
     | '/privacidad'
     | '/terminos'
     | '/tienda'
-    | '/tu-nivel'
-    | '/voluntario'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
-  AfiliacionesRoute: typeof AfiliacionesRoute
-  CampeonatosRoute: typeof CampeonatosRoute
   ContactoRoute: typeof ContactoRoute
   CookiesRoute: typeof CookiesRoute
   EventosRoute: typeof EventosRoute
   FaqRoute: typeof FaqRoute
-  GimnasiosRoute: typeof GimnasiosRoute
-  LaCarreraRoute: typeof LaCarreraRoute
-  PreparacionRoute: typeof PreparacionRoute
   PrivacidadRoute: typeof PrivacidadRoute
   TerminosRoute: typeof TerminosRoute
   TiendaRoute: typeof TiendaRoute
-  TuNivelRoute: typeof TuNivelRoute
-  VoluntarioRoute: typeof VoluntarioRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/voluntario': {
-      id: '/voluntario'
-      path: '/voluntario'
-      fullPath: '/voluntario'
-      preLoaderRoute: typeof VoluntarioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tu-nivel': {
-      id: '/tu-nivel'
-      path: '/tu-nivel'
-      fullPath: '/tu-nivel'
-      preLoaderRoute: typeof TuNivelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tienda': {
       id: '/tienda'
       path: '/tienda'
@@ -273,27 +168,6 @@ declare module '@tanstack/react-router' {
       path: '/privacidad'
       fullPath: '/privacidad'
       preLoaderRoute: typeof PrivacidadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/preparacion': {
-      id: '/preparacion'
-      path: '/preparacion'
-      fullPath: '/preparacion'
-      preLoaderRoute: typeof PreparacionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/la-carrera': {
-      id: '/la-carrera'
-      path: '/la-carrera'
-      fullPath: '/la-carrera'
-      preLoaderRoute: typeof LaCarreraRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gimnasios': {
-      id: '/gimnasios'
-      path: '/gimnasios'
-      fullPath: '/gimnasios'
-      preLoaderRoute: typeof GimnasiosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -324,20 +198,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/campeonatos': {
-      id: '/campeonatos'
-      path: '/campeonatos'
-      fullPath: '/campeonatos'
-      preLoaderRoute: typeof CampeonatosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/afiliaciones': {
-      id: '/afiliaciones'
-      path: '/afiliaciones'
-      fullPath: '/afiliaciones'
-      preLoaderRoute: typeof AfiliacionesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$': {
       id: '/$'
       path: '/$'
@@ -358,20 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
-  AfiliacionesRoute: AfiliacionesRoute,
-  CampeonatosRoute: CampeonatosRoute,
   ContactoRoute: ContactoRoute,
   CookiesRoute: CookiesRoute,
   EventosRoute: EventosRoute,
   FaqRoute: FaqRoute,
-  GimnasiosRoute: GimnasiosRoute,
-  LaCarreraRoute: LaCarreraRoute,
-  PreparacionRoute: PreparacionRoute,
   PrivacidadRoute: PrivacidadRoute,
   TerminosRoute: TerminosRoute,
   TiendaRoute: TiendaRoute,
-  TuNivelRoute: TuNivelRoute,
-  VoluntarioRoute: VoluntarioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

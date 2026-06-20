@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
-const STORAGE_KEY = "hyrox-cookies-accepted";
+const STORAGE_KEY = "runluv-cookies-accepted";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -38,7 +38,7 @@ export function CookieBanner() {
           <p className="text-sm text-white">
             Usamos cookies para ofrecerte la mejor experiencia en nuestra web.{" "}
             <a
-              href="/politica-cookies"
+              href="/cookies"
               className="underline underline-offset-2 hover:text-gray-300 transition-colors duration-150"
             >
               Más información
