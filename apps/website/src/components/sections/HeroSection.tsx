@@ -1,97 +1,156 @@
 import { motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/Button";
+import logoSrc from "@/assets/image02.png";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
-const DURATION = 0.6;
+const DURATION = 0.7;
 
 const fadeUp = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
 };
 
 const stats = [
-  { value: "100+", label: "Eventos globales" },
-  { value: "5,000+", label: "Gimnasios afiliados" },
-  { value: "500,000+", label: "Atletas" },
+  { value: "15M+", label: "Corredores en México" },
+  { value: "7x", label: "Retorno económico" },
+  { value: "15,000", label: "Asistentes por evento" },
 ];
 
 export function HeroSection() {
   return (
     <section
-      className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#0a0a0a]"
+      className="relative flex min-h-screen w-full flex-col overflow-hidden"
+      style={{ background: "#060608" }}
       aria-label="Hero"
     >
+      {/* Background image */}
       <img
-        src="https://images.unsplash.com/photo-1502904550040-7534597429ae?w=1920&q=80&fit=crop&auto=format"
+        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=80&fit=crop&auto=format"
         alt=""
         aria-hidden="true"
         loading="eager"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-black/65" />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(229,249,58,0.08) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 40%, rgba(0,0,0,0.7) 100%)",
-        }}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-30"
       />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-32 pt-24 text-center">
+      {/* Overlays */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(168,85,247,0.12) 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-40"
+        style={{ background: "linear-gradient(to bottom, transparent, #060608)" }}
+      />
+
+      {/* Decorative circuit line */}
+      <div
+        className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px opacity-10"
+        style={{ background: "linear-gradient(90deg, transparent, #a855f7, transparent)" }}
+      />
+
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-36 pt-32 text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="initial"
+          animate="animate"
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0 }}
+          className="mb-6"
+        >
+          <img
+            src={logoSrc}
+            alt="runluv"
+            className="h-10 md:h-14 w-auto mx-auto brightness-[1.05]"
+          />
+        </motion.div>
+
         <motion.h1
           variants={fadeUp}
           initial="initial"
           animate="animate"
-          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0 }}
-          className="max-w-5xl text-[clamp(3rem,10vw,8rem)] font-normal leading-none tracking-tight text-white"
+          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.08 }}
+          className="max-w-5xl text-[clamp(2.6rem,8vw,6.5rem)] font-normal leading-none tracking-tight text-white"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
-          THE WORLD SERIES OF <span className="text-[#e5f93a]">FITNESS RACING</span>
+          transformamos el running en{" "}
+          <span
+            style={{
+              background: "linear-gradient(135deg, #a855f7, #c084fc)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            desarrollo para ciudades
+          </span>
         </motion.h1>
+
+        <motion.p
+          variants={fadeUp}
+          initial="initial"
+          animate="animate"
+          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.18 }}
+          className="mt-6 max-w-xl text-base md:text-lg text-white/55 leading-relaxed font-light"
+        >
+          Turismo, economía y comunidad en un solo evento.
+        </motion.p>
 
         <motion.div
           variants={fadeUp}
           initial="initial"
           animate="animate"
-          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.1 }}
+          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.28 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link to="/">
-            <Button variant="primary" size="lg">
-              ¡Inscríbete Ahora!
-            </Button>
-          </Link>
-          <Link to="/">
-            <Button variant="outline" size="lg">
-              ¿Qué es HYROX?
-            </Button>
-          </Link>
+          <a
+            href="#contacto"
+            className="inline-flex items-center justify-center h-12 px-8 text-sm font-semibold uppercase tracking-widest text-white bg-[#a855f7] hover:bg-[#9333ea] transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
+          >
+            Agenda una reunión
+          </a>
+          <a
+            href="#que-es"
+            className="inline-flex items-center justify-center h-12 px-8 text-sm font-semibold uppercase tracking-widest text-[#a855f7] border border-[#a855f7]/50 hover:border-[#a855f7] hover:bg-[#a855f7]/8 transition-all duration-[160ms]"
+          >
+            ¿Qué es runluv?
+          </a>
         </motion.div>
       </div>
 
+      {/* Stats strip */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
-        <div className="grid grid-cols-3 divide-x divide-white/10 bg-black/40 backdrop-blur-sm">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, #a855f7 50%, transparent)" }}
+        />
+        <div
+          className="grid grid-cols-3 divide-x"
+          style={{
+            backgroundColor: "rgba(15,15,20,0.85)",
+            backdropFilter: "blur(12px)",
+            borderTop: "1px solid #2a2a3a",
+          }}
+        >
           {stats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center justify-center px-4 py-5 sm:py-6"
             >
               <span
-                className="text-[clamp(1.5rem,3vw,2.25rem)] font-normal leading-none text-[#e5f93a]"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                className="text-[clamp(1.4rem,3vw,2.1rem)] font-normal leading-none"
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  background: "linear-gradient(135deg, #a855f7, #c084fc)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
               >
                 {stat.value}
               </span>
-              <span className="mt-1 text-xs uppercase tracking-widest text-white/50 sm:text-sm">
+              <span className="mt-1 text-xs uppercase tracking-widest text-white/40 sm:text-sm">
                 {stat.label}
               </span>
             </div>

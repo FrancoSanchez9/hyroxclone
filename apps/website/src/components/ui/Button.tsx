@@ -11,8 +11,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "bg-[#e5f93a] text-[#0a0a0a] border-transparent hover:bg-[#d4e82e] font-semibold",
-  outline: "bg-transparent text-[#e5f93a] border border-[#e5f93a] hover:bg-[#e5f93a]/10",
+  primary: "bg-[#a855f7] text-white border-transparent hover:bg-[#9333ea] font-semibold",
+  outline: "bg-transparent text-[#a855f7] border border-[#a855f7] hover:bg-[#a855f7]/10",
   ghost: "bg-transparent text-white border-transparent hover:text-white/70 hover:bg-white/5",
 };
 
@@ -37,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           "ease-[cubic-bezier(0.23,1,0.32,1)]",
           "active:scale-[0.97]",
           "@media(hover:hover){hover:scale-[1.02]}",
-          "focus-visible:ring-2 focus-visible:ring-[#e5f93a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
+          "focus-visible:ring-2 focus-visible:ring-[#a855f7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060608]",
           "disabled:pointer-events-none disabled:opacity-40",
           variantClasses[variant],
           sizeClasses[size],
