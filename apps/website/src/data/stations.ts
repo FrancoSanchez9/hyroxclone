@@ -6,7 +6,6 @@ export interface Station {
   muscles: string[];
   openReps: string;
   proReps: string;
-  icon: string;
 }
 
 export const stations: Station[] = [
@@ -19,7 +18,6 @@ export const stations: Station[] = [
     muscles: ["Brazos", "Hombros", "Core", "Tren inferior"],
     openReps: "1,000 m",
     proReps: "1,000 m",
-    icon: "⛷️",
   },
   {
     number: 2,
@@ -30,7 +28,6 @@ export const stations: Station[] = [
     muscles: ["Cadena posterior", "Core", "Cuádriceps"],
     openReps: "50 m",
     proReps: "50 m",
-    icon: "🛷",
   },
   {
     number: 3,
@@ -41,7 +38,6 @@ export const stations: Station[] = [
     muscles: ["Glúteos", "Espalda", "Bíceps", "Core"],
     openReps: "50 m",
     proReps: "50 m",
-    icon: "💪",
   },
   {
     number: 4,
@@ -52,7 +48,6 @@ export const stations: Station[] = [
     muscles: ["Cuerpo completo", "Cardiovascular"],
     openReps: "80 m",
     proReps: "80 m",
-    icon: "🏃",
   },
   {
     number: 5,
@@ -63,7 +58,6 @@ export const stations: Station[] = [
     muscles: ["Espalda", "Brazos", "Piernas", "Core"],
     openReps: "1,000 m",
     proReps: "1,000 m",
-    icon: "🚣",
   },
   {
     number: 6,
@@ -74,7 +68,6 @@ export const stations: Station[] = [
     muscles: ["Espalda alta", "Core", "Grip"],
     openReps: "200 m (2×24 kg)",
     proReps: "200 m (2×32 kg)",
-    icon: "🏋️",
   },
   {
     number: 7,
@@ -85,7 +78,6 @@ export const stations: Station[] = [
     muscles: ["Cuádriceps", "Glúteos", "Estabilizadores"],
     openReps: "100 m (10 kg mujer / 20 kg hombre)",
     proReps: "100 m (20 kg mujer / 30 kg hombre)",
-    icon: "🎒",
   },
   {
     number: 8,
@@ -96,6 +88,5 @@ export const stations: Station[] = [
     muscles: ["Cuerpo completo", "Piernas", "Hombros"],
     openReps: "75 reps (6 kg mujer) / 100 reps (9 kg hombre)",
     proReps: "75 reps (9 kg mujer) / 100 reps (14 kg hombre)",
-    icon: "🏀",
   },
 ];

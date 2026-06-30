@@ -7,7 +7,7 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  yellow: "bg-[#FFE500] text-black border-transparent",
+  yellow: "bg-white text-black border-transparent",
   dark: "bg-[#1A1A1A] text-white border-transparent",
   outline: "bg-transparent text-current border-current",
 };

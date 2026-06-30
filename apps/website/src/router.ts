@@ -8,6 +8,7 @@ export function createAppRouter(queryClient: QueryClient) {
     context: { queryClient },
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
+    scrollRestoration: true,
   });
 }
 

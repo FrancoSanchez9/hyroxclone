@@ -5,25 +5,16 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  {
-    label: "¿Qué es?",
-    href: "/#que-es",
-  },
-  {
-    label: "Modalidades",
-    href: "/#modalidades",
-  },
-  {
-    label: "Impacto",
-    href: "/#impacto",
-  },
-  {
-    label: "Modelo",
-    href: "/#modelo",
-  },
+  { label: "Eventos", href: "/eventos" },
+  { label: "La Carrera", href: "/la-carrera" },
+  { label: "Campeonatos", href: "/campeonatos" },
+  { label: "Preparación", href: "/preparacion" },
+  { label: "Tu Nivel", href: "/tu-nivel" },
+  { label: "Gimnasios", href: "/gimnasios" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 export const topRightLinks = [
-  { label: "Descarga dossier", href: "/" },
-  { label: "Contacto", href: "/" },
+  { label: "Voluntario", href: "/voluntario" },
+  { label: "Afiliaciones", href: "/afiliaciones" },
 ];

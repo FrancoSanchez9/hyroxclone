@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { LegalLayout, type LegalSection } from "@/components/ui/LegalLayout";
 
 const sections: LegalSection[] = [
@@ -56,7 +55,7 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Si tienes preguntas sobre el uso de cookies, escríbenos a{" "}
-        <a href="mailto:info@hyrox.mx">info@hyrox.mx</a>. Consulta también nuestro{" "}
+        <a href="mailto:info@runluv.mx">info@runluv.mx</a>. Consulta también nuestro{" "}
         <a href="/privacidad">Aviso de Privacidad</a>.
       </p>
     ),
@@ -76,10 +75,13 @@ function CookiesPage() {
 
 export const Route = createFileRoute("/cookies")({
   head: () => ({
-    meta: seo({
-      title: "Política de Cookies",
-      description: "Qué cookies utiliza HYROX México y cómo puedes gestionarlas.",
-    }),
+    meta: [
+      { title: "Política de Cookies | runluv®" },
+      {
+        name: "description",
+        content: "Qué cookies utiliza runluv® México y cómo puedes gestionarlas.",
+      },
+    ],
   }),
   component: CookiesPage,
 });

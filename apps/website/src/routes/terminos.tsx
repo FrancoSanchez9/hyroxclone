@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { LegalLayout, type LegalSection } from "@/components/ui/LegalLayout";
 
 const sections: LegalSection[] = [
@@ -86,7 +85,7 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Para cualquier duda sobre estos Términos, escríbenos a{" "}
-        <a href="mailto:info@hyrox.mx">info@hyrox.mx</a> o visita nuestra{" "}
+        <a href="mailto:info@runluv.mx">info@runluv.mx</a> o visita nuestra{" "}
         <a href="/contacto">página de contacto</a>.
       </p>
     ),
@@ -106,11 +105,14 @@ function TerminosPage() {
 
 export const Route = createFileRoute("/terminos")({
   head: () => ({
-    meta: seo({
-      title: "Términos y Condiciones",
-      description:
-        "Términos y condiciones de uso del sitio y de participación en los eventos de HYROX México.",
-    }),
+    meta: [
+      { title: "Términos y Condiciones | runluv®" },
+      {
+        name: "description",
+        content:
+          "Términos y condiciones de uso del sitio y de participación en los eventos de runluv® México.",
+      },
+    ],
   }),
   component: TerminosPage,
 });

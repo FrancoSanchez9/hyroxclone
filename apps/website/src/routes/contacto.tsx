@@ -91,7 +91,7 @@ function ContactoPage() {
       <PageHero
         badge="CONTACTO"
         title="HABLEMOS"
-        subtitle="¿Tienes una duda, propuesta o quieres llevar HYROX a tu ciudad? Escríbenos."
+        subtitle="¿Tienes una duda, propuesta o quieres llevar runluv® a tu ciudad? Escríbenos."
       />
 
       <motion.section

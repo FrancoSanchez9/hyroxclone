@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
-import { motion, useInView, useMotionValue, animate } from "framer-motion";
+import { m, useInView, useMotionValue, animate, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/animation";
 
 interface Stat {
   prefix?: string;
@@ -10,10 +11,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 100, suffix: "+", label: "Eventos Globales por Temporada" },
-  { value: 5000, suffix: "+", label: "Gimnasios Afiliados Worldwide" },
-  { prefix: "+", value: 500, suffix: "K", label: "Atletas Registrados" },
-  { value: 8, suffix: "", label: "Estaciones Funcionales" },
+  { value: 5, suffix: "", label: "Ciudades" },
+  { value: 3, suffix: "", label: "Modalidades" },
+  { value: 4, suffix: "", label: "Sedes clasificatorias" },
+  { value: 1, suffix: "", label: "Gran Final" },
 ];
 
 function AnimatedNumber({
@@ -28,12 +29,17 @@ function AnimatedNumber({
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
   const inView = useInView(ref, { once: true, margin: "-10%" });
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (!inView) return;
+    if (prefersReducedMotion) {
+      if (ref.current) ref.current.textContent = value.toLocaleString("en-US");
+      return;
+    }
     const controls = animate(motionValue, value, {
       duration: 1.8,
-      ease: [0.23, 1, 0.32, 1],
+      ease: EASE,
       onUpdate(latest) {
         if (ref.current) {
           ref.current.textContent = Math.round(latest).toLocaleString("en-US");
@@ -41,10 +47,10 @@ function AnimatedNumber({
       },
     });
     return () => controls.stop();
-  }, [inView, motionValue, value]);
+  }, [inView, motionValue, value, prefersReducedMotion]);
 
   return (
-    <span className="font-display text-[clamp(3rem,6vw,5rem)] leading-none tracking-wide text-[#e5f93a]">
+    <span className="font-display text-[clamp(3rem,6vw,5rem)] leading-none tracking-wide text-[#ffffff]">
       {prefix}
       <span ref={ref}>0</span>
       {suffix}
@@ -56,50 +62,56 @@ function StatItem({ stat, index, total }: { stat: Stat; index: number; total: nu
   const isLast = index === total - 1;
 
   return (
-    <motion.div
+    <m.div
       className={cn(
         "relative flex flex-col items-center justify-center px-6 py-10 text-center",
         "col-span-1",
-        !isLast && "md:border-r md:border-[#2a2a2a]",
+        !isLast && "md:border-r md:border-white/10",
       )}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{
-        duration: 0.6,
-        delay: index * 0.12,
-        ease: [0.23, 1, 0.32, 1],
+        duration: 0.38,
+        delay: index * 0.05,
+        ease: EASE,
       }}
     >
       <AnimatedNumber value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
-      <p className="mt-3 max-w-[160px] text-sm font-medium uppercase tracking-widest text-[#888888]">
+      <p className="mt-3 max-w-[160px] text-sm font-medium uppercase tracking-widest text-white/60">
         {stat.label}
       </p>
-    </motion.div>
+    </m.div>
   );
 }
 
 export function StatsSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#111111]">
+    <section
+      className="relative w-full overflow-hidden"
+      style={{
+        background: "#0a0a0a",
+        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)",
+        backgroundSize: "28px 28px",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           className="mb-14 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.45, ease: EASE }}
         >
-          <p className="mx-auto max-w-2xl text-xl font-medium italic leading-relaxed text-[#f5f5f5] sm:text-2xl">
-            &ldquo;Una competencia diseñada para todos &mdash; desde principiantes hasta
-            élite&rdquo;
+          <p className="mx-auto max-w-2xl text-xl font-medium italic leading-relaxed text-white/80 sm:text-2xl">
+            &ldquo;Una carrera. Un estándar. Una comunidad.&rdquo;
           </p>
-          <div className="mx-auto mt-6 h-px w-24 bg-[#e5f93a]" />
-        </motion.div>
+          <div className="mx-auto mt-6 h-px w-24 bg-[#ffffff]" />
+        </m.div>
 
         <div className="relative">
-          <div className="absolute inset-x-0 top-0 hidden h-px bg-[#2a2a2a] md:block" />
-          <div className="absolute inset-x-0 bottom-0 hidden h-px bg-[#2a2a2a] md:block" />
+          <div className="absolute inset-x-0 top-0 hidden h-px bg-white/10 md:block" />
+          <div className="absolute inset-x-0 bottom-0 hidden h-px bg-white/10 md:block" />
 
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (

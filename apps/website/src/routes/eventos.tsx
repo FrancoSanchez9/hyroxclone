@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { upcomingEvents, divisions } from "@/data/events";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@tanstack/react-router";
+import { PageHero } from "@/components/ui/PageHero";
 
-const FILTERS = ["Todos", "Open", "Pro", "Doubles", "Relay"] as const;
+const FILTERS = ["Todos", "La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Teams"] as const;
 type Filter = (typeof FILTERS)[number];
 
 function formatDateSpanish(dateStr: string, endDateStr?: string): string {
@@ -52,7 +52,7 @@ function formatDateSpanish(dateStr: string, endDateStr?: string): string {
 }
 
 const divisionColors: Record<string, string> = {
-  Open: "#e5f93a",
+  Open: "#ffffff",
   Pro: "#ffffff",
   Doubles: "#aaaaaa",
   Relay: "#666666",
@@ -67,27 +67,13 @@ function EventosPage() {
       : upcomingEvents.filter((e) => e.categories.includes(activeFilter));
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      <section className="pt-24 pb-12 px-6 border-b border-[#2a2a2a]">
-        <div className="max-w-7xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="text-[#e5f93a] text-xs font-semibold uppercase tracking-[0.2em] mb-3"
-          >
-            Temporada 2026–2027
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05, ease: [0.23, 1, 0.32, 1] }}
-            className="font-display text-6xl md:text-8xl leading-none tracking-wider uppercase text-white"
-          >
-            Eventos Oficiales México
-          </motion.h1>
-        </div>
-      </section>
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <PageHero
+        inverted
+        badge="Temporada 2026–2027"
+        title="EVENTOS OFICIALES MÉXICO"
+        subtitle="Encuentra tu próxima carrera runluv® y regístrate."
+      />
 
       <section className="py-8 px-6 border-b border-[#2a2a2a] sticky top-0 z-10 bg-[#0a0a0a]/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex gap-2 flex-wrap">
@@ -95,14 +81,15 @@ function EventosPage() {
             const isActive = activeFilter === filter;
             return (
               <button
+                type="button"
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
                 className={[
-                  "px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-150",
-                  "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e5f93a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
+                  "px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-[background-color,border-color,color] duration-150",
+                  "border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
                   isActive
-                    ? "bg-[#e5f93a] text-[#0a0a0a] border-[#e5f93a]"
-                    : "bg-transparent text-[#888888] border-[#2a2a2a] hover:border-[#e5f93a] hover:text-white",
+                    ? "bg-[#ffffff] text-[#0a0a0a] border-[#ffffff]"
+                    : "bg-transparent text-[#888888] border-[#2a2a2a] hover:border-[#ffffff] hover:text-white",
                 ].join(" ")}
               >
                 {filter}
@@ -115,17 +102,17 @@ function EventosPage() {
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           {filteredEvents.length === 0 ? (
-            <motion.p
+            <m.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-[#888888] text-center py-20 text-sm uppercase tracking-widest"
             >
               No hay eventos para esta categoría
-            </motion.p>
+            </m.p>
           ) : (
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <m.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredEvents.map((event, i) => (
-                <motion.div
+                <m.div
                   key={event.id}
                   layout
                   initial={{ opacity: 0, y: 20 }}
@@ -136,6 +123,7 @@ function EventosPage() {
                     ease: [0.23, 1, 0.32, 1],
                   }}
                   whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.98 }}
                   className="group"
                 >
                   <Card
@@ -148,19 +136,19 @@ function EventosPage() {
                           src={event.imageUrl}
                           alt={event.name}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
                         {event.featured && (
-                          <div className="absolute top-0 left-0 right-0 h-1 bg-[#e5f93a]" />
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-[#ffffff]" />
                         )}
                       </div>
                     )}
                     {!event.imageUrl && event.featured && (
-                      <div className="h-1 w-full bg-[#e5f93a]" />
+                      <div className="h-1 w-full bg-[#ffffff]" />
                     )}
                     <CardHeader className="pb-3">
-                      <p className="text-[#e5f93a] text-xs font-semibold uppercase tracking-widest">
+                      <p className="text-[#ffffff] text-xs font-semibold uppercase tracking-widest">
                         {formatDateSpanish(event.date, event.endDate)}
                       </p>
                       <h2 className="font-bold text-lg leading-tight text-white mt-1">
@@ -212,16 +200,16 @@ function EventosPage() {
                       </Link>
                     </CardFooter>
                   </Card>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
           )}
         </div>
       </section>
 
       <section className="py-20 px-6 border-t border-[#2a2a2a]">
         <div className="max-w-7xl mx-auto">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -229,11 +217,11 @@ function EventosPage() {
             className="font-display text-5xl md:text-6xl uppercase tracking-wider text-white mb-12"
           >
             Categorías
-          </motion.h2>
+          </m.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {divisions.map((div, i) => (
-              <motion.div
+              <m.div
                 key={div.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -244,6 +232,7 @@ function EventosPage() {
                   ease: [0.23, 1, 0.32, 1],
                 }}
                 whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Card className="h-full border-t-2" style={{ borderTopColor: div.color }}>
                   <CardHeader>
@@ -257,7 +246,7 @@ function EventosPage() {
                   <CardContent className="flex flex-col gap-4">
                     <p className="text-[#888888] text-sm leading-relaxed">{div.description}</p>
                     <div className="flex flex-col gap-1">
-                      <p className="text-xs text-white/40 uppercase tracking-wider font-semibold">
+                      <p className="text-xs text-white/60 uppercase tracking-wider font-semibold">
                         Pesos
                       </p>
                       <p className="text-xs text-white/70">Mujeres: {div.weights.women}</p>
@@ -265,22 +254,25 @@ function EventosPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 
 export const Route = createFileRoute("/eventos")({
   head: () => ({
-    meta: seo({
-      title: "Eventos y Calendario",
-      description:
-        "Calendario de competencias HYROX en México. Consulta fechas, sedes y categorías, y asegura tu lugar en la próxima carrera.",
-    }),
+    meta: [
+      { title: "Eventos | runluv® — Calendario de Competencias en México" },
+      {
+        name: "description",
+        content:
+          "Encuentra el próximo evento runluv® cerca de ti. Acapulco, CDMX, Monterrey, Guadalajara. Consulta fechas, precios y cupos disponibles. ¡Inscríbete ahora!",
+      },
+    ],
   }),
   component: EventosPage,
 });

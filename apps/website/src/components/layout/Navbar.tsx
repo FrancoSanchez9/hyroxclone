@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Drawer } from "vaul";
 import { Menu, X } from "lucide-react";
 import { navItems, topRightLinks } from "@/data/navigation";
 import { cn } from "@/lib/utils";
-import logoSrc from "@/assets/image02.png";
+import logoSrc from "@/assets/logo-mark.png";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname: currentPath } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -19,7 +20,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-200",
+        "fixed top-0 left-0 right-0 z-40 transition-[background-color,box-shadow,border-color] duration-200",
         scrolled && "shadow-lg shadow-black/60",
       )}
       style={
@@ -27,68 +28,87 @@ export function Navbar() {
           ? {
               backdropFilter: "blur(14px)",
               WebkitBackdropFilter: "blur(14px)",
-              backgroundColor: "rgba(6,6,8,0.92)",
+              backgroundColor: "rgba(0,0,0,0.92)",
             }
           : undefined
       }
     >
+      {/* Top bar: Login / Register */}
       <div
-        className="hidden md:flex items-center justify-end px-8 py-2 gap-6"
-        style={{ backgroundColor: "#0f0f14", borderBottom: "1px solid #2a2a3a" }}
+        className="hidden md:flex items-center justify-end px-8 py-1.5 gap-6"
+        style={{ backgroundColor: "#0a0a0a", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
       >
         {topRightLinks.map((link) => (
           <Link
             key={link.label}
             to={link.href}
-            className="text-xs text-white/50 hover:text-[#a855f7] uppercase tracking-widest font-medium transition-colors duration-150"
+            className="text-xs text-white/70 hover:text-[#ffffff] uppercase tracking-widest font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
             {link.label}
           </Link>
         ))}
       </div>
 
+      {/* Main nav */}
       <nav
-        className="flex items-center justify-between px-6 md:px-8 h-16"
+        className="flex items-center justify-between px-6 md:px-10 h-20"
         style={{
-          backgroundColor: scrolled ? "transparent" : "#060608",
-          borderBottom: "1px solid #2a2a3a",
+          backgroundColor: scrolled ? "transparent" : "#000",
+          borderBottom: "1px solid rgba(255,255,255,0.10)",
         }}
       >
-        <Link to="/" className="flex items-center">
-          <img src={logoSrc} alt="runluv" className="h-7 w-auto brightness-[1.1]" />
+        <Link to="/" className="flex items-center shrink-0">
+          <img
+            src={logoSrc}
+            alt="RunLuv"
+            className="h-10 w-auto brightness-[1.1]"
+            loading="eager"
+          />
         </Link>
 
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href ?? "/"}
-              className="relative px-3 py-2 text-sm text-white/70 hover:text-[#a855f7] transition-colors duration-150 uppercase tracking-wide font-medium"
-            >
-              {item.label}
-            </a>
-          ))}
+        <div className="hidden md:flex items-center gap-0.5">
+          {navItems.map((item) => {
+            const isActive = item.href
+              ? currentPath === item.href || currentPath.startsWith(item.href + "/")
+              : false;
+            return (
+              <Link
+                key={item.label}
+                to={item.href ?? "/"}
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "relative px-3 py-2 text-sm transition-colors duration-150 uppercase tracking-wide font-semibold focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
+                  isActive
+                    ? "text-white after:absolute after:bottom-0 after:left-3 after:right-3 after:h-px after:bg-white"
+                    : "text-white/60 hover:text-white",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="hidden md:flex items-center">
-          <a
-            href="#contacto"
-            className="px-5 py-2 text-sm font-bold uppercase tracking-widest text-white bg-[#a855f7] transition-[transform,background-color,opacity] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] hover:bg-[#9333ea]"
+          <Link
+            to="/eventos"
+            className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-black bg-white transition-[transform,background-color,opacity] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96] hover:bg-white/90"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
               letterSpacing: "0.12em",
-              fontSize: "1rem",
+              fontSize: "0.9rem",
             }}
           >
-            Agenda una reunión
-          </a>
+            FIND A RACE
+          </Link>
         </div>
 
         <Drawer.Root open={mobileOpen} onOpenChange={setMobileOpen}>
           <Drawer.Trigger asChild>
             <button
-              className="md:hidden flex items-center justify-center w-10 h-10 text-white/70 hover:text-[#a855f7] transition-colors duration-150"
-              aria-label="Abrir menú"
+              type="button"
+              className="md:hidden flex items-center justify-center w-10 h-10 text-white/70 hover:text-[#ffffff] transition-colors duration-150"
+              aria-label="Open menu"
             >
               <Menu size={22} />
             </button>
@@ -99,8 +119,8 @@ export function Navbar() {
             <Drawer.Content
               className="fixed bottom-0 left-0 right-0 z-50 flex flex-col rounded-t-2xl outline-none"
               style={{
-                backgroundColor: "#0f0f14",
-                border: "1px solid #2a2a3a",
+                backgroundColor: "#0a0a0a",
+                border: "1px solid rgba(255,255,255,0.1)",
                 maxHeight: "90dvh",
               }}
             >
@@ -108,12 +128,20 @@ export function Navbar() {
                 <div className="h-1 w-10 rounded-full bg-white/20" />
               </div>
 
-              <div className="flex items-center justify-between px-6 py-3 border-b border-[#2a2a3a]">
-                <img src={logoSrc} alt="runluv" className="h-6 w-auto" />
+              <div className="flex items-center justify-between px-6 py-3 border-b border-white/10">
+                <img
+                  src={logoSrc}
+                  alt="RunLuv"
+                  className="h-8 w-auto brightness-[1.1]"
+                  loading="lazy"
+                />
                 <Drawer.Close asChild>
                   <button
-                    className="flex items-center justify-center w-9 h-9 text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                    aria-label="Cerrar menú"
+                    type="button"
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus
+                    className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-colors duration-150"
+                    aria-label="Close menu"
                   >
                     <X size={20} />
                   </button>
@@ -123,12 +151,12 @@ export function Navbar() {
               <div className="overflow-y-auto flex-1 pb-safe">
                 {navItems.map((item) => (
                   <Drawer.Close key={item.label} asChild>
-                    <a
-                      href={item.href ?? "/"}
-                      className="block px-6 py-4 text-base text-white/70 hover:text-[#a855f7] uppercase tracking-wide font-medium transition-colors duration-150 border-b border-[#2a2a3a]"
+                    <Link
+                      to={item.href ?? "/"}
+                      className="block px-6 py-4 text-base text-white/70 hover:text-[#ffffff] uppercase tracking-wide font-semibold transition-colors duration-150 border-b border-white/10"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </Drawer.Close>
                 ))}
 
@@ -137,20 +165,20 @@ export function Navbar() {
                     <Drawer.Close key={link.label} asChild>
                       <Link
                         to={link.href}
-                        className="text-xs text-white/40 hover:text-[#a855f7] uppercase tracking-widest transition-colors duration-150"
+                        className="text-xs text-white/60 hover:text-[#ffffff] uppercase tracking-widest transition-colors duration-150"
                       >
                         {link.label}
                       </Link>
                     </Drawer.Close>
                   ))}
                   <Drawer.Close asChild>
-                    <a
-                      href="#contacto"
-                      className="mt-3 px-5 py-3 text-center font-bold uppercase tracking-widest text-white bg-[#a855f7] transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] hover:bg-[#9333ea]"
+                    <Link
+                      to="/eventos"
+                      className="mt-3 px-5 py-3 text-center font-bold uppercase tracking-widest text-black bg-white transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96] hover:bg-white/90"
                       style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1rem" }}
                     >
-                      Agenda una reunión
-                    </a>
+                      FIND A RACE
+                    </Link>
                   </Drawer.Close>
                 </div>
               </div>

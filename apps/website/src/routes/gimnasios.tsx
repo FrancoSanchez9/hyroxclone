@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Search, MapPin, Award, Star, Trophy, Zap } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/ui/PageHero";
@@ -12,22 +11,22 @@ import { Button } from "@/components/ui/Button";
 const tiers = [
   {
     icon: Star,
-    name: "HYROX Training Club",
+    name: "runluv® Training Club",
     description:
-      "El nivel de entrada. Gimnasios que ofrecen entrenamiento HYROX con metodología oficial.",
+      "El nivel de entrada. Gimnasios que ofrecen entrenamiento runluv® con metodología oficial.",
     level: "Nivel 1",
   },
   {
     icon: Trophy,
-    name: "HYROX Performance Centre",
+    name: "runluv® Performance Centre",
     description:
       "Nivel premium. Equipamiento completo certificado, coaches con certificación avanzada.",
     level: "Nivel 2",
   },
   {
     icon: Zap,
-    name: "HYROX Performance Academy",
-    description: "El nivel más alto. Formación de coaches y centro de excelencia HYROX.",
+    name: "runluv® Performance Academy",
+    description: "El nivel más alto. Formación de coaches y centro de excelencia runluv®.",
     level: "Nivel 3",
   },
 ];
@@ -68,16 +67,17 @@ function GimnasiasPage() {
   const [affiliationType, setAffiliationType] = useState("Todos");
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       <PageHero
-        badge="TRAINING CLUBS"
-        title="ENCUENTRA TU HYROX TRAINING CLUB"
-        subtitle="Más de 5,000 gimnasios certificados en todo el mundo con metodología y equipamiento HYROX oficial."
+        inverted
+        badge="ENTRENAMIENTO"
+        title="ENCUENTRA TU runluv® TRAINING CLUB"
+        subtitle="Más de 5,000 gimnasios certificados en todo el mundo con metodología y equipamiento runluv® oficial."
       />
 
       <section className="py-20 px-6 border-b border-[#2a2a2a]">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -86,28 +86,29 @@ function GimnasiasPage() {
             className="text-5xl md:text-6xl uppercase tracking-wider text-white mb-12"
           >
             Niveles de Certificación
-          </motion.h2>
+          </m.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {tiers.map((tier, i) => {
               const Icon = tier.icon;
               return (
-                <motion.div
+                <m.div
                   key={tier.name}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.45, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                  transition={{ duration: 0.45, delay: i * 0.05, ease: [0.23, 1, 0.32, 1] }}
                   whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Card hover className="h-full flex flex-col">
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between gap-3 mb-3">
-                        <div className="p-2.5 bg-[#e5f93a]/10 rounded-none">
-                          <Icon className="w-6 h-6 text-[#e5f93a]" />
+                        <div className="p-2.5 bg-[#ffffff]/10 rounded-none">
+                          <Icon className="w-6 h-6 text-[#ffffff]" />
                         </div>
                         <Badge
                           variant="outline"
-                          className="text-[#e5f93a] border-[#e5f93a] shrink-0"
+                          className="text-[#ffffff] border-[#ffffff] shrink-0"
                         >
                           {tier.level}
                         </Badge>
@@ -120,10 +121,10 @@ function GimnasiasPage() {
                       </h3>
                     </CardHeader>
                     <CardContent className="flex-1">
-                      <p className="text-[#888888] text-sm leading-relaxed">{tier.description}</p>
+                      <p className="text-white/60 text-sm leading-relaxed">{tier.description}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
@@ -132,7 +133,7 @@ function GimnasiasPage() {
 
       <section className="py-20 px-6 border-b border-[#2a2a2a]">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -141,9 +142,9 @@ function GimnasiasPage() {
             className="text-5xl md:text-6xl uppercase tracking-wider text-white mb-10"
           >
             Buscar Gimnasio
-          </motion.h2>
+          </m.h2>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -151,36 +152,39 @@ function GimnasiasPage() {
             className="flex flex-col sm:flex-row gap-4 mb-10"
           >
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/60" />
               <input
                 type="text"
+                aria-label="Buscar por ciudad o código postal"
                 placeholder="Ciudad o código postal"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full h-10 pl-10 pr-4 bg-[#1a1a1a] border border-[#2a2a2a] text-white text-sm placeholder:text-[#555555] focus:outline-none focus:border-[#e5f93a] transition-colors duration-150"
+                className="w-full h-10 pl-10 pr-4 bg-[#1a1a1a] border border-[#2a2a2a] text-white text-sm placeholder:text-[#555555] focus:outline-none focus:border-[#ffffff] transition-colors duration-150"
               />
             </div>
             <select
+              aria-label="Filtrar por tipo de afiliación"
               value={affiliationType}
               onChange={(e) => setAffiliationType(e.target.value)}
-              className="h-10 px-4 bg-[#1a1a1a] border border-[#2a2a2a] text-white text-sm focus:outline-none focus:border-[#e5f93a] transition-colors duration-150 cursor-pointer"
+              className="h-10 px-4 bg-[#1a1a1a] border border-[#2a2a2a] text-white text-sm focus:outline-none focus:border-[#ffffff] transition-colors duration-150 cursor-pointer"
             >
               <option value="Todos">Tipo de afiliación</option>
               <option value="Training Club">Training Club</option>
               <option value="Performance Centre">Performance Centre</option>
               <option value="Academy">Academy</option>
             </select>
-          </motion.div>
+          </m.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             {gyms.map((gym, i) => (
-              <motion.div
+              <m.div
                 key={gym.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.07, ease: [0.23, 1, 0.32, 1] }}
                 whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Card hover className="h-full flex flex-col">
                   <CardHeader className="pb-3">
@@ -199,7 +203,7 @@ function GimnasiasPage() {
                     </div>
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 text-[#888888] text-sm">
+                    <div className="flex items-center gap-2 text-white/60 text-sm">
                       <MapPin className="w-3.5 h-3.5 shrink-0" />
                       <span>{gym.city}</span>
                     </div>
@@ -211,18 +215,18 @@ function GimnasiasPage() {
                     </Button>
                   </CardFooter>
                 </Card>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.4 }}
             className="text-center border border-[#2a2a2a] p-6"
           >
-            <p className="text-[#888888] text-sm mb-4">
+            <p className="text-white/60 text-sm mb-4">
               ¿No encuentras tu ciudad? Ayúdanos a expandir la red:
             </p>
             <Link to="/afiliaciones">
@@ -230,13 +234,13 @@ function GimnasiasPage() {
                 Afiliar mi gimnasio
               </Button>
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
@@ -244,8 +248,8 @@ function GimnasiasPage() {
             className="border border-[#2a2a2a] p-10 md:p-16 text-center"
           >
             <div className="flex justify-center mb-6">
-              <div className="p-3 bg-[#e5f93a]/10">
-                <Award className="w-8 h-8 text-[#e5f93a]" />
+              <div className="p-3 bg-[#ffffff]/10">
+                <Award className="w-8 h-8 text-[#ffffff]" />
               </div>
             </div>
             <h2
@@ -254,29 +258,32 @@ function GimnasiasPage() {
             >
               ¿Tienes un Gimnasio?
             </h2>
-            <p className="text-[#888888] text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-              Únete a la red HYROX y ofrece a tus atletas la preparación oficial para la carrera de
-              fitness más grande del mundo.
+            <p className="text-white/60 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+              Únete a la red runluv® y ofrece a tus atletas la preparación oficial para la carrera
+              de fitness más grande del mundo.
             </p>
             <Link to="/afiliaciones">
               <Button size="lg" variant="primary">
                 Solicitar afiliación
               </Button>
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 
 export const Route = createFileRoute("/gimnasios")({
   head: () => ({
-    meta: seo({
-      title: "Gimnasios Afiliados",
-      description:
-        "Encuentra un gimnasio afiliado HYROX cerca de ti y entrena con equipo y coaches certificados.",
-    }),
+    meta: [
+      { title: "Gimnasios Afiliados | runluv® — Entrena en tu Ciudad" },
+      {
+        name: "description",
+        content:
+          "Encuentra gimnasios afiliados a runluv® en toda México. Entrena con comunidades que se preparan para competir. Busca por ciudad y especialidad.",
+      },
+    ],
   }),
   component: GimnasiasPage,
 });

@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { LegalLayout, type LegalSection } from "@/components/ui/LegalLayout";
 
 const sections: LegalSection[] = [
@@ -7,7 +6,7 @@ const sections: LegalSection[] = [
     heading: "Identidad y domicilio del responsable",
     content: (
       <p>
-        HYROX México (en adelante, "el Responsable"), con domicilio en México, es responsable del
+        runluv® México (en adelante, "el Responsable"), con domicilio en México, es responsable del
         tratamiento, uso y protección de sus datos personales conforme a la{" "}
         <strong>
           Ley Federal de Protección de Datos Personales en Posesión de los Particulares
@@ -47,7 +46,7 @@ const sections: LegalSection[] = [
         <p>
           <strong>Finalidades secundarias</strong> (opcionales): envío de comunicaciones
           promocionales, encuestas y contenido sobre futuros eventos. Usted puede negarse a estas
-          finalidades escribiéndonos a <a href="mailto:info@hyrox.mx">info@hyrox.mx</a>.
+          finalidades escribiéndonos a <a href="mailto:info@runluv.mx">info@runluv.mx</a>.
         </p>
       </>
     ),
@@ -68,9 +67,9 @@ const sections: LegalSection[] = [
       <p>
         Usted tiene derecho a <strong>Acceder, Rectificar, Cancelar u Oponerse</strong> al
         tratamiento de sus datos (derechos ARCO), así como a revocar su consentimiento. Para
-        ejercerlos, envíe su solicitud a <a href="mailto:info@hyrox.mx">info@hyrox.mx</a> indicando
-        su nombre y el derecho que desea ejercer. Atenderemos su solicitud en los plazos que marca
-        la ley.
+        ejercerlos, envíe su solicitud a <a href="mailto:info@runluv.mx">info@runluv.mx</a>{" "}
+        indicando su nombre y el derecho que desea ejercer. Atenderemos su solicitud en los plazos
+        que marca la ley.
       </p>
     ),
   },
@@ -98,7 +97,7 @@ const sections: LegalSection[] = [
     content: (
       <p>
         Si tiene dudas sobre este aviso o el tratamiento de sus datos, contáctenos en{" "}
-        <a href="mailto:info@hyrox.mx">info@hyrox.mx</a> o a través de nuestra{" "}
+        <a href="mailto:info@runluv.mx">info@runluv.mx</a> o a través de nuestra{" "}
         <a href="/contacto">página de contacto</a>.
       </p>
     ),
@@ -118,11 +117,14 @@ function PrivacidadPage() {
 
 export const Route = createFileRoute("/privacidad")({
   head: () => ({
-    meta: seo({
-      title: "Aviso de Privacidad",
-      description:
-        "Cómo HYROX México recaba, usa y protege tus datos personales conforme a la LFPDPPP.",
-    }),
+    meta: [
+      { title: "Aviso de Privacidad | runluv®" },
+      {
+        name: "description",
+        content:
+          "Cómo runluv® México recaba, usa y protege tus datos personales conforme a la LFPDPPP.",
+      },
+    ],
   }),
   component: PrivacidadPage,
 });

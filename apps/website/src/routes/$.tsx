@@ -1,12 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { seo } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 
 function NotFoundPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] px-4 text-center">
       <p
-        className="text-[clamp(8rem,30vw,18rem)] leading-none text-[#e5f93a]"
+        className="text-[clamp(8rem,30vw,18rem)] leading-none text-[#ffffff]"
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
       >
         404
@@ -32,11 +31,12 @@ function NotFoundPage() {
 export const Route = createFileRoute("/$")({
   head: () => ({
     meta: [
-      ...seo({
-        title: "Página no encontrada",
-        description: "La página que buscas no existe o fue movida.",
-      }),
-      { name: "robots", content: "noindex" },
+      { title: "Página no encontrada | runluv®" },
+      {
+        name: "description",
+        content:
+          "La página que buscas no existe. Vuelve al inicio o explora los eventos runluv® disponibles en México.",
+      },
     ],
   }),
   component: NotFoundPage,

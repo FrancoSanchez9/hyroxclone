@@ -55,10 +55,10 @@ export function LegalLayout({
                     letterSpacing: "0.02em",
                   }}
                 >
-                  <span className="text-[#e5f93a]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[#ffffff]">{String(i + 1).padStart(2, "0")}</span>
                   {section.heading}
                 </h2>
-                <div className="space-y-4 text-[15px] leading-relaxed text-white/70 [&_a]:text-[#e5f93a] [&_a]:underline [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:marker:text-[#e5f93a]">
+                <div className="space-y-4 text-[15px] leading-relaxed text-white/70 [&_a]:text-[#ffffff] [&_a]:underline [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:marker:text-[#ffffff]">
                   {section.content}
                 </div>
               </motion.div>

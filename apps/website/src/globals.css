@@ -1,23 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* runluv Brand Colors */
-  --color-rl-black: #060608;
-  --color-rl-dark: #0f0f14;
-  --color-rl-card: #16161f;
-  --color-rl-card2: #1c1c28;
-  --color-rl-purple: #a855f7;
-  --color-rl-purple-light: #c084fc;
-  --color-rl-purple-dark: #7c3aed;
-  --color-rl-white: #f5f5f5;
-  --color-rl-muted: #888888;
-  --color-rl-border: #2a2a3a;
+  --color-rl-black: #000;
+  --color-rl-dark: #0a0a0a;
+  --color-rl-card: #111111;
+  --color-rl-card2: #1a1a1a;
+  --color-rl-white: #ffffff;
+  --color-rl-muted: #666666;
+  --color-rl-border: rgba(255, 255, 255, 0.08);
 
-  /* Typography */
   --font-display: "Bebas Neue", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Easing */
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -29,14 +23,49 @@
 
   html {
     scroll-behavior: smooth;
+    /* Reserve space for the fixed navbar (h-16 = 64px + 8px buffer) */
+    scroll-padding-top: 72px;
   }
 
   body {
-    background-color: var(--color-rl-black);
-    color: var(--color-rl-white);
+    background-color: #000;
+    color: #fff;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Remove 300ms tap delay on mobile */
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+  }
+
+  /* Global focus ring — one token, entire app covered */
+  :focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   h1,
@@ -46,20 +75,21 @@
   h5 {
     font-family: var(--font-display);
     letter-spacing: 0.02em;
+    text-wrap: balance;
   }
 
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-rl-black);
+    background: #000;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-rl-border);
+    background: #333;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-rl-muted);
+    background: #555;
   }
 }
 
@@ -70,15 +100,105 @@
     letter-spacing: 0.02em;
   }
 
-  .purple-glow {
-    box-shadow: 0 0 60px rgba(168, 85, 247, 0.2);
+  /* ── GRAIN TEXTURE ── */
+  .texture-grain {
+    position: relative;
+  }
+  .texture-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .purple-glow-sm {
-    box-shadow: 0 0 24px rgba(168, 85, 247, 0.25);
+  /* ── DOT GRID TEXTURE ── */
+  .texture-dots {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ── LINE GRID TEXTURE ── */
+  .texture-lines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255, 255, 255, 0.04) 39px,
+      rgba(255, 255, 255, 0.04) 40px
+    );
+  }
+
+  /* ── CROSS HATCH ── */
+  .texture-cross {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 31px,
+        rgba(255, 255, 255, 0.03) 31px,
+        rgba(255, 255, 255, 0.03) 32px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 31px,
+        rgba(255, 255, 255, 0.03) 31px,
+        rgba(255, 255, 255, 0.03) 32px
+      );
+  }
+
+  /* ── DIAGONAL LINES ── */
+  .texture-diagonal {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 6px,
+      rgba(255, 255, 255, 0.02) 6px,
+      rgba(255, 255, 255, 0.02) 7px
+    );
+  }
+
+  /* ── SCAN LINES ── */
+  .texture-scan {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.08),
+      rgba(0, 0, 0, 0.08) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* ── BORDER GRID (structural texture via box) ── */
+  .texture-border-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* ── WHITE GLOW ── */
+  .glow-white {
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.06);
+  }
+
+  .glow-white-sm {
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.08);
   }
 
   .transition-smooth {
-    transition: all 200ms var(--ease-out-strong);
+    transition-property: transform, opacity, background-color, color, border-color;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out-strong);
+  }
+
+  /* Fix iOS Safari viewport bug — dvh excludes the retractable browser chrome */
+  .min-h-screen {
+    min-height: 100dvh;
   }
 }
