@@ -80,7 +80,7 @@ export function ImpactoSection() {
               >
                 {s.value}
               </div>
-              <p className="text-xs text-white/40 uppercase tracking-wide leading-snug">
+              <p className="text-xs text-white/60 uppercase tracking-wide leading-snug">
                 {s.label}
               </p>
             </motion.div>
@@ -104,7 +104,7 @@ export function ImpactoSection() {
             >
               ¿Por qué ahora?
             </h2>
-            <p className="text-white/45 text-sm md:text-base leading-relaxed">
+            <p className="text-white/70 text-sm md:text-base leading-relaxed">
               Las primeras ciudades que adopten este formato se posicionarán como
               <span className="text-white/70"> sede insignia</span> de una tendencia que ya no puede
               esperar.

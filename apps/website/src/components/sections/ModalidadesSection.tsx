@@ -103,7 +103,7 @@ export function ModalidadesSection() {
                 <p className="text-xs uppercase tracking-[0.2em] text-[#a855f7] mb-3 font-medium">
                   {m.tag}
                 </p>
-                <p className="text-white/50 text-sm md:text-base leading-relaxed max-w-xl">
+                <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-xl">
                   {m.desc}
                 </p>
               </div>

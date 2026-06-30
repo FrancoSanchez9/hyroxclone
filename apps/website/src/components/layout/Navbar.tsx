@@ -40,7 +40,7 @@ export function Navbar() {
           <Link
             key={link.label}
             to={link.href}
-            className="text-xs text-white/50 hover:text-[#a855f7] uppercase tracking-widest font-medium transition-colors duration-150"
+            className="text-xs text-white/60 hover:text-[#a855f7] uppercase tracking-widest font-medium transition-colors duration-150"
           >
             {link.label}
           </Link>
@@ -137,7 +137,7 @@ export function Navbar() {
                     <Drawer.Close key={link.label} asChild>
                       <Link
                         to={link.href}
-                        className="text-xs text-white/40 hover:text-[#a855f7] uppercase tracking-widest transition-colors duration-150"
+                        className="text-xs text-white/60 hover:text-[#a855f7] uppercase tracking-widest transition-colors duration-150"
                       >
                         {link.label}
                       </Link>

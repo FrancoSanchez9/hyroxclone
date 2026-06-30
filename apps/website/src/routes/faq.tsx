@@ -161,7 +161,7 @@ function FAQPage() {
           >
             PREGUNTAS FRECUENTES
           </h1>
-          <p className="mt-4 text-base text-white/50">
+          <p className="mt-4 text-base text-white/70">
             Todo lo que gobiernos, corredores y aliados necesitan saber sobre runluv®.
           </p>
         </div>

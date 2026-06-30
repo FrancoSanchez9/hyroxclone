@@ -50,7 +50,7 @@ export function CategoriasSection() {
           >
             Categorías
           </h2>
-          <p className="mt-4 text-white/40 text-sm max-w-lg">
+          <p className="mt-4 text-white/70 text-sm max-w-lg">
             Las categorías aplican según la modalidad seleccionada.
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ export function CategoriasSection() {
                   >
                     {cat.name}
                   </h3>
-                  <p className="text-sm text-white/45 leading-relaxed">{cat.desc}</p>
+                  <p className="text-sm text-white/70 leading-relaxed">{cat.desc}</p>
                 </div>
               </div>
             </motion.div>

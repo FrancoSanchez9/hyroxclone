@@ -42,7 +42,7 @@ export function ModeloSection() {
           >
             Modelo llave en mano
           </h2>
-          <p className="text-white/40 text-sm md:text-base max-w-xl">
+          <p className="text-white/70 text-sm md:text-base max-w-xl">
             Riesgo controlado. Tú pones la ciudad. Nosotros ponemos el evento.
           </p>
         </motion.div>
@@ -162,7 +162,7 @@ export function ModeloSection() {
           transition={{ duration: 0.6, ease: EASE_OUT }}
         >
           <h3
-            className="text-xl text-white/50 mb-6 uppercase tracking-widest"
+            className="text-xl text-white/60 mb-6 uppercase tracking-widest"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             Propuesta inicial
@@ -186,7 +186,7 @@ export function ModeloSection() {
                 >
                   {p.value}
                 </div>
-                <p className="text-xs text-white/35 uppercase tracking-wide">{p.label}</p>
+                <p className="text-xs text-white/60 uppercase tracking-wide">{p.label}</p>
               </div>
             ))}
           </div>

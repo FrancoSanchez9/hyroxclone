@@ -82,7 +82,7 @@ function TiendaPage() {
               >
                 <Card hover className="flex flex-col overflow-hidden">
                   <div className="aspect-square bg-[#1a1a1a] border-b border-[#2a2a2a] flex flex-col items-center justify-center gap-3 px-4">
-                    <span className="text-white/20 text-xs font-semibold uppercase tracking-widest text-center leading-relaxed">
+                    <span className="text-white/60 text-xs font-semibold uppercase tracking-widest text-center leading-relaxed">
                       {product.name}
                     </span>
                     <Badge variant="dark" className="border border-[#3a3a3a]">
@@ -94,7 +94,7 @@ function TiendaPage() {
                       <p className="text-sm font-semibold text-white leading-snug">
                         {product.name}
                       </p>
-                      <p className="mt-1 text-[#e5f93a] text-sm font-bold">
+                      <p className="mt-1 text-rl-purple text-sm font-bold">
                         ${product.price.toLocaleString("es-MX")} MXN
                       </p>
                     </div>
@@ -149,7 +149,7 @@ function TiendaPage() {
               >
                 <Card hover className="h-full flex flex-col">
                   <div className="aspect-video bg-[#111111] border-b border-[#2a2a2a] flex items-center justify-center">
-                    <span className="text-white/15 text-sm font-semibold uppercase tracking-widest">
+                    <span className="text-white/60 text-sm font-semibold uppercase tracking-widest">
                       {item.name}
                     </span>
                   </div>
@@ -200,7 +200,7 @@ function TiendaPage() {
             </p>
             <a
               href="mailto:tienda@hyrox.mx"
-              className="inline-flex items-center gap-2 text-[#e5f93a] text-sm font-semibold uppercase tracking-widest hover:underline underline-offset-4 transition-colors"
+              className="inline-flex items-center gap-2 text-rl-purple text-sm font-semibold uppercase tracking-widest hover:underline underline-offset-4 transition-colors"
             >
               tienda@hyrox.mx
             </a>

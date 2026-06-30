@@ -31,7 +31,7 @@ export function PageHero({ title, subtitle, badge, children }: PageHeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0 }}
-            className="inline-block mb-4 px-3 py-1 bg-yellow-400 text-black text-xs font-bold uppercase tracking-widest"
+            className="inline-block mb-4 px-3 py-1 bg-rl-purple text-white text-xs font-bold uppercase tracking-widest"
           >
             {badge}
           </motion.span>

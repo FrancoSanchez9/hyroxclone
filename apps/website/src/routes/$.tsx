@@ -6,7 +6,7 @@ function NotFoundPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] px-4 text-center">
       <p
-        className="text-[clamp(8rem,30vw,18rem)] leading-none text-[#e5f93a]"
+        className="text-[clamp(8rem,30vw,18rem)] leading-none text-rl-purple"
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
       >
         404
@@ -17,7 +17,7 @@ function NotFoundPage() {
       >
         PÁGINA NO ENCONTRADA
       </h1>
-      <p className="mt-4 max-w-sm text-sm text-white/50">
+      <p className="mt-4 max-w-sm text-sm text-white/70">
         La página que buscas no existe o fue movida.
       </p>
       <Link to="/">

@@ -16,7 +16,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <img src={logoSrc} alt="runluv" className="h-8 w-auto mb-4" />
-            <p className="text-sm text-white/35 leading-relaxed max-w-xs">
+            <p className="text-sm text-white/70 leading-relaxed max-w-xs">
               Transformamos el running en desarrollo para ciudades. Turismo, economía y comunidad en
               un solo evento.
             </p>
@@ -25,7 +25,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 text-white/40 hover:text-[#a855f7] transition-colors duration-150"
+                className="flex items-center justify-center w-9 h-9 text-white/60 hover:text-[#a855f7] transition-colors duration-150"
                 style={{ background: "#16161f", border: "1px solid #2a2a3a" }}
                 aria-label="Instagram"
               >
@@ -36,7 +36,7 @@ export function Footer() {
 
           {/* Modalidades */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60 mb-4">
               Modalidades
             </h3>
             <ul className="space-y-2.5">
@@ -44,7 +44,7 @@ export function Footer() {
                 <li key={item}>
                   <a
                     href="#modalidades"
-                    className="text-sm text-white/45 hover:text-[#a855f7] transition-colors duration-150"
+                    className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
                   >
                     {item}
                   </a>
@@ -55,14 +55,14 @@ export function Footer() {
 
           {/* Contacto */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60 mb-4">
               Contacto
             </h3>
             <ul className="space-y-2.5">
               <li>
                 <a
                   href="mailto:contacto@runluv.mx"
-                  className="text-sm text-white/45 hover:text-[#a855f7] transition-colors duration-150"
+                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
                 >
                   contacto@runluv.mx
                 </a>
@@ -70,7 +70,7 @@ export function Footer() {
               <li>
                 <a
                   href="#contacto"
-                  className="text-sm text-white/45 hover:text-[#a855f7] transition-colors duration-150"
+                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
                 >
                   Agenda una reunión
                 </a>
@@ -78,7 +78,7 @@ export function Footer() {
               <li>
                 <a
                   href="/"
-                  className="text-sm text-white/45 hover:text-[#a855f7] transition-colors duration-150"
+                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
                 >
                   Descarga dossier
                 </a>
@@ -88,7 +88,7 @@ export function Footer() {
         </div>
 
         <div className="border-t pt-6" style={{ borderColor: "#2a2a3a" }}>
-          <p className="text-center text-xs text-white/20">
+          <p className="text-center text-xs text-white/55">
             © runluv® 2026 · Todos los derechos reservados
           </p>
         </div>

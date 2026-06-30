@@ -38,7 +38,7 @@ export function DiferenciadorSection() {
             >
               Las carreras tradicionales
               <br />
-              <span className="text-white/30">terminan en la meta.</span>
+              <span className="text-white/45">terminan en la meta.</span>
             </h2>
             <h2
               className="text-[clamp(2rem,5vw,4rem)] leading-none mb-8"
@@ -52,7 +52,7 @@ export function DiferenciadorSection() {
             >
               runluv® empieza ahí.
             </h2>
-            <p className="text-white/45 text-base leading-relaxed max-w-md">
+            <p className="text-white/70 text-base leading-relaxed max-w-md">
               El evento no termina cuando cruzan la línea. Comienza la fiesta, el consumo, la
               experiencia. Un format diseñado para que la ciudad gane antes, durante y después.
             </p>

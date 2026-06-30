@@ -18,7 +18,7 @@ const stats = [
 export function HeroSection() {
   return (
     <section
-      className="relative flex min-h-screen w-full flex-col overflow-hidden"
+      className="relative flex min-h-dvh w-full flex-col overflow-hidden"
       style={{ background: "#060608" }}
       aria-label="Hero"
     >
@@ -150,7 +150,7 @@ export function HeroSection() {
               >
                 {stat.value}
               </span>
-              <span className="mt-1 text-xs uppercase tracking-widest text-white/40 sm:text-sm">
+              <span className="mt-1 text-xs uppercase tracking-widest text-white/60 sm:text-sm">
                 {stat.label}
               </span>
             </div>

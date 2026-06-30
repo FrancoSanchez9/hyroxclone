@@ -127,7 +127,7 @@ function ContactoPage() {
                     <channel.icon className="h-5 w-5 text-[#a855f7]" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-xs uppercase tracking-widest text-white/40">
+                    <span className="block text-xs uppercase tracking-widest text-white/60">
                       {channel.label}
                     </span>
                     <span className="block truncate text-sm font-medium text-white group-hover:text-[#a855f7]">
@@ -142,7 +142,7 @@ function ContactoPage() {
                   <MapPin className="h-5 w-5 text-[#a855f7]" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-xs uppercase tracking-widest text-white/40">
+                  <span className="block text-xs uppercase tracking-widest text-white/60">
                     Ubicación
                   </span>
                   <span className="block text-sm font-medium text-white">México</span>
@@ -194,7 +194,7 @@ function ContactoPage() {
                     <div>
                       <label
                         htmlFor={field.name}
-                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
+                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
                         Nombre completo <span className="text-[#a855f7]">*</span>
                       </label>
@@ -217,7 +217,7 @@ function ContactoPage() {
                     <div>
                       <label
                         htmlFor={field.name}
-                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
+                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
                         Email <span className="text-[#a855f7]">*</span>
                       </label>
@@ -241,7 +241,7 @@ function ContactoPage() {
                     <div>
                       <label
                         htmlFor={field.name}
-                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
+                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
                         Asunto <span className="text-[#a855f7]">*</span>
                       </label>
@@ -272,7 +272,7 @@ function ContactoPage() {
                     <div>
                       <label
                         htmlFor={field.name}
-                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/50"
+                        className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
                         Mensaje <span className="text-[#a855f7]">*</span>
                       </label>
@@ -305,7 +305,7 @@ function ContactoPage() {
                   )}
                 </form.Subscribe>
 
-                <p className="text-center text-xs text-white/40">
+                <p className="text-center text-xs text-white/60">
                   Al enviar aceptas nuestro{" "}
                   <a href="/privacidad" className="text-[#a855f7] hover:underline">
                     Aviso de Privacidad

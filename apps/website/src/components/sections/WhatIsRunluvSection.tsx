@@ -92,7 +92,7 @@ export function WhatIsRunluvSection() {
           >
             ¿Qué es runluv?
           </h2>
-          <p className="max-w-2xl mx-auto text-white/50 text-base md:text-lg leading-relaxed">
+          <p className="max-w-2xl mx-auto text-white/70 text-base md:text-lg leading-relaxed">
             Una plataforma de eventos en autódromos que integra carrera, resistencia y festival en
             un formato único diseñado para generar{" "}
             <span className="text-white/80">impacto económico, turístico y social</span> en una sola
@@ -137,7 +137,7 @@ export function WhatIsRunluvSection() {
                 >
                   {p.label}
                 </h3>
-                <p className="text-sm text-white/50 leading-relaxed">{p.desc}</p>
+                <p className="text-sm text-white/70 leading-relaxed">{p.desc}</p>
               </div>
             </motion.div>
           ))}

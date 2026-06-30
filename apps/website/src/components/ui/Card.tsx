@@ -12,9 +12,9 @@ function Card({ className, variant = "default", hover = false, ...props }: CardP
     <div
       className={cn(
         "rounded-lg border bg-[#1a1a1a] border-[#2a2a2a] text-white",
-        variant === "highlight" && "border-t-2 border-t-[#e5f93a]",
+        variant === "highlight" && "border-t-2 border-t-rl-purple",
         hover &&
-          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-[#e5f93a]",
+          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-rl-purple",
         className,
       )}
       {...props}

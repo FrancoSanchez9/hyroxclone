@@ -1,4 +1,5 @@
 import { createRootRoute, HeadContent, Outlet, ScrollRestoration } from "@tanstack/react-router";
+import { MotionConfig } from "framer-motion";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -16,7 +17,7 @@ export const Route = createRootRoute({
     }),
   }),
   component: () => (
-    <>
+    <MotionConfig reducedMotion="user">
       <HeadContent />
       <Navbar />
       <ScrollRestoration />
@@ -35,6 +36,6 @@ export const Route = createRootRoute({
           },
         }}
       />
-    </>
+    </MotionConfig>
   ),
 });
