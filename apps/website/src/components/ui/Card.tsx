@@ -11,10 +11,10 @@ function Card({ className, variant = "default", hover = false, ...props }: CardP
   return (
     <div
       className={cn(
-        "rounded-lg border bg-[#1a1a1a] border-[#2a2a2a] text-white",
-        variant === "highlight" && "border-t-2 border-t-rl-purple",
+        "rounded-lg border bg-[#1a1a1a] border-[#2a2a2a] text-white texture-grain",
+        variant === "highlight" && "border-t-2 border-t-[#ffffff]",
         hover &&
-          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-rl-purple",
+          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-[#ffffff]",
         className,
       )}
       {...props}

@@ -1,103 +1,94 @@
-import { motion } from "framer-motion";
-import logoSrc from "@/assets/image02.png";
+import { m } from "framer-motion";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
-const DURATION = 0.7;
+const DURATION = 0.5;
 
 const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 28, filter: "blur(6px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
 const stats = [
-  { value: "15M+", label: "Corredores en México" },
-  { value: "7x", label: "Retorno económico" },
-  { value: "15,000", label: "Asistentes por evento" },
+  { value: "5", label: "Ciudades" },
+  { value: "3", label: "Modalidades" },
+  { value: "2027", label: "Primera temporada" },
+  { value: "100%", label: "Para todos" },
 ];
 
 export function HeroSection() {
   return (
     <section
-      className="relative flex min-h-dvh w-full flex-col overflow-hidden"
-      style={{ background: "#060608" }}
+      className="relative flex min-h-screen w-full flex-col overflow-hidden"
+      style={{ background: "#000" }}
       aria-label="Hero"
     >
       {/* Background image */}
       <img
-        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=80&fit=crop&auto=format"
+        src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1920&q=80&fit=crop&auto=format"
         alt=""
         aria-hidden="true"
         loading="eager"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-30"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-40"
       />
 
       {/* Overlays */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80" />
+      {/* Radial white highlight at top */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(168,85,247,0.12) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%)",
+        }}
+      />
+      {/* Grain texture */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
+          opacity: 0.07,
+          mixBlendMode: "overlay",
+        }}
+      />
+      {/* Horizontal scan lines */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 3px)",
         }}
       />
       <div
         className="pointer-events-none absolute bottom-0 left-0 right-0 h-40"
-        style={{ background: "linear-gradient(to bottom, transparent, #060608)" }}
-      />
-
-      {/* Decorative circuit line */}
-      <div
-        className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px opacity-10"
-        style={{ background: "linear-gradient(90deg, transparent, #a855f7, transparent)" }}
+        style={{ background: "linear-gradient(to bottom, transparent, #000)" }}
       />
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-36 pt-32 text-center">
-        <motion.div
+        <m.p
           variants={fadeUp}
           initial="initial"
           animate="animate"
-          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0 }}
-          className="mb-6"
+          transition={{ duration: 0.35, ease: EASE_OUT, delay: 0 }}
+          className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff]"
         >
-          <img
-            src={logoSrc}
-            alt="runluv"
-            className="h-10 md:h-14 w-auto mx-auto brightness-[1.05]"
-          />
-        </motion.div>
+          LA EXPERIENCIA RUNLUV®
+        </m.p>
 
-        <motion.h1
+        <m.h1
           variants={fadeUp}
           initial="initial"
           animate="animate"
           transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.08 }}
-          className="max-w-5xl text-[clamp(2.6rem,8vw,6.5rem)] font-normal leading-none tracking-tight text-white"
+          className="max-w-5xl text-[clamp(2.8rem,9vw,7rem)] font-normal leading-none tracking-tight text-white uppercase text-balance"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
-          transformamos el running en{" "}
-          <span
-            style={{
-              background: "linear-gradient(135deg, #a855f7, #c084fc)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            desarrollo para ciudades
-          </span>
-        </motion.h1>
+          LA EXPERIENCIA RUNLUV® <span style={{ color: "#ffffff" }}>PARA TODOS</span>
+        </m.h1>
 
-        <motion.p
-          variants={fadeUp}
-          initial="initial"
-          animate="animate"
-          transition={{ duration: DURATION, ease: EASE_OUT, delay: 0.18 }}
-          className="mt-6 max-w-xl text-base md:text-lg text-white/55 leading-relaxed font-light"
-        >
-          Turismo, economía y comunidad en un solo evento.
-        </motion.p>
-
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="initial"
           animate="animate"
@@ -105,32 +96,32 @@ export function HeroSection() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="#contacto"
-            className="inline-flex items-center justify-center h-12 px-8 text-sm font-semibold uppercase tracking-widest text-white bg-[#a855f7] hover:bg-[#9333ea] transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
+            href="/eventos"
+            className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96] glow-white-sm focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            Agenda una reunión
+            FIND A RACE
           </a>
           <a
-            href="#que-es"
-            className="inline-flex items-center justify-center h-12 px-8 text-sm font-semibold uppercase tracking-widest text-[#a855f7] border border-[#a855f7]/50 hover:border-[#a855f7] hover:bg-[#a855f7]/8 transition-all duration-[160ms]"
+            href="/la-carrera"
+            className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-white border border-white/40 hover:border-white hover:bg-white/8 transition-[border-color,background-color] duration-[160ms] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            ¿Qué es runluv?
+            ¿QUÉ ES RUNLUV?
           </a>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Stats strip */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, #a855f7 50%, transparent)" }}
+          style={{ background: "linear-gradient(90deg, transparent, #ffffff 50%, transparent)" }}
         />
         <div
-          className="grid grid-cols-3 divide-x"
+          className="grid grid-cols-4 divide-x divide-white/10"
           style={{
-            backgroundColor: "rgba(15,15,20,0.85)",
-            backdropFilter: "blur(12px)",
-            borderTop: "1px solid #2a2a3a",
+            backgroundColor: "rgba(0,0,0,0.85)",
+            backdropFilter: "blur(8px)",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           {stats.map((stat) => (
@@ -139,16 +130,10 @@ export function HeroSection() {
               className="flex flex-col items-center justify-center px-4 py-5 sm:py-6"
             >
               <span
-                className="text-[clamp(1.4rem,3vw,2.1rem)] font-normal leading-none"
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  background: "linear-gradient(135deg, #a855f7, #c084fc)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
+                className="text-[clamp(1.4rem,3vw,2.1rem)] font-normal leading-none text-[#ffffff]"
+                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
-                {stat.value}
+                <span className="tabular-nums">{stat.value}</span>
               </span>
               <span className="mt-1 text-xs uppercase tracking-widest text-white/60 sm:text-sm">
                 {stat.label}

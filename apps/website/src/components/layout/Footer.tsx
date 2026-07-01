@@ -1,4 +1,5 @@
-import logoSrc from "@/assets/image02.png";
+import { Link } from "@tanstack/react-router";
+import logoSrc from "@/assets/logo-mark.png";
 
 function InstagramIcon() {
   return (
@@ -8,89 +9,146 @@ function InstagramIcon() {
   );
 }
 
+function TwitterIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+const footerColumns = [
+  {
+    heading: "Competir",
+    links: [
+      { label: "Eventos", href: "/eventos" },
+      { label: "La Carrera", href: "/la-carrera" },
+      { label: "Campeonatos", href: "/campeonatos" },
+      { label: "Tu Nivel", href: "/tu-nivel" },
+    ],
+  },
+  {
+    heading: "Prepararse",
+    links: [
+      { label: "Preparación", href: "/preparacion" },
+      { label: "Gimnasios Afiliados", href: "/gimnasios" },
+      { label: "Afiliaciones", href: "/afiliaciones" },
+    ],
+  },
+  {
+    heading: "Comunidad",
+    links: [
+      { label: "Voluntario", href: "/voluntario" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Contacto", href: "/contacto" },
+    ],
+  },
+];
+
 export function Footer() {
   return (
-    <footer style={{ background: "#060608", borderTop: "1px solid #2a2a3a" }}>
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+    <footer style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
+        {/* Top: logo + columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <img src={logoSrc} alt="runluv" className="h-8 w-auto mb-4" />
-            <p className="text-sm text-white/70 leading-relaxed max-w-xs">
-              Transformamos el running en desarrollo para ciudades. Turismo, economía y comunidad en
-              un solo evento.
+          <div className="lg:col-span-1">
+            <Link to="/">
+              <img src={logoSrc} alt="RunLuv" className="h-8 w-auto mb-5" loading="lazy" />
+            </Link>
+            <p className="text-sm text-white/60 leading-relaxed max-w-[200px]">
+              The Fitness Race for Everybody — in Mexico.
             </p>
             <div className="mt-6 flex gap-3">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                style={{ background: "#16161f", border: "1px solid #2a2a3a" }}
-                aria-label="Instagram"
+                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
+                aria-label="RunLuv en Instagram"
               >
                 <InstagramIcon />
+              </a>
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
+                aria-label="RunLuv en X (Twitter)"
+              >
+                <TwitterIcon />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
+                aria-label="RunLuv en Facebook"
+              >
+                <FacebookIcon />
               </a>
             </div>
           </div>
 
-          {/* Modalidades */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60 mb-4">
-              Modalidades
-            </h3>
-            <ul className="space-y-2.5">
-              {["La Última Vuelta®", "Endurance 4H", "5K / 10K"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#modalidades"
-                    className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contacto */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60 mb-4">
-              Contacto
-            </h3>
-            <ul className="space-y-2.5">
-              <li>
-                <a
-                  href="mailto:contacto@runluv.mx"
-                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                >
-                  contacto@runluv.mx
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contacto"
-                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                >
-                  Agenda una reunión
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="text-sm text-white/60 hover:text-[#a855f7] transition-colors duration-150"
-                >
-                  Descarga dossier
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* Columns */}
+          {footerColumns.map((col) => (
+            <div key={col.heading}>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-4">
+                {col.heading}
+              </h3>
+              <ul className="space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-white/60 hover:text-[#ffffff] transition-colors duration-150"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="border-t pt-6" style={{ borderColor: "#2a2a3a" }}>
-          <p className="text-center text-xs text-white/55">
-            © runluv® 2026 · Todos los derechos reservados
-          </p>
+        {/* Bottom bar */}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          <p className="text-xs text-white/55">© RunLuv® 2026 · All rights reserved</p>
+          <div className="flex gap-6">
+            <Link
+              to="/privacidad"
+              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+            >
+              Privacidad
+            </Link>
+            <Link
+              to="/terminos"
+              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+            >
+              Términos
+            </Link>
+            <Link
+              to="/contacto"
+              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+            >
+              Contacto
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

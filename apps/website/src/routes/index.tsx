@@ -1,25 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/seo";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { WhatIsRunluvSection } from "@/components/sections/WhatIsRunluvSection";
-import { ModalidadesSection } from "@/components/sections/ModalidadesSection";
-import { CategoriasSection } from "@/components/sections/CategoriasSection";
-import { DiferenciadorSection } from "@/components/sections/DiferenciadorSection";
-import { ImpactoSection } from "@/components/sections/ImpactoSection";
-import { ModeloSection } from "@/components/sections/ModeloSection";
-import { CTASection } from "@/components/sections/CTASection";
-
+import { WhatIsHyroxSection } from "@/components/sections/WhatIsHyroxSection";
+import { RaceFormatSection } from "@/components/sections/RaceFormatSection";
+import { StatsSection } from "@/components/sections/StatsSection";
+import { AthletesSection } from "@/components/sections/AthletesSection";
+import { TrainingSection } from "@/components/sections/TrainingSection";
+import { UpcomingEventsSection } from "@/components/sections/UpcomingEventsSection";
 function HomePage() {
   return (
     <>
       <HeroSection />
-      <WhatIsRunluvSection />
-      <ModalidadesSection />
-      <CategoriasSection />
-      <DiferenciadorSection />
-      <ImpactoSection />
-      <ModeloSection />
-      <CTASection />
+      <WhatIsHyroxSection />
+      <RaceFormatSection />
+      <StatsSection />
+      <AthletesSection />
+      <TrainingSection />
+      <UpcomingEventsSection />
     </>
   );
 }
@@ -27,11 +24,11 @@ function HomePage() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: seo({
-      title: "runluv® — Eventos de Running en Autódromos | Desarrollo para Ciudades de México",
+      title: "La Competencia de Fitness Funcional en México",
       description:
-        "runluv® transforma el running en desarrollo económico para ciudades. Eventos en autódromos con 15,000 asistentes y 7x retorno por peso invertido. Modelo llave en mano para gobiernos municipales y estatales de México.",
+        "Corre 1 km, completa una estación funcional, repítelo 8 veces. La competencia de fitness funcional más exigente y accesible de México. Regístrate en el próximo evento.",
       keywords:
-        "runluv, eventos de running, running en autódromos, La Última Vuelta, Endurance 4H, turismo deportivo, desarrollo económico, eventos B2G, gobiernos México",
+        "runluv, fitness funcional, competencia fitness, carrera de fitness, eventos deportivos México, HYROX",
     }),
   }),
   component: HomePage,

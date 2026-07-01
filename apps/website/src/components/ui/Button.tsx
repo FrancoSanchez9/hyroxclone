@@ -1,18 +1,18 @@
 import { cn } from "@/lib/utils";
-import * as React from "react";
+import type { ComponentPropsWithRef, ElementType } from "react";
 
 type ButtonVariant = "primary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentPropsWithRef<"button"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  as?: React.ElementType;
+  as?: ElementType;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "bg-[#a855f7] text-white border-transparent hover:bg-[#9333ea] font-semibold",
-  outline: "bg-transparent text-[#a855f7] border border-[#a855f7] hover:bg-[#a855f7]/10",
+  primary: "bg-white text-black border-transparent hover:bg-white/90 font-semibold",
+  outline: "bg-transparent text-[#ffffff] border border-[#ffffff] hover:bg-[#ffffff]/10",
   ghost: "bg-transparent text-white border-transparent hover:text-white/70 hover:bg-white/5",
 };
 
@@ -22,33 +22,31 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "h-12 px-7 text-base gap-2.5",
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { className, variant = "primary", size = "md", as: Component = "button", children, ...props },
-    ref,
-  ) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn(
-          "inline-flex items-center justify-center rounded-none font-medium tracking-wide",
-          "select-none outline-none cursor-pointer",
-          "transition-[transform,background-color,color,opacity] duration-[160ms]",
-          "ease-[cubic-bezier(0.23,1,0.32,1)]",
-          "active:scale-[0.97]",
-          "@media(hover:hover){hover:scale-[1.02]}",
-          "focus-visible:ring-2 focus-visible:ring-[#a855f7] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060608]",
-          "disabled:pointer-events-none disabled:opacity-40",
-          variantClasses[variant],
-          sizeClasses[size],
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
-
-Button.displayName = "Button";
+export function Button({
+  className,
+  variant = "primary",
+  size = "md",
+  as: Component = "button",
+  children,
+  ...props
+}: ButtonProps) {
+  return (
+    <Component
+      className={cn(
+        "inline-flex items-center justify-center rounded-none font-medium tracking-wide",
+        "select-none outline-none cursor-pointer",
+        "transition-[transform,background-color,color,opacity] duration-[160ms]",
+        "ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "active:scale-[0.96]",
+        "focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000]",
+        "disabled:pointer-events-none disabled:opacity-40",
+        variantClasses[variant],
+        sizeClasses[size],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+}

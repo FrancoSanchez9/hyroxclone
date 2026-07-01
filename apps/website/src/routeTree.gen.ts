@@ -9,16 +9,46 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoluntarioRouteImport } from './routes/voluntario'
+import { Route as TuNivelRouteImport } from './routes/tu-nivel'
+import { Route as TrainRouteImport } from './routes/train'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as TerminosRouteImport } from './routes/terminos'
+import { Route as RankingRouteImport } from './routes/ranking'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as PreparacionRouteImport } from './routes/preparacion'
+import { Route as LaCarreraRouteImport } from './routes/la-carrera'
+import { Route as GimnasiosRouteImport } from './routes/gimnasios'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as Elite15RouteImport } from './routes/elite-15'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as CompleteRouteImport } from './routes/complete'
+import { Route as CampeonatosRouteImport } from './routes/campeonatos'
+import { Route as AthletesRouteImport } from './routes/athletes'
+import { Route as AfiliacionesRouteImport } from './routes/afiliaciones'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventosEventIdRouteImport } from './routes/eventos.$eventId'
 
+const VoluntarioRoute = VoluntarioRouteImport.update({
+  id: '/voluntario',
+  path: '/voluntario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TuNivelRoute = TuNivelRouteImport.update({
+  id: '/tu-nivel',
+  path: '/tu-nivel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainRoute = TrainRouteImport.update({
+  id: '/train',
+  path: '/train',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TiendaRoute = TiendaRouteImport.update({
   id: '/tienda',
   path: '/tienda',
@@ -29,9 +59,29 @@ const TerminosRoute = TerminosRouteImport.update({
   path: '/terminos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RankingRoute = RankingRouteImport.update({
+  id: '/ranking',
+  path: '/ranking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
   path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreparacionRoute = PreparacionRouteImport.update({
+  id: '/preparacion',
+  path: '/preparacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaCarreraRoute = LaCarreraRouteImport.update({
+  id: '/la-carrera',
+  path: '/la-carrera',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GimnasiosRoute = GimnasiosRouteImport.update({
+  id: '/gimnasios',
+  path: '/gimnasios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -39,9 +89,19 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExperienceRoute = ExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventosRoute = EventosRouteImport.update({
   id: '/eventos',
   path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Elite15Route = Elite15RouteImport.update({
+  id: '/elite-15',
+  path: '/elite-15',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -54,6 +114,31 @@ const ContactoRoute = ContactoRouteImport.update({
   path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompleteRoute = CompleteRouteImport.update({
+  id: '/complete',
+  path: '/complete',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampeonatosRoute = CampeonatosRouteImport.update({
+  id: '/campeonatos',
+  path: '/campeonatos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AthletesRoute = AthletesRouteImport.update({
+  id: '/athletes',
+  path: '/athletes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AfiliacionesRoute = AfiliacionesRouteImport.update({
+  id: '/afiliaciones',
+  path: '/afiliaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -64,91 +149,221 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventosEventIdRoute = EventosEventIdRouteImport.update({
+  id: '/$eventId',
+  path: '/$eventId',
+  getParentRoute: () => EventosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
+  '/afiliaciones': typeof AfiliacionesRoute
+  '/athletes': typeof AthletesRoute
+  '/campeonatos': typeof CampeonatosRoute
+  '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
-  '/eventos': typeof EventosRoute
+  '/elite-15': typeof Elite15Route
+  '/eventos': typeof EventosRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
+  '/gimnasios': typeof GimnasiosRoute
+  '/la-carrera': typeof LaCarreraRoute
+  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
+  '/ranking': typeof RankingRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
+  '/train': typeof TrainRoute
+  '/tu-nivel': typeof TuNivelRoute
+  '/voluntario': typeof VoluntarioRoute
+  '/eventos/$eventId': typeof EventosEventIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
+  '/afiliaciones': typeof AfiliacionesRoute
+  '/athletes': typeof AthletesRoute
+  '/campeonatos': typeof CampeonatosRoute
+  '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
-  '/eventos': typeof EventosRoute
+  '/elite-15': typeof Elite15Route
+  '/eventos': typeof EventosRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
+  '/gimnasios': typeof GimnasiosRoute
+  '/la-carrera': typeof LaCarreraRoute
+  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
+  '/ranking': typeof RankingRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
+  '/train': typeof TrainRoute
+  '/tu-nivel': typeof TuNivelRoute
+  '/voluntario': typeof VoluntarioRoute
+  '/eventos/$eventId': typeof EventosEventIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
+  '/afiliaciones': typeof AfiliacionesRoute
+  '/athletes': typeof AthletesRoute
+  '/campeonatos': typeof CampeonatosRoute
+  '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
-  '/eventos': typeof EventosRoute
+  '/elite-15': typeof Elite15Route
+  '/eventos': typeof EventosRouteWithChildren
+  '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
+  '/gimnasios': typeof GimnasiosRoute
+  '/la-carrera': typeof LaCarreraRoute
+  '/preparacion': typeof PreparacionRoute
   '/privacidad': typeof PrivacidadRoute
+  '/ranking': typeof RankingRoute
   '/terminos': typeof TerminosRoute
   '/tienda': typeof TiendaRoute
+  '/train': typeof TrainRoute
+  '/tu-nivel': typeof TuNivelRoute
+  '/voluntario': typeof VoluntarioRoute
+  '/eventos/$eventId': typeof EventosEventIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/$'
+    | '/about'
+    | '/afiliaciones'
+    | '/athletes'
+    | '/campeonatos'
+    | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/elite-15'
     | '/eventos'
+    | '/experience'
     | '/faq'
+    | '/gimnasios'
+    | '/la-carrera'
+    | '/preparacion'
     | '/privacidad'
+    | '/ranking'
     | '/terminos'
     | '/tienda'
+    | '/train'
+    | '/tu-nivel'
+    | '/voluntario'
+    | '/eventos/$eventId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
+    | '/about'
+    | '/afiliaciones'
+    | '/athletes'
+    | '/campeonatos'
+    | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/elite-15'
     | '/eventos'
+    | '/experience'
     | '/faq'
+    | '/gimnasios'
+    | '/la-carrera'
+    | '/preparacion'
     | '/privacidad'
+    | '/ranking'
     | '/terminos'
     | '/tienda'
+    | '/train'
+    | '/tu-nivel'
+    | '/voluntario'
+    | '/eventos/$eventId'
   id:
     | '__root__'
     | '/'
     | '/$'
+    | '/about'
+    | '/afiliaciones'
+    | '/athletes'
+    | '/campeonatos'
+    | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/elite-15'
     | '/eventos'
+    | '/experience'
     | '/faq'
+    | '/gimnasios'
+    | '/la-carrera'
+    | '/preparacion'
     | '/privacidad'
+    | '/ranking'
     | '/terminos'
     | '/tienda'
+    | '/train'
+    | '/tu-nivel'
+    | '/voluntario'
+    | '/eventos/$eventId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  AboutRoute: typeof AboutRoute
+  AfiliacionesRoute: typeof AfiliacionesRoute
+  AthletesRoute: typeof AthletesRoute
+  CampeonatosRoute: typeof CampeonatosRoute
+  CompleteRoute: typeof CompleteRoute
   ContactoRoute: typeof ContactoRoute
   CookiesRoute: typeof CookiesRoute
-  EventosRoute: typeof EventosRoute
+  Elite15Route: typeof Elite15Route
+  EventosRoute: typeof EventosRouteWithChildren
+  ExperienceRoute: typeof ExperienceRoute
   FaqRoute: typeof FaqRoute
+  GimnasiosRoute: typeof GimnasiosRoute
+  LaCarreraRoute: typeof LaCarreraRoute
+  PreparacionRoute: typeof PreparacionRoute
   PrivacidadRoute: typeof PrivacidadRoute
+  RankingRoute: typeof RankingRoute
   TerminosRoute: typeof TerminosRoute
   TiendaRoute: typeof TiendaRoute
+  TrainRoute: typeof TrainRoute
+  TuNivelRoute: typeof TuNivelRoute
+  VoluntarioRoute: typeof VoluntarioRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voluntario': {
+      id: '/voluntario'
+      path: '/voluntario'
+      fullPath: '/voluntario'
+      preLoaderRoute: typeof VoluntarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tu-nivel': {
+      id: '/tu-nivel'
+      path: '/tu-nivel'
+      fullPath: '/tu-nivel'
+      preLoaderRoute: typeof TuNivelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/train': {
+      id: '/train'
+      path: '/train'
+      fullPath: '/train'
+      preLoaderRoute: typeof TrainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tienda': {
       id: '/tienda'
       path: '/tienda'
@@ -163,11 +378,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TerminosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ranking': {
+      id: '/ranking'
+      path: '/ranking'
+      fullPath: '/ranking'
+      preLoaderRoute: typeof RankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidad': {
       id: '/privacidad'
       path: '/privacidad'
       fullPath: '/privacidad'
       preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preparacion': {
+      id: '/preparacion'
+      path: '/preparacion'
+      fullPath: '/preparacion'
+      preLoaderRoute: typeof PreparacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/la-carrera': {
+      id: '/la-carrera'
+      path: '/la-carrera'
+      fullPath: '/la-carrera'
+      preLoaderRoute: typeof LaCarreraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gimnasios': {
+      id: '/gimnasios'
+      path: '/gimnasios'
+      fullPath: '/gimnasios'
+      preLoaderRoute: typeof GimnasiosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -177,11 +420,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/experience': {
+      id: '/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof ExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/eventos': {
       id: '/eventos'
       path: '/eventos'
       fullPath: '/eventos'
       preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite-15': {
+      id: '/elite-15'
+      path: '/elite-15'
+      fullPath: '/elite-15'
+      preLoaderRoute: typeof Elite15RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -198,6 +455,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/complete': {
+      id: '/complete'
+      path: '/complete'
+      fullPath: '/complete'
+      preLoaderRoute: typeof CompleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campeonatos': {
+      id: '/campeonatos'
+      path: '/campeonatos'
+      fullPath: '/campeonatos'
+      preLoaderRoute: typeof CampeonatosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/athletes': {
+      id: '/athletes'
+      path: '/athletes'
+      fullPath: '/athletes'
+      preLoaderRoute: typeof AthletesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/afiliaciones': {
+      id: '/afiliaciones'
+      path: '/afiliaciones'
+      fullPath: '/afiliaciones'
+      preLoaderRoute: typeof AfiliacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$': {
       id: '/$'
       path: '/$'
@@ -212,19 +504,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eventos/$eventId': {
+      id: '/eventos/$eventId'
+      path: '/$eventId'
+      fullPath: '/eventos/$eventId'
+      preLoaderRoute: typeof EventosEventIdRouteImport
+      parentRoute: typeof EventosRoute
+    }
   }
 }
+
+interface EventosRouteChildren {
+  EventosEventIdRoute: typeof EventosEventIdRoute
+}
+
+const EventosRouteChildren: EventosRouteChildren = {
+  EventosEventIdRoute: EventosEventIdRoute,
+}
+
+const EventosRouteWithChildren =
+  EventosRoute._addFileChildren(EventosRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  AboutRoute: AboutRoute,
+  AfiliacionesRoute: AfiliacionesRoute,
+  AthletesRoute: AthletesRoute,
+  CampeonatosRoute: CampeonatosRoute,
+  CompleteRoute: CompleteRoute,
   ContactoRoute: ContactoRoute,
   CookiesRoute: CookiesRoute,
-  EventosRoute: EventosRoute,
+  Elite15Route: Elite15Route,
+  EventosRoute: EventosRouteWithChildren,
+  ExperienceRoute: ExperienceRoute,
   FaqRoute: FaqRoute,
+  GimnasiosRoute: GimnasiosRoute,
+  LaCarreraRoute: LaCarreraRoute,
+  PreparacionRoute: PreparacionRoute,
   PrivacidadRoute: PrivacidadRoute,
+  RankingRoute: RankingRoute,
   TerminosRoute: TerminosRoute,
   TiendaRoute: TiendaRoute,
+  TrainRoute: TrainRoute,
+  TuNivelRoute: TuNivelRoute,
+  VoluntarioRoute: VoluntarioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
