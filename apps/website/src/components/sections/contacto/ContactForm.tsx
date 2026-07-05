@@ -54,7 +54,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
           <button
             type="button"
             onClick={() => dispatch({ type: "reset" })}
-            className="mt-2 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white underline underline-offset-4 transition-colors duration-150"
+            className="mt-2 text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white underline underline-offset-4 transition-colors duration-150"
           >
             Enviar otro mensaje
           </button>
@@ -65,7 +65,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="c-name"
-              className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+              className="text-[10px] font-bold uppercase tracking-widest text-white/50"
             >
               Nombre completo *
             </label>
@@ -88,7 +88,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="c-email"
-              className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+              className="text-[10px] font-bold uppercase tracking-widest text-white/50"
             >
               Correo electrónico *
             </label>
@@ -113,7 +113,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="c-subject"
-              className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+              className="text-[10px] font-bold uppercase tracking-widest text-white/50"
             >
               Asunto *
             </label>
@@ -164,7 +164,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="c-message"
-              className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+              className="text-[10px] font-bold uppercase tracking-widest text-white/50"
             >
               Mensaje *
             </label>

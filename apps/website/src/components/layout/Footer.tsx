@@ -62,7 +62,14 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/">
-              <img src={logoSrc} alt="RunLuv" className="h-8 w-auto mb-5" loading="lazy" />
+              <img
+                src={logoSrc}
+                alt="RunLuv"
+                width={413}
+                height={119}
+                className="h-8 w-auto mb-5"
+                loading="lazy"
+              />
             </Link>
             <p className="text-sm text-white/60 leading-relaxed max-w-[200px]">
               The Fitness Race for Everybody — in Mexico.

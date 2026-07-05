@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LaCarreraHeroSection } from "@/components/sections/la-carrera/LaCarreraHeroSection";
-import { StationsSection } from "@/components/sections/la-carrera/StationsSection";
+import { FormatSection } from "@/components/sections/la-carrera/FormatSection";
 import { DivisionsSection } from "@/components/sections/la-carrera/DivisionsSection";
 import { RulesSection } from "@/components/sections/la-carrera/RulesSection";
 import { BottomCTA } from "@/components/sections/la-carrera/BottomCTA";
@@ -9,7 +9,7 @@ function LaCarreraPage() {
   return (
     <>
       <LaCarreraHeroSection />
-      <StationsSection />
+      <FormatSection />
       <DivisionsSection />
       <RulesSection />
       <BottomCTA />
@@ -20,11 +20,11 @@ function LaCarreraPage() {
 export const Route = createFileRoute("/la-carrera")({
   head: () => ({
     meta: [
-      { title: "La Carrera | runluv® — Formato y Dinámica del Evento" },
+      { title: "La Carrera | runluv® — Corre sobre circuitos de clase mundial" },
       {
         name: "description",
         content:
-          "Descubre el formato runluv®: 8 rondas de 1 km de carrera más una estación funcional diferente. Conoce las estaciones, reglas y categorías antes de competir.",
+          "runluv® transforma los autódromos de México en pistas para corredores. Descubre el formato, las modalidades, las categorías y las reglas antes de competir.",
       },
     ],
   }),

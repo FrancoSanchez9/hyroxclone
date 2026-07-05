@@ -13,7 +13,7 @@ export function Select({
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">{label}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">{label}</span>
       <div className="relative">
         <select
           value={value}
@@ -28,7 +28,7 @@ export function Select({
         </select>
         <ChevronDown
           size={13}
-          className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40"
+          className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-white/50"
           aria-hidden="true"
         />
       </div>

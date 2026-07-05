@@ -25,6 +25,8 @@ export interface HyroxEvent {
   soldOut?: boolean;
   featured?: boolean;
   about?: string;
+  tagline?: string;
+  description?: string[];
   spotsLeft?: number;
   currency?: string;
   prices?: PriceTier[];
@@ -49,6 +51,11 @@ export const upcomingEvents: HyroxEvent[] = [
     featured: true,
     about:
       "runluv® llega al Autódromo Internacional Miguel E. Abed en Amozoc, Puebla. Un circuito de clase mundial convertido en escenario para corredores de todos los niveles.",
+    tagline: "Puebla, ¡aquí arranca todo!",
+    description: [
+      "Siente la energía de correr sobre un circuito de clase mundial: el asfalto donde rugen los motores ahora es tuyo. Cada recta, cada curva del Autódromo Miguel E. Abed se convierte en tu pista.",
+      "Esta es la primera parada de la temporada runluv®. Elige tu desafío — La Última Vuelta, Cada Paso Cuenta o 5K/10K — y vive un ambiente único, con música, comunidad y energía en cada bloque de salida, dentro y fuera de la pista.",
+    ],
     spotsLeft: 120,
     currency: "MXN",
     prices: [
@@ -72,6 +79,11 @@ export const upcomingEvents: HyroxEvent[] = [
       "https://images.unsplash.com/photo-1526676537331-7747bf8278fc?w=1200&h=700&q=80&fit=crop&auto=format",
     about:
       "El Autódromo Hermanos Gallo en Tlaquepaque se transforma en el escenario del primer evento runluv® en la Zona Metropolitana de Guadalajara.",
+    tagline: "Guadalajara, ¡la perla también corre!",
+    description: [
+      "El Autódromo Hermanos Gallo abre sus puertas para la primera edición runluv® en la Zona Metropolitana de Guadalajara. Un circuito con historia, ahora al ritmo de tus pasos.",
+      "Trae a tu crew, elige tu desafío y vive la fiesta tapatía del running: bloques de salida con energía, zonas para espectadores y una comunidad que no deja de empujar.",
+    ],
     spotsLeft: 200,
     currency: "MXN",
     prices: [
@@ -95,6 +107,11 @@ export const upcomingEvents: HyroxEvent[] = [
       "https://images.unsplash.com/photo-1556764420-e37ef4cdfa5c?w=1200&h=700&q=80&fit=crop&auto=format",
     about:
       "runluv® llega a León, Guanajuato. El Autódromo de León ofrece un circuito único para descubrir hasta dónde eres capaz de llegar.",
+    tagline: "León, ¡el Bajío ruge!",
+    description: [
+      "El Autódromo de León se transforma en pista de corredores por un día. Un trazado rápido y plano, ideal para buscar tu marca personal o sobrevivir una vuelta más en La Última Vuelta.",
+      "Ya sea tu primera carrera o tu revancha de la temporada, aquí descubres hasta dónde eres capaz de llegar — con toda la comunidad runluv® empujándote en cada kilómetro.",
+    ],
     spotsLeft: 180,
     currency: "MXN",
     prices: [
@@ -118,6 +135,11 @@ export const upcomingEvents: HyroxEvent[] = [
       "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&h=700&q=80&fit=crop&auto=format",
     about:
       "El Autódromo Monterrey en Apodaca recibe a runluv®. La competencia de resistencia más emocionante llega al norte de México.",
+    tagline: "Monterrey, ¡el norte corre fuerte!",
+    description: [
+      "El Autódromo Monterrey recibe la última parada clasificatoria de la temporada. El carácter regio se nota: aquí se corre con todo, hasta el final.",
+      "Cierra tu temporada con la comunidad más intensa del país — cada bloque de salida es una fiesta y cada meta cruzada, un boleto rumbo a la gran final en CDMX.",
+    ],
     spotsLeft: 250,
     currency: "MXN",
     prices: [
@@ -149,6 +171,11 @@ export const upcomingEvents: HyroxEvent[] = [
       "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&h=700&q=80&fit=crop&auto=format",
     about:
       "El evento más esperado de la temporada. El Autódromo Hermanos Rodríguez, uno de los circuitos más icónicos del mundo, se convierte en el escenario de la experiencia runluv® más grande de México.",
+    tagline: "CDMX, ¡la gran final!",
+    description: [
+      "El Autódromo Hermanos Rodríguez — uno de los circuitos más icónicos del mundo — se convierte en el escenario de la experiencia runluv® más grande de México. Correr donde corre la Fórmula 1 no se olvida.",
+      "Es el cierre de temporada: los mejores de cada ciudad, la categoría LUV Pro en su máxima expresión y una fiesta de running como no has vivido. Si solo vas a correr una este año, es esta.",
+    ],
     spotsLeft: 400,
     currency: "MXN",
     prices: [
@@ -158,6 +185,11 @@ export const upcomingEvents: HyroxEvent[] = [
     mapsUrl: "https://maps.google.com/?q=Autódromo+Hermanos+Rodríguez+CDMX",
   },
 ];
+
+export function getNextEvent(now = new Date()): HyroxEvent {
+  const today = now.toISOString().slice(0, 10);
+  return upcomingEvents.find((e) => e.date >= today) ?? upcomingEvents[upcomingEvents.length - 1];
+}
 
 export const divisions = [
   {

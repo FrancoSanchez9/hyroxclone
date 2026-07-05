@@ -3,6 +3,7 @@ import { m, useInView } from "framer-motion";
 import { Dumbbell, Map, GraduationCap, Heart, Users } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/Card";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { EASE, fadeUp } from "@/lib/animation";
 
 const trainingCards = [
@@ -54,7 +55,7 @@ const trainingCards = [
     href: "/eventos",
     Icon: Users,
     imageUrl:
-      "https://images.unsplash.com/photo-1530549387789-4c161e8b4d4f?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&h=300&q=80&fit=crop&auto=format",
   },
 ];
 
@@ -74,7 +75,7 @@ function TrainingCard({ card, index }: { card: (typeof trainingCards)[number]; i
       whileTap={{ scale: 0.98 }}
       className="group cursor-pointer"
     >
-      <Card className="h-full overflow-hidden border-t-2 border-t-transparent transition-colors duration-200 group-hover:border-t-[#ffffff]">
+      <Card className="h-full overflow-hidden border-t-2 border-t-transparent transition-colors duration-200 group-hover:border-t-[#d4ff00]">
         {imageUrl && (
           <div className="relative h-44 overflow-hidden">
             <img
@@ -106,7 +107,7 @@ function TrainingCard({ card, index }: { card: (typeof trainingCards)[number]; i
         <CardFooter>
           <Link
             to={href}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#ffffff] uppercase tracking-wider transition-opacity duration-150 hover:opacity-80"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[#d4ff00] uppercase tracking-wider transition-opacity duration-150 hover:opacity-80"
           >
             {cta}
             <span aria-hidden="true"> →</span>
@@ -123,14 +124,19 @@ export function TrainingSection() {
 
   return (
     <section
-      className="w-full py-20 md:py-28"
+      className="relative w-full overflow-hidden py-20 md:py-28"
       style={{
-        background: "#0d0d0d",
+        background: "linear-gradient(180deg, #101204 0%, #0d0d0d 25%, #000 100%)",
         backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px)",
+          "repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), linear-gradient(180deg, #101204 0%, #0d0d0d 25%, #000 100%)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div
+        aria-hidden="true"
+        className="animate-blob pointer-events-none absolute -right-48 top-10 h-[30rem] w-[30rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.07), transparent 70%)" }}
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <m.div
           ref={headerRef}
           initial={{ opacity: 0, y: 24 }}
@@ -138,15 +144,14 @@ export function TrainingSection() {
           transition={{ duration: 0.38, ease: EASE }}
           className="mb-14 text-center"
         >
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff]">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[#d4ff00]">
             PREPARACIÓN RUNLUV®
           </p>
-          <h2
-            className="text-balance text-6xl leading-none tracking-wider text-white uppercase sm:text-7xl md:text-8xl"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-          >
-            PREPÁRATE PARA RUNLUV®
-          </h2>
+          <AnimatedTitle
+            text="PREPÁRATE PARA RUNLUV®"
+            accent={["RUNLUV®"]}
+            className="text-balance text-6xl text-white sm:text-7xl md:text-8xl"
+          />
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/50 sm:text-base text-pretty">
             Prepárate para tu desafío, conoce el circuito y llega listo para disfrutar cada
             kilómetro.
@@ -174,7 +179,7 @@ export function TrainingSection() {
           >
             Corre. Descansa. Comparte. Vuelve a correr.
           </p>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/40 text-pretty">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/50 text-pretty">
             En runluv® cada kilómetro cuenta, cada meta merece celebrarse y cada llegada marca el
             inicio del siguiente desafío.
           </p>

@@ -131,7 +131,7 @@ export function ResultRow({
       </td>
 
       {/* Age */}
-      <td className="px-4 py-3.5 text-[11px] tabular-nums text-white/30">{r.ageGroup}</td>
+      <td className="px-4 py-3.5 text-[11px] tabular-nums text-white/50">{r.ageGroup}</td>
 
       {/* Splits */}
       {SPLIT_KEYS.map((key, i) => {
@@ -153,7 +153,7 @@ export function ResultRow({
 
       {/* Gap */}
       <td className="px-4 py-3.5 text-right">
-        <span className="tabular-nums text-xs font-semibold text-white/30">{gap}</span>
+        <span className="tabular-nums text-xs font-semibold text-white/50">{gap}</span>
       </td>
 
       {/* Total + bar */}
@@ -181,8 +181,8 @@ export function ResultRow({
               className="h-full"
               style={{
                 width: `${barW}%`,
-                background: "#ffffff",
-                opacity: r.rank === 1 ? 0.85 : 0.18 + 0.22 * (1 - (r.rank - 1) / 15),
+                background: r.rank === 1 ? "#d4ff00" : "#ffffff",
+                opacity: r.rank === 1 ? 0.9 : 0.18 + 0.22 * (1 - (r.rank - 1) / 15),
               }}
             />
           </div>

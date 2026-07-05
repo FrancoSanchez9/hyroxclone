@@ -30,16 +30,19 @@ const FAQ = [
 export function EventFaqSection() {
   return (
     <section aria-labelledby="faq-heading">
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#d4ff00]">
+        ¿Dudas?
+      </p>
       <h2
         id="faq-heading"
-        className="text-4xl leading-none tracking-wider text-white uppercase mb-6"
+        className="text-4xl md:text-5xl leading-none tracking-wider text-white uppercase mb-8"
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
       >
         Preguntas Frecuentes
       </h2>
       <div className="border-t border-white/10">
-        {FAQ.map((item) => (
-          <FaqItem key={item.q} q={item.q} a={item.a} />
+        {FAQ.map((item, i) => (
+          <FaqItem key={item.q} q={item.q} a={item.a} index={i} />
         ))}
       </div>
     </section>

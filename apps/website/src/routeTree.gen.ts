@@ -21,18 +21,22 @@ import { Route as LaCarreraRouteImport } from './routes/la-carrera'
 import { Route as GimnasiosRouteImport } from './routes/gimnasios'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ExperienceRouteImport } from './routes/experience'
-import { Route as EventosRouteImport } from './routes/eventos'
 import { Route as Elite15RouteImport } from './routes/elite-15'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as CompleteRouteImport } from './routes/complete'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CampeonatosRouteImport } from './routes/campeonatos'
 import { Route as AthletesRouteImport } from './routes/athletes'
 import { Route as AfiliacionesRouteImport } from './routes/afiliaciones'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventosIndexRouteImport } from './routes/eventos.index'
 import { Route as EventosEventIdRouteImport } from './routes/eventos.$eventId'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
 
 const VoluntarioRoute = VoluntarioRouteImport.update({
   id: '/voluntario',
@@ -94,14 +98,14 @@ const ExperienceRoute = ExperienceRouteImport.update({
   path: '/experience',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventosRoute = EventosRouteImport.update({
-  id: '/eventos',
-  path: '/eventos',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const Elite15Route = Elite15RouteImport.update({
   id: '/elite-15',
   path: '/elite-15',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -119,6 +123,11 @@ const CompleteRoute = CompleteRouteImport.update({
   path: '/complete',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CampeonatosRoute = CampeonatosRouteImport.update({
   id: '/campeonatos',
   path: '/campeonatos',
@@ -132,6 +141,11 @@ const AthletesRoute = AthletesRouteImport.update({
 const AfiliacionesRoute = AfiliacionesRouteImport.update({
   id: '/afiliaciones',
   path: '/afiliaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -149,24 +163,36 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventosIndexRoute = EventosIndexRouteImport.update({
+  id: '/eventos/',
+  path: '/eventos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventosEventIdRoute = EventosEventIdRouteImport.update({
-  id: '/$eventId',
-  path: '/$eventId',
-  getParentRoute: () => EventosRoute,
+  id: '/eventos/$eventId',
+  path: '/eventos/$eventId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/afiliaciones': typeof AfiliacionesRoute
   '/athletes': typeof AthletesRoute
   '/campeonatos': typeof CampeonatosRoute
+  '/checkout': typeof CheckoutRoute
   '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
+  '/dashboard': typeof DashboardRoute
   '/elite-15': typeof Elite15Route
-  '/eventos': typeof EventosRouteWithChildren
   '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
   '/gimnasios': typeof GimnasiosRoute
@@ -179,20 +205,24 @@ export interface FileRoutesByFullPath {
   '/train': typeof TrainRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
+  '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/afiliaciones': typeof AfiliacionesRoute
   '/athletes': typeof AthletesRoute
   '/campeonatos': typeof CampeonatosRoute
+  '/checkout': typeof CheckoutRoute
   '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
+  '/dashboard': typeof DashboardRoute
   '/elite-15': typeof Elite15Route
-  '/eventos': typeof EventosRouteWithChildren
   '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
   '/gimnasios': typeof GimnasiosRoute
@@ -205,21 +235,25 @@ export interface FileRoutesByTo {
   '/train': typeof TrainRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
+  '/eventos': typeof EventosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/afiliaciones': typeof AfiliacionesRoute
   '/athletes': typeof AthletesRoute
   '/campeonatos': typeof CampeonatosRoute
+  '/checkout': typeof CheckoutRoute
   '/complete': typeof CompleteRoute
   '/contacto': typeof ContactoRoute
   '/cookies': typeof CookiesRoute
+  '/dashboard': typeof DashboardRoute
   '/elite-15': typeof Elite15Route
-  '/eventos': typeof EventosRouteWithChildren
   '/experience': typeof ExperienceRoute
   '/faq': typeof FaqRoute
   '/gimnasios': typeof GimnasiosRoute
@@ -232,7 +266,9 @@ export interface FileRoutesById {
   '/train': typeof TrainRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
+  '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -240,14 +276,16 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/about'
+    | '/admin'
     | '/afiliaciones'
     | '/athletes'
     | '/campeonatos'
+    | '/checkout'
     | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/dashboard'
     | '/elite-15'
-    | '/eventos'
     | '/experience'
     | '/faq'
     | '/gimnasios'
@@ -260,20 +298,24 @@ export interface FileRouteTypes {
     | '/train'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/login'
     | '/eventos/$eventId'
+    | '/eventos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
     | '/about'
+    | '/admin'
     | '/afiliaciones'
     | '/athletes'
     | '/campeonatos'
+    | '/checkout'
     | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/dashboard'
     | '/elite-15'
-    | '/eventos'
     | '/experience'
     | '/faq'
     | '/gimnasios'
@@ -286,20 +328,24 @@ export interface FileRouteTypes {
     | '/train'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/login'
     | '/eventos/$eventId'
+    | '/eventos'
   id:
     | '__root__'
     | '/'
     | '/$'
     | '/about'
+    | '/admin'
     | '/afiliaciones'
     | '/athletes'
     | '/campeonatos'
+    | '/checkout'
     | '/complete'
     | '/contacto'
     | '/cookies'
+    | '/dashboard'
     | '/elite-15'
-    | '/eventos'
     | '/experience'
     | '/faq'
     | '/gimnasios'
@@ -312,21 +358,25 @@ export interface FileRouteTypes {
     | '/train'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/login'
     | '/eventos/$eventId'
+    | '/eventos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   AfiliacionesRoute: typeof AfiliacionesRoute
   AthletesRoute: typeof AthletesRoute
   CampeonatosRoute: typeof CampeonatosRoute
+  CheckoutRoute: typeof CheckoutRoute
   CompleteRoute: typeof CompleteRoute
   ContactoRoute: typeof ContactoRoute
   CookiesRoute: typeof CookiesRoute
+  DashboardRoute: typeof DashboardRoute
   Elite15Route: typeof Elite15Route
-  EventosRoute: typeof EventosRouteWithChildren
   ExperienceRoute: typeof ExperienceRoute
   FaqRoute: typeof FaqRoute
   GimnasiosRoute: typeof GimnasiosRoute
@@ -339,6 +389,9 @@ export interface RootRouteChildren {
   TrainRoute: typeof TrainRoute
   TuNivelRoute: typeof TuNivelRoute
   VoluntarioRoute: typeof VoluntarioRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  EventosEventIdRoute: typeof EventosEventIdRoute
+  EventosIndexRoute: typeof EventosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -427,18 +480,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/eventos': {
-      id: '/eventos'
-      path: '/eventos'
-      fullPath: '/eventos'
-      preLoaderRoute: typeof EventosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/elite-15': {
       id: '/elite-15'
       path: '/elite-15'
       fullPath: '/elite-15'
       preLoaderRoute: typeof Elite15RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -462,6 +515,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompleteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/campeonatos': {
       id: '/campeonatos'
       path: '/campeonatos'
@@ -481,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/afiliaciones'
       fullPath: '/afiliaciones'
       preLoaderRoute: typeof AfiliacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -504,39 +571,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eventos/': {
+      id: '/eventos/'
+      path: '/eventos'
+      fullPath: '/eventos/'
+      preLoaderRoute: typeof EventosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/eventos/$eventId': {
       id: '/eventos/$eventId'
-      path: '/$eventId'
+      path: '/eventos/$eventId'
       fullPath: '/eventos/$eventId'
       preLoaderRoute: typeof EventosEventIdRouteImport
-      parentRoute: typeof EventosRoute
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface EventosRouteChildren {
-  EventosEventIdRoute: typeof EventosEventIdRoute
-}
-
-const EventosRouteChildren: EventosRouteChildren = {
-  EventosEventIdRoute: EventosEventIdRoute,
-}
-
-const EventosRouteWithChildren =
-  EventosRoute._addFileChildren(EventosRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   AfiliacionesRoute: AfiliacionesRoute,
   AthletesRoute: AthletesRoute,
   CampeonatosRoute: CampeonatosRoute,
+  CheckoutRoute: CheckoutRoute,
   CompleteRoute: CompleteRoute,
   ContactoRoute: ContactoRoute,
   CookiesRoute: CookiesRoute,
+  DashboardRoute: DashboardRoute,
   Elite15Route: Elite15Route,
-  EventosRoute: EventosRouteWithChildren,
   ExperienceRoute: ExperienceRoute,
   FaqRoute: FaqRoute,
   GimnasiosRoute: GimnasiosRoute,
@@ -549,6 +621,9 @@ const rootRouteChildren: RootRouteChildren = {
   TrainRoute: TrainRoute,
   TuNivelRoute: TuNivelRoute,
   VoluntarioRoute: VoluntarioRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  EventosEventIdRoute: EventosEventIdRoute,
+  EventosIndexRoute: EventosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

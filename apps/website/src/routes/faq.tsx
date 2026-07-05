@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FaqItem } from "@/components/sections/eventos/FaqItem";
+
+const ACCENT = "#d4ff00";
 
 interface FAQItem {
   question: string;
-  answer: string | React.ReactNode;
+  answer: string;
 }
 
 interface FAQCategory {
@@ -357,106 +359,190 @@ const faqData: FAQCategory[] = [
   },
 ];
 
-function FAQAccordionItem({ item }: { item: FAQItem }) {
-  const [open, setOpen] = useState(false);
+const slug = (title: string) =>
+  title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ®]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
-  return (
-    <div
-      className={cn(
-        "overflow-hidden rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] transition-colors duration-150",
-        open && "border-[#3a3a3a]",
-      )}
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-        aria-expanded={open}
-      >
-        <span className="text-sm font-medium text-white sm:text-base">{item.question}</span>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 shrink-0 text-[#ffffff] transition-transform duration-200 ease-out",
-            open && "rotate-180",
-          )}
-          aria-hidden="true"
-        />
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <m.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{
-              height: "auto",
-              opacity: 1,
-              transition: { duration: 0.22, ease: [0.23, 1, 0.32, 1] },
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-              transition: { duration: 0.15, ease: [0.23, 1, 0.32, 1] },
-            }}
-          >
-            <div className="border-t border-[#2a2a2a] px-5 py-4 text-sm leading-relaxed text-white/70">
-              {item.answer}
-            </div>
-          </m.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+const TOTAL_QUESTIONS = faqData.reduce((n, c) => n + c.items.length, 0);
 
 function FAQPage() {
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(0);
+
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? faqData
+        .map((c) => ({
+          ...c,
+          items: c.items.filter(
+            (i) => i.question.toLowerCase().includes(q) || i.answer.toLowerCase().includes(q),
+          ),
+        }))
+        .filter((c) => c.items.length > 0)
+    : faqData;
+
+  // Scrollspy — highlights the category currently in view
+  useEffect(() => {
+    if (q) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive(Number((entry.target as HTMLElement).dataset.idx));
+          }
+        }
+      },
+      { rootMargin: "-15% 0px -75% 0px" },
+    );
+    document.querySelectorAll("[data-faq-section]").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [q]);
+
   return (
     <div
-      className="min-h-screen bg-[#0a0a0a] px-4 pb-24 pt-20"
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px)",
-      }}
+      className="relative min-h-screen overflow-hidden px-4 pb-24 pt-28 sm:px-6 lg:px-8"
+      style={{ background: "linear-gradient(170deg, #000 0%, #0a0a0a 40%, #101204 100%)" }}
     >
-      <div className="mx-auto max-w-3xl">
-        <div className="mb-12 text-center">
+      {/* Ambient glows + lane lines */}
+      <div
+        aria-hidden="true"
+        className="animate-blob pointer-events-none absolute -right-56 top-32 h-[34rem] w-[34rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.07), transparent 70%)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.025) 119px, rgba(255,255,255,0.025) 120px)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-6xl">
+        {/* Hero */}
+        <div className="mb-12">
           <p
-            className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#ffffff]"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.3em" }}
+            className="mb-3 text-sm font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
           >
             runluv® MÉXICO
           </p>
           <h1
-            className="text-[clamp(2.5rem,8vw,5rem)] font-normal leading-none tracking-tight text-white"
+            className="text-[clamp(3rem,9vw,6.5rem)] leading-none tracking-tight text-white uppercase"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
-            RESUELVE TUS DUDAS
+            Resuelve tus <span style={{ color: ACCENT }}>dudas</span>
           </h1>
-          <p className="mt-4 text-base text-white/50">
-            Todo lo que necesitas saber antes de tu desafío runluv®.
+          <p className="mt-4 max-w-xl text-base text-white/55">
+            Todo lo que necesitas saber antes de tu desafío runluv®.{" "}
+            <span className="tabular-nums text-white/50">
+              {TOTAL_QUESTIONS} preguntas · {faqData.length} temas
+            </span>
           </p>
+
+          {/* Search */}
+          <div className="relative mt-8 max-w-xl">
+            <Search
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50"
+              aria-hidden="true"
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              aria-label="Buscar en preguntas frecuentes"
+              placeholder="Busca tu duda — chip, horarios, reembolso…"
+              className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none"
+            />
+          </div>
         </div>
 
-        <div className="space-y-10">
-          {faqData.map((category) => (
-            <section key={category.title}>
-              <div className="mb-4 flex items-center gap-3">
-                <span className="h-px flex-1 bg-[#2a2a2a]" />
-                <h2
-                  className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ffffff]"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.2em" }}
+        <div className="grid gap-12 lg:grid-cols-[260px_1fr]">
+          {/* Category nav — sticky rail with scrollspy */}
+          <nav aria-label="Categorías" className="hidden lg:block">
+            <div className="sticky top-28 flex flex-col gap-1">
+              {faqData.map((cat, i) => (
+                <a
+                  key={cat.title}
+                  href={`#${slug(cat.title)}`}
+                  className={cn(
+                    "flex items-baseline gap-3 border-l-2 px-4 py-2 transition-[color,border-color] duration-150",
+                    !q && active === i
+                      ? "border-[#d4ff00] text-white"
+                      : "border-white/10 text-white/45 hover:border-white/30 hover:text-white",
+                  )}
                 >
-                  {category.title}
-                </h2>
-                <span className="h-px flex-1 bg-[#2a2a2a]" />
-              </div>
-              <div className="space-y-2">
-                {category.items.map((item) => (
-                  <FAQAccordionItem key={item.question} item={item} />
-                ))}
-              </div>
-            </section>
-          ))}
+                  <span
+                    className="tabular-nums text-lg leading-none"
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      color: !q && active === i ? ACCENT : undefined,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-wider">
+                    {cat.title}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          {/* Content */}
+          <div className="min-w-0 space-y-16">
+            {filtered.length === 0 && (
+              <p className="text-white/50">
+                No encontramos nada para "{query}". Intenta con otra palabra o{" "}
+                <a href="/contacto" className="underline" style={{ color: ACCENT }}>
+                  contáctanos
+                </a>
+                .
+              </p>
+            )}
+            {filtered.map((category, ci) => (
+              <section
+                key={category.title}
+                id={slug(category.title)}
+                data-faq-section
+                data-idx={faqData.findIndex((c) => c.title === category.title)}
+                aria-labelledby={`faq-cat-${ci}`}
+              >
+                <div className="mb-6 flex items-baseline gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="tabular-nums text-5xl leading-none"
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      color: "transparent",
+                      WebkitTextStroke: "1.5px rgba(212,255,0,0.5)",
+                    }}
+                  >
+                    {String(faqData.findIndex((c) => c.title === category.title) + 1).padStart(
+                      2,
+                      "0",
+                    )}
+                  </span>
+                  <h2
+                    id={`faq-cat-${ci}`}
+                    className="text-3xl leading-none tracking-wide text-white uppercase sm:text-4xl"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  >
+                    {category.title}
+                  </h2>
+                </div>
+                <div className="border-t border-white/10">
+                  {category.items.map((item, i) => (
+                    <FaqItem key={item.question} q={item.question} a={item.answer} index={i} />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </div>

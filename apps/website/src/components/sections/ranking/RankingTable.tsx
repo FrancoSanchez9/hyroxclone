@@ -48,7 +48,7 @@ export function RankingTable({
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="mb-5 flex items-center justify-between gap-4 flex-wrap">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-white/30">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-white/50">
           <span className="tabular-nums text-white/50">{filtered.length}</span> resultados · {race}{" "}
           · {division}
         </p>
@@ -62,7 +62,7 @@ export function RankingTable({
       >
         <table className="w-full min-w-[1020px] border-collapse text-left">
           <thead>
-            <tr style={{ background: "#ffffff" }}>
+            <tr style={{ background: "#d4ff00" }}>
               <th className="px-3 py-3.5 text-[10px] font-bold uppercase tracking-widest text-black w-14">
                 #
               </th>
@@ -134,7 +134,7 @@ export function RankingTable({
               aria-label="Primera página"
               onClick={() => dispatch({ type: "SET_PAGE", value: 1 })}
               disabled={page === 1}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/35 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
             >
               ««
             </button>
@@ -143,7 +143,7 @@ export function RankingTable({
               aria-label="Página anterior"
               onClick={() => dispatch({ type: "SET_PAGE", value: Math.max(1, page - 1) })}
               disabled={page === 1}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/35 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
             >
               ‹
             </button>
@@ -158,7 +158,7 @@ export function RankingTable({
                   onClick={() => dispatch({ type: "SET_PAGE", value: p })}
                   className={cn(
                     "cursor-pointer h-8 w-8 text-xs font-bold transition-[background-color,color,transform] duration-100 active:scale-[0.96]",
-                    p === page ? "bg-white text-black" : "text-white/35 hover:text-white",
+                    p === page ? "bg-white text-black" : "text-white/50 hover:text-white",
                   )}
                 >
                   {p}
@@ -170,7 +170,7 @@ export function RankingTable({
               aria-label="Página siguiente"
               onClick={() => dispatch({ type: "SET_PAGE", value: Math.min(totalPages, page + 1) })}
               disabled={page === totalPages}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/35 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
             >
               ›
             </button>
@@ -179,7 +179,7 @@ export function RankingTable({
               aria-label="Última página"
               onClick={() => dispatch({ type: "SET_PAGE", value: totalPages })}
               disabled={page === totalPages}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/35 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
             >
               »»
             </button>

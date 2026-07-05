@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReducer, useMemo } from "react";
-import { PageHero } from "@/components/ui/PageHero";
+import { m } from "framer-motion";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { resultsData, races, divisions, workouts } from "@/data/results";
 import {
   RankingFilters,
@@ -126,12 +127,50 @@ function RankingPage() {
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
-      <PageHero
-        inverted
-        badge="Temporada 2026–2027"
-        title="Resultados Oficiales"
-        subtitle="Consulta los rankings y resultados oficiales de runluv® por evento, modalidad y categoría."
-      />
+      {/* Hero */}
+      <section className="relative overflow-hidden px-6 pb-12 pt-32 md:pt-40">
+        <m.img
+          src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1920&q=80&fit=crop&auto=format"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-20 grayscale"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2.4, ease: [0.23, 1, 0.32, 1] }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
+        <div
+          aria-hidden="true"
+          className="animate-blob pointer-events-none absolute -right-40 top-0 h-[30rem] w-[30rem] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(212,255,0,0.09), transparent 70%)" }}
+        />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <m.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: "#d4ff00" }}
+          >
+            Temporada 2026–2027
+          </m.span>
+          <AnimatedTitle
+            text="RESULTADOS OFICIALES"
+            accent={["OFICIALES"]}
+            className="text-[clamp(2.6rem,8vw,6rem)] text-white"
+          />
+          <m.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1], delay: 0.4 }}
+            className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
+          >
+            Consulta los rankings y resultados oficiales de runluv® por evento, modalidad y
+            categoría.
+          </m.p>
+        </div>
+      </section>
 
       <RankingFilters state={state} dispatch={dispatch} onReset={resetFilters} />
 

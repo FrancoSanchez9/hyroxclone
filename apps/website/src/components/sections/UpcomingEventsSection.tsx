@@ -2,6 +2,7 @@ import { upcomingEvents, type HyroxEvent } from "@/data/events";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/Card";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
@@ -36,8 +37,14 @@ function formatDateRange(dateStr: string, endDateStr?: string): string {
 function FeaturedEventCard({ event }: { event: HyroxEvent }) {
   return (
     <m.div
-      whileHover={{ y: -4, boxShadow: "0 24px 60px rgba(255,255,255,0.12)" }}
-      transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
+      whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+      viewport={{ once: true, margin: "-80px" }}
+      whileHover={{ y: -4, boxShadow: "0 24px 60px rgba(212,255,0,0.1)" }}
+      transition={{
+        clipPath: { duration: 0.9, ease: [0.23, 1, 0.32, 1] },
+        default: { duration: 0.22, ease: [0.23, 1, 0.32, 1] },
+      }}
       className="relative w-full overflow-hidden rounded-lg border border-white/10"
     >
       {event.imageUrl && (
@@ -57,9 +64,9 @@ function FeaturedEventCard({ event }: { event: HyroxEvent }) {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <span
             className="inline-block px-3 py-1 text-xs font-bold tracking-widest text-black uppercase"
-            style={{ background: "#ffffff" }}
+            style={{ background: "#d4ff00" }}
           >
-            FEATURED
+            DESTACADO
           </span>
           {event.soldOut && (
             <Badge variant="dark" className="border border-white/20">
@@ -77,7 +84,7 @@ function FeaturedEventCard({ event }: { event: HyroxEvent }) {
           </h3>
 
           <div className="flex flex-col gap-2 mt-2">
-            <div className="flex items-center gap-2 text-[#ffffff]">
+            <div className="flex items-center gap-2 text-[#d4ff00]">
               <Calendar className="w-4 h-4 shrink-0" />
               <span className="text-sm font-semibold tracking-wider">
                 {formatDateRange(event.date, event.endDate)}
@@ -116,9 +123,10 @@ function FeaturedEventCard({ event }: { event: HyroxEvent }) {
           ) : (
             <a
               href={event.registrationUrl}
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
+              style={{ background: "#d4ff00" }}
             >
-              Register Now!
+              ¡Regístrate ahora!
             </a>
           )}
         </div>
@@ -149,7 +157,7 @@ function EventCard({ event }: { event: HyroxEvent }) {
           </div>
         )}
         <CardHeader className="pb-3">
-          <div className="flex items-center gap-2 text-[#ffffff] mb-1">
+          <div className="flex items-center gap-2 text-[#d4ff00] mb-1">
             <Calendar className="w-3.5 h-3.5 shrink-0" />
             <span className="text-xs font-bold tracking-widest">
               {formatDateRange(event.date, event.endDate)}
@@ -198,9 +206,9 @@ function EventCard({ event }: { event: HyroxEvent }) {
           ) : (
             <Link
               to={event.registrationUrl}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#ffffff] hover:text-white transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#d4ff00] hover:text-white transition-colors duration-150"
             >
-              Register
+              Regístrate
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           )}
@@ -218,17 +226,14 @@ export function UpcomingEventsSection() {
     <section className="w-full py-20 md:py-28" style={{ background: "#0a0a0a" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 md:mb-16">
-          <m.h2
-            className="text-5xl md:text-7xl text-white uppercase tracking-wide leading-none mb-3 text-balance"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-          >
-            Upcoming Events
-          </m.h2>
-          <p className="text-white/60 text-base md:text-lg">Find your nearest RunLuv race</p>
+          <AnimatedTitle
+            text="PRÓXIMAS CARRERAS"
+            accent={["CARRERAS"]}
+            className="text-5xl md:text-7xl text-white mb-3 text-balance"
+          />
+          <p className="text-white/60 text-base md:text-lg">
+            Encuentra tu carrera runluv® más cercana
+          </p>
         </div>
 
         {featuredEvent && (
@@ -248,9 +253,9 @@ export function UpcomingEventsSection() {
         <div className="flex justify-center">
           <Link
             to="/eventos"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/60 hover:text-[#ffffff] transition-colors duration-200 border-b border-transparent hover:border-[#ffffff] pb-0.5"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/60 hover:text-[#d4ff00] transition-colors duration-200 border-b border-transparent hover:border-[#d4ff00] pb-0.5"
           >
-            View all events
+            Ver todas las carreras
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

@@ -1,117 +1,68 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
+import { m } from "framer-motion";
 import { divisions } from "@/data/events";
-import { Badge } from "@/components/ui/Badge";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 
-const EASE_OUT = [0.23, 1, 0.32, 1] as const;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE_OUT, delay: i * 0.04 },
-  }),
-};
-
-const divisionNotes: Record<string, string> = {
-  Open: "Recomendado para quienes compiten por primera vez",
-  Pro: "Para atletas con experiencia en funcional y running",
-  Doubles: "Ambos atletas corren juntos y se turnan en las estaciones",
-  "Pro Doubles": "Versión Pro del formato en pareja",
-  Relay: "4 atletas × 2 km × 2 estaciones cada uno",
-};
+const EASE = [0.23, 1, 0.32, 1] as const;
+const ACCENT = "#d4ff00";
 
 export function DivisionsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="w-full bg-[#0a0a0a] py-20 md:py-28">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <m.div
-          ref={ref}
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={0}
-          className="mb-12 text-center"
-        >
-          <Badge variant="dark" className="mb-4 border border-[#2a2a2a]">
-            Categorías
-          </Badge>
-          <h2
-            className="text-6xl leading-none tracking-wider text-white uppercase sm:text-7xl"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 max-w-2xl">
+          <p
+            className="mb-4 text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
           >
-            Divisiones
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/50 sm:text-base">
-            HYROX ofrece categorías para todos los perfiles, desde principiantes hasta atletas de
-            élite.
+            Categorías
           </p>
-        </m.div>
+          <AnimatedTitle
+            text="ELIGE TU DIVISIÓN"
+            accent={["DIVISIÓN"]}
+            className="text-5xl text-white sm:text-6xl md:text-7xl"
+          />
+          <p className="mt-4 text-sm leading-relaxed text-white/55 sm:text-base">
+            Desafíos para todos los perfiles, desde tu primera carrera hasta el alto rendimiento.
+          </p>
+        </div>
 
-        <m.div
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={1}
-          className="overflow-x-auto rounded-lg border border-[#2a2a2a]"
-        >
-          <table className="w-full min-w-[560px] text-sm">
-            <thead>
-              <tr className="border-b border-[#2a2a2a] bg-[#111111]">
-                <th
-                  scope="col"
-                  className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest text-white/60"
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {divisions.map((division, idx) => (
+            <m.div
+              key={division.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: idx * 0.08, ease: EASE }}
+              whileHover={{ y: -4 }}
+              className="group flex flex-col gap-3 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-6 transition-colors duration-200 hover:border-l-[#d4ff00]"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <h3
+                  className="text-3xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-[#d4ff00]"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  División
-                </th>
-                <th
-                  scope="col"
-                  className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest text-white/60"
+                  {division.name}
+                </h3>
+                <span
+                  className="tabular-nums text-2xl leading-none text-white/15"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  Descripción
-                </th>
-                <th
-                  scope="col"
-                  className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest text-white/60"
-                >
-                  Nota especial
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {divisions.map((division, idx) => (
-                <tr
-                  key={division.name}
-                  className={[
-                    "border-b border-[#2a2a2a] transition-colors duration-150 hover:bg-white/[0.03]",
-                    idx === divisions.length - 1 ? "border-b-0" : "",
-                  ].join(" ")}
-                >
-                  <th scope="row" className="px-5 py-4">
-                    <span
-                      className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider"
-                      style={{ color: division.color }}
-                    >
-                      <span
-                        className="inline-block h-2 w-2 rounded-full shrink-0"
-                        style={{ backgroundColor: division.color }}
-                      />
-                      {division.name}
-                    </span>
-                  </th>
-                  <td className="px-5 py-4 text-white/70">{division.description}</td>
-                  <td className="px-5 py-4 text-white/60 text-xs">
-                    {divisionNotes[division.name] ?? "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </m.div>
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed text-white/60">{division.description}</p>
+              <div className="mt-1 border-t border-white/10 pt-3">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">
+                  Formato
+                </p>
+                <p className="mt-1 text-xs font-semibold" style={{ color: ACCENT }}>
+                  {division.weights.women}
+                </p>
+              </div>
+            </m.div>
+          ))}
+        </div>
       </div>
     </section>
   );

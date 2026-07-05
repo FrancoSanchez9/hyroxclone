@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/Badge";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { EASE } from "@/lib/animation";
 
 const modalities = [
@@ -21,6 +23,8 @@ const modalities = [
       "Gana el último corredor que logra mantenerse en competencia cumpliendo el tiempo límite por vuelta.",
     categories: ["Individual Open", "Individual Pro", "Doubles", "Teams", "Corporate Teams"],
     circuito: "3 — 5 km por vuelta (según autódromo)",
+    imageUrl:
+      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=1100&q=80&fit=crop&auto=format",
   },
   {
     id: "cpc",
@@ -38,6 +42,8 @@ const modalities = [
     criterio: "Gana quien acumule mayor número de kilómetros al finalizar el tiempo oficial.",
     categories: ["Individual Open", "Individual Pro", "Doubles", "Teams", "Corporate Teams"],
     circuito: "4 horas continuas",
+    imageUrl:
+      "https://images.unsplash.com/photo-1526676537331-7747bf8278fc?w=800&h=1100&q=80&fit=crop&auto=format",
   },
   {
     id: "tradicional",
@@ -55,6 +61,8 @@ const modalities = [
     criterio: "Mejor tiempo absoluto y ganadores por categoría de edad.",
     categories: ["Femenil / Varonil", "18–29", "30–39", "40–49", "50+"],
     circuito: "5 km y 10 km",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=1100&q=80&fit=crop&auto=format",
   },
 ] as const;
 
@@ -71,103 +79,89 @@ function ModalityCard({
   return (
     <m.div
       ref={ref}
-      className="group"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.42, delay: index * 0.08, ease: EASE }}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.97 }}
+      className="group h-full"
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+      transition={{ duration: 0.55, delay: index * 0.1, ease: EASE }}
+      whileHover={{ y: -6 }}
     >
-      {/* border-t-2 border-t-transparent reserved always so layout never shifts */}
-      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 border-t-2 border-t-transparent bg-[#111111] p-6 transition-colors duration-200 group-hover:border-t-white">
-        {/* Decorative large number — background accent */}
+      <div className="relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10">
+        {/* Full-bleed photo — grayscale until hover */}
+        <img
+          src={modality.imageUrl}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
+
+        {/* Giant outlined number */}
         <span
-          className="pointer-events-none absolute -right-2 -top-2 select-none leading-none tabular-nums text-white/[0.06]"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "9rem" }}
+          className="pointer-events-none absolute right-4 top-2 select-none leading-none tabular-nums"
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "7rem",
+            color: "transparent",
+            WebkitTextStroke: "1.5px rgba(212,255,0,0.45)",
+          }}
           aria-hidden="true"
         >
           {modality.number}
         </span>
 
-        {/* Number + short name header */}
-        <div className="relative mb-3 flex items-end gap-3">
+        {/* Content — bottom anchored, one clean column */}
+        <div className="relative z-10 flex flex-col gap-3 p-6">
           <span
-            className="text-[4.5rem] leading-none tabular-nums text-white/35"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            className="text-6xl leading-none tracking-wide uppercase"
+            style={{ fontFamily: "'Bebas Neue', sans-serif", color: "#d4ff00" }}
           >
-            {modality.number}
+            {modality.shortName}
           </span>
-          <div className="mb-1 flex flex-col">
-            <span
-              className="text-2xl leading-none tracking-wider text-white uppercase"
+
+          <div>
+            <h3
+              className="text-2xl leading-tight tracking-wide text-white uppercase"
               style={{ fontFamily: "'Bebas Neue', sans-serif" }}
             >
-              {modality.shortName}
+              {modality.name}
+            </h3>
+            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
+              {modality.tagline}
+            </p>
+          </div>
+
+          <p className="text-sm leading-relaxed text-white/70">{modality.description}</p>
+
+          <div className="flex items-center gap-2 border-y border-white/15 py-2.5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/45">
+              Circuito
+            </span>
+            <span className="text-sm font-semibold tabular-nums text-[#d4ff00]">
+              {modality.circuito}
             </span>
           </div>
-        </div>
 
-        {/* Full name */}
-        <h3
-          className="text-xl leading-tight tracking-wide text-white uppercase text-balance"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-        >
-          {modality.name}
-        </h3>
-
-        {/* Tagline */}
-        <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">
-          {modality.tagline}
-        </p>
-
-        {/* Divider */}
-        <div className="my-4 border-t border-white/10" />
-
-        {/* Description */}
-        <p className="text-sm leading-relaxed text-white/60 text-balance">{modality.description}</p>
-
-        {/* Circuito block — rounded-sm inside rounded-lg card */}
-        <div className="mt-4 rounded-sm bg-white/[0.05] px-3 py-2.5">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/35">
-            Circuito
-          </p>
-          <p className="mt-0.5 text-sm font-semibold tabular-nums text-white/80">
-            {modality.circuito}
-          </p>
-        </div>
-
-        {/* Characteristics */}
-        <ul className="mt-4 flex flex-col gap-2.5">
-          {modality.characteristics.map((char) => (
-            <li key={char} className="flex items-center gap-2.5 text-sm text-white/65">
-              <span
-                className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-white/50"
-                aria-hidden="true"
-              />
-              {char}
-            </li>
-          ))}
-        </ul>
-
-        {/* Spacer pushes categories to bottom */}
-        <div className="mt-auto" />
-
-        {/* Categories */}
-        <div className="mt-5 border-t border-white/10 pt-4">
-          <p className="mb-2.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/35">
-            Categorías
-          </p>
           <div className="flex flex-wrap gap-1.5">
             {modality.categories.map((cat) => (
               <Badge
                 key={cat}
                 variant="outline"
-                className="rounded-sm border-white/20 text-[10px] text-white/50 font-medium"
+                className="rounded-sm border-white/25 text-[10px] text-white/60 font-medium"
               >
                 {cat}
               </Badge>
             ))}
           </div>
+
+          <Link
+            to="/eventos"
+            className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+            style={{ background: "#d4ff00" }}
+          >
+            Inscríbete <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </m.div>
@@ -179,8 +173,22 @@ export function RaceFormatSection() {
   const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
 
   return (
-    <section className="w-full py-20 md:py-28" style={{ background: "#0d0d0d" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      className="relative w-full overflow-hidden py-20 md:py-28"
+      style={{ background: "linear-gradient(180deg, #000 0%, #0d0d0d 30%, #101204 100%)" }}
+    >
+      {/* Floating accent glows — motion-graphics backdrop */}
+      <div
+        aria-hidden="true"
+        className="animate-blob pointer-events-none absolute -left-48 top-24 h-[32rem] w-[32rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.09), transparent 70%)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="animate-blob-slow pointer-events-none absolute -right-56 bottom-0 h-[38rem] w-[38rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.06), transparent 70%)" }}
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <m.div
           ref={headerRef}
@@ -192,12 +200,11 @@ export function RaceFormatSection() {
           <Badge variant="outline" className="mb-5 border-white/25 text-white/55 tracking-[0.2em]">
             DESAFÍOS
           </Badge>
-          <h2
-            className="text-5xl leading-none tracking-wider text-white uppercase text-balance sm:text-6xl md:text-7xl lg:text-8xl"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-          >
-            ELIGE TU DESAFÍO
-          </h2>
+          <AnimatedTitle
+            text="ELIGE TU DESAFÍO"
+            accent={["DESAFÍO"]}
+            className="text-5xl text-white text-balance sm:text-6xl md:text-7xl lg:text-8xl"
+          />
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/50 sm:text-base text-balance">
             Tres modalidades diseñadas para diferentes formas de correr y competir.
           </p>

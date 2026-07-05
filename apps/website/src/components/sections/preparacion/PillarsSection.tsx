@@ -1,114 +1,107 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
-import { Zap, Dumbbell, Activity, Calendar } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
-import { Card, CardHeader, CardContent } from "@/components/ui/Card";
-import { fadeUp } from "@/lib/animation";
+import { m } from "framer-motion";
+import { Activity, Gauge, Dumbbell, Moon } from "lucide-react";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+
+const EASE = [0.23, 1, 0.32, 1] as const;
+const ACCENT = "#d4ff00";
 
 const pillars = [
   {
     number: "01",
     icon: Activity,
-    title: "Running",
+    title: "Base de carrera",
     description:
-      "Desarrolla tu base aeróbica. El running es la columna vertebral de HYROX: 8 km en total divididos en 8 tramos de 1 km.",
+      "Construye tu motor aeróbico. Kilómetros constantes a ritmo cómodo son los cimientos de cualquier desafío, del 5K a las 4 horas de Cada Paso Cuenta.",
   },
   {
     number: "02",
-    icon: Dumbbell,
-    title: "Fuerza Funcional",
+    icon: Gauge,
+    title: "Ritmo y estrategia",
     description:
-      "Cada estación requiere fuerza y resistencia muscular. Entrena los movimientos específicos: ski erg, sled, rowing, wall balls.",
+      "En runluv® no siempre gana quien sale más rápido. Aprende a administrar tu esfuerzo, leer el circuito y decidir cuándo apretar y cuándo resistir.",
   },
   {
     number: "03",
-    icon: Zap,
-    title: "Resistencia Mixta",
+    icon: Dumbbell,
+    title: "Fuerza y movilidad",
     description:
-      "La clave es la transición: tu cuerpo cambia entre running y ejercicio funcional 8 veces. Entrena bloques combinados.",
+      "Piernas fuertes y buena movilidad te protegen de lesiones y te sostienen en los kilómetros finales. Dos sesiones por semana marcan la diferencia.",
   },
   {
     number: "04",
-    icon: Calendar,
-    title: "Periodización",
+    icon: Moon,
+    title: "Descanso y nutrición",
     description:
-      "Planifica tu preparación con suficiente tiempo. Mínimo 12 semanas para principiantes, 8 semanas para atletas con base.",
+      "La preparación también se construye fuera de la pista. Duerme, come e hidrátate con intención: tu cuerpo se adapta cuando descansa, no cuando entrena.",
   },
 ];
 
 export function PillarsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section
-      className="w-full bg-[#0d0d0d] py-20 md:py-28"
+      className="relative w-full overflow-hidden bg-[#0d0d0d] py-20 md:py-28"
       style={{
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
         backgroundSize: "28px 28px",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <m.div
-          ref={ref}
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={0}
-          className="mb-14 text-center"
-        >
-          <Badge variant="yellow" className="mb-4" style={{ backgroundColor: "#ffffff" }}>
-            Metodología
-          </Badge>
-          <h2
-            className="text-5xl leading-none tracking-wider text-white uppercase sm:text-6xl md:text-7xl"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+      {/* Faded runner backdrop */}
+      <img
+        src="https://images.unsplash.com/photo-1502904550040-7534597429ae?w=1600&q=80&fit=crop&auto=format"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-[0.1] grayscale"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-transparent to-[#0d0d0d]" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-14 max-w-2xl">
+          <p
+            className="mb-4 text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
           >
-            LOS 4 PILARES DEL ENTRENAMIENTO HYROX
-          </h2>
-        </m.div>
+            Metodología
+          </p>
+          <AnimatedTitle
+            text="LOS 4 PILARES"
+            accent={["PILARES"]}
+            className="text-5xl text-white sm:text-6xl md:text-7xl"
+          />
+          <p className="mt-4 text-sm leading-relaxed text-white/55 sm:text-base">
+            La preparación que te lleva a la meta se apoya en cuatro pilares. Domínalos y llegarás
+            listo para cualquier desafío.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
               <m.div
                 key={pillar.number}
-                variants={fadeUp}
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                custom={idx + 1}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: EASE }}
                 whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.97 }}
+                className="group relative flex flex-col gap-3 overflow-hidden border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-[#d4ff00]"
               >
-                <Card
-                  className="h-full border-t-2 border-t-transparent transition-colors duration-200 hover:border-t-[#ffffff]"
-                  hover
+                <span
+                  className="pointer-events-none absolute -right-2 -top-4 select-none tabular-nums leading-none text-white/[0.05]"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "8rem" }}
+                  aria-hidden="true"
                 >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <Badge
-                          variant="yellow"
-                          className="shrink-0 px-2.5 py-1 text-sm font-bold"
-                          style={{ backgroundColor: "#ffffff" }}
-                        >
-                          {pillar.number}
-                        </Badge>
-                        <h3
-                          className="text-2xl leading-none tracking-wider text-white uppercase"
-                          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                        >
-                          {pillar.title}
-                        </h3>
-                      </div>
-                      <Icon className="h-6 w-6 shrink-0 text-[#ffffff]/70" aria-hidden="true" />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-sm leading-relaxed text-white/60">{pillar.description}</p>
-                  </CardContent>
-                </Card>
+                  {pillar.number}
+                </span>
+                <Icon size={26} style={{ color: ACCENT }} aria-hidden="true" />
+                <h3
+                  className="text-2xl uppercase leading-none tracking-wide text-white"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                >
+                  {pillar.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-white/60">{pillar.description}</p>
               </m.div>
             );
           })}

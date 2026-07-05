@@ -6,6 +6,7 @@
   --color-rl-card: #111111;
   --color-rl-card2: #1a1a1a;
   --color-rl-white: #ffffff;
+  --color-rl-accent: #d4ff00;
   --color-rl-muted: #666666;
   --color-rl-border: rgba(255, 255, 255, 0.08);
 
@@ -82,6 +83,11 @@
     text-wrap: pretty;
   }
 
+  ::selection {
+    background: #d4ff00;
+    color: #000;
+  }
+
   h1,
   h2,
   h3,
@@ -92,18 +98,13 @@
     text-wrap: balance;
   }
 
+  /* Hide the scrollbar — the top progress bar shows position instead */
+  html {
+    scrollbar-width: none; /* Firefox */
+  }
   ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #000;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    width: 0;
+    height: 0;
   }
 }
 
@@ -203,6 +204,45 @@
 
   .glow-white-sm {
     box-shadow: 0 0 24px rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── FLOATING GRADIENT BLOB (motion-graphics backdrop) ── */
+  @keyframes float-blob {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(60px, -40px, 0);
+    }
+  }
+  .animate-blob {
+    animation: float-blob 16s ease-in-out infinite alternate;
+  }
+  .animate-blob-slow {
+    animation: float-blob 24s ease-in-out infinite alternate-reverse;
+  }
+
+  /* ── SWEEP LINE (light travelling across a thin line) ── */
+  @keyframes line-sweep {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+  .animate-line-sweep {
+    animation: line-sweep 2.6s linear infinite;
+  }
+
+  /* ── MARQUEE (constant motion → linear) ── */
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 24s linear infinite;
   }
 
   .transition-smooth {

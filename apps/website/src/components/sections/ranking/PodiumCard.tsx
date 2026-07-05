@@ -27,12 +27,12 @@ export function PodiumCard({
       <div
         className={cn(
           "w-full flex flex-col items-center px-4 pt-5 pb-4 gap-1 border",
-          isWinner ? "border-white/30 bg-white/6" : "border-white/10 bg-white/2",
+          isWinner ? "border-[#d4ff00]/50 bg-[#d4ff00]/10" : "border-white/10 bg-white/2",
         )}
       >
         <div className="flex items-center gap-2 mb-1">
           <Flag code={r.flagCode} />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">
             {r.nationality}
           </span>
         </div>
@@ -72,11 +72,8 @@ export function PodiumCard({
       </div>
       {/* Step */}
       <div
-        className={cn(
-          "w-full flex items-center justify-center",
-          isWinner ? "bg-white" : "bg-white/12",
-        )}
-        style={{ height: stepH }}
+        className={cn("w-full flex items-center justify-center", !isWinner && "bg-white/12")}
+        style={{ height: stepH, background: isWinner ? "#d4ff00" : undefined }}
       >
         <span
           className={cn(isWinner ? "text-black" : "text-white/60")}

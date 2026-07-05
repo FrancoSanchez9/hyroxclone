@@ -39,7 +39,7 @@ export function ContactInfoPanel() {
             <Mail className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-0.5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-0.5">
               General
             </p>
             <p className="text-sm text-white group-hover:underline underline-offset-2">
@@ -56,7 +56,7 @@ export function ContactInfoPanel() {
             <MapPin className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-0.5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-0.5">
               Sede
             </p>
             <p className="text-sm text-white/80">Ciudad de México, México</p>
@@ -76,7 +76,7 @@ export function ContactInfoPanel() {
             <InstagramIcon />
           </span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-0.5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-0.5">
               Instagram
             </p>
             <p className="text-sm text-white group-hover:underline underline-offset-2">@runluvmx</p>

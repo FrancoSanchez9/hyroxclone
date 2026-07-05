@@ -30,7 +30,7 @@ export function LegalLayout({
 
       <section className="px-6 py-16 border-t border-[#2a2a2a]">
         <div className="mx-auto max-w-3xl">
-          <p className="mb-12 text-xs uppercase tracking-widest text-white/40">
+          <p className="mb-12 text-xs uppercase tracking-widest text-white/50">
             Última actualización: {lastUpdated}
           </p>
 

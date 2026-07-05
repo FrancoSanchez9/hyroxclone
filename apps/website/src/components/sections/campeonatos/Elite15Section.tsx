@@ -1,88 +1,107 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
-import { fadeUp } from "@/lib/animation";
+import { m } from "framer-motion";
+import { BarChart3, Medal } from "lucide-react";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+
+const EASE = [0.23, 1, 0.32, 1] as const;
+const ACCENT = "#d4ff00";
+
+const cards = [
+  {
+    Icon: BarChart3,
+    title: "Ranking runluv®",
+    body: "Consulta tus resultados oficiales, compara tu desempeño y sigue tu evolución durante la temporada. Ve tu posición dentro de tu modalidad, categoría y grupo de edad, y mide tu avance de una sede a otra.",
+  },
+  {
+    Icon: Medal,
+    title: "El desafío elite",
+    body: "En la Gran Final, los participantes elite competirán por el reconocimiento oficial como los corredores más destacados de la temporada. Velocidad, estrategia, resistencia y mentalidad reunidas en una sola vuelta.",
+  },
+];
 
 export function Elite15Section() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section className="w-full bg-[#0d0d0d] py-20 md:py-28">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <m.div
-          ref={ref}
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={0}
-          className="mb-12 text-center"
-        >
-          <Badge
-            variant="yellow"
-            className="mb-5"
-            style={{ backgroundColor: "#ffffff", color: "#000" }}
+    <section
+      className="relative w-full overflow-hidden py-20 md:py-28"
+      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%)" }}
+    >
+      <div
+        aria-hidden="true"
+        className="animate-blob-slow pointer-events-none absolute -left-48 bottom-0 h-[32rem] w-[32rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.06), transparent 70%)" }}
+      />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 max-w-2xl">
+          <p
+            className="mb-4 text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
           >
-            ELITE LUV
-          </Badge>
-          <h2
-            className="text-[clamp(3rem,9vw,6.5rem)] leading-none tracking-wider text-white uppercase"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-          >
-            EL NIVEL MÁS ALTO DE RUNLUV®
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/55 sm:text-base">
-            Elite LUV será la línea competitiva más alta de runluv®. A lo largo de la temporada, los
-            corredores con mejores resultados buscarán colocarse entre los primeros lugares del
-            ranking para acceder a la competencia elite de la Gran Final.
+            Elite LUV
           </p>
-        </m.div>
+          <AnimatedTitle
+            text="EL NIVEL MÁS ALTO"
+            accent={["ALTO"]}
+            className="text-5xl text-white sm:text-6xl md:text-7xl"
+          />
+          <p className="mt-4 text-sm leading-relaxed text-white/55 sm:text-base">
+            Elite LUV es la línea competitiva más alta de runluv®. Los corredores con mejores
+            resultados buscan colocarse en el ranking para acceder a la competencia elite de la Gran
+            Final.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[0.85fr_1fr]">
+          {/* Image panel */}
           <m.div
-            variants={fadeUp}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            custom={1}
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="relative min-h-[280px] overflow-hidden lg:min-h-full"
           >
-            <Card className="h-full border-t-2 p-8" style={{ borderTopColor: "#ffffff" }} hover>
-              <h3
-                className="mb-4 text-2xl uppercase tracking-wider text-white"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            <img
+              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=900&q=80&fit=crop&auto=format"
+              alt="Corredores de élite runluv®"
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-center grayscale"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6">
+              <p
+                className="text-4xl uppercase leading-none tracking-wide sm:text-5xl"
+                style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
               >
-                RANKING RUNLUV®
-              </h3>
-              <p className="text-sm leading-relaxed text-white/55">
-                El ranking runluv® permitirá a cada participante consultar sus resultados oficiales,
-                comparar su desempeño y seguir su evolución durante la temporada. Podrás ver tu
-                posición dentro de tu modalidad, categoría y grupo de edad, así como medir tu avance
-                de una sede a otra.
+                Elite LUV
               </p>
-            </Card>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-white/60">
+                La línea competitiva más alta
+              </p>
+            </div>
           </m.div>
 
-          <m.div
-            variants={fadeUp}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            custom={2}
-          >
-            <Card className="h-full border-t-2 p-8" style={{ borderTopColor: "#C0C0C0" }} hover>
-              <h3
-                className="mb-4 text-2xl uppercase tracking-wider text-white"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+          {/* Cards */}
+          <div className="grid grid-cols-1 gap-4">
+            {cards.map((card, i) => (
+              <m.div
+                key={card.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: i * 0.1, ease: EASE }}
+                whileHover={{ y: -4 }}
+                className="flex flex-col gap-4 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-8 transition-colors duration-200 hover:border-l-[#d4ff00]"
               >
-                EL DESAFÍO ELITE
-              </h3>
-              <p className="text-sm leading-relaxed text-white/55">
-                En la Gran Final, los participantes elite competirán por el reconocimiento oficial
-                como los corredores más destacados de la temporada dentro de su modalidad, categoría
-                y grupo de edad. Velocidad, estrategia, resistencia y mentalidad reunidas en una
-                sola vuelta.
-              </p>
-            </Card>
-          </m.div>
+                <card.Icon size={28} style={{ color: ACCENT }} aria-hidden="true" />
+                <h3
+                  className="text-2xl uppercase leading-none tracking-wide text-white"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                >
+                  {card.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-white/55">{card.body}</p>
+              </m.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

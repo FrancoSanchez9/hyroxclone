@@ -1,19 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHero } from "@/components/ui/PageHero";
 import { QuizSection } from "@/components/sections/tu-nivel/QuizSection";
 
 function TuNivelPage() {
-  return (
-    <>
-      <PageHero
-        inverted
-        badge="ENCUENTRA TU DESAFÍO"
-        title="¿CUÁL ES TU SIGUIENTE VUELTA?"
-        subtitle="Responde algunas preguntas y descubre qué desafío de runluv® se adapta mejor a ti."
-      />
-      <QuizSection />
-    </>
-  );
+  return <QuizSection />;
 }
 
 export const Route = createFileRoute("/tu-nivel")({

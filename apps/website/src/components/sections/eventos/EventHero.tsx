@@ -8,7 +8,7 @@ const EASE = [0.23, 1, 0.32, 1] as const;
 
 export function EventHero({ event }: { event: HyroxEvent }) {
   return (
-    <div className="relative h-[65vh] min-h-[420px] overflow-hidden">
+    <div className="relative h-[72vh] min-h-[560px] overflow-hidden">
       {event.imageUrl && (
         <img
           src={event.imageUrl}
@@ -41,7 +41,7 @@ export function EventHero({ event }: { event: HyroxEvent }) {
           {event.featured && (
             <span
               className="inline-block mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black px-2.5 py-1"
-              style={{ background: "#ffffff" }}
+              style={{ background: "#d4ff00" }}
             >
               Destacado
             </span>
@@ -67,12 +67,28 @@ export function EventHero({ event }: { event: HyroxEvent }) {
             {event.categories.map((cat) => (
               <span
                 key={cat}
-                className="text-[10px] font-bold uppercase tracking-widest text-black px-2.5 py-1"
-                style={{ background: "#ffffff" }}
+                className="text-[10px] font-bold uppercase tracking-widest text-white/80 border border-white/25 px-2.5 py-1"
               >
                 {cat}
               </span>
             ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <a
+              href="#registro"
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+              style={{ background: "#d4ff00", boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
+            >
+              ¡Regístrate ahora!
+            </a>
+            <a
+              href="#detalles"
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96]"
+            >
+              Más información
+            </a>
           </div>
         </m.div>
       </div>

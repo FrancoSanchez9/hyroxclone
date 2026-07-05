@@ -1,131 +1,119 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
-import { Card, CardHeader, CardContent } from "@/components/ui/Card";
-import { fadeUp } from "@/lib/animation";
+import { m } from "framer-motion";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+
+const EASE = [0.23, 1, 0.32, 1] as const;
+const ACCENT = "#d4ff00";
 
 const phases = [
   {
     range: "Semanas 1–4",
     name: "Base",
-    color: "#ffffff",
     focuses: [
-      "Volumen de running progresivo",
-      "Aprender los movimientos de cada estación",
-      "2–3 sesiones de fuerza funcional por semana",
-      "Técnica antes que intensidad",
+      "Volumen de carrera progresivo a ritmo cómodo",
+      "2–3 sesiones de fuerza por semana",
+      "Trabajo de movilidad y técnica de zancada",
+      "Constancia antes que intensidad",
     ],
   },
   {
     range: "Semanas 5–8",
     name: "Construcción",
-    color: "#e0e0e0",
     focuses: [
-      "Incrementar intensidad en running",
-      "Workouts combinados (run + estación)",
-      "Cargas progresivas en estaciones de sled",
-      "Introducir simulacros de carrera cortos",
+      "Series y cambios de ritmo",
+      "Tiradas largas para resistencia",
+      "Simula tu desafío: ritmo objetivo del evento",
+      "Ajusta hidratación y nutrición en tiradas largas",
     ],
   },
   {
     range: "Semanas 9–12",
     name: "Pico",
-    color: "#cccccc",
     focuses: [
-      "Entrenamiento específico de carrera",
-      "Simulacros completos de HYROX",
-      "Semana 11: carga alta final",
-      "Semana 12: taper, reducción de volumen",
+      "Entrenamiento específico a ritmo de carrera",
+      "Ensayo completo del circuito o distancia",
+      "Semana 11: última carga fuerte",
+      "Semana 12: taper — baja volumen, llega fresco",
     ],
   },
 ];
 
 export function TimelineSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section
       className="w-full bg-[#0a0a0a] py-20 md:py-28"
       style={{
         backgroundImage:
-          "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.018) 18px, rgba(255,255,255,0.018) 19px)",
+          "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.02) 119px, rgba(255,255,255,0.02) 120px)",
       }}
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <m.div
-          ref={ref}
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          custom={0}
-          className="mb-14 text-center"
-        >
-          <Badge variant="dark" className="mb-4 border border-[#2a2a2a]">
-            Plan de Entrenamiento
-          </Badge>
-          <h2
-            className="text-5xl leading-none tracking-wider text-white uppercase sm:text-6xl md:text-7xl"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        <div className="mb-14 max-w-2xl">
+          <p
+            className="mb-4 text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
           >
-            TU PLAN DE 12 SEMANAS
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/50 sm:text-base">
-            Tres fases progresivas diseñadas para llevarte del entrenamiento base hasta el pico de
-            rendimiento el día de la carrera.
+            Plan de entrenamiento
           </p>
-        </m.div>
+          <AnimatedTitle
+            text="TU PLAN DE 12 SEMANAS"
+            accent={["SEMANAS"]}
+            className="text-4xl text-white sm:text-5xl md:text-6xl"
+          />
+          <p className="mt-4 text-sm leading-relaxed text-white/55 sm:text-base">
+            Tres fases progresivas para llevarte del entrenamiento base al pico de forma el día del
+            evento.
+          </p>
+        </div>
 
-        <div className="relative flex flex-col gap-6 sm:flex-row">
+        <div className="relative flex flex-col gap-4 sm:flex-row">
           <div
-            className="absolute left-6 top-8 hidden h-[calc(100%-4rem)] w-px bg-gradient-to-b from-[#ffffff]/30 via-[#e0e0e0]/30 to-[#cccccc]/30 sm:block"
+            className="absolute left-6 top-8 hidden h-[calc(100%-4rem)] w-px sm:block"
+            style={{
+              background: "linear-gradient(180deg, rgba(212,255,0,0.5), rgba(212,255,0,0.15))",
+            }}
             aria-hidden="true"
           />
 
           {phases.map((phase, idx) => (
             <m.div
               key={phase.name}
-              variants={fadeUp}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              custom={idx + 1}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: idx * 0.1, ease: EASE }}
               className="relative flex-1"
             >
               <div
                 className="absolute -left-[1.35rem] top-6 hidden h-3 w-3 rounded-full sm:block"
-                style={{ backgroundColor: phase.color }}
+                style={{ background: ACCENT }}
                 aria-hidden="true"
               />
-              <Card className="h-full" hover>
-                <CardHeader className="pb-3">
-                  <p
-                    className="text-xs font-semibold uppercase tracking-widest"
-                    style={{ color: phase.color }}
-                  >
-                    {phase.range}
-                  </p>
-                  <h3
-                    className="text-3xl leading-none tracking-wider text-white uppercase"
-                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                  >
-                    {phase.name}
-                  </h3>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <ul className="space-y-2">
-                    {phase.focuses.map((focus) => (
-                      <li key={focus} className="flex items-start gap-2">
-                        <span
-                          className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                          style={{ backgroundColor: phase.color }}
-                          aria-hidden="true"
-                        />
-                        <span className="text-sm leading-relaxed text-white/65">{focus}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <div className="flex h-full flex-col border border-white/10 bg-white/[0.03] p-6">
+                <p
+                  className="text-xs font-bold uppercase tracking-widest"
+                  style={{ color: ACCENT }}
+                >
+                  {phase.range}
+                </p>
+                <h3
+                  className="mt-1 text-3xl uppercase leading-none tracking-wide text-white"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                >
+                  {phase.name}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {phase.focuses.map((focus) => (
+                    <li key={focus} className="flex items-start gap-2.5">
+                      <span
+                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                        style={{ background: ACCENT }}
+                        aria-hidden="true"
+                      />
+                      <span className="text-sm leading-relaxed text-white/65">{focus}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </m.div>
           ))}
         </div>

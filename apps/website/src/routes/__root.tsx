@@ -4,7 +4,6 @@ import { LazyMotion, MotionConfig, domAnimation, useReducedMotion } from "framer
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
 
 function RootLayout() {
   const shouldReduceMotion = useReducedMotion();
@@ -22,7 +21,6 @@ function RootLayout() {
         <main id="main-content">
           <Outlet />
         </main>
-        <NewsletterSection />
         <Footer />
         <CookieBanner />
         <Toaster

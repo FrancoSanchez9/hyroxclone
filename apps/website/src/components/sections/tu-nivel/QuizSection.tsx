@@ -1,7 +1,8 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { m, AnimatePresence, type Variants } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, RotateCcw, ChevronRight } from "lucide-react";
+import { ArrowRight, RotateCcw, ChevronLeft, Share2 } from "lucide-react";
+import { toast } from "sonner";
 import { EASE } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { QuizOption } from "./QuizOption";
@@ -457,22 +458,195 @@ function getArchetype(brujula: Record<Direction, number>, userLevel: number): Ar
 // ─── Quiz Component ───────────────────────────────────────────────────────────
 
 const TOTAL_QUESTIONS = 14;
+const ACCENT = "#d4ff00";
+
+// ─── Share card (Spotify-Wrapped-style 9:16 story image) ─────────────────────
+
+interface ShareCardData {
+  direction: string;
+  bars: { label: string; pct: number }[];
+  archetypeName: string;
+  phrase: string;
+  challengeName: string;
+  affinity: number;
+  levelLabel: string;
+}
+
+function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+  const words = text.split(" ");
+  const lines: string[] = [];
+  let line = "";
+  for (const w of words) {
+    const test = line ? `${line} ${w}` : w;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+async function generateShareImage(data: ShareCardData): Promise<Blob> {
+  await Promise.all([
+    document.fonts.load("100px 'Bebas Neue'"),
+    document.fonts.load("bold 32px Inter"),
+  ]);
+
+  const W = 1080;
+  const H = 1920;
+  const M = 80; // margin
+  const canvas = document.createElement("canvas");
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D & { letterSpacing: string };
+
+  // Background — dark gradient + lane lines + lime glow
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, "#000000");
+  bg.addColorStop(1, "#101204");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  for (let x = 120; x < W; x += 120) ctx.fillRect(x, 0, 2, H);
+
+  const glow = ctx.createRadialGradient(W * 0.88, H * 0.12, 0, W * 0.88, H * 0.12, 520);
+  glow.addColorStop(0, "rgba(212,255,0,0.16)");
+  glow.addColorStop(1, "rgba(212,255,0,0)");
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  // Header
+  ctx.letterSpacing = "10px";
+  ctx.fillStyle = ACCENT;
+  ctx.font = "bold 34px Inter, sans-serif";
+  ctx.fillText("MI ADN RUNLUV®", M, 190);
+  ctx.letterSpacing = "0px";
+
+  // Direction — the giant lime payoff
+  ctx.font = "190px 'Bebas Neue', sans-serif";
+  ctx.fillStyle = ACCENT;
+  ctx.fillText(data.direction, M, 400);
+
+  // ADN bars
+  let y = 520;
+  ctx.letterSpacing = "4px";
+  ctx.font = "bold 28px Inter, sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.4)";
+  ctx.fillText("TU ADN RUNLUV®", M, y);
+  ctx.letterSpacing = "0px";
+  y += 60;
+  const barW = W - M * 2;
+  data.bars.forEach((bar, i) => {
+    ctx.font = "bold 30px Inter, sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillText(bar.label, M, y);
+    const pctText = `${Math.round(bar.pct)}%`;
+    ctx.fillStyle = i === 0 ? ACCENT : "rgba(255,255,255,0.5)";
+    ctx.fillText(pctText, W - M - ctx.measureText(pctText).width, y);
+    ctx.fillStyle = "rgba(255,255,255,0.1)";
+    ctx.fillRect(M, y + 18, barW, 10);
+    ctx.fillStyle = i === 0 ? ACCENT : "rgba(255,255,255,0.8)";
+    ctx.fillRect(M, y + 18, barW * (bar.pct / 100), 10);
+    y += 96;
+  });
+
+  // Archetype
+  y += 60;
+  ctx.letterSpacing = "4px";
+  ctx.font = "bold 28px Inter, sans-serif";
+  ctx.fillStyle = ACCENT;
+  ctx.fillText("MI ARQUETIPO", M, y);
+  ctx.letterSpacing = "0px";
+  y += 100;
+  ctx.font = "110px 'Bebas Neue', sans-serif";
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText(data.archetypeName, M, y);
+  y += 56;
+  ctx.font = "italic 32px Inter, sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  for (const line of wrapLines(ctx, `"${data.phrase}"`, W - M * 2)) {
+    ctx.fillText(line, M, y);
+    y += 44;
+  }
+
+  // Challenge — inverted lime card
+  const cardY = 1440;
+  const cardH = 330;
+  ctx.fillStyle = ACCENT;
+  ctx.fillRect(M, cardY, W - M * 2, cardH);
+  ctx.letterSpacing = "4px";
+  ctx.font = "bold 28px Inter, sans-serif";
+  ctx.fillStyle = "rgba(0,0,0,0.6)";
+  ctx.fillText(`MI DESAFÍO — ${data.affinity}% DE AFINIDAD`, M + 48, cardY + 76);
+  ctx.letterSpacing = "0px";
+  ctx.font = "140px 'Bebas Neue', sans-serif";
+  ctx.fillStyle = "#000000";
+  ctx.fillText(data.challengeName, M + 48, cardY + 210);
+  ctx.letterSpacing = "4px";
+  ctx.font = "bold 28px Inter, sans-serif";
+  ctx.fillStyle = "rgba(0,0,0,0.6)";
+  ctx.fillText(data.levelLabel.toUpperCase(), M + 48, cardY + 276);
+  ctx.letterSpacing = "0px";
+
+  // Footer
+  ctx.letterSpacing = "6px";
+  ctx.font = "bold 28px Inter, sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.45)";
+  ctx.fillText("¿CUÁL ES TU SIGUIENTE VUELTA?", M, 1850);
+  ctx.fillStyle = ACCENT;
+  const runluvText = "RUNLUV.MX";
+  ctx.fillText(runluvText, W - M - ctx.measureText(runluvText).width, 1850);
+  ctx.letterSpacing = "0px";
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("canvas.toBlob failed"))), "image/png");
+  });
+}
 
 const slideVariants: Variants = {
-  enter: { opacity: 0, y: 20 },
-  center: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
+  enter: { opacity: 0, x: 48, filter: "blur(4px)" },
+  center: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.45, ease: EASE, staggerChildren: 0.08 },
+  },
+  exit: { opacity: 0, x: -48, filter: "blur(4px)", transition: { duration: 0.22, ease: EASE } },
+};
+
+const sectionV: Variants = {
+  enter: { opacity: 0, y: 24 },
+  center: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 
 export function QuizSection() {
+  const [started, setStarted] = useState(false); // intro screen before question 1
   const [step, setStep] = useState(0); // 0-13 = questions, 14 = result
-  const [brujulaAnswers, setBrujulaAnswers] = useState<(LetterOption | null)[]>(
+  const [brujulaAnswers, setBrujulaAnswers] = useState<(LetterOption | null)[]>(() =>
     Array(7).fill(null),
   );
-  const [nivelAnswers, setNivelAnswers] = useState<(number | null)[]>(Array(7).fill(null));
+  const [nivelAnswers, setNivelAnswers] = useState<(number | null)[]>(() => Array(7).fill(null));
 
-  const currentAnswer: LetterOption | null | number =
-    step < 7 ? brujulaAnswers[step] : nivelAnswers[step - 7];
+  // Auto-advance: selecting an answer moves to the next question after a beat,
+  // long enough to see the lime selection land.
+  const advanceTimer = useRef<number | null>(null);
+  const clearAdvance = useCallback(() => {
+    if (advanceTimer.current !== null) {
+      window.clearTimeout(advanceTimer.current);
+      advanceTimer.current = null;
+    }
+  }, []);
+  const scheduleAdvance = useCallback(() => {
+    clearAdvance();
+    advanceTimer.current = window.setTimeout(() => {
+      setStep((s) => Math.min(s + 1, TOTAL_QUESTIONS));
+    }, 450);
+  }, [clearAdvance]);
+  useEffect(() => clearAdvance, [clearAdvance]);
 
   const handleSelectBrujula = useCallback(
     (letter: LetterOption) => {
@@ -481,8 +655,9 @@ export function QuizSection() {
         next[step] = letter;
         return next;
       });
+      scheduleAdvance();
     },
-    [step],
+    [step, scheduleAdvance],
   );
 
   const handleSelectNivel = useCallback(
@@ -492,23 +667,23 @@ export function QuizSection() {
         next[step - 7] = score;
         return next;
       });
+      scheduleAdvance();
     },
-    [step],
+    [step, scheduleAdvance],
   );
 
-  const handleNext = useCallback(() => {
-    if (step < TOTAL_QUESTIONS - 1) {
-      setStep((s) => s + 1);
-    } else {
-      setStep(TOTAL_QUESTIONS); // show result
-    }
-  }, [step]);
+  const handleBack = useCallback(() => {
+    clearAdvance();
+    setStep((s) => Math.max(0, s - 1));
+  }, [clearAdvance]);
 
   const handleReset = useCallback(() => {
+    clearAdvance();
     setStep(0);
+    setStarted(false);
     setBrujulaAnswers(Array(7).fill(null));
     setNivelAnswers(Array(7).fill(null));
-  }, []);
+  }, [clearAdvance]);
 
   // ── Result calculation ──
   const result = useMemo(() => {
@@ -535,261 +710,482 @@ export function QuizSection() {
     };
   }, [step, brujulaAnswers, nivelAnswers]);
 
+  const handleShare = useCallback(async () => {
+    if (!result) return;
+    const text = `Mi ADN runluv®: ${DIRECTION_LABELS[result.topDirection]} · Arquetipo: ${result.archetype.name} · Mi desafío: ${result.primary.name} (${result.primary.affinity}% de afinidad)`;
+
+    try {
+      const blob = await generateShareImage({
+        direction: DIRECTION_LABELS[result.topDirection],
+        bars: result.sortedBrujula.map(([dir, pct]) => ({
+          label: DIRECTION_LABELS[dir as Direction],
+          pct,
+        })),
+        archetypeName: result.archetype.name,
+        phrase: result.archetype.phrase,
+        challengeName: result.primary.name,
+        affinity: result.primary.affinity,
+        levelLabel: result.nivelInfo.label,
+      });
+      const file = new File([blob], "mi-adn-runluv.png", { type: "image/png" });
+
+      if (navigator.canShare?.({ files: [file] })) {
+        // Mobile: native sheet → WhatsApp, Instagram Stories, etc.
+        await navigator.share({ files: [file], title: "Mi resultado runluv®", text });
+      } else {
+        // Desktop: download the story image
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "mi-adn-runluv.png";
+        a.click();
+        URL.revokeObjectURL(url);
+        toast("Imagen descargada — súbela a tus historias");
+      }
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return; // user closed the sheet
+      // Last resort: text to clipboard
+      await navigator.clipboard.writeText(`${text} — ${window.location.href}`);
+      toast("Resultado copiado al portapapeles");
+    }
+  }, [result]);
+
   const isBrujula = step < 7;
   const nivelIndex = step - 7;
 
   return (
-    <section className="w-full bg-[#0a0a0a] py-20 md:py-28">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-        <AnimatePresence mode="wait" initial={false}>
-          {step < TOTAL_QUESTIONS ? (
-            <m.div
-              key={`question-${step}`}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              {/* Progress bar */}
-              <div className="mb-8">
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-white/30">
-                    {isBrujula
-                      ? `Brújula — pregunta ${step + 1} de 7`
-                      : `Tu nivel — pregunta ${nivelIndex + 1} de 7`}
-                  </span>
-                  <span className="tabular-nums text-xs text-white/30">
-                    {step + 1} / {TOTAL_QUESTIONS}
-                  </span>
-                </div>
-                <div className="h-[2px] w-full bg-white/10">
-                  <m.div
-                    className="h-full bg-white"
-                    initial={false}
-                    animate={{ width: `${((step + 1) / TOTAL_QUESTIONS) * 100}%` }}
-                    transition={{ duration: 0.4, ease: EASE }}
-                  />
-                </div>
-              </div>
-
-              {/* Question */}
-              <p className="mb-7 text-balance text-xl font-medium leading-snug text-white sm:text-2xl">
-                {isBrujula ? BRUJULA_QUESTIONS[step].text : NIVEL_QUESTIONS[nivelIndex].text}
-              </p>
-
-              {/* Options */}
-              <div role="radiogroup" className="space-y-2">
-                {isBrujula
-                  ? BRUJULA_QUESTIONS[step].options.map((opt) => (
-                      <QuizOption
-                        key={opt.letter}
-                        id={opt.letter}
-                        label={`${opt.letter}) ${opt.label}`}
-                        selected={brujulaAnswers[step] === opt.letter}
-                        onSelect={handleSelectBrujula}
-                      />
-                    ))
-                  : NIVEL_QUESTIONS[nivelIndex].options.map((opt) => (
-                      <QuizOption
-                        key={opt.letter}
-                        id={String(opt.score)}
-                        label={`${opt.letter}) ${opt.label}`}
-                        selected={nivelAnswers[nivelIndex] === opt.score}
-                        onSelect={(s) => handleSelectNivel(Number(s))}
-                      />
-                    ))}
-              </div>
-
-              {/* Next button */}
+    <section
+      className="relative flex min-h-screen w-full items-center overflow-hidden pb-20 pt-32 md:pt-36"
+      style={{ background: "linear-gradient(160deg, #000 0%, #0a0a0a 45%, #101204 100%)" }}
+    >
+      {/* Floating accent glows */}
+      <div
+        aria-hidden="true"
+        className="animate-blob pointer-events-none absolute -left-56 top-1/4 h-[34rem] w-[34rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.08), transparent 70%)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="animate-blob-slow pointer-events-none absolute -right-56 bottom-0 h-[38rem] w-[38rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.06), transparent 70%)" }}
+      />
+      {/* Track lanes — faint verticals like lane lines */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.03) 119px, rgba(255,255,255,0.03) 120px)",
+        }}
+      />
+      <div className="relative z-10 w-full">
+        <div
+          className={cn(
+            "mx-auto px-4 sm:px-6 lg:px-8",
+            !started || step < TOTAL_QUESTIONS ? "max-w-3xl" : "max-w-5xl",
+          )}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {!started ? (
               <m.div
-                initial={false}
-                animate={currentAnswer !== null ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                className="mt-6"
+                key="intro"
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
               >
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  disabled={currentAnswer === null}
-                  className={cn(
-                    "flex w-full items-center justify-center gap-2 border px-6 py-4 text-sm font-semibold uppercase tracking-wider transition-all duration-150 active:scale-[0.96]",
-                    currentAnswer !== null
-                      ? "border-white bg-white text-black hover:bg-white/90"
-                      : "pointer-events-none border-white/10 bg-white/5 text-white/20",
-                  )}
+                <m.p
+                  variants={sectionV}
+                  className="mb-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em]"
+                  style={{ color: ACCENT }}
                 >
-                  {step === TOTAL_QUESTIONS - 1 ? "Ver mi resultado" : "Siguiente"}
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </m.div>
-            </m.div>
-          ) : result ? (
-            <m.div
-              key="result"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="space-y-10"
-            >
-              {/* ── 1. Brújula ── */}
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/40">
-                  Tu brújula apunta a
-                </p>
-                <p
-                  className="text-balance text-6xl leading-none tracking-wider text-white uppercase sm:text-7xl"
+                  <span
+                    className="h-2 w-2 animate-pulse rounded-full"
+                    style={{ background: ACCENT }}
+                  />
+                  En tus marcas · runluv®
+                </m.p>
+
+                <h1
+                  aria-label="Descubre hasta dónde puedes llegar"
+                  className="uppercase leading-[0.9] tracking-tight text-white"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  {DIRECTION_LABELS[result.topDirection]}
-                </p>
-              </div>
-
-              {/* ── 2. ADN runluv® ── */}
-              <div>
-                <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/40">
-                  Tu ADN runluv®
-                </p>
-                <div className="space-y-3">
-                  {result.sortedBrujula.map(([dir, pct], i) => (
-                    <m.div
-                      key={dir}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1, duration: 0.35, ease: EASE }}
-                    >
-                      <div className="mb-1 flex items-center justify-between">
-                        <span className="text-xs font-semibold uppercase tracking-widest text-white/70">
-                          {DIRECTION_LABELS[dir as Direction]}
-                        </span>
-                        <span className="tabular-nums text-xs text-white/50">
-                          {Math.round(pct)}%
-                        </span>
-                      </div>
-                      <div className="h-[3px] w-full bg-white/10">
-                        <m.div
-                          className="h-full bg-white"
-                          initial={{ width: "0%" }}
-                          animate={{ width: `${pct}%` }}
-                          transition={{ delay: i * 0.1 + 0.1, duration: 0.7, ease: EASE }}
-                        />
-                      </div>
-                    </m.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── 3. Arquetipo ── */}
-              <div className="border border-white/10 bg-white/[0.03] p-6">
-                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/40">
-                  Tu arquetipo
-                </p>
-                <p
-                  className="mb-3 text-4xl leading-none tracking-wider text-white uppercase sm:text-5xl"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                >
-                  {result.archetype.name}
-                </p>
-                <p className="mb-3 text-pretty text-sm font-semibold leading-relaxed text-white">
-                  {result.archetype.headline}
-                </p>
-                <p className="mb-4 text-pretty text-sm leading-relaxed text-white/60">
-                  {result.archetype.message}
-                </p>
-                <p className="border-l-2 border-white/20 pl-4 text-sm italic text-white/50">
-                  "{result.archetype.phrase}"
-                </p>
-              </div>
-
-              {/* ── 4. Tu fortaleza (Nivel) ── */}
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/40">
-                  Tu fortaleza
-                </p>
-                <p
-                  className="mb-1 text-3xl leading-none tracking-wider text-white uppercase sm:text-4xl"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                >
-                  {result.nivelInfo.label}
-                </p>
-                <p className="text-pretty text-sm leading-relaxed text-white/60">
-                  {result.nivelInfo.desc}
-                </p>
-              </div>
-
-              {/* ── 5. Tu desafío ── */}
-              <div className="border border-white bg-white/5 p-6">
-                <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/40">
-                  Tu desafío
-                </p>
-                <p
-                  className="mb-3 text-5xl leading-none tracking-wider text-white uppercase sm:text-6xl"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                >
-                  {result.primary.name}
-                </p>
-                <p className="text-pretty text-sm leading-relaxed text-white/60">
-                  {MODAL_DESCRIPTIONS[result.primary.key]}
-                </p>
-              </div>
-
-              {/* ── 6. También podrías disfrutar ── */}
-              {result.alternatives.length > 0 && (
-                <div>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
-                    También podrías disfrutar
-                  </p>
-                  <div className="space-y-2">
-                    {result.alternatives.map((alt) => (
-                      <div
-                        key={alt.key}
-                        className="flex items-center justify-between border border-white/10 px-4 py-3"
+                  {[
+                    { text: "DESCUBRE HASTA DÓNDE", accent: false },
+                    { text: "PUEDES LLEGAR", accent: true },
+                  ].map((line, i) => (
+                    <span key={line.text} aria-hidden="true" className="block overflow-hidden">
+                      <m.span
+                        className="block text-[clamp(2.6rem,8vw,5.5rem)]"
+                        initial={{ y: "110%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.7, ease: EASE, delay: 0.1 + i * 0.1 }}
+                        style={line.accent ? { color: ACCENT } : undefined}
                       >
-                        <span className="text-sm font-medium text-white">{alt.name}</span>
-                        <span className="tabular-nums text-xs text-white/40">{alt.affinity}%</span>
-                      </div>
-                    ))}
+                        {line.text}
+                      </m.span>
+                    </span>
+                  ))}
+                </h1>
+
+                <m.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
+                  className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg"
+                >
+                  Responde algunas preguntas y descubre tu arquetipo de corredor, tu ADN runluv® y
+                  el desafío ideal para tu momento. No hay respuestas correctas — solo la tuya.
+                </m.p>
+
+                <m.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
+                  className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+                >
+                  {[
+                    { value: "14", label: "preguntas" },
+                    { value: "~2", label: "minutos" },
+                    { value: "1", label: "desafío para ti" },
+                  ].map((s) => (
+                    <div key={s.label} className="flex items-baseline gap-2">
+                      <span
+                        className="text-3xl leading-none tabular-nums"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
+                      >
+                        {s.value}
+                      </span>
+                      <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
+                        {s.label}
+                      </span>
+                    </div>
+                  ))}
+                </m.div>
+
+                {/* Animated start line */}
+                <m.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, ease: EASE, delay: 0.55 }}
+                  className="relative mt-8 h-px w-full max-w-md overflow-hidden bg-white/10"
+                  aria-hidden="true"
+                >
+                  <div
+                    className="animate-line-sweep absolute inset-y-0 w-1/3"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${ACCENT}, transparent)`,
+                    }}
+                  />
+                </m.div>
+
+                <m.button
+                  type="button"
+                  onClick={() => setStarted(true)}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}
+                  className="mt-10 inline-flex items-center gap-2 px-9 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+                  style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.3)" }}
+                >
+                  Comenzar test
+                  <ArrowRight className="h-4 w-4" />
+                </m.button>
+              </m.div>
+            ) : step < TOTAL_QUESTIONS ? (
+              <m.div
+                key={`question-${step}`}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                {/* Progress */}
+                <div className="mb-12">
+                  <div className="mb-4 flex items-center justify-between">
+                    <span
+                      className="border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.2em]"
+                      style={{ borderColor: "rgba(212,255,0,0.4)", color: ACCENT }}
+                    >
+                      {isBrujula ? "01 — Tu motor" : "02 — Tu nivel"}
+                    </span>
+                    <span
+                      className="tabular-nums text-2xl leading-none uppercase text-white/50"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                    >
+                      KM {step + 1} <span className="text-white/25">/ {TOTAL_QUESTIONS}</span>
+                    </span>
+                  </div>
+                  <div className="h-1.5 w-full bg-white/10">
+                    <m.div
+                      className="h-full"
+                      style={{ background: ACCENT }}
+                      initial={false}
+                      animate={{ width: `${((step + 1) / TOTAL_QUESTIONS) * 100}%` }}
+                      transition={{ duration: 0.5, ease: EASE }}
+                    />
                   </div>
                 </div>
-              )}
 
-              {/* ── 7. Frase de cierre ── */}
-              <div className="border-t border-white/10 pt-8 text-center">
-                <p
-                  className="text-balance text-2xl leading-snug tracking-wider text-white uppercase sm:text-3xl"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                >
-                  {result.archetype.closes}
-                </p>
-              </div>
+                {/* Question */}
+                <div className="mb-10 flex items-start gap-6">
+                  <span
+                    className="shrink-0 tabular-nums text-[5.5rem] leading-[0.8] sm:text-[7rem]"
+                    style={{
+                      fontFamily: "'Bebas Neue', sans-serif",
+                      color: "transparent",
+                      WebkitTextStroke: "2px rgba(212,255,0,0.5)",
+                    }}
+                    aria-hidden="true"
+                  >
+                    {String(step + 1).padStart(2, "0")}
+                  </span>
+                  <h2
+                    className="text-balance pt-1 text-4xl leading-[0.95] tracking-wide text-white uppercase sm:text-5xl md:text-6xl"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  >
+                    {isBrujula ? BRUJULA_QUESTIONS[step].text : NIVEL_QUESTIONS[nivelIndex].text}
+                  </h2>
+                </div>
 
-              {/* ── 8. Botones ── */}
-              <div className="flex flex-col gap-3">
-                <Link
-                  to="/eventos"
-                  className="flex items-center justify-center gap-2 bg-white px-6 py-4 text-sm font-semibold uppercase tracking-wider text-black transition-all duration-150 active:scale-[0.96] hover:bg-white/90"
-                >
-                  Inscribirme
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/la-carrera"
-                  className="flex items-center justify-center gap-2 border border-white px-6 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-all duration-150 active:scale-[0.96] hover:bg-white/5"
-                >
-                  Descubrir otros desafíos
-                </Link>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="flex items-center justify-center gap-2 px-6 py-3 text-sm text-white/40 transition-all duration-150 active:scale-[0.96] hover:text-white/70"
-                >
-                  <RotateCcw className="h-3.5 w-3.5" />
-                  Volver a empezar
-                </button>
-              </div>
-            </m.div>
-          ) : null}
-        </AnimatePresence>
+                {/* Options — selecting auto-advances */}
+                <div role="radiogroup" className="space-y-3">
+                  {isBrujula
+                    ? BRUJULA_QUESTIONS[step].options.map((opt, i) => (
+                        <QuizOption
+                          key={opt.letter}
+                          id={opt.letter}
+                          letter={opt.letter}
+                          label={opt.label}
+                          index={i}
+                          selected={brujulaAnswers[step] === opt.letter}
+                          onSelect={handleSelectBrujula}
+                        />
+                      ))
+                    : NIVEL_QUESTIONS[nivelIndex].options.map((opt, i) => (
+                        <QuizOption
+                          key={opt.letter}
+                          id={String(opt.score)}
+                          letter={opt.letter}
+                          label={opt.label}
+                          index={i}
+                          selected={nivelAnswers[nivelIndex] === opt.score}
+                          onSelect={(s) => handleSelectNivel(Number(s))}
+                        />
+                      ))}
+                </div>
+
+                {/* Back */}
+                <div className="mt-8 flex min-h-8 items-center">
+                  {step > 0 && (
+                    <button
+                      type="button"
+                      onClick={handleBack}
+                      className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-white/50 transition-colors duration-150 hover:text-white active:scale-[0.96]"
+                    >
+                      <ChevronLeft className="h-3.5 w-3.5" />
+                      Anterior
+                    </button>
+                  )}
+                </div>
+              </m.div>
+            ) : result ? (
+              <m.div
+                key="result"
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="space-y-8"
+              >
+                {/* ── Row 1: Brújula + Fortaleza | ADN ── */}
+                <div className="grid gap-8 lg:grid-cols-2 lg:items-end">
+                  <m.div variants={sectionV}>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/50">
+                      Corres para
+                    </p>
+                    <p
+                      className="text-balance text-6xl leading-none tracking-wider uppercase sm:text-7xl"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
+                    >
+                      {DIRECTION_LABELS[result.topDirection]}
+                    </p>
+                    <div className="mt-6 border-t border-white/10 pt-4">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/50">
+                        Tu fortaleza
+                      </p>
+                      <p
+                        className="text-2xl leading-none tracking-wider text-white uppercase sm:text-3xl"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                      >
+                        {result.nivelInfo.label}
+                      </p>
+                      <p className="mt-1 text-pretty text-sm leading-relaxed text-white/60">
+                        {result.nivelInfo.desc}
+                      </p>
+                    </div>
+                  </m.div>
+
+                  <m.div variants={sectionV}>
+                    <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/50">
+                      Tu ADN runluv®
+                    </p>
+                    <div className="space-y-3">
+                      {result.sortedBrujula.map(([dir, pct], i) => (
+                        <m.div
+                          key={dir}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1, duration: 0.35, ease: EASE }}
+                        >
+                          <div className="mb-1 flex items-center justify-between">
+                            <span className="text-xs font-semibold uppercase tracking-widest text-white/70">
+                              {DIRECTION_LABELS[dir as Direction]}
+                            </span>
+                            <span className="tabular-nums text-xs text-white/50">
+                              {Math.round(pct)}%
+                            </span>
+                          </div>
+                          <div className="h-[3px] w-full bg-white/10">
+                            <m.div
+                              className="h-full"
+                              style={{ background: i === 0 ? ACCENT : "rgba(255,255,255,0.8)" }}
+                              initial={{ width: "0%" }}
+                              animate={{ width: `${pct}%` }}
+                              transition={{ delay: i * 0.1 + 0.1, duration: 0.7, ease: EASE }}
+                            />
+                          </div>
+                        </m.div>
+                      ))}
+                    </div>
+                  </m.div>
+                </div>
+
+                {/* ── Row 2: Arquetipo | Desafío + alternativas ── */}
+                <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+                  <m.div
+                    variants={sectionV}
+                    className="border border-white/10 border-l-2 bg-white/[0.03] p-6"
+                    style={{ borderLeftColor: ACCENT }}
+                  >
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-white/50">
+                      Tu arquetipo
+                    </p>
+                    <p
+                      className="mb-3 text-4xl leading-none tracking-wider text-white uppercase sm:text-5xl"
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                    >
+                      {result.archetype.name}
+                    </p>
+                    <p className="mb-3 text-pretty text-sm font-semibold leading-relaxed text-white">
+                      {result.archetype.headline}
+                    </p>
+                    <p className="mb-4 text-pretty text-sm leading-relaxed text-white/60">
+                      {result.archetype.message}
+                    </p>
+                    <p className="border-l-2 border-white/20 pl-4 text-sm italic text-white/50">
+                      "{result.archetype.phrase}"
+                    </p>
+                  </m.div>
+
+                  <div className="flex flex-col gap-4">
+                    {/* ── Tu desafío — the payoff, inverted lime ── */}
+                    <m.div
+                      variants={sectionV}
+                      className="relative flex-1 overflow-hidden p-6 sm:p-8"
+                      style={{ background: ACCENT }}
+                    >
+                      <span
+                        className="pointer-events-none absolute -right-2 -top-4 select-none tabular-nums leading-none text-black/10"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "9rem" }}
+                        aria-hidden="true"
+                      >
+                        {result.primary.affinity}%
+                      </span>
+                      <p className="mb-1 text-xs font-bold uppercase tracking-widest text-black/60">
+                        Tu desafío — {result.primary.affinity}% de afinidad
+                      </p>
+                      <p
+                        className="mb-3 text-5xl leading-none tracking-wider text-black uppercase sm:text-6xl"
+                        style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                      >
+                        {result.primary.name}
+                      </p>
+                      <p className="max-w-md text-pretty text-sm font-medium leading-relaxed text-black/75">
+                        {MODAL_DESCRIPTIONS[result.primary.key]}
+                      </p>
+                    </m.div>
+
+                    {/* ── 6. También podrías disfrutar ── */}
+                    {result.alternatives.length > 0 && (
+                      <m.div variants={sectionV} className="grid grid-cols-2 gap-2">
+                        {result.alternatives.map((alt) => (
+                          <div
+                            key={alt.key}
+                            className="flex items-center justify-between gap-2 border border-white/10 px-3 py-2.5 transition-colors duration-150 hover:border-white/30"
+                          >
+                            <span className="text-xs font-medium text-white">{alt.name}</span>
+                            <span
+                              className="tabular-nums text-xs font-bold"
+                              style={{ color: ACCENT }}
+                            >
+                              {alt.affinity}%
+                            </span>
+                          </div>
+                        ))}
+                      </m.div>
+                    )}
+                  </div>
+                </div>
+
+                {/* ── Cierre + acciones ── */}
+                <m.div variants={sectionV} className="border-t border-white/10 pt-8">
+                  <p
+                    className="mb-6 text-balance text-center text-2xl leading-snug tracking-wider text-white uppercase sm:text-3xl"
+                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  >
+                    {result.archetype.closes}
+                  </p>
+                  <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row">
+                    <button
+                      type="button"
+                      onClick={handleShare}
+                      className="flex items-center justify-center gap-2 px-7 py-4 text-sm font-bold uppercase tracking-wider text-black transition-[transform,filter] duration-150 active:scale-[0.96] hover:brightness-95"
+                      style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
+                    >
+                      <Share2 className="h-4 w-4" />
+                      Compartir mi resultado
+                    </button>
+                    <Link
+                      to="/eventos"
+                      className="flex items-center justify-center gap-2 bg-white px-7 py-4 text-sm font-bold uppercase tracking-wider text-black transition-[transform,background-color] duration-150 active:scale-[0.96] hover:bg-white/90"
+                    >
+                      Inscribirme
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      to="/la-carrera"
+                      className="flex items-center justify-center gap-2 border border-white/40 px-7 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-[border-color,background-color] duration-150 active:scale-[0.96] hover:border-white hover:bg-white/5"
+                    >
+                      Otros desafíos
+                    </Link>
+                  </div>
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={handleReset}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-white/50 transition-colors duration-150 active:scale-[0.96] hover:text-white/70"
+                    >
+                      <RotateCcw className="h-3.5 w-3.5" />
+                      Volver a empezar
+                    </button>
+                  </div>
+                </m.div>
+              </m.div>
+            ) : null}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

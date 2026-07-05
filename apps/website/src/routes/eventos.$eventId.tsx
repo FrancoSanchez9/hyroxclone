@@ -1,21 +1,50 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { m } from "framer-motion";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { isAuthenticated } from "@/lib/auth";
+import { m, AnimatePresence } from "framer-motion";
 import { upcomingEvents } from "@/data/events";
 import { EventHero } from "@/components/sections/eventos/EventHero";
+import { CountdownStrip } from "@/components/sections/CountdownStrip";
 import { EventDetailsPanel } from "@/components/sections/eventos/EventDetailsPanel";
 import { EventRegistrationSection } from "@/components/sections/eventos/EventRegistrationSection";
+import { EventWelcomeSection } from "@/components/sections/eventos/EventWelcomeSection";
+import { EventRulesSection } from "@/components/sections/eventos/EventRulesSection";
 import { EventContentSections } from "@/components/sections/eventos/EventContentSections";
 import { EventFaqSection } from "@/components/sections/eventos/EventFaqSection";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 
+const TABS = [
+  { id: "info", label: "Información" },
+  { id: "registro", label: "Registro" },
+  { id: "reglamento", label: "Reglamento" },
+  { id: "venue", label: "Venue & Horarios" },
+  { id: "faq", label: "FAQ" },
+] as const;
+type TabId = (typeof TABS)[number]["id"];
+
 function EventDetailPage() {
   const { eventId } = Route.useParams();
+  const navigate = useNavigate();
   const event = upcomingEvents.find((e) => e.id === eventId);
 
   const [selectedDivision, setSelectedDivision] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [tab, setTab] = useState<TabId>("info");
+
+  // Hero / countdown "Registrarse" links use #registro — open that tab when they fire.
+  useEffect(() => {
+    const openRegistro = () => {
+      if (window.location.hash === "#registro") {
+        setTab("registro");
+        document.getElementById("detalles")?.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+    openRegistro();
+    window.addEventListener("hashchange", openRegistro);
+    return () => window.removeEventListener("hashchange", openRegistro);
+  }, []);
 
   if (!event) {
     return (
@@ -34,32 +63,99 @@ function EventDetailPage() {
   }
 
   const activePriceTier = event.prices?.find((p) => p.available);
+  const readyToBuy = Boolean(selectedDivision && selectedCategory);
+  const total = activePriceTier ? activePriceTier.price * quantity : 0;
+
+  // Carry the selection into the simulated checkout flow.
+  const handleCheckout = () => {
+    if (!readyToBuy) {
+      setTab("registro");
+      document.getElementById("detalles")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    void navigate({
+      to: "/checkout",
+      search: {
+        event: event.id,
+        division: selectedDivision ?? "",
+        category: selectedCategory ?? "",
+        qty: quantity,
+      },
+    });
+  };
 
   return (
     <div style={{ background: "#0a0a0a", minHeight: "100vh" }} className="text-white">
       <EventHero event={event} />
 
+      <CountdownStrip event={event} registerHref="#registro" />
+
       <EventDetailsPanel event={event} />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div id="detalles" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_340px]">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-16">
-            <EventRegistrationSection
-              event={event}
-              selectedDivision={selectedDivision}
-              selectedCategory={selectedCategory}
-              onSelectDivision={(div) => {
-                setSelectedDivision(div);
-                setSelectedCategory(null);
-              }}
-              onSelectCategory={setSelectedCategory}
-            />
+          {/* LEFT COLUMN — tabbed to cut the scroll */}
+          <div className="min-w-0">
+            {/* Tab bar — sticky under the details panel */}
+            <div className="sticky top-16 z-20 -mx-4 mb-10 border-b border-white/10 bg-[#0a0a0a]/95 px-4 backdrop-blur-sm sm:-mx-6 sm:px-6">
+              <div className="flex gap-1 overflow-x-auto">
+                {TABS.map((t) => {
+                  const active = tab === t.id;
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      onClick={() => setTab(t.id)}
+                      className={`relative shrink-0 px-4 py-4 text-xs font-bold uppercase tracking-widest transition-colors duration-150 ${
+                        active ? "text-white" : "text-white/50 hover:text-white/70"
+                      }`}
+                    >
+                      {t.label}
+                      {active && (
+                        <m.span
+                          layoutId="tab-underline"
+                          className="absolute inset-x-2 -bottom-px h-0.5"
+                          style={{ background: "#d4ff00" }}
+                          transition={{ type: "spring", stiffness: 500, damping: 32 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-            <EventContentSections event={event} />
-
-            <EventFaqSection />
+            {/* Panels */}
+            <AnimatePresence mode="wait">
+              <m.div
+                key={tab}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25, ease: EASE }}
+                className="flex flex-col gap-16"
+              >
+                {tab === "info" && <EventWelcomeSection event={event} />}
+                {tab === "registro" && (
+                  <EventRegistrationSection
+                    event={event}
+                    selectedDivision={selectedDivision}
+                    selectedCategory={selectedCategory}
+                    quantity={quantity}
+                    onSelectDivision={(div) => {
+                      setSelectedDivision(div);
+                      setSelectedCategory(null);
+                    }}
+                    onSelectCategory={setSelectedCategory}
+                    onChangeQuantity={setQuantity}
+                  />
+                )}
+                {tab === "reglamento" && <EventRulesSection />}
+                {tab === "venue" && <EventContentSections event={event} />}
+                {tab === "faq" && <EventFaqSection />}
+              </m.div>
+            </AnimatePresence>
           </div>
 
           {/* RIGHT SIDEBAR — sticky register CTA */}
@@ -67,19 +163,19 @@ function EventDetailPage() {
             <div className="lg:sticky lg:top-28 flex flex-col gap-0 border border-white/15">
               {/* Price header */}
               <div className="px-6 py-6 border-b border-white/10" style={{ background: "#111" }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
                   Precio actual
                 </p>
                 {activePriceTier ? (
                   <>
                     <p
-                      className="text-4xl font-normal leading-none tabular-nums text-white"
+                      className="text-4xl font-normal leading-none tabular-nums text-[#d4ff00]"
                       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
                       ${activePriceTier.price.toLocaleString("es-MX")}
                       <span className="text-lg ml-1 text-white/50">{event.currency}</span>
                     </p>
-                    <p className="mt-1 text-[11px] text-white/40">{activePriceTier.label}</p>
+                    <p className="mt-1 text-[11px] text-white/50">{activePriceTier.label}</p>
                   </>
                 ) : (
                   <p className="text-2xl font-normal text-white/50">Consultar precio</p>
@@ -98,16 +194,22 @@ function EventDetailPage() {
                 ) : (
                   <button
                     type="button"
-                    className="flex items-center justify-center h-14 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[background-color] duration-150 active:scale-[0.96]"
+                    onClick={handleCheckout}
+                    className="cursor-pointer flex items-center justify-center h-14 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-150 hover:brightness-95 active:scale-[0.96]"
+                    style={{ background: "#d4ff00" }}
                   >
-                    Registrarse ahora
+                    {!readyToBuy
+                      ? "Elige división y categoría"
+                      : isAuthenticated()
+                        ? `Comprar ${quantity} ${quantity === 1 ? "pase" : "pases"}`
+                        : "Inicia sesión para comprar"}
                   </button>
                 )}
 
                 {event.spotsLeft !== undefined && !event.soldOut && (
-                  <p className="text-center text-[11px] text-white/40">
+                  <p className="text-center text-[11px] text-white/50">
                     Solo quedan{" "}
-                    <span className="tabular-nums font-bold text-white">{event.spotsLeft}</span>{" "}
+                    <span className="tabular-nums font-bold text-[#d4ff00]">{event.spotsLeft}</span>{" "}
                     lugares disponibles
                   </p>
                 )}
@@ -122,14 +224,26 @@ function EventDetailPage() {
                   >
                     {selectedDivision && (
                       <div className="flex justify-between text-xs">
-                        <span className="text-white/40 uppercase tracking-wide">División</span>
+                        <span className="text-white/50 uppercase tracking-wide">División</span>
                         <span className="font-bold text-white">{selectedDivision}</span>
                       </div>
                     )}
                     {selectedCategory && (
                       <div className="flex justify-between text-xs">
-                        <span className="text-white/40 uppercase tracking-wide">Categoría</span>
+                        <span className="text-white/50 uppercase tracking-wide">Categoría</span>
                         <span className="font-bold text-white">{selectedCategory}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between text-xs">
+                      <span className="text-white/50 uppercase tracking-wide">Pases</span>
+                      <span className="font-bold text-white tabular-nums">{quantity}</span>
+                    </div>
+                    {readyToBuy && activePriceTier && (
+                      <div className="flex justify-between border-t border-white/10 pt-2 text-xs">
+                        <span className="text-white/50 uppercase tracking-wide">Total</span>
+                        <span className="font-bold tabular-nums text-[#d4ff00]">
+                          ${total.toLocaleString("es-MX")} {event.currency}
+                        </span>
                       </div>
                     )}
                   </m.div>
@@ -141,7 +255,7 @@ function EventDetailPage() {
                 className="px-6 py-6 border-t border-white/10 flex flex-col gap-3"
                 style={{ background: "#111" }}
               >
-                <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
                   Incluye
                 </p>
                 {[
@@ -154,7 +268,7 @@ function EventDetailPage() {
                   <div key={item} className="flex items-start gap-3">
                     <div
                       className="mt-0.5 h-3.5 w-3.5 shrink-0 flex items-center justify-center"
-                      style={{ background: "#ffffff" }}
+                      style={{ background: "#d4ff00" }}
                       aria-hidden="true"
                     >
                       <svg width="8" height="8" viewBox="0 0 8 8" fill="none">

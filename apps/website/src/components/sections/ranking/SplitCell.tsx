@@ -53,18 +53,18 @@ export function SplitCell({
           transition={{ duration: 0.12 }}
           className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 whitespace-nowrap border border-white/18 bg-[#1c1c1c] px-4 py-3 shadow-2xl shadow-black/70"
         >
-          <p className="mb-2 text-[9px] font-bold uppercase tracking-widest text-white/35">
+          <p className="mb-2 text-[9px] font-bold uppercase tracking-widest text-white/50">
             {stationLabel}
           </p>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center justify-between gap-8">
-              <span className="text-[10px] uppercase tracking-wider text-white/35">Run</span>
+              <span className="text-[10px] uppercase tracking-wider text-white/50">Run</span>
               <span className="tabular-nums text-[12px] font-semibold text-white/80">
                 {runTime}
               </span>
             </div>
             <div className="flex items-center justify-between gap-8">
-              <span className="text-[10px] uppercase tracking-wider text-white/35">WO</span>
+              <span className="text-[10px] uppercase tracking-wider text-white/50">WO</span>
               <span className="tabular-nums text-[12px] font-bold text-white">{stationTime}</span>
             </div>
           </div>

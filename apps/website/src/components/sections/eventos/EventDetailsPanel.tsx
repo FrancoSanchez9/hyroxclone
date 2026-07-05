@@ -22,7 +22,7 @@ export function EventDetailsPanel({ event }: { event: HyroxEvent }) {
             },
           ].map(({ label, value }) => (
             <div key={label} className="flex flex-col justify-center px-4 py-4 sm:px-6 sm:py-5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
                 {label}
               </span>
               <span className="text-xs font-semibold text-white leading-tight">{value}</span>

@@ -167,7 +167,7 @@ export function NewsletterSection() {
                 <div className="flex flex-col gap-1">
                   <label
                     htmlFor="nl-email"
-                    className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+                    className="text-[10px] font-bold uppercase tracking-widest text-white/50"
                   >
                     Correo electrónico *
                   </label>
@@ -197,7 +197,7 @@ export function NewsletterSection() {
                 <div className="flex flex-col gap-1">
                   <label
                     htmlFor="nl-city"
-                    className="text-[10px] font-bold uppercase tracking-widest text-white/40"
+                    className="text-[10px] font-bold uppercase tracking-widest text-white/50"
                   >
                     Tu ciudad *
                   </label>
@@ -256,7 +256,7 @@ export function NewsletterSection() {
                   Suscribirme
                 </button>
 
-                <p className="text-xs text-white/40 text-pretty">
+                <p className="text-xs text-white/50 text-pretty">
                   Al suscribirte aceptas nuestra{" "}
                   <Link
                     to="/privacidad"

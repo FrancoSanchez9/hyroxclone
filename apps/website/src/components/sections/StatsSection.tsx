@@ -50,7 +50,7 @@ function AnimatedNumber({
   }, [inView, motionValue, value, prefersReducedMotion]);
 
   return (
-    <span className="font-display text-[clamp(3rem,6vw,5rem)] leading-none tracking-wide text-[#ffffff]">
+    <span className="font-display text-[clamp(3rem,6vw,5rem)] leading-none tracking-wide text-black">
       {prefix}
       <span ref={ref}>0</span>
       {suffix}
@@ -66,7 +66,7 @@ function StatItem({ stat, index, total }: { stat: Stat; index: number; total: nu
       className={cn(
         "relative flex flex-col items-center justify-center px-6 py-10 text-center",
         "col-span-1",
-        !isLast && "md:border-r md:border-white/10",
+        !isLast && "md:border-r md:border-black/15",
       )}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ function StatItem({ stat, index, total }: { stat: Stat; index: number; total: nu
       }}
     >
       <AnimatedNumber value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
-      <p className="mt-3 max-w-[160px] text-sm font-medium uppercase tracking-widest text-white/60">
+      <p className="mt-3 max-w-[160px] text-sm font-medium uppercase tracking-widest text-black/60">
         {stat.label}
       </p>
     </m.div>
@@ -90,8 +90,8 @@ export function StatsSection() {
     <section
       className="relative w-full overflow-hidden"
       style={{
-        background: "#0a0a0a",
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)",
+        background: "#d4ff00",
+        backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)",
         backgroundSize: "28px 28px",
       }}
     >
@@ -103,15 +103,15 @@ export function StatsSection() {
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.45, ease: EASE }}
         >
-          <p className="mx-auto max-w-2xl text-xl font-medium italic leading-relaxed text-white/80 sm:text-2xl">
+          <p className="mx-auto max-w-2xl text-xl font-medium italic leading-relaxed text-black/85 sm:text-2xl">
             &ldquo;Una carrera. Un estándar. Una comunidad.&rdquo;
           </p>
-          <div className="mx-auto mt-6 h-px w-24 bg-[#ffffff]" />
+          <div className="mx-auto mt-6 h-px w-24 bg-black" />
         </m.div>
 
         <div className="relative">
-          <div className="absolute inset-x-0 top-0 hidden h-px bg-white/10 md:block" />
-          <div className="absolute inset-x-0 bottom-0 hidden h-px bg-white/10 md:block" />
+          <div className="absolute inset-x-0 top-0 hidden h-px bg-black/15 md:block" />
+          <div className="absolute inset-x-0 bottom-0 hidden h-px bg-black/15 md:block" />
 
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((stat, index) => (

@@ -1,76 +1,106 @@
 import { m } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/Button";
+import { ArrowRight } from "lucide-react";
+import { RaceTrack } from "./RaceTrack";
 
-const EASE_OUT = [0.23, 1, 0.32, 1] as const;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE_OUT, delay: i * 0.04 },
-  }),
-};
+const EASE = [0.23, 1, 0.32, 1] as const;
+const ACCENT = "#d4ff00";
 
 export function LaCarreraHeroSection() {
   return (
-    <section className="relative flex min-h-[70vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] px-6 py-28 text-center">
+    <section className="relative w-full overflow-hidden bg-[#0a0a0a] px-6 pb-16 pt-32 md:pt-40">
+      {/* Ambient glow + lane texture */}
       <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 40px,
-            rgba(255,255,255,0.015) 40px,
-            rgba(255,255,255,0.015) 41px
-          )`,
-        }}
+        aria-hidden="true"
+        className="animate-blob pointer-events-none absolute -left-40 top-0 h-[30rem] w-[30rem] rounded-full"
+        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.08), transparent 70%)" }}
       />
       <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(229,249,58,0.07) 0%, transparent 70%)",
+          backgroundImage:
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.025) 119px, rgba(255,255,255,0.025) 120px)",
         }}
       />
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        <m.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className="text-sm font-semibold uppercase tracking-[0.3em] text-[#ffffff]"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* Copy */}
+        <div>
+          <m.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="mb-5 inline-block text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ color: ACCENT }}
+          >
+            La experiencia runluv®
+          </m.span>
+
+          <h1
+            aria-label="La carrera sobre circuitos de clase mundial"
+            className="uppercase leading-[0.9] tracking-tight text-white"
+            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+          >
+            {[
+              { text: "LA CARRERA", accent: false },
+              { text: "SOBRE", accent: false },
+              { text: "CIRCUITOS", accent: true },
+            ].map((line, i) => (
+              <span key={line.text} aria-hidden="true" className="block overflow-hidden">
+                <m.span
+                  className="block text-[clamp(2.8rem,8vw,6rem)]"
+                  initial={{ y: "110%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.7, ease: EASE, delay: 0.1 + i * 0.1 }}
+                  style={line.accent ? { color: ACCENT } : undefined}
+                >
+                  {line.text}
+                </m.span>
+              </span>
+            ))}
+          </h1>
+
+          <m.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
+            className="mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg"
+          >
+            runluv® transforma los autódromos donde rugen los motores en pistas para corredores.
+            Elige tu desafío, recorre el circuito y descubre hasta dónde puedes llegar.
+          </m.p>
+
+          <m.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
+            className="mt-8 flex flex-wrap gap-4"
+          >
+            <Link
+              to="/eventos"
+              className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+              style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
+            >
+              Inscríbete
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/tu-nivel"
+              className="inline-flex items-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96]"
+            >
+              Haz tu test
+            </Link>
+          </m.div>
+        </div>
+
+        {/* Racetrack */}
+        <m.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
         >
-          HYROX México
-        </m.p>
-        <m.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-          className="max-w-4xl text-[clamp(3.5rem,11vw,8.5rem)] font-normal leading-none tracking-tight text-white"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-        >
-          LA CARRERA DE <span className="text-[#ffffff]">FITNESS</span>
-        </m.h1>
-        <m.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          className="max-w-lg text-base leading-relaxed text-white/60 sm:text-lg"
-        >
-          8 km corriendo + 8 estaciones funcionales. Sin descanso.
-        </m.p>
-        <m.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
-          <Link to="/eventos">
-            <Button variant="primary" size="lg">
-              Inscríbete ahora
-            </Button>
-          </Link>
+          <RaceTrack className="w-full" />
         </m.div>
       </div>
     </section>

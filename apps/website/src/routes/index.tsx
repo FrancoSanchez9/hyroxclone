@@ -4,19 +4,25 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { WhatIsHyroxSection } from "@/components/sections/WhatIsHyroxSection";
 import { RaceFormatSection } from "@/components/sections/RaceFormatSection";
 import { StatsSection } from "@/components/sections/StatsSection";
-import { AthletesSection } from "@/components/sections/AthletesSection";
-import { TrainingSection } from "@/components/sections/TrainingSection";
 import { UpcomingEventsSection } from "@/components/sections/UpcomingEventsSection";
+import { Reveal } from "@/components/ui/Reveal";
+
 function HomePage() {
   return (
     <>
       <HeroSection />
-      <WhatIsHyroxSection />
-      <RaceFormatSection />
-      <StatsSection />
-      <AthletesSection />
-      <TrainingSection />
-      <UpcomingEventsSection />
+      <Reveal>
+        <WhatIsHyroxSection />
+      </Reveal>
+      <Reveal>
+        <RaceFormatSection />
+      </Reveal>
+      <Reveal>
+        <StatsSection />
+      </Reveal>
+      <Reveal>
+        <UpcomingEventsSection />
+      </Reveal>
     </>
   );
 }
@@ -26,9 +32,9 @@ export const Route = createFileRoute("/")({
     meta: seo({
       title: "La Competencia de Fitness Funcional en México",
       description:
-        "Corre 1 km, completa una estación funcional, repítelo 8 veces. La competencia de fitness funcional más exigente y accesible de México. Regístrate en el próximo evento.",
+        "runluv® transforma los autódromos de México en pistas para corredores. Elige tu desafío, corre el circuito y vive la experiencia. Regístrate en el próximo evento.",
       keywords:
-        "runluv, fitness funcional, competencia fitness, carrera de fitness, eventos deportivos México, HYROX",
+        "runluv, carrera, running México, autódromo, eventos deportivos México, correr, maratón",
     }),
   }),
   component: HomePage,

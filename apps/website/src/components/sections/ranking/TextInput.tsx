@@ -13,7 +13,7 @@ export function TextInput({
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">{label}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">{label}</span>
       <div className="relative">
         <input
           type="text"
@@ -26,7 +26,7 @@ export function TextInput({
           <button
             type="button"
             onClick={() => onChange("")}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white/60 transition-colors"
             aria-label="Limpiar"
           >
             <X size={13} />

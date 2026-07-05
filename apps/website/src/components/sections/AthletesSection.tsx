@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Link } from "@tanstack/react-router";
+import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { EASE, fadeUp } from "@/lib/animation";
 
 const athletes = [
@@ -60,13 +61,13 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
           alt={athlete.name}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+          className="h-full w-full object-cover object-top grayscale transition-[transform,filter] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:grayscale-0"
           style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
         <div
           className="absolute top-3 right-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-black"
-          style={{ background: "#ffffff" }}
+          style={{ background: "#d4ff00" }}
         >
           {athlete.division}
         </div>
@@ -83,7 +84,7 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
         <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
           <span className="text-xs uppercase tracking-widest text-white/50">Best Time</span>
           <span
-            className="tabular-nums text-xl font-normal text-[#ffffff]"
+            className="tabular-nums text-xl font-normal text-[#d4ff00]"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             {athlete.bestTime}
@@ -109,19 +110,18 @@ export function AthletesSection() {
           className="mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
         >
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff]">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#d4ff00]">
               Elite Athletes
             </p>
-            <h2
-              className="text-6xl leading-none tracking-wider text-white uppercase sm:text-7xl md:text-8xl"
-              style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            >
-              MEET THE PROS
-            </h2>
+            <AnimatedTitle
+              text="MEET THE PROS"
+              accent={["PROS"]}
+              className="text-6xl text-white sm:text-7xl md:text-8xl"
+            />
           </div>
           <Link
             to="/athletes"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/50 hover:text-[#ffffff] transition-colors duration-200 border-b border-transparent hover:border-[#ffffff] pb-0.5 shrink-0"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/50 hover:text-[#d4ff00] transition-colors duration-200 border-b border-transparent hover:border-[#d4ff00] pb-0.5 shrink-0"
           >
             Meet All Athletes →
           </Link>
