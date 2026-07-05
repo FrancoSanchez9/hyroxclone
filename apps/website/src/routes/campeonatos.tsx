@@ -3,6 +3,7 @@ import { ChampionshipHero } from "@/components/sections/campeonatos/Championship
 import { QualifySection } from "@/components/sections/campeonatos/QualifySection";
 import { Elite15Section } from "@/components/sections/campeonatos/Elite15Section";
 import { ChampionshipTeaserSection } from "@/components/sections/campeonatos/ChampionshipTeaserSection";
+import { BeyondMexicoSection } from "@/components/sections/campeonatos/BeyondMexicoSection";
 import { CTASection } from "@/components/sections/campeonatos/CTASection";
 
 function CampeonatosPage() {
@@ -12,6 +13,7 @@ function CampeonatosPage() {
       <QualifySection />
       <Elite15Section />
       <ChampionshipTeaserSection />
+      <BeyondMexicoSection />
       <CTASection />
     </>
   );
