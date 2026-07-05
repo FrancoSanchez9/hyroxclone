@@ -95,6 +95,12 @@ export function WhatIsRunluvSection() {
               su nivel, recorren el circuito y reciben un resultado oficial que marca el inicio del
               siguiente desafío.
             </p>
+            <p
+              className="text-lg font-bold uppercase tracking-wide text-[#d4ff00] text-pretty"
+              style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            >
+              Bienvenido a la comunidad runluv®
+            </p>
 
             <ul className="flex flex-col gap-3">
               {bullets.map((bullet) => (
