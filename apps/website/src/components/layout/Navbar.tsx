@@ -110,7 +110,7 @@ export function Navbar() {
               to="/tu-nivel"
               className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#d4ff00] border border-[#d4ff00]/50 transition-[background-color,border-color,transform] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#d4ff00]/10 hover:border-[#d4ff00] active:scale-[0.96]"
             >
-              Test
+              Tu reto
             </Link>
             <Link
               to="/ranking"
