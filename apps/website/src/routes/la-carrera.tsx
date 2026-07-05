@@ -3,6 +3,7 @@ import { LaCarreraHeroSection } from "@/components/sections/la-carrera/LaCarrera
 import { FormatSection } from "@/components/sections/la-carrera/FormatSection";
 import { DivisionsSection } from "@/components/sections/la-carrera/DivisionsSection";
 import { RulesSection } from "@/components/sections/la-carrera/RulesSection";
+import { RulesByModalitySection } from "@/components/sections/la-carrera/RulesByModalitySection";
 import { BottomCTA } from "@/components/sections/la-carrera/BottomCTA";
 
 function LaCarreraPage() {
@@ -11,6 +12,7 @@ function LaCarreraPage() {
       <LaCarreraHeroSection />
       <FormatSection />
       <DivisionsSection />
+      <RulesByModalitySection />
       <RulesSection />
       <BottomCTA />
     </>
