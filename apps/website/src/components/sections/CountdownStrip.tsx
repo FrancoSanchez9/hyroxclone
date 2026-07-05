@@ -77,11 +77,11 @@ export function CountdownStrip({ event, registerHref }: CountdownStripProps) {
         </div>
 
         {/* Countdown */}
-        <div className="flex items-center gap-5 border-t border-black/15 px-6 py-4 md:ml-auto md:border-t-0 md:border-l md:px-10 md:py-6">
+        <div className="flex items-center gap-3 border-t border-black/15 px-6 py-4 sm:gap-5 md:ml-auto md:border-t-0 md:border-l md:px-10 md:py-6">
           {cells.map((cell) => (
             <div key={cell.label} className="flex items-baseline gap-1.5">
               <span
-                className="tabular-nums text-[clamp(2.4rem,5vw,4rem)] leading-none text-black"
+                className="tabular-nums text-[clamp(2rem,7vw,4rem)] leading-none text-black"
                 style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
                 {pad(cell.value)}

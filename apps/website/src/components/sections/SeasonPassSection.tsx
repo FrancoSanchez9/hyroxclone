@@ -83,7 +83,7 @@ export function SeasonPassSection() {
                     {i + 1}
                   </span>
                   <span className="text-sm font-semibold text-white">{c.city}</span>
-                  <span className="ml-auto text-xs text-white/40">{c.venue}</span>
+                  <span className="ml-auto hidden text-xs text-white/40 sm:block">{c.venue}</span>
                 </li>
               ))}
             </ol>
