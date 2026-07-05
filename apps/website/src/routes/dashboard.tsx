@@ -35,7 +35,7 @@ function DashboardPage() {
   };
 
   const shortcuts = [
-    { Icon: Compass, label: "Haz tu test", sub: "Encuentra tu desafío", to: "/tu-nivel" },
+    { Icon: Compass, label: "¿Cuál es tu reto?", sub: "Descúbrelo en 2 minutos", to: "/tu-nivel" },
     { Icon: Ticket, label: "Inscripciones", sub: "Elige tu carrera", to: "/eventos" },
     { Icon: Trophy, label: "Ranking", sub: "Resultados oficiales", to: "/ranking" },
   ] as const;

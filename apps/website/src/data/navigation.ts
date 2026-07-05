@@ -15,7 +15,7 @@ export const navItems: NavItem[] = [
 ];
 
 export const topRightLinks = [
-  { label: "Test", href: "/tu-nivel" },
+  { label: "Tu reto", href: "/tu-nivel" },
   { label: "Inscripciones", href: "/eventos" },
   { label: "Ranking", href: "/ranking" },
 ];

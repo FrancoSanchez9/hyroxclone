@@ -111,7 +111,7 @@ export function HeroSection() {
             to="/tu-nivel"
             className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            Haz tu test
+            ¿Cuál es tu reto?
           </Link>
         </m.div>
       </div>
