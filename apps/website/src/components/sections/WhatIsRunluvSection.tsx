@@ -11,13 +11,6 @@ const bullets = [
   "Resultados y rankings oficiales en cada temporada",
 ];
 
-const quickStats = [
-  { value: "3", label: "modalidades" },
-  { value: "5", label: "ciudades" },
-  { value: "1", label: "experiencia" },
-  { value: "100%", label: "para todos" },
-];
-
 export function WhatIsRunluvSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -158,30 +151,6 @@ export function WhatIsRunluvSection() {
             ))}
           </div>
         </div>
-
-        <m.div
-          className="mt-10 grid grid-cols-2 divide-x divide-y divide-white/10 sm:grid-cols-4 sm:divide-y-0"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.25 }}
-        >
-          {quickStats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center justify-center px-4 py-6 text-center"
-            >
-              <span
-                className="text-[clamp(1.75rem,4vw,3rem)] font-normal leading-none text-[#ffffff]"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-              >
-                {stat.value}
-              </span>
-              <span className="mt-1.5 text-xs uppercase tracking-widest text-white/45">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </m.div>
       </div>
     </section>
   );
