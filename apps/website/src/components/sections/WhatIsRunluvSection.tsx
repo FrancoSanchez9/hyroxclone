@@ -18,7 +18,7 @@ const quickStats = [
   { value: "100%", label: "para todos" },
 ];
 
-export function WhatIsHyroxSection() {
+export function WhatIsRunluvSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 

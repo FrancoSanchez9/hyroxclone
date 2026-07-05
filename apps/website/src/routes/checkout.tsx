@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Mail, User, Phone, CreditCard, Check, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { upcomingEvents } from "@/data/events";
+import { upcomingEvents, seasonPass } from "@/data/events";
 import { isAuthenticated, getSession } from "@/lib/auth";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/lib/animation";
@@ -37,7 +37,9 @@ const labelCls = "text-[10px] font-bold uppercase tracking-widest text-white/50"
 function CheckoutPage() {
   const navigate = useNavigate();
   const { event: eventId, division, category, qty } = Route.useSearch();
-  const event = upcomingEvents.find((e) => e.id === eventId);
+  const event =
+    upcomingEvents.find((e) => e.id === eventId) ??
+    (eventId === seasonPass.id ? seasonPass : undefined);
 
   const session = getSession();
   const [step, setStep] = useState<Step>(isAuthenticated() ? "details" : "identify");

@@ -11,7 +11,7 @@ import {
   CalendarClock,
   Sunrise,
 } from "lucide-react";
-import { type HyroxEvent } from "@/data/events";
+import { type RunluvEvent } from "@/data/events";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 const ACCENT = "#d4ff00";
@@ -41,7 +41,7 @@ const cardItem = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 };
 
-export function EventWelcomeSection({ event }: { event: HyroxEvent }) {
+export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
   const paragraphs = event.description ?? (event.about ? [event.about] : []);
 
   return (

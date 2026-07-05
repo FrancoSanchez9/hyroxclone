@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, Minus, Plus, Pencil } from "lucide-react";
-import { type HyroxEvent } from "@/data/events";
+import { type RunluvEvent } from "@/data/events";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -46,7 +46,7 @@ const panel = {
 };
 
 interface EventRegistrationSectionProps {
-  event: HyroxEvent;
+  event: RunluvEvent;
   selectedDivision: string | null;
   selectedCategory: string | null;
   quantity: number;

@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { MapPin, Calendar, ChevronLeft } from "lucide-react";
-import { type HyroxEvent } from "@/data/events";
+import { type RunluvEvent } from "@/data/events";
 import { formatDateLong } from "@/lib/formatDate";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 
-export function EventHero({ event }: { event: HyroxEvent }) {
+export function EventHero({ event }: { event: RunluvEvent }) {
   return (
     <div className="relative h-[72vh] min-h-[560px] overflow-hidden">
       {event.imageUrl && (

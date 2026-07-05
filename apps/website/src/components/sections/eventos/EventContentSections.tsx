@@ -1,6 +1,6 @@
 import { m } from "framer-motion";
 import { MapPin, Navigation } from "lucide-react";
-import { type HyroxEvent, type ScheduleDay } from "@/data/events";
+import { type RunluvEvent, type ScheduleDay } from "@/data/events";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 const ACCENT = "#d4ff00";
@@ -26,7 +26,7 @@ const DEFAULT_SCHEDULE: ScheduleDay[] = [
   },
 ];
 
-export function EventContentSections({ event }: { event: HyroxEvent }) {
+export function EventContentSections({ event }: { event: RunluvEvent }) {
   const schedule = event.schedule ?? DEFAULT_SCHEDULE;
   return (
     <>

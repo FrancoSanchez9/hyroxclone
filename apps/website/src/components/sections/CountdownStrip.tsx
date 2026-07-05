@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { type HyroxEvent } from "@/data/events";
+import { type RunluvEvent } from "@/data/events";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 const ACCENT = "#d4ff00";
@@ -32,7 +32,7 @@ function formatEventDate(dateStr: string): string {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 interface CountdownStripProps {
-  event: HyroxEvent;
+  event: RunluvEvent;
   /** In-page anchor (e.g. "#registro"). When set, the register block scrolls instead of routing. */
   registerHref?: string;
 }

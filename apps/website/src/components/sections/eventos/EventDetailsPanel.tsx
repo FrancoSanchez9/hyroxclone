@@ -1,8 +1,8 @@
 import { Calendar, MapPin, Users, CheckCircle } from "lucide-react";
-import { type HyroxEvent } from "@/data/events";
+import { type RunluvEvent } from "@/data/events";
 import { formatDateLong } from "@/lib/formatDate";
 
-export function EventDetailsPanel({ event }: { event: HyroxEvent }) {
+export function EventDetailsPanel({ event }: { event: RunluvEvent }) {
   return (
     <div className="border-b border-white/10" style={{ background: "#111111" }}>
       <div className="mx-auto max-w-7xl px-6">

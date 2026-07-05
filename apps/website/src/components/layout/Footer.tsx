@@ -61,18 +61,18 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/">
+            <Link to="/" aria-label="runluv® — inicio">
               <img
                 src={logoSrc}
-                alt="RunLuv"
+                alt="runluv®"
                 width={413}
                 height={119}
                 className="h-8 w-auto mb-5"
                 loading="lazy"
               />
             </Link>
-            <p className="text-sm text-white/60 leading-relaxed max-w-[200px]">
-              The Fitness Race for Everybody — in Mexico.
+            <p className="text-sm text-white/60 leading-relaxed max-w-[220px]">
+              Running sobre los autódromos de Fórmula 1 de México.
             </p>
             <div className="mt-6 flex gap-3">
               <a

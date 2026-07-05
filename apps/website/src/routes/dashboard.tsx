@@ -11,7 +11,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { getSession, logout, isAuthenticated, isAdmin } from "@/lib/auth";
-import { getNextEvent } from "@/data/events";
+import { getNextEvent, seasonCircuits } from "@/data/events";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 const ACCENT = "#d4ff00";
@@ -26,6 +26,8 @@ function DashboardPage() {
   const navigate = useNavigate();
   const session = getSession();
   const nextEvent = getNextEvent();
+  // ponytail: sin backend aún no hay historial de carreras — 0 sellos por ahora.
+  const stampedCircuits = 0;
 
   const handleLogout = () => {
     logout();
@@ -168,11 +170,65 @@ function DashboardPage() {
           ))}
         </div>
 
+        {/* Season passport — 5 Circuitos */}
+        <m.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
+          className="mt-6 border border-white/10 bg-white/[0.03] p-8"
+        >
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p
+                className="text-[10px] font-bold uppercase tracking-[0.25em]"
+                style={{ color: ACCENT }}
+              >
+                Pasaporte runluv®
+              </p>
+              <h2
+                className="mt-1 text-3xl uppercase leading-none tracking-wide text-white sm:text-4xl"
+                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+              >
+                5 Circuitos
+              </h2>
+            </div>
+            {/* ponytail: 0 sellado — enchufar al historial de inscripciones cuando exista backend. */}
+            <span className="text-sm font-bold uppercase tracking-widest text-white/50">
+              {stampedCircuits}/{seasonCircuits.length} sellados
+            </span>
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+            {seasonCircuits.map((c) => (
+              <div
+                key={c.id}
+                className="flex flex-col items-center gap-2 border border-dashed border-white/15 py-4 text-center"
+              >
+                <MapPin className="h-5 w-5 text-white/30" aria-hidden="true" />
+                <span className="text-xs font-bold uppercase tracking-wide text-white/70">
+                  {c.city}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-sm text-white/50">
+            Corre las 5 paradas de la temporada y sella tu pasaporte.{" "}
+            <Link
+              to="/checkout"
+              search={{ event: "pase-temporada-2026", division: "", category: "", qty: 1 }}
+              className="underline hover:text-white"
+              style={{ color: ACCENT }}
+            >
+              Consigue el pase de temporada
+            </Link>
+            .
+          </p>
+        </m.div>
+
         {/* Placeholder state */}
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-6 border border-dashed border-white/15 p-8 text-center"
         >
           <p className="text-sm text-white/50">

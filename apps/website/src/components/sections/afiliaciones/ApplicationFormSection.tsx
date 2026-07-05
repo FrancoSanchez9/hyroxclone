@@ -183,10 +183,10 @@ export function ApplicationFormSection() {
             <p className="text-xs text-white/60">
               También puedes contactar a nuestro equipo en{" "}
               <a
-                href="mailto:info@hyrox.mx"
+                href="mailto:info@runluv.mx"
                 className="text-[#ffffff] underline underline-offset-2 hover:text-[#cccccc] transition-colors duration-150"
               >
-                info@hyrox.mx
+                info@runluv.mx
               </a>
             </p>
           </div>

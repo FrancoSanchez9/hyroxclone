@@ -200,10 +200,10 @@ function TiendaPage() {
               Hasta entonces, encuentra merch oficial en todos los eventos runluv® o contáctanos.
             </p>
             <a
-              href="mailto:tienda@hyrox.mx"
+              href="mailto:tienda@runluv.mx"
               className="inline-flex items-center gap-2 text-[#ffffff] text-sm font-semibold uppercase tracking-widest hover:underline underline-offset-4 transition-colors"
             >
-              tienda@hyrox.mx
+              tienda@runluv.mx
             </a>
           </m.div>
         </div>

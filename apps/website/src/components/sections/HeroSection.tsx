@@ -7,9 +7,9 @@ const EASE = [0.23, 1, 0.32, 1] as const;
 const ACCENT = "#d4ff00";
 
 const TITLE_LINES: { text: string; accent?: boolean; outline?: boolean }[] = [
-  { text: "LA EXPERIENCIA" },
-  { text: "RUNLUV®", accent: true },
-  { text: "PARA TODOS", outline: true },
+  { text: "DESCUBRE" },
+  { text: "DE QUÉ ESTÁS", accent: true },
+  { text: "HECHO", outline: true },
 ];
 
 export function HeroSection() {
@@ -25,7 +25,7 @@ export function HeroSection() {
     >
       {/* Background image — slow zoom-out on load + scroll parallax */}
       <m.img
-        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600&q=55&fit=crop&auto=format"
+        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1280&q=45&fit=crop&auto=format"
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -65,11 +65,11 @@ export function HeroSection() {
           transition={{ duration: 0.4, ease: EASE }}
           className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-white/80"
         >
-          Corre. Compite. Vuelve.
+          Elige tu reto · Corre · Vuelve por más
         </m.p>
 
         <h1
-          aria-label="La experiencia runluv® para todos"
+          aria-label="Descubre de qué estás hecho — runluv®"
           className="uppercase leading-[0.92] tracking-tight text-white"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >

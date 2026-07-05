@@ -1,4 +1,4 @@
-import { upcomingEvents, type HyroxEvent } from "@/data/events";
+import { upcomingEvents, type RunluvEvent } from "@/data/events";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/Card";
@@ -34,7 +34,7 @@ function formatDateRange(dateStr: string, endDateStr?: string): string {
   return `${day} ${month} — ${endDay} ${endMonth} ${year}`;
 }
 
-function FeaturedEventCard({ event }: { event: HyroxEvent }) {
+function FeaturedEventCard({ event }: { event: RunluvEvent }) {
   return (
     <m.div
       initial={{ clipPath: "inset(0 100% 0 0)" }}
@@ -135,7 +135,7 @@ function FeaturedEventCard({ event }: { event: HyroxEvent }) {
   );
 }
 
-function EventCard({ event }: { event: HyroxEvent }) {
+function EventCard({ event }: { event: RunluvEvent }) {
   return (
     <m.div
       whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(0,0,0,0.5)" }}

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/Button";
 
-const STORAGE_KEY = "hyrox-cookies-accepted";
+const STORAGE_KEY = "runluv-cookies-accepted";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(() => !localStorage.getItem(STORAGE_KEY));

@@ -10,7 +10,7 @@ export interface ScheduleDay {
   waves: { time: string; label: string }[];
 }
 
-export interface HyroxEvent {
+export interface RunluvEvent {
   id: string;
   name: string;
   city: string;
@@ -34,7 +34,7 @@ export interface HyroxEvent {
   mapsUrl?: string;
 }
 
-export const upcomingEvents: HyroxEvent[] = [
+export const upcomingEvents: RunluvEvent[] = [
   {
     id: "puebla-2026",
     name: "runluv® Puebla",
@@ -186,10 +186,42 @@ export const upcomingEvents: HyroxEvent[] = [
   },
 ];
 
-export function getNextEvent(now = new Date()): HyroxEvent {
+export function getNextEvent(now = new Date()): RunluvEvent {
   const today = now.toISOString().slice(0, 10);
   return upcomingEvents.find((e) => e.date >= today) ?? upcomingEvents[upcomingEvents.length - 1];
 }
+
+// Season pass — the retention product. Modelled as a RunluvEvent so the existing
+// checkout flow works unchanged (event lookup falls back to this by id).
+// ponytail: price = the 5 early-bird tickets minus a season discount, hardcoded.
+export const seasonPass: RunluvEvent = {
+  id: "pase-temporada-2026",
+  name: "Pase de Temporada runluv®",
+  city: "5 ciudades",
+  venue: "Las 5 paradas de la temporada",
+  date: upcomingEvents[0].date,
+  country: "México",
+  categories: [],
+  registrationUrl: "/checkout",
+  currency: "MXN",
+  tagline: "Una inscripción. Los 5 autódromos. Un ranking.",
+  prices: [
+    {
+      label: "Pase de Temporada",
+      price: 3799,
+      note: "Ahorra vs. 5 inscripciones",
+      available: true,
+    },
+  ],
+};
+
+// The 5 circuits of the season, in order — used by the dashboard passport ("5 Circuitos").
+export const seasonCircuits = upcomingEvents.map((e) => ({
+  id: e.id,
+  city: e.city,
+  venue: e.venue,
+  date: e.date,
+}));
 
 export const divisions = [
   {
