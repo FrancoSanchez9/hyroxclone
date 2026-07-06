@@ -5,6 +5,8 @@ import { ArrowRight, RotateCcw, ChevronLeft, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { EASE } from "@/lib/animation";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
+import { getSession } from "@/lib/auth";
 import { QuizOption } from "./QuizOption";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -701,6 +703,7 @@ export function QuizSection() {
       brujula,
       sortedBrujula,
       topDirection: sortedBrujula[0][0] as Direction,
+      nivelScore,
       nivelInfo,
       modalities,
       primary: modalities[0],
@@ -709,6 +712,33 @@ export function QuizSection() {
       archetypeKey,
     };
   }, [step, brujulaAnswers, nivelAnswers]);
+
+  // Persist the result once per completion — fire-and-forget, no-op sin Supabase.
+  const savedRef = useRef(false);
+  useEffect(() => {
+    if (!result || !supabase || savedRef.current) return;
+    savedRef.current = true;
+    const session = getSession();
+    void supabase
+      .from("quiz_results")
+      .insert({
+        email: session?.email ?? null,
+        descubrir: Math.round(result.brujula.descubrir),
+        resistir: Math.round(result.brujula.resistir),
+        superarte: Math.round(result.brujula.superarte),
+        competir: Math.round(result.brujula.competir),
+        compartir: Math.round(result.brujula.compartir),
+        nivel: result.nivelInfo.level,
+        nivel_pct: Math.round(result.nivelScore),
+        archetype: result.archetype.name,
+        recommended_modality: result.primary.name,
+        affinities: result.modalities.map((mo) => ({ name: mo.name, affinity: mo.affinity })),
+      })
+      .then(({ error }) => {
+        // ponytail: fallo silencioso — guardar el resultado nunca debe romper la UX del quiz.
+        if (error) console.warn("quiz_results insert:", error.message);
+      });
+  }, [result]);
 
   const handleShare = useCallback(async () => {
     if (!result) return;

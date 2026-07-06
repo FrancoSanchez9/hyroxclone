@@ -123,6 +123,7 @@ create policy "quiz: cada quien lee los suyos"
 create table public.leads (
   email text primary key,
   source text not null, -- 'newsletter' | 'quiz' | 'contacto'
+  city text, -- el newsletter pregunta la ciudad: demanda por sede
   created_at timestamptz not null default now()
 );
 
