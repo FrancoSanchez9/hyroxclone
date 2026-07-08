@@ -164,7 +164,7 @@ function EventosPage() {
       <section className="relative overflow-hidden px-6 pb-0 pt-32 md:pt-40">
         {/* Background racetrack photo */}
         <m.img
-          src="https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1920&q=80&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&q=60&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
           loading="eager"

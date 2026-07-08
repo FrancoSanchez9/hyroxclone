@@ -15,7 +15,7 @@ function PrepHero() {
   return (
     <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       <m.img
-        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=80&fit=crop&auto=format"
+        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&q=60&fit=crop&auto=format"
         alt=""
         aria-hidden="true"
         loading="eager"

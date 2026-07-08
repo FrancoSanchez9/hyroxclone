@@ -6,6 +6,7 @@ import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
+import { optimizeUnsplash } from "@/lib/utils";
 
 function formatDateRange(dateStr: string, endDateStr?: string): string {
   const start = new Date(dateStr + "T00:00:00");
@@ -49,7 +50,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
     >
       {event.imageUrl && (
         <img
-          src={event.imageUrl}
+          src={optimizeUnsplash(event.imageUrl, 800, 500)}
           alt={event.name}
           loading="lazy"
           decoding="async"
@@ -146,7 +147,7 @@ function EventCard({ event }: { event: RunluvEvent }) {
         {event.imageUrl && (
           <div className="relative h-36 overflow-hidden">
             <img
-              src={event.imageUrl}
+              src={optimizeUnsplash(event.imageUrl, 450, 200)}
               alt={event.name}
               loading="lazy"
               decoding="async"

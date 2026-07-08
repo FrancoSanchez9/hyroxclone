@@ -100,7 +100,7 @@ function GimnasiasPage() {
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-14 pt-32 md:pt-40">
         <m.img
-          src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1920&q=80&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1200&q=60&fit=crop&auto=format"
           alt=""
           aria-hidden="true"
           loading="eager"

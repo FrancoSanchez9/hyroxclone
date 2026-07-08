@@ -56,7 +56,7 @@ export function WhatIsRunluvSection() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=900&h=600&q=80&fit=crop&auto=format"
+              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=400&q=65&fit=crop&auto=format"
               alt="Corredores en un evento runluv®"
               loading="lazy"
               decoding="async"

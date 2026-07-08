@@ -15,7 +15,7 @@ const trainingCards = [
     href: "/la-carrera",
     Icon: Dumbbell,
     imageUrl:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=450&h=225&q=65&fit=crop&auto=format",
   },
   {
     title: "Conoce el circuito",
@@ -25,7 +25,7 @@ const trainingCards = [
     href: "/eventos",
     Icon: Map,
     imageUrl:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=450&h=225&q=65&fit=crop&auto=format",
   },
   {
     title: "Administra tu ritmo",
@@ -35,7 +35,7 @@ const trainingCards = [
     href: "/tu-nivel",
     Icon: GraduationCap,
     imageUrl:
-      "https://images.unsplash.com/photo-1544216717-3bbf52512659?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1544216717-3bbf52512659?w=450&h=225&q=65&fit=crop&auto=format",
   },
   {
     title: "Descansa, aliméntate e hidrátate",
@@ -45,7 +45,7 @@ const trainingCards = [
     href: "/faq",
     Icon: Heart,
     imageUrl:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=450&h=225&q=65&fit=crop&auto=format",
   },
   {
     title: "Disfruta la experiencia",
@@ -55,7 +55,7 @@ const trainingCards = [
     href: "/eventos",
     Icon: Users,
     imageUrl:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&h=300&q=80&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=450&h=225&q=65&fit=crop&auto=format",
   },
 ];
 
