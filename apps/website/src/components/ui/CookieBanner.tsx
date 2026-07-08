@@ -34,10 +34,9 @@ export function CookieBanner() {
             Usamos cookies para ofrecerte la mejor experiencia en nuestra web.{" "}
             <Link
               to="/privacidad"
-              aria-label="Más información sobre nuestra política de privacidad"
               className="underline underline-offset-2 hover:text-gray-300 transition-colors duration-150"
             >
-              Más información
+              Lee nuestra política de privacidad
             </Link>
           </p>
           <div className="flex shrink-0 items-center gap-3">
