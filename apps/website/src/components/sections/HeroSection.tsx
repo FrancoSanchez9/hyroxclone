@@ -2,9 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { m, useScroll, useTransform } from "framer-motion";
 import { getNextEvent } from "@/data/events";
 import { CountdownStrip } from "@/components/sections/CountdownStrip";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const TITLE_LINES: { text: string; accent?: boolean; outline?: boolean }[] = [
   { text: "DESCUBRE" },
@@ -25,7 +23,9 @@ export function HeroSection() {
     >
       {/* Background image — slow zoom-out on load + scroll parallax */}
       <m.img
-        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1280&q=45&fit=crop&auto=format"
+        src="/images/1461896836934-ffe607ba8211-1280.webp"
+        width={1280}
+        height={853}
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -54,7 +54,6 @@ export function HeroSection() {
           backgroundRepeat: "repeat",
           backgroundSize: "128px 128px",
           opacity: 0.07,
-          mixBlendMode: "overlay",
         }}
       />
 
@@ -102,7 +101,7 @@ export function HeroSection() {
         >
           <Link
             to={event.registrationUrl}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
           >
             Regístrate a {event.name}
