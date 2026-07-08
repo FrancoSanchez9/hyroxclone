@@ -52,7 +52,7 @@ export function RankingTable({
           <span className="tabular-nums text-white/50">{filtered.length}</span> resultados · {race}{" "}
           · {division}
         </p>
-        <p className="text-[10px] text-white/20">Hover S1–S8 para ver splits</p>
+        <p className="text-[10px] text-white/45">Hover S1–S8 para ver splits</p>
       </div>
 
       {/* Scrollable table */}
@@ -125,7 +125,7 @@ export function RankingTable({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="mt-8 flex items-center justify-between">
-          <p className="text-[11px] tabular-nums text-white/25">
+          <p className="text-[11px] tabular-nums text-white/50">
             Página {page} de {totalPages}
           </p>
           <div className="flex items-center gap-1">

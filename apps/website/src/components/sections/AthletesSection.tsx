@@ -51,8 +51,6 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       className="group relative overflow-hidden"
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.97 }}
       style={{ background: "#111" }}
     >
       <div className="relative h-72 overflow-hidden">

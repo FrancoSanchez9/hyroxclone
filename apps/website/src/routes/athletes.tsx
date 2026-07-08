@@ -111,9 +111,7 @@ function AthletesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
-                className="group relative overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.98 }}
+                className="group relative overflow-hidden"
                 style={{ background: "#111" }}
               >
                 <div className="relative h-64 overflow-hidden">

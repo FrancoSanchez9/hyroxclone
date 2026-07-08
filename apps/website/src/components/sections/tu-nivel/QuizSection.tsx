@@ -7,6 +7,7 @@ import { EASE } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
 import { getSession } from "@/lib/auth";
+import { trackEvent } from "@/lib/analytics";
 import {
   type Direction,
   type LetterOption,
@@ -454,8 +455,17 @@ export function QuizSection() {
   // Persist the result once per completion — fire-and-forget, no-op sin Supabase.
   const savedRef = useRef(false);
   useEffect(() => {
-    if (!result || !supabase || savedRef.current) return;
+    if (!result || savedRef.current) return;
     savedRef.current = true;
+
+    trackEvent("quiz_completed", {
+      archetype: result.archetype.name,
+      recommendedModality: result.primary.name,
+      level: result.nivelInfo.level,
+      levelPct: Math.round(result.nivelScore),
+    });
+
+    if (!supabase) return;
     const session = getSession();
     void supabase
       .from("quiz_results")

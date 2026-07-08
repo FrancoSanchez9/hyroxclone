@@ -51,3 +51,22 @@ export function initAnalytics(): void {
   tryLoad();
   onConsentChange(tryLoad);
 }
+
+/**
+ * Registra un evento personalizado en la consola (en desarrollo) y en el dataLayer si se cuenta con consentimiento.
+ */
+export function trackEvent(name: string, properties?: Record<string, any>): void {
+  if (!hasAnalyticsConsent()) return;
+
+  if (import.meta.env.DEV) {
+    console.log("[Analytics Event]", name, properties);
+  }
+
+  const w = window as any;
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({
+    event: name,
+    ...properties,
+    timestamp: new Date().toISOString(),
+  });
+}

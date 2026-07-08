@@ -7,6 +7,7 @@ import { upcomingEvents, seasonPass } from "@/data/events";
 import { isAuthenticated, getSession } from "@/lib/auth";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/lib/animation";
+import { trackEvent } from "@/lib/analytics";
 
 const ACCENT = "#d4ff00";
 
@@ -54,8 +55,19 @@ function CheckoutPage() {
 
   // Simulated "order emailed" confirmation. No real inbox is touched.
   useEffect(() => {
-    if (step === "done") toast.success(`Orden ${orderId} enviada a ${email}`);
-  }, [step, orderId, email]);
+    if (step === "done") {
+      toast.success(`Orden ${orderId} enviada a ${email}`);
+      trackEvent("checkout_completed", {
+        orderId,
+        eventId: event?.id,
+        eventName: event?.name,
+        total,
+        qty,
+        division,
+        category,
+      });
+    }
+  }, [step, orderId, email, event, total, qty, division, category]);
 
   if (!event) {
     return (

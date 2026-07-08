@@ -87,7 +87,7 @@ function ContactoPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#060608] text-white">
+    <main className="min-h-screen bg-rl-dark text-white">
       <PageHero
         badge="CONTACTO"
         title="HABLEMOS"
@@ -99,7 +99,7 @@ function ContactoPage() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={sectionVariants}
-        className="py-20 px-6 border-t border-[#2a2a3a]"
+        className="py-20 px-6 border-t border-rl-border"
       >
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.2fr]">
           {/* Canales de contacto */}
@@ -121,25 +121,25 @@ function ContactoPage() {
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
                   rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-4 border border-[#2a2a3a] bg-[#16161f] px-5 py-4 transition-colors duration-150 hover:border-[#a855f7]"
+                  className="group flex items-center gap-4 border border-rl-border bg-rl-card px-5 py-4 transition-[border-color,transform] duration-[160ms] hover:border-rl-accent focus-visible:outline-2 focus-visible:outline-rl-accent focus-visible:outline-offset-2 active:scale-[0.98]"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#a855f7]/10">
-                    <channel.icon className="h-5 w-5 text-[#a855f7]" />
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-rl-accent/10">
+                    <channel.icon className="h-5 w-5 text-rl-accent" />
                   </span>
                   <span className="min-w-0">
                     <span className="block text-xs uppercase tracking-widest text-white/60">
                       {channel.label}
                     </span>
-                    <span className="block truncate text-sm font-medium text-white group-hover:text-[#a855f7]">
+                    <span className="block truncate text-sm font-medium text-white group-hover:text-rl-accent">
                       {channel.value}
                     </span>
                   </span>
                 </a>
               ))}
 
-              <div className="flex items-center gap-4 border border-[#2a2a3a] bg-[#16161f] px-5 py-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#a855f7]/10">
-                  <MapPin className="h-5 w-5 text-[#a855f7]" />
+              <div className="flex items-center gap-4 border border-rl-border bg-rl-card px-5 py-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-rl-accent/10">
+                  <MapPin className="h-5 w-5 text-rl-accent" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs uppercase tracking-widest text-white/60">
@@ -153,7 +153,7 @@ function ContactoPage() {
 
           {/* Formulario */}
           <div>
-            <Badge variant="outline" className="mb-4 text-[#a855f7]">
+            <Badge variant="outline" className="mb-4 text-rl-accent border-rl-accent/30">
               FORMULARIO
             </Badge>
             <h2
@@ -168,10 +168,10 @@ function ContactoPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="rounded-lg border border-[#a855f7]/30 bg-[#a855f7]/5 px-6 py-8 text-center"
+                className="rounded-lg border border-rl-accent/30 bg-rl-accent/5 px-6 py-8 text-center"
               >
                 <p
-                  className="mb-2 text-2xl text-[#a855f7]"
+                  className="mb-2 text-2xl text-rl-accent"
                   style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.05em" }}
                 >
                   ¡MENSAJE ENVIADO!
@@ -196,7 +196,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
-                        Nombre completo <span className="text-[#a855f7]">*</span>
+                        Nombre completo <span className="text-rl-accent">*</span>
                       </label>
                       <input
                         id={field.name}
@@ -205,7 +205,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
+                        className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-rl-accent focus-visible:ring-2 focus-visible:ring-rl-accent"
                         placeholder="Tu nombre completo"
                       />
                     </div>
@@ -219,7 +219,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
-                        Email <span className="text-[#a855f7]">*</span>
+                        Email <span className="text-rl-accent">*</span>
                       </label>
                       <input
                         id={field.name}
@@ -229,7 +229,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
+                        className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-rl-accent focus-visible:ring-2 focus-visible:ring-rl-accent"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -243,7 +243,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
-                        Asunto <span className="text-[#a855f7]">*</span>
+                        Asunto <span className="text-rl-accent">*</span>
                       </label>
                       <select
                         id={field.name}
@@ -252,7 +252,7 @@ function ContactoPage() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
-                        className="w-full appearance-none border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-[#a855f7]"
+                        className="w-full appearance-none border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-rl-accent focus-visible:ring-2 focus-visible:ring-rl-accent"
                       >
                         <option value="" disabled>
                           Selecciona un tema
@@ -274,7 +274,7 @@ function ContactoPage() {
                         htmlFor={field.name}
                         className="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-white/60"
                       >
-                        Mensaje <span className="text-[#a855f7]">*</span>
+                        Mensaje <span className="text-rl-accent">*</span>
                       </label>
                       <textarea
                         id={field.name}
@@ -284,7 +284,7 @@ function ContactoPage() {
                         onChange={(e) => field.handleChange(e.target.value)}
                         required
                         rows={5}
-                        className="w-full resize-none border border-[#2a2a3a] bg-[#16161f] px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-[#a855f7]"
+                        className="w-full resize-none border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors duration-150 focus:border-rl-accent focus-visible:ring-2 focus-visible:ring-rl-accent"
                         placeholder="Cuéntanos en qué podemos ayudarte..."
                       />
                     </div>
@@ -307,7 +307,10 @@ function ContactoPage() {
 
                 <p className="text-center text-xs text-white/60">
                   Al enviar aceptas nuestro{" "}
-                  <a href="/privacidad" className="text-[#a855f7] hover:underline">
+                  <a
+                    href="/privacidad"
+                    className="text-rl-accent hover:underline focus-visible:outline-none focus-visible:underline"
+                  >
                     Aviso de Privacidad
                   </a>
                   .

@@ -102,7 +102,7 @@ export function ResultRow({
             3
           </div>
         ) : (
-          <span className="tabular-nums text-sm font-bold text-white/25 pl-2">{r.rank}</span>
+          <span className="tabular-nums text-sm font-bold text-white/50 pl-2">{r.rank}</span>
         )}
       </td>
 
@@ -119,7 +119,7 @@ export function ResultRow({
             {r.firstName}
           </span>
         </p>
-        <p className="mt-0.5 text-[10px] tabular-nums text-white/22">#{r.bib}</p>
+        <p className="mt-0.5 text-[10px] tabular-nums text-white/45">#{r.bib}</p>
       </td>
 
       {/* Nationality */}

@@ -90,7 +90,7 @@ export function VolunteerFormSection() {
                     onChange={(e) => field.handleChange(e.target.value)}
                     required
                     aria-required="true"
-                    className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-[#ffffff]"
+                    className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-white focus-visible:ring-2 focus-visible:ring-white"
                     placeholder="Tu nombre completo"
                   />
                 </div>
@@ -116,7 +116,7 @@ export function VolunteerFormSection() {
                     onChange={(e) => field.handleChange(e.target.value)}
                     required
                     aria-required="true"
-                    className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-[#ffffff]"
+                    className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-white focus-visible:ring-2 focus-visible:ring-white"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -143,7 +143,7 @@ export function VolunteerFormSection() {
                     onChange={(e) => field.handleChange(e.target.value)}
                     required
                     aria-required="true"
-                    className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-[#ffffff]"
+                    className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-white focus-visible:ring-2 focus-visible:ring-white"
                     placeholder="+52 55 0000 0000"
                   />
                 </div>
@@ -167,7 +167,7 @@ export function VolunteerFormSection() {
                     onChange={(e) => field.handleChange(e.target.value)}
                     required
                     aria-required="true"
-                    className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-[#ffffff] appearance-none"
+                    className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white outline-none transition-colors duration-150 focus:border-white focus-visible:ring-2 focus-visible:ring-white appearance-none"
                   >
                     <option value="" disabled className="text-white/50">
                       Selecciona un evento
@@ -199,7 +199,7 @@ export function VolunteerFormSection() {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                     rows={4}
-                    className="w-full border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-[#ffffff] resize-none"
+                    className="w-full border border-rl-border bg-rl-card2 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors duration-150 focus:border-white focus-visible:ring-2 focus-visible:ring-white resize-none"
                     placeholder="Cuéntanos sobre cualquier experiencia previa en eventos deportivos o como voluntario..."
                   />
                 </div>
@@ -225,12 +225,12 @@ export function VolunteerFormSection() {
         <p className="mt-6 text-center text-sm text-white/60">
           También puedes contactarnos por WhatsApp{" "}
           <a
-            href="https://wa.me/5215500000000"
+            href="https://wa.me/522223217136"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#ffffff] hover:underline"
+            className="text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
-            +52 55 0000 0000
+            +52 222 321 7136
           </a>
         </p>
       </div>
