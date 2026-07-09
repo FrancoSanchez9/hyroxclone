@@ -25,6 +25,8 @@ dist-ssr
 
 # Build artifacts
 .tanstack/
+.output/
+.nitro/
 
 # Env local (llaves Supabase)
 .env

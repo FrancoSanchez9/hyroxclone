@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
 import { divisions } from "@/data/events";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 export function DivisionsSection() {
   return (
@@ -35,17 +33,17 @@ export function DivisionsSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: idx * 0.08, ease: EASE }}
               whileHover={{ y: -4 }}
-              className="group flex flex-col gap-3 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-6 transition-colors duration-200 hover:border-l-[#d4ff00]"
+              className="group flex flex-col gap-3 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-6 transition-colors duration-200 hover:border-l-rl-accent"
             >
               <div className="flex items-baseline justify-between gap-3">
                 <h3
-                  className="text-3xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-[#d4ff00]"
+                  className="text-3xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-rl-accent"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   {division.name}
                 </h3>
                 <span
-                  className="tabular-nums text-2xl leading-none text-white/15"
+                  className="tabular-nums text-2xl leading-none text-white/30"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   {String(idx + 1).padStart(2, "0")}

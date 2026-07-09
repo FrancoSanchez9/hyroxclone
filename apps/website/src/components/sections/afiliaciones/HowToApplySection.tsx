@@ -1,7 +1,6 @@
 import { m } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
 
 const steps = [
   {

@@ -2,9 +2,7 @@ import { m } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const STATS = [
   { value: "4", label: "Sedes clasificatorias" },
@@ -17,7 +15,9 @@ export function ChampionshipHero() {
     <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       {/* Background — iconic circuit */}
       <m.img
-        src="https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&q=60&fit=crop&auto=format"
+        src="/images/1532444458054-01a7dd3e9fca-1920.webp"
+        width={1920}
+        height={1184}
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -69,7 +69,7 @@ export function ChampionshipHero() {
         >
           <Link
             to="/eventos"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
           >
             Ver el calendario

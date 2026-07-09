@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-const ACCENT = "#d4ff00";
+import { ACCENT } from "@/lib/theme";
 
 export function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);

@@ -1,12 +1,19 @@
 import { AnimatePresence, m } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/Button";
 
 const STORAGE_KEY = "runluv-cookies-accepted";
 
 export function CookieBanner() {
-  const [visible, setVisible] = useState(() => !localStorage.getItem(STORAGE_KEY));
+  // Hidden during SSR and the first client render (no `localStorage` on the
+  // server); reveal after mount if consent hasn't been stored yet. Avoids the
+  // "localStorage is not defined" SSR crash and a hydration mismatch.
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
+  }, []);
 
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, "all");

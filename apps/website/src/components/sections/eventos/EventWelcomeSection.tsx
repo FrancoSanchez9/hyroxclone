@@ -12,9 +12,7 @@ import {
   Sunrise,
 } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 // Franjas verdes diagonales reutilizables.
 const STRIPES = `repeating-linear-gradient(45deg, ${ACCENT} 0, ${ACCENT} 3px, transparent 3px, transparent 12px)`;
@@ -156,7 +154,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
               variants={cardItem}
               whileHover={{ y: -3 }}
               transition={{ type: "spring", stiffness: 400, damping: 24 }}
-              className="group relative flex items-center gap-4 overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-colors duration-200 hover:border-[#d4ff00]/40"
+              className="group relative flex items-center gap-4 overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-colors duration-200 hover:border-rl-accent/40"
             >
               {/* franja lateral que crece en hover */}
               <span
@@ -165,7 +163,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
                 aria-hidden="true"
               />
               <span
-                className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#d4ff00]/30"
+                className="flex h-11 w-11 shrink-0 items-center justify-center border border-rl-accent/30"
                 style={{ background: "rgba(212,255,0,0.08)" }}
               >
                 <Icon size={18} style={{ color: ACCENT }} aria-hidden="true" />
@@ -187,7 +185,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, ease: EASE }}
-            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-[#d4ff00] bg-white/[0.02] p-6"
+            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/[0.02] p-6"
           >
             <div className="flex items-center gap-3">
               <CalendarClock size={22} style={{ color: ACCENT }} aria-hidden="true" />
@@ -226,7 +224,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, delay: 0.1, ease: EASE }}
-            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-[#d4ff00] bg-white/[0.02] p-6"
+            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/[0.02] p-6"
           >
             <div className="flex items-center gap-3">
               <Sunrise size={22} style={{ color: ACCENT }} aria-hidden="true" />

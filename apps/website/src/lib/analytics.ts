@@ -3,7 +3,7 @@
  *
  * Cómo usar cuando se integren analytics:
  *   1. Rellena `loadAnalyticsScripts()` con la carga real (GA4, Meta Pixel, etc.).
- *   2. Nada más: ya se llama desde `main.tsx` vía `initAnalytics()` y solo
+ *   2. Nada más: ya se llama desde `client.tsx` vía `initAnalytics()` y solo
  *      ejecuta esa carga si el usuario aceptó TODAS las cookies.
  *
  * Si el usuario acepta más tarde (sin recargar), la suscripción a

@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
 import { BarChart3, Medal } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const cards = [
   {
@@ -59,7 +57,9 @@ export function Elite15Section() {
             className="relative min-h-[280px] overflow-hidden lg:min-h-full"
           >
             <img
-              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=900&q=80&fit=crop&auto=format"
+              src="/images/1552674605-db6ffd4facb5-900.webp"
+              width={900}
+              height={600}
               alt="Corredores de élite runluv®"
               loading="lazy"
               decoding="async"
@@ -89,7 +89,7 @@ export function Elite15Section() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: i * 0.1, ease: EASE }}
                 whileHover={{ y: -4 }}
-                className="flex flex-col gap-4 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-8 transition-colors duration-200 hover:border-l-[#d4ff00]"
+                className="flex flex-col gap-4 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-8 transition-colors duration-200 hover:border-l-rl-accent"
               >
                 <card.Icon size={28} style={{ color: ACCENT }} aria-hidden="true" />
                 <h3

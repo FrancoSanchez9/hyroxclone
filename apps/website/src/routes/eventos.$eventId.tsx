@@ -11,8 +11,8 @@ import { EventWelcomeSection } from "@/components/sections/eventos/EventWelcomeS
 import { EventRulesSection } from "@/components/sections/eventos/EventRulesSection";
 import { EventContentSections } from "@/components/sections/eventos/EventContentSections";
 import { EventFaqSection } from "@/components/sections/eventos/EventFaqSection";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 const TABS = [
   { id: "info", label: "Información" },
@@ -116,7 +116,7 @@ function EventDetailPage() {
                         <m.span
                           layoutId="tab-underline"
                           className="absolute inset-x-2 -bottom-px h-0.5"
-                          style={{ background: "#d4ff00" }}
+                          style={{ background: ACCENT }}
                           transition={{ type: "spring", stiffness: 500, damping: 32 }}
                         />
                       )}
@@ -169,7 +169,7 @@ function EventDetailPage() {
                 {activePriceTier ? (
                   <>
                     <p
-                      className="text-4xl font-normal leading-none tabular-nums text-[#d4ff00]"
+                      className="text-4xl font-normal leading-none tabular-nums text-rl-accent"
                       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
                       ${activePriceTier.price.toLocaleString("es-MX")}
@@ -196,7 +196,7 @@ function EventDetailPage() {
                     type="button"
                     onClick={handleCheckout}
                     className="cursor-pointer flex items-center justify-center h-14 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-150 hover:brightness-95 active:scale-[0.96]"
-                    style={{ background: "#d4ff00" }}
+                    style={{ background: ACCENT }}
                   >
                     {!readyToBuy
                       ? "Elige división y categoría"
@@ -209,7 +209,7 @@ function EventDetailPage() {
                 {event.spotsLeft !== undefined && !event.soldOut && (
                   <p className="text-center text-[11px] text-white/50">
                     Solo quedan{" "}
-                    <span className="tabular-nums font-bold text-[#d4ff00]">{event.spotsLeft}</span>{" "}
+                    <span className="tabular-nums font-bold text-rl-accent">{event.spotsLeft}</span>{" "}
                     lugares disponibles
                   </p>
                 )}
@@ -241,7 +241,7 @@ function EventDetailPage() {
                     {readyToBuy && activePriceTier && (
                       <div className="flex justify-between border-t border-white/10 pt-2 text-xs">
                         <span className="text-white/50 uppercase tracking-wide">Total</span>
-                        <span className="font-bold tabular-nums text-[#d4ff00]">
+                        <span className="font-bold tabular-nums text-rl-accent">
                           ${total.toLocaleString("es-MX")} {event.currency}
                         </span>
                       </div>
@@ -268,7 +268,7 @@ function EventDetailPage() {
                   <div key={item} className="flex items-start gap-3">
                     <div
                       className="mt-0.5 h-3.5 w-3.5 shrink-0 flex items-center justify-center"
-                      style={{ background: "#d4ff00" }}
+                      style={{ background: ACCENT }}
                       aria-hidden="true"
                     >
                       <svg width="8" height="8" viewBox="0 0 8 8" fill="none">

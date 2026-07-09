@@ -3,8 +3,8 @@ import { m } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { supabase } from "@/lib/supabase";
+import { EASE } from "@/lib/theme";
 
-const EASE = [0.23, 1, 0.32, 1] as const;
 const STORAGE_KEY = "runluv-newsletter-subs:v1";
 
 const perks = [
@@ -188,7 +188,7 @@ export function NewsletterSection() {
                     aria-describedby={emailError ? "nl-email-error" : undefined}
                     onChange={(e) => dispatch({ type: "setEmail", value: e.target.value })}
                     placeholder="tu@correo.com"
-                    className="h-12 px-4 text-sm text-black placeholder-black/40 outline-none w-full"
+                    className="h-12 px-4 text-sm text-black placeholder-black/55 outline-none w-full"
                     style={{
                       background: "#ffffff",
                       border: emailError ? "2px solid #ff4444" : "2px solid transparent",

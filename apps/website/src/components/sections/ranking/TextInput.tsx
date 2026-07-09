@@ -20,7 +20,7 @@ export function TextInput({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full border border-white/15 bg-[#111] px-3 py-2.5 text-sm text-white placeholder-white/25 focus:border-white/40 focus:outline-none transition-[border-color] duration-150"
+          className="w-full border border-white/15 bg-[#111] px-3 py-2.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent transition-[border-color] duration-150"
         />
         {value && (
           <button

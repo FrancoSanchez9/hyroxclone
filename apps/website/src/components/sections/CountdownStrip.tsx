@@ -3,9 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 function useCountdown(targetMs: number) {
   const [now, setNow] = useState(() => Date.now());
@@ -83,6 +81,10 @@ export function CountdownStrip({ event, registerHref }: CountdownStripProps) {
               <span
                 className="tabular-nums text-[clamp(2rem,7vw,4rem)] leading-none text-black"
                 style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                // Live countdown: the SSR value and the client's hydration value
+                // differ by the elapsed seconds. Let React keep the server text and
+                // update it on the first tick instead of throwing a hydration error.
+                suppressHydrationWarning
               >
                 {pad(cell.value)}
               </span>

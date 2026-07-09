@@ -2,69 +2,63 @@ import { createFileRoute } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { PageHero } from "@/components/ui/PageHero";
 import { Link } from "@tanstack/react-router";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { Flag } from "@/components/sections/ranking/Flag";
+import { EASE } from "@/lib/theme";
 
 const proAthletes = [
   {
     name: "Hunter McIntyre",
     country: "USA",
-    flag: "🇺🇸",
+    flagCode: "us",
     division: "Pro Men",
     bestTime: "55:23",
     rank: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1571019613454-1cb2f99b2d8b-400.webp",
   },
   {
     name: "Tim Wenisch",
     country: "Germany",
-    flag: "🇩🇪",
+    flagCode: "de",
     division: "Pro Men",
     bestTime: "54:08",
     rank: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1534438327276-14e5300c3a48-400.webp",
   },
   {
     name: "Lauren Weeks",
     country: "USA",
-    flag: "🇺🇸",
+    flagCode: "us",
     division: "Pro Women",
     bestTime: "1:04:17",
     rank: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1594381898411-846e7d193883-400.webp",
   },
   {
     name: "Linda Meier",
     country: "Germany",
-    flag: "🇩🇪",
+    flagCode: "de",
     division: "Pro Women",
     bestTime: "1:02:45",
     rank: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1541534741688-6078c6bfb5c5-400.webp",
   },
   {
     name: "Jonas Weber",
     country: "Germany",
-    flag: "🇩🇪",
+    flagCode: "de",
     division: "Pro Men",
     bestTime: "56:12",
     rank: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1517836357463-d25dfeac3438-400.webp",
   },
   {
     name: "Emma Fischer",
     country: "Switzerland",
-    flag: "🇨🇭",
+    flagCode: "ch",
     division: "Pro Women",
     bestTime: "1:05:33",
     rank: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1544216717-3bbf52512659?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1544216717-3bbf52512659-400.webp",
   },
 ];
 
@@ -117,6 +111,8 @@ function AthletesPage() {
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={athlete.imageUrl}
+                    width={400}
+                    height={267}
                     alt={athlete.name}
                     loading="lazy"
                     decoding="async"
@@ -144,8 +140,9 @@ function AthletesPage() {
                   >
                     {athlete.name}
                   </h3>
-                  <p className="mt-1 text-sm text-white/50">
-                    {athlete.flag} {athlete.country}
+                  <p className="mt-1 flex items-center gap-2 text-sm text-white/50">
+                    <Flag code={athlete.flagCode} />
+                    {athlete.country}
                   </p>
                   <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
                     <span className="text-xs uppercase tracking-widest text-white/50">
@@ -245,7 +242,7 @@ function AthletesPage() {
             </p>
             <Link
               to="/elite-15"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
             >
               Learn About Elite 15
             </Link>

@@ -30,7 +30,7 @@ const FAQ = [
 export function EventFaqSection() {
   return (
     <section aria-labelledby="faq-heading">
-      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#d4ff00]">
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-rl-accent">
         ¿Dudas?
       </p>
       <h2

@@ -4,9 +4,7 @@ import { m } from "framer-motion";
 import { Search, MapPin, Star, Trophy, Zap, ArrowRight } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { cn } from "@/lib/utils";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const tiers = [
   {
@@ -100,7 +98,9 @@ function GimnasiasPage() {
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-14 pt-32 md:pt-40">
         <m.img
-          src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1200&q=60&fit=crop&auto=format"
+          src="/images/1517649763962-0c623066013b-1920.webp"
+          width={1920}
+          height={1280}
           alt=""
           aria-hidden="true"
           loading="eager"
@@ -169,7 +169,7 @@ function GimnasiasPage() {
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.45, delay: i * 0.08, ease: EASE }}
                   whileHover={{ y: -4 }}
-                  className="flex h-full flex-col gap-4 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-[#d4ff00]"
+                  className="flex h-full flex-col gap-4 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-rl-accent"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <Icon size={28} style={{ color: ACCENT }} aria-hidden="true" />
@@ -224,7 +224,7 @@ function GimnasiasPage() {
                 placeholder="Busca por ciudad o nombre del club…"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none"
+                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none"
               />
             </div>
             <div className="flex flex-wrap gap-2">
@@ -236,7 +236,7 @@ function GimnasiasPage() {
                   className={cn(
                     "border px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-[background-color,border-color,color] duration-150 active:scale-[0.96]",
                     filter === f
-                      ? "border-[#d4ff00] bg-[#d4ff00] text-black"
+                      ? "border-rl-accent bg-rl-accent text-black"
                       : "border-white/15 text-white/50 hover:border-white/50 hover:text-white",
                   )}
                 >
@@ -261,11 +261,11 @@ function GimnasiasPage() {
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: EASE }}
                   whileHover={{ y: -3 }}
-                  className="group flex flex-col gap-3 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-l-[#d4ff00]"
+                  className="group flex flex-col gap-3 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-l-rl-accent"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h3
-                      className="text-2xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-[#d4ff00]"
+                      className="text-2xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-rl-accent"
                       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
                       {club.name}
@@ -274,7 +274,7 @@ function GimnasiasPage() {
                       className={cn(
                         "shrink-0 border px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest",
                         club.type === "Performance Centre"
-                          ? "border-transparent bg-[#d4ff00] text-black"
+                          ? "border-transparent bg-rl-accent text-black"
                           : "border-white/20 text-white/50",
                       )}
                     >

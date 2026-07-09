@@ -46,8 +46,7 @@ export const upcomingEvents: RunluvEvent[] = [
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/puebla-2026",
-    imageUrl:
-      "https://images.unsplash.com/photo-1596460658047-1826d5921c56?w=1200&h=700&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1596460658047-1826d5921c56-1200x700.webp",
     featured: true,
     about:
       "runluv® llega al Autódromo Internacional Miguel E. Abed en Amozoc, Puebla. Un circuito de clase mundial convertido en escenario para corredores de todos los niveles.",
@@ -75,8 +74,7 @@ export const upcomingEvents: RunluvEvent[] = [
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/guadalajara-2026",
-    imageUrl:
-      "https://images.unsplash.com/photo-1526676537331-7747bf8278fc?w=1200&h=700&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1526676537331-7747bf8278fc-1200x700.webp",
     about:
       "El Autódromo Hermanos Gallo en Tlaquepaque se transforma en el escenario del primer evento runluv® en la Zona Metropolitana de Guadalajara.",
     tagline: "Guadalajara, ¡la perla también corre!",
@@ -103,8 +101,7 @@ export const upcomingEvents: RunluvEvent[] = [
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/leon-2026",
-    imageUrl:
-      "https://images.unsplash.com/photo-1556764420-e37ef4cdfa5c?w=1200&h=700&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1556764420-e37ef4cdfa5c-1200x700.webp",
     about:
       "runluv® llega a León, Guanajuato. El Autódromo de León ofrece un circuito único para descubrir hasta dónde eres capaz de llegar.",
     tagline: "León, ¡el Bajío ruge!",
@@ -131,8 +128,7 @@ export const upcomingEvents: RunluvEvent[] = [
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/monterrey-2026",
-    imageUrl:
-      "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&h=700&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1532444458054-01a7dd3e9fca-1200x700.webp",
     about:
       "El Autódromo Monterrey en Apodaca recibe a runluv®. La competencia de resistencia más emocionante llega al norte de México.",
     tagline: "Monterrey, ¡el norte corre fuerte!",
@@ -167,8 +163,7 @@ export const upcomingEvents: RunluvEvent[] = [
       "Teams",
     ],
     registrationUrl: "/eventos/cdmx-2027",
-    imageUrl:
-      "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&h=700&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1532444458054-01a7dd3e9fca-1200x700.webp",
     about:
       "El evento más esperado de la temporada. El Autódromo Hermanos Rodríguez, uno de los circuitos más icónicos del mundo, se convierte en el escenario de la experiencia runluv® más grande de México.",
     tagline: "CDMX, ¡la gran final!",

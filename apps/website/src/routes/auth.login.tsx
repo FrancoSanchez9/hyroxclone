@@ -3,9 +3,7 @@ import { useState } from "react";
 import { m } from "framer-motion";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import { login, isAuthenticated, isAdmin } from "@/lib/auth";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -83,7 +81,7 @@ function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@correo.com"
-                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none"
+                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none"
               />
             </div>
           </label>
@@ -100,7 +98,7 @@ function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none"
+                className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none"
               />
             </div>
           </label>
@@ -109,7 +107,7 @@ function LoginPage() {
 
           <button
             type="submit"
-            className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+            className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
           >
             Entrar
@@ -128,7 +126,7 @@ function LoginPage() {
         <button
           type="button"
           onClick={handleGoogle}
-          className="flex w-full items-center justify-center gap-3 bg-white px-8 py-4 text-sm font-semibold text-[#1f1f1f] transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-white/90 active:scale-[0.96]"
+          className="flex w-full items-center justify-center gap-3 bg-white px-8 py-4 text-sm font-semibold text-[#1f1f1f] transition-[transform,background-color] duration-[160ms] ease-out-strong hover:bg-white/90 active:scale-[0.96]"
         >
           <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
             <path

@@ -1,7 +1,5 @@
 import { m } from "framer-motion";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 export function ChampionshipTeaserSection() {
   return (
@@ -16,7 +14,9 @@ export function ChampionshipTeaserSection() {
         >
           {/* Iconic circuit backdrop */}
           <img
-            src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&q=80&fit=crop&auto=format"
+            src="/images/1552674605-db6ffd4facb5-1600.webp"
+            width={1600}
+            height={1067}
             alt=""
             aria-hidden="true"
             loading="lazy"

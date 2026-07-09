@@ -18,7 +18,7 @@ export function Select({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full appearance-none border border-white/15 bg-[#111] px-3 py-2.5 pr-8 text-sm text-white focus:border-white/40 focus:outline-none transition-[border-color] duration-150"
+          className="w-full appearance-none border border-white/15 bg-[#111] px-3 py-2.5 pr-8 text-sm text-white focus:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent transition-[border-color] duration-150"
         >
           {options.map((o) => (
             <option key={o} value={o} style={{ background: "#111" }}>

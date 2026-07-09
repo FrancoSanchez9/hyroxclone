@@ -3,8 +3,8 @@ import { m } from "framer-motion";
 import { MapPin, Calendar, ChevronLeft } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
 import { formatDateLong } from "@/lib/formatDate";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 export function EventHero({ event }: { event: RunluvEvent }) {
   return (
@@ -12,6 +12,8 @@ export function EventHero({ event }: { event: RunluvEvent }) {
       {event.imageUrl && (
         <img
           src={event.imageUrl}
+          width={1200}
+          height={700}
           alt={event.name}
           className="absolute inset-0 h-full w-full object-cover object-center"
           style={{ filter: "grayscale(100%)", outline: "1px solid rgba(255,255,255,0.1)" }}
@@ -41,7 +43,7 @@ export function EventHero({ event }: { event: RunluvEvent }) {
           {event.featured && (
             <span
               className="inline-block mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black px-2.5 py-1"
-              style={{ background: "#d4ff00" }}
+              style={{ background: ACCENT }}
             >
               Destacado
             </span>
@@ -78,8 +80,8 @@ export function EventHero({ event }: { event: RunluvEvent }) {
           <div className="mt-7 flex flex-wrap items-center gap-4">
             <a
               href="#registro"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
-              style={{ background: "#d4ff00", boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+              style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
             >
               ¡Regístrate ahora!
             </a>

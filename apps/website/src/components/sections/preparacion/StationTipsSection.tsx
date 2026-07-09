@@ -1,8 +1,6 @@
 import { m } from "framer-motion";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const tips = [
   {
@@ -58,7 +56,7 @@ export function StationTipsSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: idx * 0.1, ease: EASE }}
               whileHover={{ y: -4 }}
-              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-black/40 p-6 backdrop-blur-sm transition-colors duration-200 hover:border-t-[#d4ff00]"
+              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-black/40 p-6 backdrop-blur-sm transition-colors duration-200 hover:border-t-rl-accent"
             >
               <div className="flex items-center justify-between gap-2">
                 <h3

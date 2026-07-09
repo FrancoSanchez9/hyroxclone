@@ -3,9 +3,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, Minus, Plus, Pencil } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
 import { cn } from "@/lib/utils";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const DIVISION_CATEGORIES: Record<string, string[]> = {
   "La Última Vuelta": ["Individual Open", "Individual Pro", "Doubles", "Teams"],
@@ -72,7 +70,7 @@ function StepSummary({
       onClick={onEdit}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="group flex w-full cursor-pointer items-center justify-between border border-white/10 bg-white/[0.02] px-5 py-3.5 text-left transition-colors duration-150 hover:border-[#d4ff00]/40"
+      className="group flex w-full cursor-pointer items-center justify-between border border-white/10 bg-white/[0.02] px-5 py-3.5 text-left transition-colors duration-150 hover:border-rl-accent/40"
     >
       <span className="flex items-center gap-3">
         <span
@@ -86,7 +84,7 @@ function StepSummary({
         </span>
         <span className="text-sm font-bold text-white">{value}</span>
       </span>
-      <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-white/50 transition-colors group-hover:text-[#d4ff00]">
+      <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-white/50 transition-colors group-hover:text-rl-accent">
         <Pencil size={11} /> Cambiar
       </span>
     </m.button>
@@ -140,7 +138,7 @@ export function EventRegistrationSection({
                     className={cn(
                       "flex h-7 w-7 shrink-0 items-center justify-center border text-xs font-bold tabular-nums transition-colors duration-300",
                       done || isActive
-                        ? "border-[#d4ff00] text-black"
+                        ? "border-rl-accent text-black"
                         : "border-white/20 text-white/50",
                     )}
                     style={{ background: done || isActive ? ACCENT : "transparent" }}
@@ -205,7 +203,7 @@ export function EventRegistrationSection({
                       className={cn(
                         "group relative flex cursor-pointer flex-col items-start gap-1 overflow-hidden border p-4 text-left transition-colors duration-200",
                         selected
-                          ? "border-[#d4ff00] text-white"
+                          ? "border-rl-accent text-white"
                           : "border-white/15 text-white/60 hover:border-white/40 hover:text-white",
                       )}
                       style={selected ? { background: "rgba(212,255,0,0.08)" } : undefined}
@@ -225,7 +223,7 @@ export function EventRegistrationSection({
                         className={cn(
                           "absolute right-3 top-3 transition-[opacity,transform] duration-200",
                           selected
-                            ? "text-[#d4ff00] opacity-100"
+                            ? "text-rl-accent opacity-100"
                             : "-translate-x-1 text-white/50 opacity-0 group-hover:translate-x-0 group-hover:opacity-100",
                         )}
                         aria-hidden="true"
@@ -272,7 +270,7 @@ export function EventRegistrationSection({
                       className={cn(
                         "cursor-pointer border px-5 py-2.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",
                         selectedCategory === cat
-                          ? "border-[#d4ff00] bg-[#d4ff00] text-black"
+                          ? "border-rl-accent bg-rl-accent text-black"
                           : "border-white/15 text-white/60 hover:border-white/40 hover:text-white",
                       )}
                     >
@@ -309,7 +307,7 @@ export function EventRegistrationSection({
                     disabled={quantity <= 1}
                     onClick={() => onChangeQuantity(quantity - 1)}
                     whileTap={{ scale: 0.85 }}
-                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-[#d4ff00] disabled:cursor-not-allowed disabled:text-white/15"
+                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
                   >
                     <Minus size={20} />
                   </m.button>
@@ -337,7 +335,7 @@ export function EventRegistrationSection({
                     disabled={quantity >= MAX_PASSES}
                     onClick={() => onChangeQuantity(quantity + 1)}
                     whileTap={{ scale: 0.85 }}
-                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-[#d4ff00] disabled:cursor-not-allowed disabled:text-white/15"
+                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
                   >
                     <Plus size={20} />
                   </m.button>
@@ -363,7 +361,7 @@ export function EventRegistrationSection({
                         className={cn(
                           "relative flex items-center justify-between overflow-hidden border px-5 py-4 transition-colors duration-200",
                           tier.available
-                            ? "border-[#d4ff00]/40 bg-[#d4ff00]/[0.06]"
+                            ? "border-rl-accent/40 bg-rl-accent/[0.06]"
                             : "border-white/10 opacity-45",
                         )}
                       >
@@ -388,7 +386,7 @@ export function EventRegistrationSection({
                             ${tier.price.toLocaleString("es-MX")} {event.currency}
                           </p>
                           {tier.available ? (
-                            <p className="mt-0.5 flex items-center justify-end gap-1 text-[10px] font-bold uppercase tracking-wider text-[#d4ff00]">
+                            <p className="mt-0.5 flex items-center justify-end gap-1 text-[10px] font-bold uppercase tracking-wider text-rl-accent">
                               <span
                                 className="h-1.5 w-1.5 animate-pulse rounded-full"
                                 style={{ background: ACCENT }}

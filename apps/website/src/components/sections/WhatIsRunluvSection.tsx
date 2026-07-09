@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 const bullets = [
   "Sin clasificación previa — todos pueden participar",
@@ -36,7 +36,7 @@ export function WhatIsRunluvSection() {
               ¿QUÉ ES{" "}
               <span
                 style={{
-                  background: "#d4ff00",
+                  background: ACCENT,
                   padding: "0 8px",
                   color: "#000",
                   display: "inline-block",
@@ -56,7 +56,9 @@ export function WhatIsRunluvSection() {
             transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=400&q=65&fit=crop&auto=format"
+              src="/images/1552674605-db6ffd4facb5-900x600.webp"
+              width={900}
+              height={600}
               alt="Corredores en un evento runluv®"
               loading="lazy"
               decoding="async"
@@ -65,7 +67,7 @@ export function WhatIsRunluvSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#d4ff00]">
+              <p className="text-xs font-bold uppercase tracking-widest text-rl-accent">
                 LA EXPERIENCIA RUNLUV®
               </p>
             </div>
@@ -89,7 +91,7 @@ export function WhatIsRunluvSection() {
               siguiente desafío.
             </p>
             <p
-              className="text-lg font-bold uppercase tracking-wide text-[#d4ff00] text-pretty"
+              className="text-lg font-bold uppercase tracking-wide text-rl-accent text-pretty"
               style={{ fontFamily: "'Bebas Neue', sans-serif" }}
             >
               Bienvenido a la comunidad runluv®
@@ -98,7 +100,7 @@ export function WhatIsRunluvSection() {
             <ul className="flex flex-col gap-3">
               {bullets.map((bullet) => (
                 <li key={bullet} className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#d4ff00]" aria-hidden="true" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-rl-accent" aria-hidden="true" />
                   <span className="text-sm leading-relaxed text-white/70 sm:text-base">
                     {bullet}
                   </span>
@@ -109,13 +111,13 @@ export function WhatIsRunluvSection() {
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 to="/la-carrera"
-                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
+                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
               >
                 Descubre la carrera
               </Link>
               <Link
                 to="/tu-nivel"
-                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-[#d4ff00] border border-[#d4ff00]/50 hover:border-[#d4ff00] hover:bg-[#d4ff00]/10 transition-[border-color,background-color] duration-[160ms] active:scale-[0.96]"
+                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-rl-accent border border-rl-accent/50 hover:border-rl-accent hover:bg-rl-accent/10 transition-[border-color,background-color] duration-[160ms] active:scale-[0.96]"
               >
                 Encuentra tu desafío
               </Link>
@@ -134,7 +136,7 @@ export function WhatIsRunluvSection() {
                       className="text-5xl uppercase leading-none md:text-6xl"
                       style={
                         word === "RUNLUV®"
-                          ? { fontFamily: "'Bebas Neue', sans-serif", color: "#d4ff00" }
+                          ? { fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }
                           : {
                               fontFamily: "'Bebas Neue', sans-serif",
                               color: "transparent",
@@ -144,7 +146,7 @@ export function WhatIsRunluvSection() {
                     >
                       {word}
                     </span>
-                    <span className="h-2 w-2 rounded-full bg-[#d4ff00]" />
+                    <span className="h-2 w-2 rounded-full bg-rl-accent" />
                   </span>
                 ))}
               </div>

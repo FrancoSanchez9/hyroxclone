@@ -6,7 +6,7 @@ import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
-import { optimizeUnsplash } from "@/lib/utils";
+import { ACCENT } from "@/lib/theme";
 
 function formatDateRange(dateStr: string, endDateStr?: string): string {
   const start = new Date(dateStr + "T00:00:00");
@@ -50,7 +50,9 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
     >
       {event.imageUrl && (
         <img
-          src={optimizeUnsplash(event.imageUrl, 800, 500)}
+          src={event.imageUrl}
+          width={1200}
+          height={700}
           alt={event.name}
           loading="lazy"
           decoding="async"
@@ -65,7 +67,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <span
             className="inline-block px-3 py-1 text-xs font-bold tracking-widest text-black uppercase"
-            style={{ background: "#d4ff00" }}
+            style={{ background: ACCENT }}
           >
             DESTACADO
           </span>
@@ -85,7 +87,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
           </h3>
 
           <div className="flex flex-col gap-2 mt-2">
-            <div className="flex items-center gap-2 text-[#d4ff00]">
+            <div className="flex items-center gap-2 text-rl-accent">
               <Calendar className="w-4 h-4 shrink-0" />
               <span className="text-sm font-semibold tracking-wider">
                 {formatDateRange(event.date, event.endDate)}
@@ -124,8 +126,8 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
           ) : (
             <a
               href={event.registrationUrl}
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
-              style={{ background: "#d4ff00" }}
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-out-strong active:scale-[0.96]"
+              style={{ background: ACCENT }}
             >
               ¡Regístrate ahora!
             </a>
@@ -147,7 +149,9 @@ function EventCard({ event }: { event: RunluvEvent }) {
         {event.imageUrl && (
           <div className="relative h-36 overflow-hidden">
             <img
-              src={optimizeUnsplash(event.imageUrl, 450, 200)}
+              src={event.imageUrl}
+              width={1200}
+              height={700}
               alt={event.name}
               loading="lazy"
               decoding="async"
@@ -158,7 +162,7 @@ function EventCard({ event }: { event: RunluvEvent }) {
           </div>
         )}
         <CardHeader className="pb-3">
-          <div className="flex items-center gap-2 text-[#d4ff00] mb-1">
+          <div className="flex items-center gap-2 text-rl-accent mb-1">
             <Calendar className="w-3.5 h-3.5 shrink-0" />
             <span className="text-xs font-bold tracking-widest">
               {formatDateRange(event.date, event.endDate)}
@@ -207,7 +211,7 @@ function EventCard({ event }: { event: RunluvEvent }) {
           ) : (
             <Link
               to={event.registrationUrl}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#d4ff00] hover:text-white transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-rl-accent hover:text-white transition-colors duration-150"
             >
               Regístrate
               <ArrowRight className="w-3.5 h-3.5" />
@@ -254,7 +258,7 @@ export function UpcomingEventsSection() {
         <div className="flex justify-center">
           <Link
             to="/eventos"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/60 hover:text-[#d4ff00] transition-colors duration-200 border-b border-transparent hover:border-[#d4ff00] pb-0.5"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/60 hover:text-rl-accent transition-colors duration-200 border-b border-transparent hover:border-rl-accent pb-0.5"
           >
             Ver todas las carreras
             <ArrowRight className="w-4 h-4" />

@@ -46,8 +46,8 @@
 
   html {
     scroll-behavior: smooth;
-    /* Reserve space for the fixed navbar (h-16 = 64px + 8px buffer) */
-    scroll-padding-top: 72px;
+    /* Reserve space for the fixed navbar (h-20 = 80px + 8px buffer) */
+    scroll-padding-top: 88px;
   }
 
   @media (prefers-reduced-motion: reduce) {

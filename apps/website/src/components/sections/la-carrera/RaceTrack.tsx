@@ -1,5 +1,6 @@
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ACCENT } from "@/lib/theme";
 
 // Bold graphic racetrack — concentric filled lanes (à la Urban Run Club) with a
 // hand-drawn rough edge, in lime. A dark runner-comet loops the middle lane via
@@ -94,7 +95,7 @@ export function RaceTrack({ className }: { className?: string }) {
           cy={CY + 30}
           rx="340"
           ry="150"
-          fill="#d4ff00"
+          fill={ACCENT}
           opacity="0.06"
           filter="url(#rt-glow)"
         />
@@ -146,7 +147,7 @@ export function RaceTrack({ className }: { className?: string }) {
         >
           El circuito
         </span>
-        <span className="mt-1 text-[9px] font-bold uppercase tracking-[0.28em] text-[#d4ff00] sm:text-[10px]">
+        <span className="mt-1 text-[9px] font-bold uppercase tracking-[0.28em] text-rl-accent sm:text-[10px]">
           Autódromo · Clase mundial
         </span>
       </div>

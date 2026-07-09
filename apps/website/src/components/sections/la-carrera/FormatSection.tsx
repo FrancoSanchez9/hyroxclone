@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
 import { Flag, Timer, Trophy } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const STEPS = [
   {
@@ -34,7 +32,9 @@ export function FormatSection() {
     >
       {/* Faded circuit backdrop */}
       <img
-        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1600&q=80&fit=crop&auto=format"
+        src="/images/1476480862126-209bfaa8edc8-1600.webp"
+        width={1600}
+        height={1067}
         alt=""
         aria-hidden="true"
         loading="lazy"
@@ -74,7 +74,7 @@ export function FormatSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: EASE }}
-              className="group relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-[#d4ff00]"
+              className="group relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-rl-accent"
             >
               <span
                 className="pointer-events-none absolute -right-2 -top-4 select-none tabular-nums leading-none text-white/[0.05]"

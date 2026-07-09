@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { m, useInView, useMotionValue, animate, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { EASE } from "@/lib/animation";
+import { ACCENT } from "@/lib/theme";
 
 interface Stat {
   prefix?: string;
@@ -90,7 +91,7 @@ export function StatsSection() {
     <section
       className="relative w-full overflow-hidden"
       style={{
-        background: "#d4ff00",
+        background: ACCENT,
         backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)",
         backgroundSize: "28px 28px",
       }}

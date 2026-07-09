@@ -1,17 +1,17 @@
 # runluv®
 
-> runluv® es una plataforma B2G mexicana de eventos de running en autódromos que transforma el deporte en desarrollo económico para ciudades. Modelo de colaboración público-privada llave en mano para gobiernos municipales y estatales de México.
+> runluv® es una experiencia mexicana de running que transforma los autódromos en pistas para corredores de todos los niveles. Modalidades La Última Vuelta®, Endurance 4H, 5K y 10K en Puebla, Guadalajara, León, Monterrey y la Gran Final en Ciudad de México, temporada 2027. runluv® también opera un modelo de colaboración público-privada llave en mano para llevar estos eventos a gobiernos municipales y estatales de México.
 
 ## Acerca de runluv
 
-- [¿Qué es runluv?](https://runluv.mx/#que-es): Plataforma de eventos que integra carrera, resistencia y festival en autódromos. Formato único en México diseñado para generar impacto económico, turístico y social en una sola jornada de 6 a 8 horas.
-- [Modelo de colaboración](https://runluv.mx/#modelo): Modelo público-privado llave en mano. El gobierno aporta infraestructura, permisos, seguridad, difusión y coinversión. runluv® aporta producción integral, comercialización, operación y marca. Riesgo controlado.
+- [¿Qué es runluv?](https://runluv.mx/): Experiencia de running que integra carrera, resistencia y festival en autódromos. Formato único en México diseñado para que corredores de todos los niveles descubran hasta dónde son capaces de llegar, en una sola jornada de 6 a 8 horas.
+- [Modelo de colaboración con gobiernos](https://runluv.mx/contacto): Para ciudades interesadas en llevar runluv® a su localidad. Modelo público-privado llave en mano: el gobierno aporta infraestructura, permisos, seguridad, difusión y coinversión; runluv® aporta producción integral, comercialización, operación y marca. Riesgo controlado.
 
 ## Modalidades de competencia
 
-- [La Última Vuelta® (LUV)](https://runluv.mx/#modalidades): Formato de eliminación exclusivo y registrado. Completa cada vuelta antes del tiempo límite o queda eliminado. Gana quien resiste hasta el final. Único en México.
-- [Endurance 4H](https://runluv.mx/#modalidades): Cuatro horas para acumular la mayor distancia posible. Corre, trota, camina o descansa. Cada kilómetro cuenta.
-- [5K / 10K](https://runluv.mx/#modalidades): Formato clásico para velocidad, marca personal o primera experiencia runluv.
+- [La Última Vuelta® (LUV)](https://runluv.mx/la-carrera): Formato de eliminación exclusivo y registrado. Completa cada vuelta antes del tiempo límite o queda eliminado. Gana quien resiste hasta el final. Único en México.
+- [Endurance 4H](https://runluv.mx/la-carrera): Cuatro horas para acumular la mayor distancia posible. Corre, trota, camina o descansa. Cada kilómetro cuenta.
+- [5K / 10K](https://runluv.mx/la-carrera): Formato clásico para velocidad, marca personal o primera experiencia runluv.
 
 ## Categorías de participación
 
@@ -23,12 +23,12 @@
 
 ## Impacto económico por evento
 
-- [Métricas de impacto](https://runluv.mx/#impacto): 3,000–5,000 corredores registrados. 15,000 asistentes totales. 20–35% visitantes foráneos. 1,500–3,500 noches de hotel generadas. Retorno de 7x por peso invertido. 90+ días de impacto visible post-evento.
+- [Métricas de impacto (proyección runluv®)](https://runluv.mx/contacto): 3,000–5,000 corredores registrados. 15,000 asistentes totales. 20–35% visitantes foráneos. 1,500–3,500 noches de hotel generadas. Retorno estimado de 7x por peso invertido. 90+ días de impacto visible post-evento. Cifras del caso de negocio runluv®; detalle metodológico disponible en el dossier ejecutivo.
 
-## Por qué ahora
+## Por qué ahora (estimaciones de mercado, caso de negocio runluv®)
 
 - +15 millones de corredores en México
-- Crecimiento anual del 8–12%
+- Crecimiento anual estimado del 8–12% en el mercado de running
 - Saturación de formatos tradicionales
 - Auge de experiencias híbridas
 - Las primeras ciudades se posicionan como sede insignia
@@ -39,11 +39,12 @@ Las carreras tradicionales terminan en la meta. runluv® empieza ahí. El format
 
 ## Contacto
 
-- [Agenda una reunión](mailto:contacto@runluv.mx): Para gobiernos estatales, municipales y secretarías de turismo
-- [Descarga el dossier](https://runluv.mx/#contacto): Propuesta ejecutiva completa
+- [Regístrate a un evento](https://runluv.mx/eventos): Para corredores que quieren participar en la próxima sede
+- [Agenda una reunión](mailto:contacto@runluv.mx): Para gobiernos estatales, municipales y secretarías de turismo interesados en llevar runluv® a su ciudad
+- [Descarga el dossier](https://runluv.mx/contacto): Propuesta ejecutiva completa del modelo de colaboración
 
 ## Optional
 
 - Tagline: Resiste hasta el final
 - País de operación: México
-- Formato: Evento B2G — plataforma de events running en autódromos
+- Formato: Experiencia de running en autódromos, con modelo de colaboración público-privada (B2G) para expansión a nuevas ciudades

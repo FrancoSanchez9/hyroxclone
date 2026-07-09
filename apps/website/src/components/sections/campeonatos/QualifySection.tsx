@@ -3,9 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Trophy, ArrowRight } from "lucide-react";
 import { upcomingEvents } from "@/data/events";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 function shortDate(dateStr: string) {
@@ -82,16 +80,16 @@ export function QualifySection() {
 
               <Link
                 to={event.registrationUrl}
-                className="group flex flex-col gap-1 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-l-[#d4ff00]"
+                className="group flex flex-col gap-1 border border-white/10 border-l-2 border-l-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-l-rl-accent"
               >
                 <div className="flex items-center justify-between gap-3">
                   <h3
-                    className="text-2xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-[#d4ff00]"
+                    className="text-2xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-rl-accent"
                     style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
                     {event.name}
                   </h3>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-white/50 transition-[color,transform] duration-200 group-hover:translate-x-1 group-hover:text-[#d4ff00]" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-white/50 transition-[color,transform] duration-200 group-hover:translate-x-1 group-hover:text-rl-accent" />
                 </div>
                 <p className="text-xs uppercase tracking-widest" style={{ color: ACCENT }}>
                   {shortDate(event.date)}

@@ -10,6 +10,7 @@ import {
 } from "@/components/sections/ranking/RankingFilters";
 import { RankingPodium } from "@/components/sections/ranking/RankingPodium";
 import { RankingTable, type SplitStat } from "@/components/sections/ranking/RankingTable";
+import { ACCENT } from "@/lib/theme";
 
 const SPLIT_KEYS = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"] as const;
 
@@ -130,7 +131,9 @@ function RankingPage() {
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-12 pt-32 md:pt-40">
         <m.img
-          src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1200&q=60&fit=crop&auto=format"
+          src="/images/1461896836934-ffe607ba8211-1920.webp"
+          width={1920}
+          height={1280}
           alt=""
           aria-hidden="true"
           loading="eager"
@@ -151,7 +154,7 @@ function RankingPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.3em]"
-            style={{ color: "#d4ff00" }}
+            style={{ color: ACCENT }}
           >
             Temporada 2026–2027
           </m.span>

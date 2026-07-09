@@ -7,15 +7,15 @@ import { PillarsSection } from "@/components/sections/preparacion/PillarsSection
 import { TimelineSection } from "@/components/sections/preparacion/TimelineSection";
 import { StationTipsSection } from "@/components/sections/preparacion/StationTipsSection";
 import { TrainingClubCTA } from "@/components/sections/preparacion/TrainingClubCTA";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 function PrepHero() {
   return (
     <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       <m.img
-        src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&q=60&fit=crop&auto=format"
+        src="/images/1476480862126-209bfaa8edc8-1920.webp"
+        width={1920}
+        height={1280}
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -62,7 +62,7 @@ function PrepHero() {
         >
           <Link
             to="/tu-nivel"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
           >
             Encuentra tu desafío

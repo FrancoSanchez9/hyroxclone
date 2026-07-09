@@ -15,9 +15,7 @@ import {
 import { getSession, logout, isAuthenticated, isAdmin } from "@/lib/auth";
 import { upcomingEvents } from "@/data/events";
 import { cn } from "@/lib/utils";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 // ponytail: in-memory mock data + toasts; wire to a real API when a backend exists.
 
@@ -134,7 +132,7 @@ function AdminPage() {
               className={cn(
                 "inline-flex items-center gap-2 border px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-[background-color,border-color,color] duration-150 active:scale-[0.96]",
                 tab === id
-                  ? "border-[#d4ff00] bg-[#d4ff00] text-black"
+                  ? "border-rl-accent bg-rl-accent text-black"
                   : "border-white/15 text-white/50 hover:border-white/40 hover:text-white",
               )}
             >
@@ -227,7 +225,7 @@ function AdminPage() {
                               type="button"
                               onClick={demoToast}
                               aria-label={`Destacar ${e.name}`}
-                              className="border border-white/15 p-2 text-white/50 transition-colors duration-150 hover:border-[#d4ff00] hover:text-[#d4ff00] active:scale-[0.94]"
+                              className="border border-white/15 p-2 text-white/50 transition-colors duration-150 hover:border-rl-accent hover:text-rl-accent active:scale-[0.94]"
                             >
                               <Star className="h-3.5 w-3.5" />
                             </button>
@@ -268,7 +266,7 @@ function AdminPage() {
                             className={cn(
                               "px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest",
                               u.role === "admin"
-                                ? "bg-[#d4ff00] text-black"
+                                ? "bg-rl-accent text-black"
                                 : "border border-white/20 text-white/50",
                             )}
                           >
@@ -314,7 +312,7 @@ function AdminPage() {
                         aria-hidden="true"
                       >
                         <span
-                          className="absolute top-0.5 h-5 w-5 rounded-full bg-black transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                          className="absolute top-0.5 h-5 w-5 rounded-full bg-black transition-transform duration-200 ease-out-strong"
                           style={{ transform: on ? "translateX(1.45rem)" : "translateX(0.125rem)" }}
                         />
                       </span>
@@ -331,6 +329,10 @@ function AdminPage() {
 }
 
 export const Route = createFileRoute("/admin")({
+  // Mock auth lives in localStorage, invisible to the server. Render client-only
+  // so `beforeLoad` runs where the session exists — otherwise SSR redirects even
+  // logged-in admins before the client can hydrate.
+  ssr: false,
   beforeLoad: () => {
     if (!isAuthenticated()) throw redirect({ to: "/auth/login" });
     if (!isAdmin()) throw redirect({ to: "/dashboard" });

@@ -2,40 +2,42 @@ import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+import { Flag } from "@/components/sections/ranking/Flag";
 import { EASE, fadeUp } from "@/lib/animation";
+import { ACCENT } from "@/lib/theme";
 
 const athletes = [
   {
     name: "Hunter McIntyre",
-    country: "USA 🇺🇸",
+    country: "USA",
+    flagCode: "us",
     division: "Pro Men",
     bestTime: "55:23",
-    imageUrl:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1571019613454-1cb2f99b2d8b-400.webp",
   },
   {
     name: "Lauren Weeks",
-    country: "USA 🇺🇸",
+    country: "USA",
+    flagCode: "us",
     division: "Pro Women",
     bestTime: "1:04:17",
-    imageUrl:
-      "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1594381898411-846e7d193883-400.webp",
   },
   {
     name: "Tim Wenisch",
-    country: "Germany 🇩🇪",
+    country: "Germany",
+    flagCode: "de",
     division: "Pro Men",
     bestTime: "54:08",
-    imageUrl:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1534438327276-14e5300c3a48-400.webp",
   },
   {
     name: "Linda Meier",
-    country: "Germany 🇩🇪",
+    country: "Germany",
+    flagCode: "de",
     division: "Pro Women",
     bestTime: "1:02:45",
-    imageUrl:
-      "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1541534741688-6078c6bfb5c5-400.webp",
   },
 ];
 
@@ -56,16 +58,18 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
       <div className="relative h-72 overflow-hidden">
         <img
           src={athlete.imageUrl}
+          width={400}
+          height={267}
           alt={athlete.name}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover object-top grayscale transition-[transform,filter] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:grayscale-0"
+          className="h-full w-full object-cover object-top grayscale transition-[transform,filter] duration-500 ease-out-strong group-hover:scale-105 group-hover:grayscale-0"
           style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
         <div
           className="absolute top-3 right-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-black"
-          style={{ background: "#d4ff00" }}
+          style={{ background: ACCENT }}
         >
           {athlete.division}
         </div>
@@ -78,11 +82,14 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
         >
           {athlete.name}
         </h3>
-        <p className="mt-1 text-sm text-white/50">{athlete.country}</p>
+        <p className="mt-1 flex items-center gap-2 text-sm text-white/50">
+          <Flag code={athlete.flagCode} />
+          {athlete.country}
+        </p>
         <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
           <span className="text-xs uppercase tracking-widest text-white/50">Best Time</span>
           <span
-            className="tabular-nums text-xl font-normal text-[#d4ff00]"
+            className="tabular-nums text-xl font-normal text-rl-accent"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             {athlete.bestTime}
@@ -108,7 +115,7 @@ export function AthletesSection() {
           className="mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
         >
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-[#d4ff00]">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-rl-accent">
               Elite Athletes
             </p>
             <AnimatedTitle
@@ -119,7 +126,7 @@ export function AthletesSection() {
           </div>
           <Link
             to="/athletes"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/50 hover:text-[#d4ff00] transition-colors duration-200 border-b border-transparent hover:border-[#d4ff00] pb-0.5 shrink-0"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-white/50 hover:text-rl-accent transition-colors duration-200 border-b border-transparent hover:border-rl-accent pb-0.5 shrink-0"
           >
             Meet All Athletes →
           </Link>

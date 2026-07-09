@@ -3,8 +3,8 @@ import { m } from "framer-motion";
 import { Star } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Link } from "@tanstack/react-router";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { Flag } from "@/components/sections/ranking/Flag";
+import { EASE } from "@/lib/theme";
 
 const qualificationCriteria = [
   {
@@ -25,42 +25,82 @@ const qualificationCriteria = [
 ];
 
 const elite15Athletes = [
-  { name: "Tim Wenisch", country: "Germany 🇩🇪", division: "Pro Men", rank: 1, bestTime: "54:08" },
-  { name: "Hunter McIntyre", country: "USA 🇺🇸", division: "Pro Men", rank: 2, bestTime: "55:23" },
-  { name: "Jonas Weber", country: "Germany 🇩🇪", division: "Pro Men", rank: 3, bestTime: "56:12" },
-  { name: "Luca Rossetti", country: "Italy 🇮🇹", division: "Pro Men", rank: 4, bestTime: "56:44" },
+  {
+    name: "Tim Wenisch",
+    country: "Germany",
+    flagCode: "de",
+    division: "Pro Men",
+    rank: 1,
+    bestTime: "54:08",
+  },
+  {
+    name: "Hunter McIntyre",
+    country: "USA",
+    flagCode: "us",
+    division: "Pro Men",
+    rank: 2,
+    bestTime: "55:23",
+  },
+  {
+    name: "Jonas Weber",
+    country: "Germany",
+    flagCode: "de",
+    division: "Pro Men",
+    rank: 3,
+    bestTime: "56:12",
+  },
+  {
+    name: "Luca Rossetti",
+    country: "Italy",
+    flagCode: "it",
+    division: "Pro Men",
+    rank: 4,
+    bestTime: "56:44",
+  },
   {
     name: "Anders Eriksson",
-    country: "Sweden 🇸🇪",
+    country: "Sweden",
+    flagCode: "se",
     division: "Pro Men",
     rank: 5,
     bestTime: "57:02",
   },
   {
     name: "Linda Meier",
-    country: "Germany 🇩🇪",
+    country: "Germany",
+    flagCode: "de",
     division: "Pro Women",
     rank: 1,
     bestTime: "1:02:45",
   },
-  { name: "Lauren Weeks", country: "USA 🇺🇸", division: "Pro Women", rank: 2, bestTime: "1:04:17" },
+  {
+    name: "Lauren Weeks",
+    country: "USA",
+    flagCode: "us",
+    division: "Pro Women",
+    rank: 2,
+    bestTime: "1:04:17",
+  },
   {
     name: "Emma Fischer",
-    country: "Switzerland 🇨🇭",
+    country: "Switzerland",
+    flagCode: "ch",
     division: "Pro Women",
     rank: 3,
     bestTime: "1:05:33",
   },
   {
     name: "Anna Kovaleva",
-    country: "Ukraine 🇺🇦",
+    country: "Ukraine",
+    flagCode: "ua",
     division: "Pro Women",
     rank: 4,
     bestTime: "1:06:11",
   },
   {
     name: "Sofia Lenz",
-    country: "Austria 🇦🇹",
+    country: "Austria",
+    flagCode: "at",
     division: "Pro Women",
     rank: 5,
     bestTime: "1:06:58",
@@ -269,7 +309,10 @@ function Elite15Page() {
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-white/60">{athlete.country}</p>
+                  <p className="flex items-center gap-2 text-xs text-white/60">
+                    <Flag code={athlete.flagCode} />
+                    {athlete.country}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-white/50 uppercase tracking-widest mb-0.5">
@@ -309,7 +352,7 @@ function Elite15Page() {
             </p>
             <Link
               to="/eventos"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
             >
               Encuentra un evento
             </Link>

@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { seasonPass, seasonCircuits } from "@/data/events";
-
-const ACCENT = "#d4ff00";
+import { ACCENT } from "@/lib/theme";
 
 const perks = [
   "Inscripción a las 5 paradas de la temporada",
@@ -45,7 +44,7 @@ export function SeasonPassSection() {
             <ul className="mt-8 flex flex-col gap-3">
               {perks.map((perk) => (
                 <li key={perk} className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#d4ff00]" aria-hidden="true" />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-rl-accent" aria-hidden="true" />
                   <span className="text-sm leading-relaxed text-white/75 sm:text-base">{perk}</span>
                 </li>
               ))}

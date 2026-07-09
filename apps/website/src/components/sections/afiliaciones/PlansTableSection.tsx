@@ -1,8 +1,7 @@
 import { m } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { CellValue } from "@/components/sections/afiliaciones/CellValue";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
 
 const tableFeatures = [
   { label: "Uso del logo", trainingClub: true, performanceCentre: true, performanceAcademy: true },

@@ -1,9 +1,7 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Globe } from "lucide-react";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 export function BeyondMexicoSection() {
   const ref = useRef<HTMLElement>(null);

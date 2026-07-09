@@ -5,9 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { upcomingEvents, divisions } from "@/data/events";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { cn } from "@/lib/utils";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const FILTERS = ["Todos", "La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Teams"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -38,10 +36,12 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
         {event.imageUrl && (
           <img
             src={event.imageUrl}
+            width={1200}
+            height={700}
             alt={event.name}
             loading="lazy"
             decoding="async"
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:grayscale-0"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-[600ms] ease-out-strong group-hover:scale-105 group-hover:grayscale-0"
           />
         )}
         {/* Legibility gradients */}
@@ -50,7 +50,7 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
 
         {/* Racing stripe — lime bar that widens on hover */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-1 transition-[width] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-2"
+          className="pointer-events-none absolute inset-y-0 left-0 w-1 transition-[width] duration-300 ease-out-strong group-hover:w-2"
           style={{ background: ACCENT }}
         />
 
@@ -107,7 +107,7 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
               )}
             </div>
             <h2
-              className="text-4xl leading-[0.9] tracking-wide text-white uppercase transition-colors duration-200 group-hover:text-[#d4ff00] md:text-6xl"
+              className="text-4xl leading-[0.9] tracking-wide text-white uppercase transition-colors duration-200 group-hover:text-rl-accent md:text-6xl"
               style={{ fontFamily: "'Bebas Neue', sans-serif" }}
             >
               {event.name}
@@ -133,7 +133,7 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
               "hidden shrink-0 items-center gap-2 self-center border px-6 py-3 text-xs font-bold uppercase tracking-widest transition-[background-color,border-color,color] duration-200 lg:inline-flex",
               event.soldOut
                 ? "border-white/15 text-white/50"
-                : "border-white/40 text-white group-hover:border-[#d4ff00] group-hover:bg-[#d4ff00] group-hover:text-black",
+                : "border-white/40 text-white group-hover:border-rl-accent group-hover:bg-rl-accent group-hover:text-black",
             )}
           >
             {event.soldOut ? "Agotado" : "Registrarse"}
@@ -164,7 +164,9 @@ function EventosPage() {
       <section className="relative overflow-hidden px-6 pb-0 pt-32 md:pt-40">
         {/* Background racetrack photo */}
         <m.img
-          src="https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=1200&q=60&fit=crop&auto=format"
+          src="/images/1532444458054-01a7dd3e9fca-1920.webp"
+          width={1920}
+          height={1184}
           alt=""
           aria-hidden="true"
           loading="eager"
@@ -240,9 +242,9 @@ function EventosPage() {
                 onClick={() => setActiveFilter(filter)}
                 className={cn(
                   "border px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-[background-color,border-color,color] duration-150 active:scale-[0.96]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4ff00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rl-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
                   isActive
-                    ? "border-[#d4ff00] bg-[#d4ff00] text-black"
+                    ? "border-rl-accent bg-rl-accent text-black"
                     : "border-white/15 bg-transparent text-white/50 hover:border-white/50 hover:text-white",
                 )}
               >
@@ -304,7 +306,7 @@ function EventosPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.08, ease: EASE }}
                 whileHover={{ y: -4 }}
-                className="flex h-full flex-col gap-4 border border-white/10 border-t-2 bg-white/[0.03] p-6 transition-colors duration-200 hover:border-t-[#d4ff00]"
+                className="flex h-full flex-col gap-4 border border-white/10 border-t-2 bg-white/[0.03] p-6 transition-colors duration-200 hover:border-t-rl-accent"
                 style={{ borderTopColor: i === 0 ? ACCENT : undefined }}
               >
                 <span className="font-display text-3xl uppercase leading-none tracking-wide text-white">

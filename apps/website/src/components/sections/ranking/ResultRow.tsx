@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { type RaceResult } from "@/data/results";
 import { Flag } from "./Flag";
 import { SplitCell } from "./SplitCell";
+import { ACCENT } from "@/lib/theme";
 
 const STATION_LABELS = [
   "SkiErg",
@@ -181,7 +182,7 @@ export function ResultRow({
               className="h-full"
               style={{
                 width: `${barW}%`,
-                background: r.rank === 1 ? "#d4ff00" : "#ffffff",
+                background: r.rank === 1 ? ACCENT : "#ffffff",
                 opacity: r.rank === 1 ? 0.9 : 0.18 + 0.22 * (1 - (r.rank - 1) / 15),
               }}
             />

@@ -2,7 +2,9 @@ import { type Dispatch } from "react";
 import { type RaceResult } from "@/data/results";
 import { cn } from "@/lib/utils";
 import { ResultRow } from "./ResultRow";
+import { ResultCard } from "./ResultCard";
 import { type FilterAction } from "./RankingFilters";
+import { ACCENT } from "@/lib/theme";
 
 const STATION_LABELS = [
   "SkiErg",
@@ -52,17 +54,17 @@ export function RankingTable({
           <span className="tabular-nums text-white/50">{filtered.length}</span> resultados · {race}{" "}
           · {division}
         </p>
-        <p className="text-[10px] text-white/45">Hover S1–S8 para ver splits</p>
+        <p className="hidden text-[10px] text-white/50 md:block">Hover S1–S8 para ver splits</p>
       </div>
 
-      {/* Scrollable table */}
+      {/* Desktop: scrollable table */}
       <div
-        className="overflow-x-auto rounded-none"
+        className="hidden overflow-x-auto rounded-none md:block"
         style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.08) transparent" }}
       >
         <table className="w-full min-w-[1020px] border-collapse text-left">
           <thead>
-            <tr style={{ background: "#d4ff00" }}>
+            <tr style={{ background: ACCENT }}>
               <th className="px-3 py-3.5 text-[10px] font-bold uppercase tracking-widest text-black w-14">
                 #
               </th>
@@ -120,6 +122,19 @@ export function RankingTable({
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile: card list (the table's 1020px width would force horizontal scroll) */}
+      <div className="flex flex-col gap-2 md:hidden">
+        {paginated.length === 0 ? (
+          <p className="py-16 text-center text-sm text-white/40">
+            No se encontraron resultados con los filtros actuales.
+          </p>
+        ) : (
+          paginated.map((r) => (
+            <ResultCard key={r.bib} r={r} splitStats={splitStats} leaderSec={leaderSec} />
+          ))
+        )}
       </div>
 
       {/* Pagination */}

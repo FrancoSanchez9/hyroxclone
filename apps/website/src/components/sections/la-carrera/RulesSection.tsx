@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
 import { Timer, Route, ShieldCheck } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const rules = [
   {

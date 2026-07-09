@@ -8,8 +8,7 @@ import { isAuthenticated, getSession } from "@/lib/auth";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/lib/animation";
 import { trackEvent } from "@/lib/analytics";
-
-const ACCENT = "#d4ff00";
+import { ACCENT } from "@/lib/theme";
 
 interface CheckoutSearch {
   event: string;
@@ -32,7 +31,7 @@ const money = (n: number, currency = "MXN") => `$${n.toLocaleString("es-MX")} ${
 
 // Shared input styling — mirrors the login page.
 const inputCls =
-  "w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/40 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none";
+  "w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/40 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none";
 const labelCls = "text-[10px] font-bold uppercase tracking-widest text-white/50";
 
 function CheckoutPage() {
@@ -465,6 +464,10 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 export const Route = createFileRoute("/checkout")({
+  // Client-only: the initial step depends on localStorage auth (isAuthenticated),
+  // which the server can't read — SSR'ing it would cause a hydration mismatch for
+  // logged-in users. No SEO value on a checkout flow anyway.
+  ssr: false,
   validateSearch: (s: Record<string, unknown>): CheckoutSearch => ({
     event: typeof s.event === "string" ? s.event : "",
     division: typeof s.division === "string" ? s.division : "",

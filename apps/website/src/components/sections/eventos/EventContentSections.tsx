@@ -1,14 +1,12 @@
 import { m } from "framer-motion";
 import { MapPin, Navigation } from "lucide-react";
 import { type RunluvEvent, type ScheduleDay } from "@/data/events";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 // Ambiente de carrera para el collage del venue (IDs ya usados en el sitio).
 const VENUE_GALLERY = [
-  "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=500&q=80&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80&fit=crop&auto=format",
+  "/images/1552674605-db6ffd4facb5-500.webp",
+  "/images/1517836357463-d25dfeac3438-500.webp",
 ];
 
 // Typical runluv race-day program, used when an event has no custom schedule.
@@ -43,10 +41,7 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {schedule.map((day) => (
               <div key={day.day} className="border border-white/10">
-                <div
-                  className="px-5 py-3 border-b border-white/10"
-                  style={{ background: "#d4ff00" }}
-                >
+                <div className="px-5 py-3 border-b border-white/10" style={{ background: ACCENT }}>
                   <p className="text-xs font-bold uppercase tracking-widest text-black">
                     {day.day}
                   </p>
@@ -94,7 +89,7 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
                 href={event.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden shrink-0 items-center gap-2 border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-150 hover:border-[#d4ff00] hover:bg-[#d4ff00] hover:text-black sm:inline-flex"
+                className="hidden shrink-0 items-center gap-2 border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-150 hover:border-rl-accent hover:bg-rl-accent hover:text-black sm:inline-flex"
               >
                 <Navigation size={12} aria-hidden="true" />
                 Cómo llegar
@@ -115,9 +110,11 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
                 {event.imageUrl && (
                   <img
                     src={event.imageUrl}
+                    width={1200}
+                    height={700}
                     alt={event.venue}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-[600ms] ease-out-strong group-hover:scale-105"
                   />
                 )}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />

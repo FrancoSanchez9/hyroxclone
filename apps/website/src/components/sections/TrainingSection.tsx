@@ -14,8 +14,7 @@ const trainingCards = [
     cta: "Ver modalidades",
     href: "/la-carrera",
     Icon: Dumbbell,
-    imageUrl:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=450&h=225&q=65&fit=crop&auto=format",
+    imageUrl: "/images/1534438327276-14e5300c3a48-600x300.webp",
   },
   {
     title: "Conoce el circuito",
@@ -24,8 +23,7 @@ const trainingCards = [
     cta: "Ver eventos",
     href: "/eventos",
     Icon: Map,
-    imageUrl:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=450&h=225&q=65&fit=crop&auto=format",
+    imageUrl: "/images/1517836357463-d25dfeac3438-600x300.webp",
   },
   {
     title: "Administra tu ritmo",
@@ -34,8 +32,7 @@ const trainingCards = [
     cta: "Encuentra tu nivel",
     href: "/tu-nivel",
     Icon: GraduationCap,
-    imageUrl:
-      "https://images.unsplash.com/photo-1544216717-3bbf52512659?w=450&h=225&q=65&fit=crop&auto=format",
+    imageUrl: "/images/1544216717-3bbf52512659-600x300.webp",
   },
   {
     title: "Descansa, aliméntate e hidrátate",
@@ -44,8 +41,7 @@ const trainingCards = [
     cta: "Ver FAQ",
     href: "/faq",
     Icon: Heart,
-    imageUrl:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=450&h=225&q=65&fit=crop&auto=format",
+    imageUrl: "/images/1512621776951-a57141f2eefd-600x300.webp",
   },
   {
     title: "Disfruta la experiencia",
@@ -54,8 +50,7 @@ const trainingCards = [
     cta: "Ver eventos",
     href: "/eventos",
     Icon: Users,
-    imageUrl:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=450&h=225&q=65&fit=crop&auto=format",
+    imageUrl: "/images/1530549387789-4c1017266635-600x300.webp",
   },
 ];
 
@@ -75,11 +70,13 @@ function TrainingCard({ card, index }: { card: (typeof trainingCards)[number]; i
       whileTap={{ scale: 0.98 }}
       className="group cursor-pointer"
     >
-      <Card className="h-full overflow-hidden border-t-2 border-t-transparent transition-colors duration-200 group-hover:border-t-[#d4ff00]">
+      <Card className="h-full overflow-hidden border-t-2 border-t-transparent transition-colors duration-200 group-hover:border-t-rl-accent">
         {imageUrl && (
           <div className="relative h-44 overflow-hidden">
             <img
               src={imageUrl}
+              width={600}
+              height={300}
               alt={title}
               loading="lazy"
               decoding="async"
@@ -107,7 +104,7 @@ function TrainingCard({ card, index }: { card: (typeof trainingCards)[number]; i
         <CardFooter>
           <Link
             to={href}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#d4ff00] uppercase tracking-wider transition-opacity duration-150 hover:opacity-80"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-rl-accent uppercase tracking-wider transition-opacity duration-150 hover:opacity-80"
           >
             {cta}
             <span aria-hidden="true"> →</span>
@@ -144,7 +141,7 @@ export function TrainingSection() {
           transition={{ duration: 0.38, ease: EASE }}
           className="mb-14 text-center"
         >
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[#d4ff00]">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-rl-accent">
             PREPARACIÓN RUNLUV®
           </p>
           <AnimatedTitle

@@ -6,8 +6,8 @@ import { toast } from "sonner";
 import { EASE } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
-import { getSession } from "@/lib/auth";
 import { trackEvent } from "@/lib/analytics";
+import { QuizLeadForm, type QuizLead } from "./QuizLeadForm";
 import {
   type Direction,
   type LetterOption,
@@ -22,6 +22,7 @@ import {
   getArchetype,
 } from "@/lib/quiz-scoring";
 import { QuizOption } from "./QuizOption";
+import { ACCENT } from "@/lib/theme";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -196,11 +197,11 @@ const NIVEL_QUESTIONS: NivelQuestion[] = [
 // ─── Quiz Component ───────────────────────────────────────────────────────────
 
 const TOTAL_QUESTIONS = 14;
-const ACCENT = "#d4ff00";
 
 // ─── Share card (Spotify-Wrapped-style 9:16 story image) ─────────────────────
 
 interface ShareCardData {
+  name: string;
   direction: string;
   bars: { label: string; pct: number }[];
   archetypeName: string;
@@ -257,11 +258,17 @@ async function generateShareImage(data: ShareCardData): Promise<Blob> {
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, W, H);
 
-  // Header
-  ctx.letterSpacing = "10px";
+  // Header — personalised brand line, auto-shrunk so long names still fit the margin
+  ctx.letterSpacing = "8px";
   ctx.fillStyle = ACCENT;
-  ctx.font = "bold 34px Inter, sans-serif";
-  ctx.fillText("MI ADN RUNLUV®", M, 190);
+  const header = data.name ? `EL ADN RUNLUV® DE ${data.name.toUpperCase()}` : "MI ADN RUNLUV®";
+  let headerSize = 34;
+  ctx.font = `bold ${headerSize}px Inter, sans-serif`;
+  while (ctx.measureText(header).width > W - M * 2 && headerSize > 20) {
+    headerSize -= 2;
+    ctx.font = `bold ${headerSize}px Inter, sans-serif`;
+  }
+  ctx.fillText(header, M, 190);
   ctx.letterSpacing = "0px";
 
   // Direction — the giant lime payoff
@@ -368,6 +375,8 @@ export function QuizSection() {
     Array(7).fill(null),
   );
   const [nivelAnswers, setNivelAnswers] = useState<(number | null)[]>(() => Array(7).fill(null));
+  const [lead, setLead] = useState<QuizLead | null>(null); // captured before the result reveal
+  const savedRef = useRef(false); // guards the one-time persist
 
   // Auto-advance: selecting an answer moves to the next question after a beat,
   // long enough to see the lime selection land.
@@ -421,6 +430,8 @@ export function QuizSection() {
     setStarted(false);
     setBrujulaAnswers(Array(7).fill(null));
     setNivelAnswers(Array(7).fill(null));
+    setLead(null);
+    savedRef.current = false;
   }, [clearAdvance]);
 
   // ── Result calculation ──
@@ -452,41 +463,44 @@ export function QuizSection() {
     };
   }, [step, brujulaAnswers, nivelAnswers]);
 
-  // Persist the result once per completion — fire-and-forget, no-op sin Supabase.
-  const savedRef = useRef(false);
-  useEffect(() => {
-    if (!result || savedRef.current) return;
-    savedRef.current = true;
+  // Capture the respondent, reveal the result, and persist (once). Fire-and-forget:
+  // sin Supabase el quiz igual revela el resultado — solo no persiste.
+  const handleCapture = useCallback(
+    (data: QuizLead) => {
+      setLead(data);
+      if (!result || savedRef.current) return;
+      savedRef.current = true;
 
-    trackEvent("quiz_completed", {
-      archetype: result.archetype.name,
-      recommendedModality: result.primary.name,
-      level: result.nivelInfo.level,
-      levelPct: Math.round(result.nivelScore),
-    });
-
-    if (!supabase) return;
-    const session = getSession();
-    void supabase
-      .from("quiz_results")
-      .insert({
-        email: session?.email ?? null,
-        descubrir: Math.round(result.brujula.descubrir),
-        resistir: Math.round(result.brujula.resistir),
-        superarte: Math.round(result.brujula.superarte),
-        competir: Math.round(result.brujula.competir),
-        compartir: Math.round(result.brujula.compartir),
-        nivel: result.nivelInfo.level,
-        nivel_pct: Math.round(result.nivelScore),
+      trackEvent("quiz_completed", {
         archetype: result.archetype.name,
-        recommended_modality: result.primary.name,
-        affinities: result.modalities.map((mo) => ({ name: mo.name, affinity: mo.affinity })),
-      })
-      .then(({ error }) => {
-        // ponytail: fallo silencioso — guardar el resultado nunca debe romper la UX del quiz.
-        if (error) console.warn("quiz_results insert:", error.message);
+        recommendedModality: result.primary.name,
+        level: result.nivelInfo.level,
+        levelPct: Math.round(result.nivelScore),
       });
-  }, [result]);
+
+      if (!supabase) return;
+      void supabase
+        .from("quiz_results")
+        .insert({
+          name: data.name,
+          descubrir: Math.round(result.brujula.descubrir),
+          resistir: Math.round(result.brujula.resistir),
+          superarte: Math.round(result.brujula.superarte),
+          competir: Math.round(result.brujula.competir),
+          compartir: Math.round(result.brujula.compartir),
+          nivel: result.nivelInfo.level,
+          nivel_pct: Math.round(result.nivelScore),
+          archetype: result.archetype.name,
+          recommended_modality: result.primary.name,
+          affinities: result.modalities.map((mo) => ({ name: mo.name, affinity: mo.affinity })),
+        })
+        .then(({ error }) => {
+          // ponytail: fallo silencioso — guardar nunca debe romper la UX del quiz.
+          if (error) console.warn("quiz_results insert:", error.message);
+        });
+    },
+    [result],
+  );
 
   const handleShare = useCallback(async () => {
     if (!result) return;
@@ -494,6 +508,7 @@ export function QuizSection() {
 
     try {
       const blob = await generateShareImage({
+        name: lead?.name ?? "",
         direction: DIRECTION_LABELS[result.topDirection],
         bars: result.sortedBrujula.map(([dir, pct]) => ({
           label: DIRECTION_LABELS[dir as Direction],
@@ -526,7 +541,7 @@ export function QuizSection() {
       await navigator.clipboard.writeText(`${text} — ${window.location.href}`);
       toast("Resultado copiado al portapapeles");
     }
-  }, [result]);
+  }, [result, lead]);
 
   const isBrujula = step < 7;
   const nivelIndex = step - 7;
@@ -664,7 +679,7 @@ export function QuizSection() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}
-                  className="mt-10 inline-flex items-center gap-2 px-9 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+                  className="mt-10 inline-flex items-center gap-2 px-9 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
                   style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.3)" }}
                 >
                   Comenzar test
@@ -767,6 +782,16 @@ export function QuizSection() {
                     </button>
                   )}
                 </div>
+              </m.div>
+            ) : result && !lead ? (
+              <m.div
+                key="capture"
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                <QuizLeadForm onSubmit={handleCapture} />
               </m.div>
             ) : result ? (
               <m.div

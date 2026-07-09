@@ -2,8 +2,7 @@ import { m } from "framer-motion";
 import { TrendingUp, Award, BookOpen, Package, Users, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardHeader, CardContent } from "@/components/ui/Card";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
 
 const benefits = [
   {

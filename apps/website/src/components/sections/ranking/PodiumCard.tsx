@@ -2,6 +2,7 @@ import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { type RaceResult } from "@/data/results";
 import { Flag } from "./Flag";
+import { ACCENT } from "@/lib/theme";
 
 export function PodiumCard({
   r,
@@ -27,7 +28,7 @@ export function PodiumCard({
       <div
         className={cn(
           "w-full flex flex-col items-center px-4 pt-5 pb-4 gap-1 border",
-          isWinner ? "border-[#d4ff00]/50 bg-[#d4ff00]/10" : "border-white/10 bg-white/2",
+          isWinner ? "border-rl-accent/50 bg-rl-accent/10" : "border-white/10 bg-white/2",
         )}
       >
         <div className="flex items-center gap-2 mb-1">
@@ -73,7 +74,7 @@ export function PodiumCard({
       {/* Step */}
       <div
         className={cn("w-full flex items-center justify-center", !isWinner && "bg-white/12")}
-        style={{ height: stepH, background: isWinner ? "#d4ff00" : undefined }}
+        style={{ height: stepH, background: isWinner ? ACCENT : undefined }}
       >
         <span
           className={cn(isWinner ? "text-black" : "text-white/60")}

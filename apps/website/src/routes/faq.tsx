@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FaqItem } from "@/components/sections/eventos/FaqItem";
-
-const ACCENT = "#d4ff00";
+import { ACCENT } from "@/lib/theme";
 
 interface FAQItem {
   question: string;
@@ -443,6 +442,9 @@ function FAQPage() {
               {TOTAL_QUESTIONS} preguntas · {faqData.length} temas
             </span>
           </p>
+          <p className="mt-2 text-xs text-white/35">
+            Última actualización: <time dateTime="2026-06-23">23 de junio de 2026</time>
+          </p>
 
           {/* Search */}
           <div className="relative mt-8 max-w-xl">
@@ -456,7 +458,7 @@ function FAQPage() {
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Buscar en preguntas frecuentes"
               placeholder="Busca tu duda — chip, horarios, reembolso…"
-              className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-[#d4ff00] focus:outline-none"
+              className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none"
             />
           </div>
         </div>
@@ -472,7 +474,7 @@ function FAQPage() {
                   className={cn(
                     "flex items-baseline gap-3 border-l-2 px-4 py-2 transition-[color,border-color] duration-150",
                     !q && active === i
-                      ? "border-[#d4ff00] text-white"
+                      ? "border-rl-accent text-white"
                       : "border-white/10 text-white/45 hover:border-white/30 hover:text-white",
                   )}
                 >

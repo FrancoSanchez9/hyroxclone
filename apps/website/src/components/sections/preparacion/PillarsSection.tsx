@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
 import { Activity, Gauge, Dumbbell, Moon } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const pillars = [
   {
@@ -47,7 +45,9 @@ export function PillarsSection() {
     >
       {/* Faded runner backdrop */}
       <img
-        src="https://images.unsplash.com/photo-1502904550040-7534597429ae?w=1600&q=80&fit=crop&auto=format"
+        src="/images/1502904550040-7534597429ae-1600.webp"
+        width={1600}
+        height={844}
         alt=""
         aria-hidden="true"
         loading="lazy"
@@ -85,7 +85,7 @@ export function PillarsSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: idx * 0.08, ease: EASE }}
                 whileHover={{ y: -4 }}
-                className="group relative flex flex-col gap-3 overflow-hidden border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-[#d4ff00]"
+                className="group relative flex flex-col gap-3 overflow-hidden border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-7 transition-colors duration-200 hover:border-t-rl-accent"
               >
                 <span
                   className="pointer-events-none absolute -right-2 -top-4 select-none tabular-nums leading-none text-white/[0.05]"

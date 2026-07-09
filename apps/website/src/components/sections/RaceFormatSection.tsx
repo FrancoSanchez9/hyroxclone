@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/Badge";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { EASE } from "@/lib/animation";
+import { ACCENT } from "@/lib/theme";
 
 const modalities = [
   {
@@ -23,8 +24,7 @@ const modalities = [
       "Gana el último corredor que logra mantenerse en competencia cumpliendo el tiempo límite por vuelta.",
     categories: ["Individual Open", "Individual Pro", "Doubles", "Teams", "Corporate Teams"],
     circuito: "3 — 5 km por vuelta (según autódromo)",
-    imageUrl:
-      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=1100&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1461896836934-ffe607ba8211-800x1100.webp",
   },
   {
     id: "cpc",
@@ -42,8 +42,7 @@ const modalities = [
     criterio: "Gana quien acumule mayor número de kilómetros al finalizar el tiempo oficial.",
     categories: ["Individual Open", "Individual Pro", "Doubles", "Teams", "Corporate Teams"],
     circuito: "4 horas continuas",
-    imageUrl:
-      "https://images.unsplash.com/photo-1526676537331-7747bf8278fc?w=800&h=1100&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1526676537331-7747bf8278fc-800x1100.webp",
   },
   {
     id: "tradicional",
@@ -61,8 +60,7 @@ const modalities = [
     criterio: "Mejor tiempo absoluto y ganadores por categoría de edad.",
     categories: ["Femenil / Varonil", "18–29", "30–39", "40–49", "50+"],
     circuito: "5 km y 10 km",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&h=1100&q=80&fit=crop&auto=format",
+    imageUrl: "/images/1517836357463-d25dfeac3438-800x1100.webp",
   },
 ] as const;
 
@@ -89,11 +87,13 @@ function ModalityCard({
         {/* Full-bleed photo — grayscale until hover */}
         <img
           src={modality.imageUrl}
+          width={800}
+          height={1100}
           alt=""
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 group-hover:grayscale-0"
+          className="absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-700 ease-out-strong group-hover:scale-105 group-hover:grayscale-0"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
 
@@ -115,7 +115,7 @@ function ModalityCard({
         <div className="relative z-10 flex flex-col gap-3 p-6">
           <span
             className="text-6xl leading-none tracking-wide uppercase"
-            style={{ fontFamily: "'Bebas Neue', sans-serif", color: "#d4ff00" }}
+            style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
           >
             {modality.shortName}
           </span>
@@ -138,7 +138,7 @@ function ModalityCard({
             <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/45">
               Circuito
             </span>
-            <span className="text-sm font-semibold tabular-nums text-[#d4ff00]">
+            <span className="text-sm font-semibold tabular-nums text-rl-accent">
               {modality.circuito}
             </span>
           </div>
@@ -157,8 +157,8 @@ function ModalityCard({
 
           <Link
             to="/eventos"
-            className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
-            style={{ background: "#d4ff00" }}
+            className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+            style={{ background: ACCENT }}
           >
             Inscríbete <span aria-hidden="true">→</span>
           </Link>

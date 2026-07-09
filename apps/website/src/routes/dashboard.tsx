@@ -12,9 +12,7 @@ import {
 } from "lucide-react";
 import { getSession, logout, isAuthenticated, isAdmin } from "@/lib/auth";
 import { getNextEvent, seasonCircuits } from "@/data/events";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
+import { ACCENT, EASE } from "@/lib/theme";
 
 const MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 function longDate(dateStr: string) {
@@ -99,6 +97,8 @@ function DashboardPage() {
           {nextEvent.imageUrl && (
             <img
               src={nextEvent.imageUrl}
+              width={1200}
+              height={700}
               alt=""
               aria-hidden="true"
               loading="lazy"
@@ -153,12 +153,12 @@ function DashboardPage() {
             >
               <Link
                 to={s.to}
-                className="group flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-6 transition-colors duration-200 hover:border-t-[#d4ff00]"
+                className="group flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-6 transition-colors duration-200 hover:border-t-rl-accent"
               >
                 <s.Icon size={26} style={{ color: ACCENT }} aria-hidden="true" />
                 <div>
                   <h3
-                    className="text-xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-[#d4ff00]"
+                    className="text-xl uppercase leading-none tracking-wide text-white transition-colors duration-200 group-hover:text-rl-accent"
                     style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
                     {s.label}
@@ -245,6 +245,10 @@ function DashboardPage() {
 }
 
 export const Route = createFileRoute("/dashboard")({
+  // Mock auth lives in localStorage, invisible to the server. Render client-only
+  // so `beforeLoad` runs where the session exists — otherwise SSR redirects even
+  // logged-in users to /auth/login before the client can hydrate.
+  ssr: false,
   beforeLoad: () => {
     if (!isAuthenticated()) throw redirect({ to: "/auth/login" });
   },

@@ -1,8 +1,7 @@
 import { m } from "framer-motion";
 import { Check } from "lucide-react";
 import type { ContactState, ContactAction } from "./types";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
 
 const SUBJECTS = [
   "Inscripción a un evento",
@@ -14,7 +13,7 @@ const SUBJECTS = [
   "Otro",
 ];
 
-const inputClass = "h-12 w-full px-4 text-sm text-black placeholder-black/40 outline-none bg-white";
+const inputClass = "h-12 w-full px-4 text-sm text-black placeholder-black/55 outline-none bg-white";
 const errorBorder = "border-2 border-red-400";
 const normalBorder = "border-2 border-transparent";
 
@@ -176,7 +175,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
                 dispatch({ type: "setField", field: "message", value: e.target.value })
               }
               placeholder="Cuéntanos en qué podemos ayudarte..."
-              className={`w-full px-4 py-3 text-sm text-black placeholder-black/40 outline-none resize-none bg-white ${errors.message ? errorBorder : normalBorder}`}
+              className={`w-full px-4 py-3 text-sm text-black placeholder-black/55 outline-none resize-none bg-white ${errors.message ? errorBorder : normalBorder}`}
             />
             {errors.message && (
               <p role="alert" className="text-xs text-red-400">

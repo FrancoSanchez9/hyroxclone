@@ -36,7 +36,7 @@ export function Button({
         "inline-flex items-center justify-center rounded-none font-medium tracking-wide",
         "select-none outline-none cursor-pointer",
         "transition-[transform,background-color,color,opacity] duration-[160ms]",
-        "ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "ease-out-strong",
         "active:scale-[0.96]",
         "focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000]",
         "disabled:pointer-events-none disabled:opacity-40",

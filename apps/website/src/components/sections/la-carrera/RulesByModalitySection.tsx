@@ -1,7 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-
-const ACCENT = "#d4ff00";
+import { ACCENT } from "@/lib/theme";
 
 interface ModalityRules {
   name: string;

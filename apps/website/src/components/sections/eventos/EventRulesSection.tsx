@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { ACCENT, EASE } from "@/lib/theme";
 import {
   Timer,
   Route,
@@ -9,9 +10,6 @@ import {
   Smartphone,
   Award,
 } from "lucide-react";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
-const ACCENT = "#d4ff00";
 
 const rules = [
   {
@@ -66,7 +64,7 @@ export function EventRulesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.1, ease: EASE }}
-              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-t-[#d4ff00]"
+              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-white/[0.03] p-5 transition-colors duration-200 hover:border-t-rl-accent"
             >
               <rule.Icon className="h-6 w-6" style={{ color: ACCENT }} aria-hidden="true" />
               <h3

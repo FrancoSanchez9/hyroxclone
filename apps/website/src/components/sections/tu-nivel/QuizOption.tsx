@@ -29,7 +29,7 @@ export function QuizOption<T extends string>({
       className={cn(
         "group flex w-full cursor-pointer items-stretch overflow-hidden border text-left transition-[border-color,background-color,transform] duration-150 active:scale-[0.98]",
         selected
-          ? "border-[#d4ff00] bg-[#d4ff00]/10"
+          ? "border-rl-accent bg-rl-accent/10"
           : "border-white/12 bg-white/[0.03] hover:border-white/35 hover:bg-white/[0.06]",
       )}
     >
@@ -37,7 +37,7 @@ export function QuizOption<T extends string>({
         className={cn(
           "flex w-14 shrink-0 items-center justify-center border-r text-3xl leading-none transition-colors duration-150 sm:w-16 sm:text-4xl",
           selected
-            ? "border-[#d4ff00] bg-[#d4ff00] text-black"
+            ? "border-rl-accent bg-rl-accent text-black"
             : "border-white/10 bg-white/5 text-white/50 group-hover:text-white/70",
         )}
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}

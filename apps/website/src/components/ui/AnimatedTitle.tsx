@@ -1,6 +1,7 @@
 import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { EASE } from "@/lib/animation";
+import { ACCENT } from "@/lib/theme";
 
 interface AnimatedTitleProps {
   text: string;
@@ -43,7 +44,7 @@ export function AnimatedTitle({ text, className, accent = [] }: AnimatedTitlePro
             className="inline-block"
             variants={word}
             custom={i}
-            style={accent.includes(w) ? { color: "#d4ff00" } : undefined}
+            style={accent.includes(w) ? { color: ACCENT } : undefined}
           >
             {w}
           </m.span>

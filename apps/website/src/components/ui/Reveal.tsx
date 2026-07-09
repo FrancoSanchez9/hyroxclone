@@ -1,8 +1,7 @@
 import { m } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-
-const EASE = [0.23, 1, 0.32, 1] as const;
+import { EASE } from "@/lib/theme";
 
 /** Fades + lifts its children into view once, on scroll. Respects reduced motion via MotionConfig. */
 export function Reveal({

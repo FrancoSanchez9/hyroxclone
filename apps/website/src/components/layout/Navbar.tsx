@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { navItems, topRightLinks } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 import logoSrc from "@/assets/logo-mark.png";
+import { ACCENT } from "@/lib/theme";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,7 +40,7 @@ export function Navbar() {
       <m.div
         aria-hidden="true"
         className="fixed top-0 left-0 right-0 z-50 h-[3px] origin-left"
-        style={{ scaleX: progress, background: "#d4ff00" }}
+        style={{ scaleX: progress, background: ACCENT }}
       />
       <header
         className={cn(
@@ -108,19 +109,19 @@ export function Navbar() {
           >
             <Link
               to="/tu-nivel"
-              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#d4ff00] border border-[#d4ff00]/50 transition-[background-color,border-color,transform] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#d4ff00]/10 hover:border-[#d4ff00] active:scale-[0.96]"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-rl-accent border border-rl-accent/50 transition-[background-color,border-color,transform] duration-[160ms] ease-out-strong hover:bg-rl-accent/10 hover:border-rl-accent active:scale-[0.96]"
             >
               Tu reto
             </Link>
             <Link
               to="/ranking"
-              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-white/80 border border-white/25 transition-[background-color,border-color,color,transform] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-white hover:text-white active:scale-[0.96]"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-white/80 border border-white/25 transition-[background-color,border-color,color,transform] duration-[160ms] ease-out-strong hover:border-white hover:text-white active:scale-[0.96]"
             >
               Ranking
             </Link>
             <Link
               to="/eventos"
-              className="px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-[#d4ff00] transition-[filter,transform] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:brightness-95 active:scale-[0.96]"
+              className="px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-rl-accent transition-[filter,transform] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
               style={{ boxShadow: "0 0 24px rgba(212,255,0,0.25)" }}
             >
               Inscripciones
@@ -194,8 +195,8 @@ export function Navbar() {
                           className={cn(
                             "px-5 py-3 text-center text-sm font-bold uppercase tracking-widest transition-[filter,background-color,border-color] duration-[160ms] active:scale-[0.96]",
                             i === 1
-                              ? "bg-[#d4ff00] text-black hover:brightness-95"
-                              : "border border-[#d4ff00]/50 text-[#d4ff00] hover:bg-[#d4ff00]/10",
+                              ? "bg-rl-accent text-black hover:brightness-95"
+                              : "border border-rl-accent/50 text-rl-accent hover:bg-rl-accent/10",
                           )}
                         >
                           {link.label}
