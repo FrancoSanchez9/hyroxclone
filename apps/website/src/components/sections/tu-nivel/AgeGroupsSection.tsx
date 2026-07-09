@@ -55,12 +55,58 @@ export function AgeGroupsSection() {
           </p>
         </m.div>
 
+        {/* Mobile: one compact card per age group (avoids the wide table's scroll) */}
         <m.div
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           custom={1}
-          className="overflow-x-auto rounded-none border border-[#2a2a2a]"
+          className="grid gap-2 md:hidden"
+        >
+          {AGE_BRACKETS.map((bracket, idx) => {
+            const isProAvailable = idx <= proIndex;
+            const isRelayBracket = idx === 0 || idx === 8;
+            return (
+              <div
+                key={bracket}
+                className="flex items-center justify-between gap-3 border border-[#2a2a2a] bg-[#111111] px-4 py-3"
+              >
+                <span
+                  className="uppercase tracking-widest text-white"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.15rem" }}
+                >
+                  {bracket}
+                </span>
+                <div className="flex flex-wrap items-center justify-end gap-1.5">
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold text-white/80">
+                    Open
+                  </span>
+                  {isProAvailable && (
+                    <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold text-white/80">
+                      Pro
+                    </span>
+                  )}
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold text-white/80">
+                    Doubles
+                  </span>
+                  {isRelayBracket && (
+                    <span className="rounded-full bg-[#d4ff00]/15 px-2 py-0.5 text-[11px] font-semibold text-[#d4ff00]">
+                      Relay {idx === 0 ? "U40" : "40+"}
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </m.div>
+
+        {/* Desktop: full matrix table */}
+        <m.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          custom={1}
+          className="hidden overflow-x-auto rounded-none border border-[#2a2a2a] md:block"
         >
           <table className="w-full min-w-[640px] text-sm">
             <thead>

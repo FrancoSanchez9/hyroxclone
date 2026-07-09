@@ -1,7 +1,14 @@
 import { m } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { CellValue } from "@/components/sections/afiliaciones/CellValue";
+import { cn } from "@/lib/utils";
 import { EASE } from "@/lib/theme";
+
+const plans = [
+  { key: "trainingClub", name: "Training Club", recommended: false },
+  { key: "performanceCentre", name: "Performance Centre", recommended: true },
+  { key: "performanceAcademy", name: "Performance Academy", recommended: false },
+] as const;
 
 const tableFeatures = [
   { label: "Uso del logo", trainingClub: true, performanceCentre: true, performanceAcademy: true },
@@ -59,12 +66,55 @@ export function PlansTableSection() {
           </h2>
         </m.div>
 
+        {/* Mobile: stacked cards (avoids the wide table's horizontal scroll) */}
+        <div className="grid gap-4 md:hidden">
+          {plans.map((plan) => (
+            <div
+              key={plan.key}
+              className={cn(
+                "rounded-xl border p-5",
+                plan.recommended
+                  ? "border-white/30 bg-white/[0.04]"
+                  : "border-[#2a2a2a] bg-[#111111]",
+              )}
+            >
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h3
+                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  className="text-2xl tracking-wide text-white"
+                >
+                  {plan.name}
+                </h3>
+                {plan.recommended && (
+                  <Badge variant="yellow" className="shrink-0 text-[10px]">
+                    RECOMENDADO
+                  </Badge>
+                )}
+              </div>
+              <ul className="flex flex-col gap-2.5">
+                {tableFeatures.map((row) => (
+                  <li
+                    key={row.label}
+                    className="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-2.5 text-sm last:border-b-0 last:pb-0"
+                  >
+                    <span className="text-white/60">{row.label}</span>
+                    <span className="shrink-0 text-right">
+                      <CellValue value={row[plan.key]} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: comparison table */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="overflow-x-auto"
+          className="hidden overflow-x-auto md:block"
         >
           <table className="w-full min-w-[640px] border-collapse">
             <thead>

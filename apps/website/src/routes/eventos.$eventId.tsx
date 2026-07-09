@@ -49,7 +49,10 @@ function EventDetailPage() {
   if (!event) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] text-white gap-6">
-        <p className="text-6xl font-normal" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+        <p
+          className="px-6 text-center text-4xl font-normal sm:text-6xl"
+          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        >
           Evento no encontrado
         </p>
         <Link

@@ -71,7 +71,10 @@ function CheckoutPage() {
   if (!event) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-[#0a0a0a] text-white">
-        <p className="text-6xl" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+        <p
+          className="px-6 text-center text-4xl sm:text-6xl"
+          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        >
           Compra no válida
         </p>
         <Link

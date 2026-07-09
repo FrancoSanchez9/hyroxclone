@@ -33,11 +33,11 @@ export function CookieBanner() {
           animate={{ y: "0%", transition: { duration: 0.3, ease: [0.23, 1, 0.32, 1] } }}
           exit={{ y: "100%", transition: { duration: 0.2, ease: [0.4, 0, 1, 1] } }}
           style={{ backgroundColor: "#111111" }}
-          className="fixed bottom-0 left-0 right-0 z-50 flex flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between"
+          className="fixed bottom-0 left-0 right-0 z-50 flex flex-col gap-3 border-t border-white/10 px-5 py-3.5 shadow-[0_-10px_40px_rgba(0,0,0,0.55)] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-4"
           role="dialog"
           aria-label="Aviso de cookies"
         >
-          <p className="text-sm text-white">
+          <p className="text-xs text-white sm:text-sm">
             Usamos cookies para ofrecerte la mejor experiencia en nuestra web.{" "}
             <Link
               to="/privacidad"

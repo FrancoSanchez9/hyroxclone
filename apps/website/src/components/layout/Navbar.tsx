@@ -132,7 +132,7 @@ export function Navbar() {
             <Drawer.Trigger asChild>
               <button
                 type="button"
-                className="md:hidden flex items-center justify-center w-10 h-10 text-white/70 hover:text-[#ffffff] transition-colors duration-150"
+                className="md:hidden flex items-center justify-center w-11 h-11 text-white/70 hover:text-[#ffffff] transition-colors duration-150"
                 aria-label="Open menu"
               >
                 <Menu size={22} />

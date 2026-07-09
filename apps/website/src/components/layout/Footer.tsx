@@ -79,7 +79,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
                 style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
                 aria-label="RunLuv en Instagram"
               >
@@ -89,7 +89,7 @@ export function Footer() {
                 href="https://x.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
                 style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
                 aria-label="RunLuv en X (Twitter)"
               >
@@ -99,7 +99,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
+                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
                 style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
                 aria-label="RunLuv en Facebook"
               >

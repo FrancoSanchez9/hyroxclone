@@ -114,7 +114,7 @@ function ModalityCard({
         {/* Content — bottom anchored, one clean column */}
         <div className="relative z-10 flex flex-col gap-3 p-6">
           <span
-            className="text-6xl leading-none tracking-wide uppercase"
+            className="text-4xl leading-none tracking-wide uppercase sm:text-6xl"
             style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
           >
             {modality.shortName}
