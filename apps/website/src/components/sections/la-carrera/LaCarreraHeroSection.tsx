@@ -1,8 +1,13 @@
-import { m } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { RaceTrack } from "./RaceTrack";
-import { ACCENT, EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
+
+const TITLE_LINES: { text: string; accent?: boolean }[] = [
+  { text: "LA CARRERA" },
+  { text: "SOBRE" },
+  { text: "CIRCUITOS", accent: true },
+];
 
 export function LaCarreraHeroSection() {
   return (
@@ -25,56 +30,42 @@ export function LaCarreraHeroSection() {
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Copy */}
         <div>
-          <m.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="mb-5 inline-block text-xs font-bold uppercase tracking-[0.3em]"
-            style={{ color: ACCENT }}
+          <span
+            className="hero-rise mb-5 inline-block text-xs font-bold uppercase tracking-[0.3em]"
+            style={{ animationDelay: "0s", color: ACCENT }}
           >
             La experiencia runluv®
-          </m.span>
+          </span>
 
           <h1
             aria-label="La carrera sobre circuitos de clase mundial"
             className="uppercase leading-[0.9] tracking-tight text-white"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
-            {[
-              { text: "LA CARRERA", accent: false },
-              { text: "SOBRE", accent: false },
-              { text: "CIRCUITOS", accent: true },
-            ].map((line, i) => (
+            {TITLE_LINES.map((line, i) => (
               <span key={line.text} aria-hidden="true" className="block overflow-hidden">
-                <m.span
-                  className="block text-[clamp(2.8rem,8vw,6rem)]"
-                  initial={{ y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.7, ease: EASE, delay: 0.1 + i * 0.1 }}
-                  style={line.accent ? { color: ACCENT } : undefined}
+                <span
+                  className="hero-line text-[clamp(2.8rem,8vw,6rem)]"
+                  style={{
+                    animationDelay: `${(0.1 + i * 0.1).toFixed(2)}s`,
+                    ...(line.accent ? { color: ACCENT } : {}),
+                  }}
                 >
                   {line.text}
-                </m.span>
+                </span>
               </span>
             ))}
           </h1>
 
-          <m.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-            className="mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg"
+          <p
+            className="hero-rise mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg"
+            style={{ animationDelay: "0.4s" }}
           >
             runluv® transforma los autódromos donde rugen los motores en pistas para corredores.
             Elige tu desafío, recorre el circuito y descubre hasta dónde puedes llegar.
-          </m.p>
+          </p>
 
-          <m.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
-            className="mt-8 flex flex-wrap gap-4"
-          >
+          <div className="hero-rise mt-8 flex flex-wrap gap-4" style={{ animationDelay: "0.5s" }}>
             <Link
               to="/eventos"
               className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
@@ -89,17 +80,13 @@ export function LaCarreraHeroSection() {
             >
               ¿Cuál es tu reto?
             </Link>
-          </m.div>
+          </div>
         </div>
 
         {/* Racetrack */}
-        <m.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-        >
+        <div className="hero-rise" style={{ animationDelay: "0.3s" }}>
           <RaceTrack className="w-full" />
-        </m.div>
+        </div>
       </div>
     </section>
   );

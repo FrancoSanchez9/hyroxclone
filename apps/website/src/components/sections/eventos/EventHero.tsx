@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { m } from "framer-motion";
 import { MapPin, Calendar, ChevronLeft } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
 import { formatDateLong } from "@/lib/formatDate";
-import { EASE } from "@/lib/theme";
 import { ACCENT } from "@/lib/theme";
 
 export function EventHero({ event }: { event: RunluvEvent }) {
@@ -35,11 +33,7 @@ export function EventHero({ event }: { event: RunluvEvent }) {
 
       {/* Event info */}
       <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:px-12">
-        <m.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE }}
-        >
+        <div className="hero-rise">
           {event.featured && (
             <span
               className="inline-block mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black px-2.5 py-1"
@@ -92,7 +86,7 @@ export function EventHero({ event }: { event: RunluvEvent }) {
               Más información
             </a>
           </div>
-        </m.div>
+        </div>
       </div>
     </div>
   );

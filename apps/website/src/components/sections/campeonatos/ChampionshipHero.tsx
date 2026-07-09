@@ -1,8 +1,6 @@
-import { m } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
-import { ACCENT, EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 const STATS = [
   { value: "4", label: "Sedes clasificatorias" },
@@ -14,17 +12,14 @@ export function ChampionshipHero() {
   return (
     <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       {/* Background — iconic circuit */}
-      <m.img
+      <img
         src="/images/1532444458054-01a7dd3e9fca-1920.webp"
         width={1920}
         height={1184}
         alt=""
         aria-hidden="true"
         loading="eager"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-20 grayscale"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2.4, ease: EASE }}
+        className="hero-zoom pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-20 grayscale"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
       <div
@@ -34,39 +29,46 @@ export function ChampionshipHero() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <m.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em]"
-          style={{ color: ACCENT }}
+        <span
+          className="hero-rise mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em]"
+          style={{ animationDelay: "0s", color: ACCENT }}
         >
           <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: ACCENT }} />
           Temporada nacional 2027
-        </m.span>
+        </span>
 
-        <AnimatedTitle
-          text="LA TEMPORADA RUNLUV®"
-          accent={["RUNLUV®"]}
-          className="text-[clamp(2.8rem,9vw,6.5rem)] text-white"
-        />
+        <h1
+          aria-label="La temporada runluv®"
+          className="uppercase leading-none tracking-wide text-white"
+          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        >
+          <span aria-hidden="true" className="block overflow-hidden pb-[0.04em]">
+            <span
+              className="hero-line text-[clamp(2.8rem,9vw,6.5rem)]"
+              style={{ animationDelay: "0.1s" }}
+            >
+              LA TEMPORADA
+            </span>
+          </span>
+          <span aria-hidden="true" className="block overflow-hidden pb-[0.04em]">
+            <span
+              className="hero-line text-[clamp(2.8rem,9vw,6.5rem)]"
+              style={{ animationDelay: "0.2s", color: ACCENT }}
+            >
+              RUNLUV®
+            </span>
+          </span>
+        </h1>
 
-        <m.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-          className="mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
+        <p
+          className="hero-rise mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg"
+          style={{ animationDelay: "0.4s" }}
         >
           Cuatro autódromos clasificatorios y una Gran Final en el circuito más icónico de México.
           Cada carrera suma al ranking. Cada vuelta te acerca a la Ciudad de México.
-        </m.p>
+        </p>
 
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
-          className="mt-8 flex flex-wrap gap-4"
-        >
+        <div className="hero-rise mt-8 flex flex-wrap gap-4" style={{ animationDelay: "0.5s" }}>
           <Link
             to="/eventos"
             className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
@@ -81,14 +83,12 @@ export function ChampionshipHero() {
           >
             Ver ranking
           </Link>
-        </m.div>
+        </div>
 
         {/* Stats strip */}
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}
-          className="mt-12 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/10 pt-8"
+        <div
+          className="hero-rise mt-12 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/10 pt-8"
+          style={{ animationDelay: "0.6s" }}
         >
           {STATS.map((s) => (
             <div key={s.label} className="flex items-baseline gap-2">
@@ -103,7 +103,7 @@ export function ChampionshipHero() {
               </span>
             </div>
           ))}
-        </m.div>
+        </div>
       </div>
     </section>
   );
