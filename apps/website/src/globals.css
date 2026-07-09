@@ -277,4 +277,118 @@
   .min-h-screen {
     min-height: 100dvh;
   }
+
+  /* ──────────────────────────────────────────────────────────────────────
+     HERO ENTRANCE — pure CSS so it animates at first paint (SSR-safe: no JS,
+     no hydration wait; content ships visible-then-animating in the SSR HTML).
+     The reduced-motion block above collapses these to their end state.
+     ────────────────────────────────────────────────────────────────────── */
+  @keyframes hero-line-in {
+    from {
+      opacity: 0;
+      transform: translateY(115%);
+      filter: blur(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.18);
+    }
+    to {
+      transform: scale(1.04);
+    }
+  }
+  @keyframes hero-sweep {
+    0% {
+      opacity: 0;
+      transform: translateX(-160%) skewX(-14deg);
+    }
+    14% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(220%) skewX(-14deg);
+    }
+  }
+  @keyframes hero-glow {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.14);
+    }
+  }
+  @keyframes hero-underline {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes scroll-cue {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(7px);
+    }
+  }
+
+  /* Title lines rise out of their mask with a motion-blur — the "wow" moment. */
+  .hero-line {
+    display: block;
+    opacity: 0;
+    animation: hero-line-in 1s var(--ease-out-strong) both;
+  }
+  /* Tagline + CTAs — softer blurred fade-up, staggered after the title. */
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 0.85s var(--ease-out-strong) both;
+  }
+  /* Slow cinematic push-in on the backdrop image (parallax stays on the wrapper). */
+  .hero-zoom {
+    animation: hero-zoom 2.8s var(--ease-out-strong) both;
+  }
+  /* One-shot diagonal light streak — a "speed"/camera-flash pass over the scene. */
+  .hero-sweep {
+    animation: hero-sweep 2s var(--ease-out-strong) 0.4s both;
+  }
+  /* Breathing lime energy behind the headline. */
+  .hero-glow {
+    transform-origin: 50% 0%;
+    animation: hero-glow 6.5s ease-in-out 1.3s infinite;
+  }
+  /* Accent bar wipes in under the headline. */
+  .hero-underline {
+    transform-origin: left center;
+    animation: hero-underline 0.8s var(--ease-out-strong) 1s both;
+  }
+  .animate-scroll-cue {
+    animation: scroll-cue 1.9s ease-in-out infinite;
+  }
 }

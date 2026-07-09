@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { m, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { getNextEvent } from "@/data/events";
 import { CountdownStrip } from "@/components/sections/CountdownStrip";
-import { ACCENT, EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 const TITLE_LINES: { text: string; accent?: boolean; outline?: boolean }[] = [
   { text: "DESCUBRE" },
@@ -21,28 +22,41 @@ export function HeroSection() {
       style={{ background: "#000" }}
       aria-label="Hero"
     >
-      {/* Background image — slow zoom-out on load + scroll parallax */}
-      <m.img
-        src="/images/1461896836934-ffe607ba8211-1280.webp"
-        width={1280}
-        height={853}
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-        fetchPriority="high"
-        className="pointer-events-none absolute inset-x-0 -top-[15%] h-[115%] w-full object-cover object-center opacity-45"
+      {/* Background — framer drives the scroll parallax on the wrapper; the CSS
+          push-in (.hero-zoom) lives on the img so the two transforms never clash
+          and the zoom still runs before JS hydrates. */}
+      <m.div
+        className="pointer-events-none absolute inset-x-0 -top-[15%] h-[115%] w-full"
         style={{ y: parallaxY }}
-        initial={{ scale: 1.12 }}
-        animate={{ scale: 1.06 }}
-        transition={{ duration: 2.4, ease: EASE }}
-      />
+        aria-hidden="true"
+      >
+        <img
+          src="/images/1461896836934-ffe607ba8211-1280.webp"
+          width={1280}
+          height={853}
+          alt=""
+          loading="eager"
+          fetchPriority="high"
+          className="hero-zoom h-full w-full object-cover object-center opacity-45"
+        />
+      </m.div>
 
       {/* Overlays */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/85" />
+      {/* Breathing lime energy */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="hero-glow pointer-events-none absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,255,0,0.05) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,255,0,0.08) 0%, transparent 70%)`,
+        }}
+      />
+      {/* One-shot diagonal light streak (behind the text, over the image) */}
+      <div
+        aria-hidden="true"
+        className="hero-sweep pointer-events-none absolute inset-y-0 left-0 z-[5] w-1/3"
+        style={{
+          background:
+            "linear-gradient(100deg, transparent 0%, rgba(212,255,0,0.10) 42%, rgba(255,255,255,0.22) 50%, rgba(212,255,0,0.10) 58%, transparent 100%)",
         }}
       />
       {/* Grain texture */}
@@ -58,14 +72,12 @@ export function HeroSection() {
       />
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-44 pt-32 text-center">
-        <m.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: EASE }}
-          className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-white/80"
+        <p
+          className="hero-rise mb-6 text-xs font-bold uppercase tracking-[0.3em] text-white/80"
+          style={{ animationDelay: "0.05s" }}
         >
           Elige tu reto · Corre · Vuelve por más
-        </m.p>
+        </p>
 
         <h1
           aria-label="Descubre de qué estás hecho — runluv®"
@@ -73,31 +85,37 @@ export function HeroSection() {
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
           {TITLE_LINES.map((line, i) => (
-            <span key={line.text} aria-hidden="true" className="block overflow-hidden">
-              <m.span
-                className="block text-[clamp(3.2rem,11vw,9rem)]"
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.8, ease: EASE, delay: 0.08 + i * 0.11 }}
-                style={
-                  line.accent
+            <span key={line.text} aria-hidden="true" className="block overflow-hidden pb-[0.04em]">
+              <span
+                className="hero-line text-[clamp(3.2rem,11vw,9rem)]"
+                style={{
+                  animationDelay: `${(0.15 + i * 0.13).toFixed(2)}s`,
+                  ...(line.accent
                     ? { color: ACCENT }
                     : line.outline
-                      ? { color: "transparent", WebkitTextStroke: "2px rgba(255,255,255,0.85)" }
-                      : undefined
-                }
+                      ? {
+                          color: "transparent",
+                          WebkitTextStroke: "2px rgba(255,255,255,0.85)",
+                        }
+                      : {}),
+                }}
               >
                 {line.text}
-              </m.span>
+              </span>
             </span>
           ))}
         </h1>
 
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+        {/* Accent bar wipes in under the headline */}
+        <span
+          aria-hidden="true"
+          className="hero-underline mt-7 block h-[4px] w-28"
+          style={{ background: ACCENT, boxShadow: "0 0 24px rgba(212,255,0,0.55)" }}
+        />
+
+        <div
+          className="hero-rise mt-9 flex flex-wrap items-center justify-center gap-4"
+          style={{ animationDelay: "0.75s" }}
         >
           <Link
             to={event.registrationUrl}
@@ -112,7 +130,16 @@ export function HeroSection() {
           >
             ¿Cuál es tu reto?
           </Link>
-        </m.div>
+        </div>
+      </div>
+
+      {/* Scroll cue — just above the countdown strip. Hidden on mobile where the
+          strip stacks and would collide with it. */}
+      <div
+        aria-hidden="true"
+        className="animate-scroll-cue pointer-events-none absolute bottom-32 left-1/2 z-10 hidden -translate-x-1/2 text-white/55 md:block"
+      >
+        <ChevronDown className="h-6 w-6" strokeWidth={1.5} />
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-10">
