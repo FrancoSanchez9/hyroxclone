@@ -4,7 +4,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { Mail, User, Phone, CreditCard, Check, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { upcomingEvents, seasonPass } from "@/data/events";
-import { isAuthenticated, getSession } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { Button } from "@/components/ui/Button";
 import { EASE } from "@/lib/animation";
 import { trackEvent } from "@/lib/analytics";
@@ -41,12 +41,24 @@ function CheckoutPage() {
     upcomingEvents.find((e) => e.id === eventId) ??
     (eventId === seasonPass.id ? seasonPass : undefined);
 
-  const session = getSession();
-  const [step, setStep] = useState<Step>(isAuthenticated() ? "details" : "identify");
-  const [email, setEmail] = useState(session?.email ?? "");
+  // La sesión resuelve async, así que no puede decidir el paso inicial de entrada:
+  // arrancamos en "identify" y saltamos a "details" cuando confirmamos que hay
+  // sesión (ver efecto abajo). Mientras tanto se muestra un loader — sin él, un
+  // usuario logueado vería parpadear la pantalla de "identifícate".
+  const { session, loading: authLoading } = useSession();
+  const [step, setStep] = useState<Step>("identify");
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [processing, setProcessing] = useState(false);
+
+  useEffect(() => {
+    if (authLoading || !session) return;
+    // Updates funcionales: si el usuario ya escribió algo, no lo pisamos.
+    setEmail((prev) => prev || session.email);
+    setName((prev) => prev || session.name);
+    setStep((prev) => (prev === "identify" ? "details" : prev));
+  }, [authLoading, session]);
 
   const tier = event?.prices?.find((p) => p.available) ?? event?.prices?.[0];
   const total = tier ? tier.price * qty : 0;
@@ -67,6 +79,15 @@ function CheckoutPage() {
       });
     }
   }, [step, orderId, email, event, total, qty, division, category]);
+
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a]">
+        <Loader2 className="h-8 w-8 animate-spin" style={{ color: ACCENT }} />
+        <span className="sr-only">Cargando…</span>
+      </div>
+    );
+  }
 
   if (!event) {
     return (
@@ -269,7 +290,7 @@ function CheckoutPage() {
                     </div>
                   </label>
                   <div className="mt-1 flex gap-3">
-                    {!isAuthenticated() && (
+                    {!session && (
                       <Button variant="ghost" size="lg" onClick={() => setStep("identify")}>
                         <ArrowLeft size={16} /> Atrás
                       </Button>

@@ -19,6 +19,12 @@
       "skillPath": "skills/make-interfaces-feel-better/SKILL.md",
       "computedHash": "54b6e221bbe4e2d1a8461c3f9ecabe69daf891f964e9ee5e699c323daa018f2e"
     },
+    "remotion-best-practices": {
+      "source": "remotion-dev/skills",
+      "sourceType": "github",
+      "skillPath": "skills/remotion/SKILL.md",
+      "computedHash": "5284f294f0bad7c1217d24af5044a5c672d9202b218331db33e833d64ce121a4"
+    },
     "wcag-audit-patterns": {
       "source": "wshobson/agents",
       "sourceType": "github",

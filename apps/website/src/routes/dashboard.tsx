@@ -10,7 +10,7 @@ import {
   ArrowRight,
   ShieldCheck,
 } from "lucide-react";
-import { getSession, logout, isAuthenticated, isAdmin } from "@/lib/auth";
+import { getSession, logout, useSession } from "@/lib/auth";
 import { getNextEvent, seasonCircuits } from "@/data/events";
 import { ACCENT, EASE } from "@/lib/theme";
 
@@ -22,13 +22,14 @@ function longDate(dateStr: string) {
 
 function DashboardPage() {
   const navigate = useNavigate();
-  const session = getSession();
+  const { session } = useSession();
   const nextEvent = getNextEvent();
-  // ponytail: sin backend aún no hay historial de carreras — 0 sellos por ahora.
+  // ponytail: el historial real de carreras llega en la Fase 5 (leer `orders` y la
+  // vista `passport`). Hasta entonces, 0 sellos.
   const stampedCircuits = 0;
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     void navigate({ to: "/auth/login" });
   };
 
@@ -66,7 +67,7 @@ function DashboardPage() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
-            {isAdmin() && (
+            {session?.role === "admin" && (
               <Link
                 to="/admin"
                 className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-150 hover:brightness-95 active:scale-[0.96]"
@@ -245,12 +246,12 @@ function DashboardPage() {
 }
 
 export const Route = createFileRoute("/dashboard")({
-  // Mock auth lives in localStorage, invisible to the server. Render client-only
-  // so `beforeLoad` runs where the session exists — otherwise SSR redirects even
-  // logged-in users to /auth/login before the client can hydrate.
+  // La sesión de Supabase vive en localStorage, invisible para el servidor. Cliente
+  // puro para que `beforeLoad` corra donde la sesión existe — con SSR redirigiría a
+  // /auth/login incluso a usuarios ya autenticados antes de hidratar.
   ssr: false,
-  beforeLoad: () => {
-    if (!isAuthenticated()) throw redirect({ to: "/auth/login" });
+  beforeLoad: async () => {
+    if (!(await getSession())) throw redirect({ to: "/auth/login" });
   },
   head: () => ({
     meta: [{ title: "Mi panel | runluv®" }],

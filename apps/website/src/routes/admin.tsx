@@ -12,7 +12,7 @@ import {
   Star,
   ShieldCheck,
 } from "lucide-react";
-import { getSession, logout, isAuthenticated, isAdmin } from "@/lib/auth";
+import { getSession, logout, useSession } from "@/lib/auth";
 import { upcomingEvents } from "@/data/events";
 import { cn } from "@/lib/utils";
 import { ACCENT, EASE } from "@/lib/theme";
@@ -77,14 +77,14 @@ function MonthDate({ dateStr }: { dateStr: string }) {
 
 function AdminPage() {
   const navigate = useNavigate();
-  const session = getSession();
+  const { session } = useSession();
   const [tab, setTab] = useState<TabId>("resumen");
   const [visible, setVisible] = useState<Record<string, boolean>>(
     Object.fromEntries(SITE_SECTIONS.map((s) => [s.id, true])),
   );
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     void navigate({ to: "/auth/login" });
   };
 
@@ -333,9 +333,10 @@ export const Route = createFileRoute("/admin")({
   // so `beforeLoad` runs where the session exists — otherwise SSR redirects even
   // logged-in admins before the client can hydrate.
   ssr: false,
-  beforeLoad: () => {
-    if (!isAuthenticated()) throw redirect({ to: "/auth/login" });
-    if (!isAdmin()) throw redirect({ to: "/dashboard" });
+  beforeLoad: async () => {
+    const session = await getSession();
+    if (!session) throw redirect({ to: "/auth/login" });
+    if (session.role !== "admin") throw redirect({ to: "/dashboard" });
   },
   head: () => ({
     meta: [{ title: "Administración | runluv®" }],

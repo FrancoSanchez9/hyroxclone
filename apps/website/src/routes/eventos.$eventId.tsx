@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { isAuthenticated } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { m, AnimatePresence } from "framer-motion";
 import { upcomingEvents } from "@/data/events";
 import { EventHero } from "@/components/sections/eventos/EventHero";
@@ -27,6 +27,10 @@ function EventDetailPage() {
   const { eventId } = Route.useParams();
   const navigate = useNavigate();
   const event = upcomingEvents.find((e) => e.id === eventId);
+  // Solo decide el texto del botón: comprar funciona igual como invitado, el paso de
+  // identificarse lo resuelve /checkout. Arranca en null tanto en SSR como en el
+  // primer render del cliente, así que no hay mismatch al hidratar.
+  const { session } = useSession();
 
   const [selectedDivision, setSelectedDivision] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -203,7 +207,7 @@ function EventDetailPage() {
                   >
                     {!readyToBuy
                       ? "Elige división y categoría"
-                      : isAuthenticated()
+                      : session
                         ? `Comprar ${quantity} ${quantity === 1 ? "pase" : "pases"}`
                         : "Inicia sesión para comprar"}
                   </button>

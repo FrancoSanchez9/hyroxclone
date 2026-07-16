@@ -5,9 +5,12 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   fmt: {
-    ignorePatterns: ["**/routeTree.gen.ts"],
+    ignorePatterns: ["**/routeTree.gen.ts", ".agents/**", ".claude/**"],
   },
-  lint: { options: { typeAware: true, typeCheck: true } },
+  lint: {
+    ignorePatterns: [".agents/**", ".claude/**"],
+    options: { typeAware: true, typeCheck: true },
+  },
   run: {
     cache: true,
   },

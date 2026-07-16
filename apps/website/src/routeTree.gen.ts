@@ -32,6 +32,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventosIndexRouteImport } from './routes/eventos.index'
 import { Route as EventosEventIdRouteImport } from './routes/eventos.$eventId'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 
 const VoluntarioRoute = VoluntarioRouteImport.update({
   id: '/voluntario',
@@ -148,6 +149,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/terminos': typeof TerminosRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
   '/eventos/': typeof EventosIndexRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/terminos': typeof TerminosRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
   '/eventos': typeof EventosIndexRoute
@@ -221,6 +229,7 @@ export interface FileRoutesById {
   '/terminos': typeof TerminosRoute
   '/tu-nivel': typeof TuNivelRoute
   '/voluntario': typeof VoluntarioRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/auth/login': typeof AuthLoginRoute
   '/eventos/$eventId': typeof EventosEventIdRoute
   '/eventos/': typeof EventosIndexRoute
@@ -248,6 +257,7 @@ export interface FileRouteTypes {
     | '/terminos'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/callback'
     | '/auth/login'
     | '/eventos/$eventId'
     | '/eventos/'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/terminos'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/callback'
     | '/auth/login'
     | '/eventos/$eventId'
     | '/eventos'
@@ -298,6 +309,7 @@ export interface FileRouteTypes {
     | '/terminos'
     | '/tu-nivel'
     | '/voluntario'
+    | '/auth/callback'
     | '/auth/login'
     | '/eventos/$eventId'
     | '/eventos/'
@@ -324,6 +336,7 @@ export interface RootRouteChildren {
   TerminosRoute: typeof TerminosRoute
   TuNivelRoute: typeof TuNivelRoute
   VoluntarioRoute: typeof VoluntarioRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   AuthLoginRoute: typeof AuthLoginRoute
   EventosEventIdRoute: typeof EventosEventIdRoute
   EventosIndexRoute: typeof EventosIndexRoute
@@ -492,6 +505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -516,6 +536,7 @@ const rootRouteChildren: RootRouteChildren = {
   TerminosRoute: TerminosRoute,
   TuNivelRoute: TuNivelRoute,
   VoluntarioRoute: VoluntarioRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   AuthLoginRoute: AuthLoginRoute,
   EventosEventIdRoute: EventosEventIdRoute,
   EventosIndexRoute: EventosIndexRoute,
