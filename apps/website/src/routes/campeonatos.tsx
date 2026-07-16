@@ -5,6 +5,7 @@ import { Elite15Section } from "@/components/sections/campeonatos/Elite15Section
 import { ChampionshipTeaserSection } from "@/components/sections/campeonatos/ChampionshipTeaserSection";
 import { BeyondMexicoSection } from "@/components/sections/campeonatos/BeyondMexicoSection";
 import { CTASection } from "@/components/sections/campeonatos/CTASection";
+import { SEASON_NAME } from "@/data/season";
 
 function CampeonatosPage() {
   return (
@@ -22,7 +23,7 @@ function CampeonatosPage() {
 export const Route = createFileRoute("/campeonatos")({
   head: () => ({
     meta: [
-      { title: "Temporada 2027 | runluv® — Rankings y Gran Final" },
+      { title: `${SEASON_NAME} | runluv® — Rankings y Gran Final` },
       {
         name: "description",
         content:

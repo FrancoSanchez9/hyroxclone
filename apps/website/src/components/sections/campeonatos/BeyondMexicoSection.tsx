@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Globe } from "lucide-react";
 import { ACCENT, EASE } from "@/lib/theme";
+import { SEASON_NAME, SEASON_YEAR_RANGE } from "@/data/season";
 
 export function BeyondMexicoSection() {
   const ref = useRef<HTMLElement>(null);
@@ -32,7 +33,7 @@ export function BeyondMexicoSection() {
           transition={{ duration: 0.6, ease: EASE, delay: 0.15 }}
           className="mx-auto mt-10 flex max-w-2xl flex-col gap-5 text-center text-base leading-relaxed text-white/70 sm:text-lg"
         >
-          <p>La temporada 2027 será el inicio.</p>
+          <p>La {SEASON_NAME.toLowerCase()} será el inicio.</p>
           <p>
             runluv® nace en México con una primera ruta nacional, pero su visión es crecer hacia
             otros países y construir, temporada tras temporada, una comunidad internacional de
@@ -54,7 +55,7 @@ export function BeyondMexicoSection() {
           className="mt-12 text-center text-[clamp(1.8rem,5vw,3rem)] uppercase leading-none tracking-wide"
           style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
         >
-          La primera será México 2027.
+          La primera ruta será México · {SEASON_YEAR_RANGE}.
         </m.p>
       </div>
     </section>

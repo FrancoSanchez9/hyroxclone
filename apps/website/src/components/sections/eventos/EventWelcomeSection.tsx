@@ -12,6 +12,7 @@ import {
   Sunrise,
 } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
+import { SEASON_NAME } from "@/data/season";
 import { ACCENT, EASE } from "@/lib/theme";
 
 // Franjas verdes diagonales reutilizables.
@@ -52,7 +53,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: EASE }}
-          className="relative overflow-hidden border border-white/10 bg-white/[0.02] p-7 sm:p-9"
+          className="relative overflow-hidden border border-white/10 bg-white/2 p-7 sm:p-9"
         >
           {/* franja verde superior */}
           <span
@@ -90,7 +91,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
               style={{ color: ACCENT }}
             >
               <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: ACCENT }} />
-              Primera parada · Temporada 2026–2027
+              Primera parada · {SEASON_NAME}
             </span>
             <h2
               id="welcome-heading"
@@ -154,7 +155,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
               variants={cardItem}
               whileHover={{ y: -3 }}
               transition={{ type: "spring", stiffness: 400, damping: 24 }}
-              className="group relative flex items-center gap-4 overflow-hidden border border-white/10 bg-white/[0.02] p-5 transition-colors duration-200 hover:border-rl-accent/40"
+              className="group relative flex items-center gap-4 overflow-hidden border border-white/10 bg-white/2 p-5 transition-colors duration-200 hover:border-rl-accent/40"
             >
               {/* franja lateral que crece en hover */}
               <span
@@ -185,7 +186,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, ease: EASE }}
-            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/[0.02] p-6"
+            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/2 p-6"
           >
             <div className="flex items-center gap-3">
               <CalendarClock size={22} style={{ color: ACCENT }} aria-hidden="true" />
@@ -224,7 +225,7 @@ export function EventWelcomeSection({ event }: { event: RunluvEvent }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, delay: 0.1, ease: EASE }}
-            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/[0.02] p-6"
+            className="relative flex flex-col gap-4 overflow-hidden border border-white/10 border-t-2 border-t-rl-accent bg-white/2 p-6"
           >
             <div className="flex items-center gap-3">
               <Sunrise size={22} style={{ color: ACCENT }} aria-hidden="true" />

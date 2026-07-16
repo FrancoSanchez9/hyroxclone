@@ -49,12 +49,12 @@ export function RankingTable({
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="mb-5 flex items-center justify-between gap-4 flex-wrap">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-white/50">
-          <span className="tabular-nums text-white/50">{filtered.length}</span> resultados · {race}{" "}
-          · {division}
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-white/70">
+          <span className="tabular-nums text-white">{filtered.length}</span> resultados · {race} ·{" "}
+          {division}
         </p>
-        <p className="hidden text-[10px] text-white/50 md:block">Hover S1–S8 para ver splits</p>
+        <p className="hidden text-xs text-white/70 md:block">Hover S1–S8 para ver splits</p>
       </div>
 
       {/* Desktop: scrollable table */}
@@ -87,13 +87,13 @@ export function RankingTable({
                     <span className="text-[10px] font-bold uppercase tracking-widest text-black">
                       S{i + 1}
                     </span>
-                    <span className="hidden lg:block text-[8px] uppercase tracking-wide text-black/40 leading-tight whitespace-nowrap">
+                    <span className="hidden text-[10px] leading-tight tracking-wide whitespace-nowrap text-black/60 uppercase lg:block">
                       {s}
                     </span>
                   </div>
                 </th>
               ))}
-              <th className="px-4 py-3.5 text-right text-[10px] font-bold uppercase tracking-widest text-black/40 w-16">
+              <th className="w-16 px-4 py-3.5 text-right text-[10px] font-bold tracking-widest text-black/60 uppercase">
                 Gap
               </th>
               <th className="px-4 py-3.5 text-right text-[10px] font-bold uppercase tracking-widest text-black w-24">
@@ -104,7 +104,7 @@ export function RankingTable({
           <tbody>
             {paginated.length === 0 ? (
               <tr>
-                <td colSpan={14} className="py-16 text-center text-sm text-white/25">
+                <td colSpan={14} className="py-16 text-center text-sm text-white/70">
                   No se encontraron resultados con los filtros actuales.
                 </td>
               </tr>
@@ -127,7 +127,7 @@ export function RankingTable({
       {/* Mobile: card list (the table's 1020px width would force horizontal scroll) */}
       <div className="flex flex-col gap-2 md:hidden">
         {paginated.length === 0 ? (
-          <p className="py-16 text-center text-sm text-white/40">
+          <p className="py-16 text-center text-sm text-white/70">
             No se encontraron resultados con los filtros actuales.
           </p>
         ) : (
@@ -139,8 +139,8 @@ export function RankingTable({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="mt-8 flex items-center justify-between">
-          <p className="text-[11px] tabular-nums text-white/50">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs tabular-nums text-white/70">
             Página {page} de {totalPages}
           </p>
           <div className="flex items-center gap-1">
@@ -149,7 +149,7 @@ export function RankingTable({
               aria-label="Primera página"
               onClick={() => dispatch({ type: "SET_PAGE", value: 1 })}
               disabled={page === 1}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="hidden h-11 w-11 cursor-pointer items-center justify-center text-xs font-bold text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-30 sm:inline-flex"
             >
               ««
             </button>
@@ -158,22 +158,23 @@ export function RankingTable({
               aria-label="Página anterior"
               onClick={() => dispatch({ type: "SET_PAGE", value: Math.max(1, page - 1) })}
               disabled={page === 1}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-base font-bold text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-30"
             >
               ‹
             </button>
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              const start = Math.max(1, Math.min(page - 2, totalPages - 4));
+            {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
+              const start = Math.max(1, Math.min(page - 1, totalPages - 2));
               const p = start + i;
               return (
                 <button
                   key={p}
                   type="button"
                   aria-label={`Ir a página ${p}`}
+                  aria-current={p === page ? "page" : undefined}
                   onClick={() => dispatch({ type: "SET_PAGE", value: p })}
                   className={cn(
-                    "cursor-pointer h-8 w-8 text-xs font-bold transition-[background-color,color,transform] duration-100 active:scale-[0.96]",
-                    p === page ? "bg-white text-black" : "text-white/50 hover:text-white",
+                    "h-11 min-w-11 cursor-pointer px-2 text-xs font-bold transition-[background-color,color,transform] duration-150 active:scale-[0.96]",
+                    p === page ? "bg-white text-black" : "text-white/70 hover:text-white",
                   )}
                 >
                   {p}
@@ -185,7 +186,7 @@ export function RankingTable({
               aria-label="Página siguiente"
               onClick={() => dispatch({ type: "SET_PAGE", value: Math.min(totalPages, page + 1) })}
               disabled={page === totalPages}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-base font-bold text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-30"
             >
               ›
             </button>
@@ -194,7 +195,7 @@ export function RankingTable({
               aria-label="Última página"
               onClick={() => dispatch({ type: "SET_PAGE", value: totalPages })}
               disabled={page === totalPages}
-              className="cursor-pointer px-3 py-1.5 text-xs font-bold text-white/50 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors active:scale-[0.96] transition-transform"
+              className="hidden h-11 w-11 cursor-pointer items-center justify-center text-xs font-bold text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-30 sm:inline-flex"
             >
               »»
             </button>

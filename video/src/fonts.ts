@@ -7,12 +7,21 @@ export const BODY = "Inter";
 
 const handle = delayRender("Loading brand fonts");
 Promise.all([
-  loadFont({ family: DISPLAY, url: staticFile("BebasNeue.woff2"), weight: "400", format: "woff2" }),
-  loadFont({ family: BODY, url: staticFile("Inter.woff2"), weight: "400", format: "woff2" }),
+  loadFont({
+    family: DISPLAY,
+    url: staticFile("BebasNeue.woff2"),
+    weight: "400",
+    format: "woff2",
+  }),
+  loadFont({
+    family: BODY,
+    url: staticFile("Inter.woff2"),
+    weight: "400",
+    format: "woff2",
+  }),
 ])
   .then(() => continueRender(handle))
   .catch((err) => {
-    // eslint-disable-next-line no-console
     console.error("Font load failed", err);
     continueRender(handle);
   });

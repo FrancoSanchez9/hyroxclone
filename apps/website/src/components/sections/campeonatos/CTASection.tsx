@@ -2,6 +2,7 @@ import { m } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ACCENT, EASE } from "@/lib/theme";
+import { SEASON_NAME } from "@/data/season";
 
 export function CTASection() {
   return (
@@ -11,7 +12,7 @@ export function CTASection() {
     >
       <div
         aria-hidden="true"
-        className="animate-blob pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full"
+        className="animate-blob pointer-events-none absolute left-1/2 top-0 h-120 w-120 -translate-x-1/2 rounded-full"
         style={{ background: "radial-gradient(circle, rgba(212,255,0,0.09), transparent 70%)" }}
       />
       <m.div
@@ -28,13 +29,13 @@ export function CTASection() {
           Tu primera vuelta <span style={{ color: ACCENT }}>comienza aquí</span>
         </h2>
         <p className="max-w-md text-base leading-relaxed text-white/55">
-          La temporada 2027 es solo el inicio. Elige tu desafío, entrena, compite y forma parte de
-          la comunidad runluv®.
+          La {SEASON_NAME.toLowerCase()} es solo el inicio. Elige tu desafío, entrena, compite y
+          forma parte de la comunidad runluv®.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/eventos"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-160 ease-out-strong hover:brightness-95 active:scale-[0.96]"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
           >
             Ver eventos
@@ -42,7 +43,7 @@ export function CTASection() {
           </Link>
           <Link
             to="/tu-nivel"
-            className="inline-flex items-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96]"
+            className="inline-flex items-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-160 hover:border-white hover:bg-white/8 active:scale-[0.96]"
           >
             Encuentra tu desafío
           </Link>

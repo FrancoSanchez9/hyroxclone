@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Link } from "@tanstack/react-router";
 import { Flag } from "@/components/sections/ranking/Flag";
 import { EASE } from "@/lib/theme";
+import { SEASON_NAME } from "@/data/season";
 
 const qualificationCriteria = [
   {
@@ -260,7 +261,7 @@ function Elite15Page() {
             className="mb-14"
           >
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-3">
-              Temporada 2026
+              {SEASON_NAME}
             </p>
             <h2
               className="text-5xl md:text-7xl font-normal leading-none text-white uppercase"

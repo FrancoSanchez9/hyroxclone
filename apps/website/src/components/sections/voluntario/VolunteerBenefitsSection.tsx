@@ -1,151 +1,145 @@
-import { m } from "framer-motion";
-import { Shield, Package, Coffee, Users } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
-import { Card, CardHeader, CardContent } from "@/components/ui/Card";
-import { EASE, fadeUp } from "@/lib/animation";
+import { ArrowRight, Coffee, Package, Shield, Users } from "lucide-react";
 
 const benefits = [
   {
     icon: Shield,
-    title: "Acceso gratuito",
-    description: "Entra al evento sin costo y vive la adrenalina desde el interior.",
+    title: "Acceso de equipo",
+    description: "Según tu rol y evento, podrás apoyar desde las zonas donde sucede la operación.",
   },
   {
     icon: Package,
-    title: "Camiseta oficial",
-    description: "Recibe tu camiseta exclusiva de voluntario HYROX.",
+    title: "Materiales del equipo",
+    description:
+      "Te confirmaremos antes del evento los materiales y elementos que corresponden a tu rol.",
   },
   {
     icon: Coffee,
-    title: "Alimentación incluida",
-    description: "Almuerzo proporcionado durante tu turno de voluntariado.",
+    title: "Alimentos y apoyo",
+    description:
+      "La sede te informará qué hidratación, alimentos y apoyo estarán disponibles durante tu turno.",
   },
   {
     icon: Users,
     title: "Comunidad",
-    description: "Conoce a atletas, coaches y al equipo detrás de HYROX.",
+    description:
+      "Conoce corredores, aliados y personas que comparten la energía de hacer que suceda.",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Regístrate",
-    description: "Completa el formulario de interés antes de tu evento elegido.",
+    eyebrow: "Elige",
+    title: "Tu evento",
+    description: "Selecciona la sede en la que quieres participar y cuéntanos un poco sobre ti.",
   },
   {
     number: "02",
-    title: "Confirmación",
-    description: "Recibirás un email de confirmación con tu asignación de rol.",
+    eyebrow: "Conecta",
+    title: "Con el equipo",
+    description:
+      "Si existe disponibilidad y encaje, te contactaremos para revisar rol, horario y punto de encuentro.",
   },
   {
     number: "03",
+    eyebrow: "Hazlo real",
     title: "El gran día",
-    description: "Llega 2 horas antes, recibe tu briefing y disfruta la experiencia.",
+    description:
+      "Después de confirmar, recibe una inducción, conoce a tu equipo y ayuda a crear una gran carrera.",
   },
 ];
 
 export function VolunteerBenefitsSection() {
   return (
     <>
-      <m.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={fadeUp}
-        className="py-20 px-6 border-t border-[#2a2a2a]"
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12">
-            <Badge variant="dark" className="mb-4 border border-[#3a3a3a]">
-              BENEFICIOS
-            </Badge>
-            <h2
-              className="text-[clamp(2rem,6vw,4rem)] leading-none text-white"
-              style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            >
-              ¿POR QUÉ SER VOLUNTARIO?
-            </h2>
+      <section className="border-b border-rl-border-subtle bg-rl-surface-subtle px-6 py-20 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.26em] text-rl-accent">
+                Lo que puede incluir
+              </p>
+              <h2 className="max-w-xl text-[clamp(2.8rem,6vw,5.5rem)] leading-[0.9] text-white">
+                Tu energía mueve la carrera
+              </h2>
+            </div>
+            <p className="max-w-2xl text-base leading-relaxed text-rl-text-secondary lg:justify-self-end lg:text-lg">
+              No vienes a mirar desde afuera. Eres parte de la salida, la ruta, la meta y cada
+              momento que hace sentir acompañado a un corredor.
+            </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {benefits.map((benefit, i) => (
-              <m.div
+
+          <div className="mt-14 grid border-t border-rl-border-strong sm:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((benefit, index) => (
+              <article
                 key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.38, delay: i * 0.05, ease: EASE }}
+                className="group min-h-64 border-b border-rl-border-subtle p-6 transition-[background-color] duration-160 hover:bg-white/3 sm:border-r lg:border-b-0 lg:last:border-r-0"
               >
-                <Card hover className="h-full">
-                  <CardHeader>
-                    <div className="mb-3 flex h-10 w-10 items-center justify-center bg-[#ffffff]/10">
-                      <benefit.icon className="h-5 w-5 text-[#ffffff]" />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">{benefit.title}</h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm leading-relaxed text-white/60">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              </m.div>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center bg-rl-accent text-black">
+                    <benefit.icon className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <span className="text-xs font-bold tabular-nums text-rl-text-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-10 text-2xl leading-none text-white">{benefit.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-rl-text-secondary">
+                  {benefit.description}
+                </p>
+              </article>
             ))}
           </div>
         </div>
-      </m.section>
+      </section>
 
-      <m.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={fadeUp}
-        className="py-20 px-6 bg-[#0f0f0f] border-t border-[#2a2a2a]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px)",
-        }}
+      <section
+        id="proceso"
+        className="scroll-mt-24 border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24 lg:px-8"
       >
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12">
-            <Badge variant="dark" className="mb-4 border border-[#3a3a3a]">
-              PROCESO
-            </Badge>
-            <h2
-              className="text-[clamp(2rem,6vw,4rem)] leading-none text-white"
-              style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-5 border-b border-rl-border-strong pb-10 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.26em] text-rl-accent">
+                Del registro a la pista
+              </p>
+              <h2 className="text-[clamp(2.8rem,6vw,5rem)] leading-[0.9] text-white">
+                Así funciona
+              </h2>
+            </div>
+            <a
+              href="#solicitud"
+              className="inline-flex min-h-11 items-center gap-2 self-start text-sm font-bold uppercase tracking-widest text-white transition-[color,transform] duration-160 hover:text-rl-accent active:scale-[0.96] sm:self-auto"
             >
-              ¿CÓMO FUNCIONA?
-            </h2>
+              Ir al registro
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <m.div
+
+          <ol className="grid lg:grid-cols-3">
+            {steps.map((step) => (
+              <li
                 key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.38, delay: i * 0.05, ease: EASE }}
-                className="flex gap-5"
+                className="relative border-b border-rl-border-subtle py-10 lg:min-h-80 lg:border-r lg:border-b-0 lg:px-8 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
                 <span
-                  className="shrink-0 text-[3.5rem] leading-none text-[#ffffff]/20 select-none"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  className="text-[4.5rem] leading-none text-white/12 tabular-nums"
+                  aria-hidden="true"
                 >
                   {step.number}
                 </span>
-                <div className="pt-1">
-                  <h3
-                    className="text-xl text-white mb-2"
-                    style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.05em" }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-white/60">{step.description}</p>
-                </div>
-              </m.div>
+                <p className="mt-8 text-xs font-bold uppercase tracking-[0.24em] text-rl-accent">
+                  {step.eyebrow}
+                </p>
+                <h3 className="mt-2 text-3xl leading-none text-white">{step.title}</h3>
+                <p className="mt-4 max-w-sm text-sm leading-relaxed text-rl-text-secondary">
+                  {step.description}
+                </p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
-      </m.section>
+      </section>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { EASE } from "@/lib/animation";
 import { ACCENT } from "@/lib/theme";
@@ -14,7 +14,7 @@ const word = {
   hidden: { y: "110%" },
   visible: (i: number) => ({
     y: 0,
-    transition: { duration: 0.65, ease: EASE, delay: i * 0.07 },
+    transition: { duration: 0.26, ease: EASE, delay: i * 0.035 },
   }),
 };
 
@@ -25,10 +25,12 @@ const word = {
  */
 export function AnimatedTitle({ text, className, accent = [] }: AnimatedTitleProps) {
   const words = text.split(" ");
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <m.h2
       aria-label={text}
-      initial="hidden"
+      initial={shouldReduceMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
       className={cn("uppercase leading-none tracking-wide", className)}

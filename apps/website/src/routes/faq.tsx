@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FaqItem } from "@/components/sections/eventos/FaqItem";
-import { ACCENT } from "@/lib/theme";
+import { FaqAccordionItem } from "@/components/sections/faq/FaqAccordionItem";
 
 interface FAQItem {
   question: string;
@@ -358,35 +357,51 @@ const faqData: FAQCategory[] = [
   },
 ];
 
-const slug = (title: string) =>
-  title
+const normalized = (value: string) =>
+  value
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[̀-ͯ®]/g, "")
+    .replace(/[\u0300-\u036f®]/g, "");
+
+const slug = (title: string) =>
+  normalized(title)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-const TOTAL_QUESTIONS = faqData.reduce((n, c) => n + c.items.length, 0);
+const TOTAL_QUESTIONS = faqData.reduce((total, category) => total + category.items.length, 0);
 
 function FAQPage() {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
 
-  const q = query.trim().toLowerCase();
-  const filtered = q
-    ? faqData
-        .map((c) => ({
-          ...c,
-          items: c.items.filter(
-            (i) => i.question.toLowerCase().includes(q) || i.answer.toLowerCase().includes(q),
-          ),
-        }))
-        .filter((c) => c.items.length > 0)
-    : faqData;
+  const searchTerm = normalized(query.trim());
+  const filtered = useMemo(() => {
+    if (!searchTerm) return faqData;
 
-  // Scrollspy — highlights the category currently in view
+    return faqData
+      .map((category) => {
+        const categoryMatches = normalized(category.title).includes(searchTerm);
+        return {
+          ...category,
+          items: categoryMatches
+            ? category.items
+            : category.items.filter(
+                (item) =>
+                  normalized(item.question).includes(searchTerm) ||
+                  normalized(item.answer).includes(searchTerm),
+              ),
+        };
+      })
+      .filter((category) => category.items.length > 0);
+  }, [searchTerm]);
+
+  const resultCount = filtered.reduce((total, category) => total + category.items.length, 0);
+  const visibleSections = filtered.map((category) => slug(category.title)).join("|");
+
   useEffect(() => {
-    if (q) return;
+    const sections = document.querySelectorAll("[data-faq-section]");
+    if (sections.length === 0) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -395,18 +410,26 @@ function FAQPage() {
           }
         }
       },
-      { rootMargin: "-15% 0px -75% 0px" },
+      { rootMargin: "-18% 0px -72% 0px" },
     );
-    document.querySelectorAll("[data-faq-section]").forEach((el) => observer.observe(el));
+    sections.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [q]);
+  }, [visibleSections]);
+
+  const categoryLink = (category: FAQCategory) => {
+    const categoryIndex = faqData.findIndex((item) => item.title === category.title);
+    return {
+      categoryIndex,
+      isActive: active === categoryIndex,
+      href: `#${slug(category.title)}`,
+    };
+  };
 
   return (
     <div
-      className="relative min-h-screen overflow-hidden px-4 pb-24 pt-28 sm:px-6 lg:px-8"
+      className="relative min-h-screen overflow-x-clip px-4 pb-24 pt-28 sm:px-6 lg:px-8"
       style={{ background: "linear-gradient(170deg, #000 0%, #0a0a0a 40%, #101204 100%)" }}
     >
-      {/* Ambient glows + lane lines */}
       <div
         aria-hidden="true"
         className="animate-blob pointer-events-none absolute -right-56 top-32 h-[34rem] w-[34rem] rounded-full"
@@ -421,129 +444,237 @@ function FAQPage() {
         }}
       />
 
-      <div className="relative mx-auto max-w-6xl">
-        {/* Hero */}
-        <div className="mb-12">
-          <p
-            className="mb-3 text-sm font-bold uppercase tracking-[0.3em]"
-            style={{ color: ACCENT }}
-          >
-            runluv® MÉXICO
+      <div className="relative mx-auto max-w-7xl">
+        <header className="mb-9 sm:mb-12">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-rl-accent sm:text-sm">
+            runluv® México
           </p>
-          <h1
-            className="text-[clamp(3rem,9vw,6.5rem)] leading-none tracking-tight text-white uppercase"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-          >
-            Resuelve tus <span style={{ color: ACCENT }}>dudas</span>
+          <h1 className="max-w-4xl text-balance text-[clamp(3.25rem,9vw,7rem)] leading-[0.9] tracking-tight text-white uppercase">
+            Resuelve tus <span className="text-rl-accent">dudas</span>
           </h1>
-          <p className="mt-4 max-w-xl text-base text-white/55">
+          <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-rl-text-secondary">
             Todo lo que necesitas saber antes de tu desafío runluv®.{" "}
-            <span className="tabular-nums text-white/50">
+            <span className="tabular-nums text-rl-text-muted">
               {TOTAL_QUESTIONS} preguntas · {faqData.length} temas
             </span>
           </p>
-          <p className="mt-2 text-xs text-white/35">
+          <p className="mt-2 text-xs text-rl-text-muted">
             Última actualización: <time dateTime="2026-06-23">23 de junio de 2026</time>
           </p>
 
-          {/* Search */}
-          <div className="relative mt-8 max-w-xl">
-            <Search
-              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50"
-              aria-hidden="true"
-            />
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              aria-label="Buscar en preguntas frecuentes"
-              placeholder="Busca tu duda — chip, horarios, reembolso…"
-              className="w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-12 lg:grid-cols-[260px_1fr]">
-          {/* Category nav — sticky rail with scrollspy */}
-          <nav aria-label="Categorías" className="hidden lg:block">
-            <div className="sticky top-28 flex flex-col gap-1">
-              {faqData.map((cat, i) => (
-                <a
-                  key={cat.title}
-                  href={`#${slug(cat.title)}`}
-                  className={cn(
-                    "flex items-baseline gap-3 border-l-2 px-4 py-2 transition-[color,border-color] duration-150",
-                    !q && active === i
-                      ? "border-rl-accent text-white"
-                      : "border-white/10 text-white/45 hover:border-white/30 hover:text-white",
-                  )}
+          <div className="mt-8 max-w-2xl">
+            <label htmlFor="faq-search" className="sr-only">
+              Buscar en preguntas frecuentes
+            </label>
+            <div className="relative">
+              <Search
+                className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-rl-text-muted"
+                aria-hidden="true"
+              />
+              <input
+                id="faq-search"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder={`Buscar en ${TOTAL_QUESTIONS} preguntas…`}
+                className="min-h-13 w-full appearance-none border border-rl-border-strong bg-white/[0.045] py-3 pl-12 pr-14 text-base text-white placeholder:text-rl-text-muted transition-[border-color,background-color,box-shadow] duration-160 hover:border-white/40 focus:border-rl-accent focus:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-rl-accent/30"
+              />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-rl-text-muted transition-[color,transform] duration-160 hover:text-white active:scale-[0.96]"
+                  aria-label="Limpiar búsqueda"
                 >
-                  <span
-                    className="tabular-nums text-lg leading-none"
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      color: !q && active === i ? ACCENT : undefined,
-                    }}
+                  <X className="h-5 w-5" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+            <p className="mt-3 min-h-5 text-sm text-rl-text-muted" role="status" aria-live="polite">
+              {searchTerm
+                ? `${resultCount} ${resultCount === 1 ? "resultado" : "resultados"} en ${filtered.length} ${filtered.length === 1 ? "tema" : "temas"}`
+                : "Busca por modalidad, horario, boleto, seguridad o cualquier palabra clave."}
+            </p>
+          </div>
+        </header>
+
+        {filtered.length > 0 && (
+          <nav
+            aria-label="Categorías de preguntas"
+            className="sticky top-20 z-30 -mx-4 mb-10 border-y border-rl-border-subtle bg-black/92 px-4 backdrop-blur-md sm:-mx-6 sm:px-6 lg:hidden"
+          >
+            <div className="flex gap-2 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {filtered.map((category) => {
+                const link = categoryLink(category);
+                return (
+                  <a
+                    key={category.title}
+                    href={link.href}
+                    className={cn(
+                      "inline-flex min-h-11 shrink-0 items-center gap-2 border px-4 text-xs font-bold uppercase tracking-wider transition-[color,border-color,background-color,transform] duration-160 active:scale-[0.96]",
+                      link.isActive
+                        ? "border-rl-accent bg-rl-accent text-black"
+                        : "border-rl-border-strong bg-black/70 text-rl-text-secondary hover:border-white/60 hover:text-white",
+                    )}
+                    aria-current={link.isActive ? "location" : undefined}
                   >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider">
-                    {cat.title}
-                  </span>
-                </a>
-              ))}
+                    {category.title}
+                    <span className="tabular-nums opacity-70">{category.items.length}</span>
+                  </a>
+                );
+              })}
+            </div>
+          </nav>
+        )}
+
+        <div className="grid gap-12 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
+          <nav aria-label="Categorías de preguntas" className="hidden lg:block">
+            <div className="sticky top-28 border-t border-rl-border-subtle pt-3">
+              <p className="mb-3 px-4 text-[11px] font-bold uppercase tracking-[0.22em] text-rl-text-muted">
+                {searchTerm ? "Temas encontrados" : "Explora por tema"}
+              </p>
+              {filtered.map((category) => {
+                const link = categoryLink(category);
+                return (
+                  <a
+                    key={category.title}
+                    href={link.href}
+                    className={cn(
+                      "grid min-h-11 grid-cols-[2rem_1fr_auto] items-center gap-3 border-l-2 px-4 py-2 transition-[color,border-color,background-color] duration-160",
+                      link.isActive
+                        ? "border-rl-accent bg-white/[0.035] text-white"
+                        : "border-rl-border-subtle text-rl-text-muted hover:border-white/40 hover:bg-white/[0.025] hover:text-white",
+                    )}
+                    aria-current={link.isActive ? "location" : undefined}
+                  >
+                    <span
+                      className={cn(
+                        "text-lg leading-none tabular-nums",
+                        link.isActive && "text-rl-accent",
+                      )}
+                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                    >
+                      {String(link.categoryIndex + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">
+                      {category.title}
+                    </span>
+                    <span className="text-xs tabular-nums opacity-70">{category.items.length}</span>
+                  </a>
+                );
+              })}
             </div>
           </nav>
 
-          {/* Content */}
-          <div className="min-w-0 space-y-16">
-            {filtered.length === 0 && (
-              <p className="text-white/50">
-                No encontramos nada para "{query}". Intenta con otra palabra o{" "}
-                <a href="/contacto" className="underline" style={{ color: ACCENT }}>
-                  contáctanos
-                </a>
-                .
-              </p>
+          <div className="min-w-0">
+            {filtered.length === 0 ? (
+              <div className="border-y border-rl-border-subtle py-12 sm:py-16" role="status">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-rl-accent">
+                  Sin coincidencias
+                </p>
+                <h2 className="mt-3 max-w-2xl text-balance text-4xl leading-none text-white sm:text-5xl">
+                  No encontramos “{query}”
+                </h2>
+                <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-rl-text-secondary">
+                  Prueba con una palabra más corta, revisa la ortografía o contacta a nuestro
+                  equipo.
+                </p>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <button
+                    type="button"
+                    onClick={() => setQuery("")}
+                    className="inline-flex min-h-12 items-center justify-center bg-rl-accent px-6 text-sm font-bold uppercase tracking-widest text-black transition-[filter,transform] duration-160 hover:brightness-95 active:scale-[0.96]"
+                  >
+                    Ver todas las preguntas
+                  </button>
+                  <a
+                    href="/contacto"
+                    className="inline-flex min-h-12 items-center justify-center border border-rl-border-strong px-6 text-sm font-bold uppercase tracking-widest text-white transition-[border-color,color,transform] duration-160 hover:border-rl-accent hover:text-rl-accent active:scale-[0.96]"
+                  >
+                    Contactar al equipo
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-14 sm:space-y-16">
+                {filtered.map((category) => {
+                  const categoryIndex = faqData.findIndex((item) => item.title === category.title);
+                  const headingId = `faq-cat-${categoryIndex}`;
+
+                  return (
+                    <section
+                      key={category.title}
+                      id={slug(category.title)}
+                      data-faq-section
+                      data-idx={categoryIndex}
+                      aria-labelledby={headingId}
+                      className="scroll-mt-40 lg:scroll-mt-28"
+                    >
+                      <div className="mb-5 flex items-end justify-between gap-4 border-b border-rl-border-strong pb-5">
+                        <div className="flex min-w-0 items-baseline gap-3 sm:gap-4">
+                          <span
+                            aria-hidden="true"
+                            className="text-4xl leading-none tabular-nums sm:text-5xl"
+                            style={{
+                              fontFamily: "'Bebas Neue', sans-serif",
+                              color: "transparent",
+                              WebkitTextStroke: "1.5px rgba(212,255,0,0.65)",
+                            }}
+                          >
+                            {String(categoryIndex + 1).padStart(2, "0")}
+                          </span>
+                          <h2
+                            id={headingId}
+                            className="text-balance text-3xl leading-none tracking-wide text-white uppercase sm:text-4xl"
+                          >
+                            {category.title}
+                          </h2>
+                        </div>
+                        <span
+                          className="shrink-0 text-xs font-semibold tabular-nums text-rl-text-muted"
+                          aria-label={`${category.items.length} ${category.items.length === 1 ? "pregunta" : "preguntas"}`}
+                        >
+                          {category.items.length}
+                          <span className="hidden sm:inline">
+                            {category.items.length === 1 ? " pregunta" : " preguntas"}
+                          </span>
+                        </span>
+                      </div>
+
+                      <div>
+                        {category.items.map((item, index) => (
+                          <FaqAccordionItem
+                            key={item.question}
+                            question={item.question}
+                            answer={item.answer}
+                            index={index}
+                            searchTerm={searchTerm}
+                          />
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
+
+                <aside className="border-y border-rl-border-strong bg-white/[0.025] px-5 py-8 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:px-8">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-rl-accent">
+                      ¿Aún tienes dudas?
+                    </p>
+                    <h2 className="mt-2 text-balance text-3xl leading-none text-white sm:text-4xl">
+                      Hablemos de tu siguiente desafío
+                    </h2>
+                  </div>
+                  <a
+                    href="/contacto"
+                    className="mt-6 inline-flex min-h-12 shrink-0 items-center gap-2 bg-rl-accent px-6 text-sm font-bold uppercase tracking-widest text-black transition-[filter,transform] duration-160 hover:brightness-95 active:scale-[0.96] sm:mt-0"
+                  >
+                    Contactar al equipo
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                </aside>
+              </div>
             )}
-            {filtered.map((category, ci) => (
-              <section
-                key={category.title}
-                id={slug(category.title)}
-                data-faq-section
-                data-idx={faqData.findIndex((c) => c.title === category.title)}
-                aria-labelledby={`faq-cat-${ci}`}
-              >
-                <div className="mb-6 flex items-baseline gap-4">
-                  <span
-                    aria-hidden="true"
-                    className="tabular-nums text-5xl leading-none"
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      color: "transparent",
-                      WebkitTextStroke: "1.5px rgba(212,255,0,0.5)",
-                    }}
-                  >
-                    {String(faqData.findIndex((c) => c.title === category.title) + 1).padStart(
-                      2,
-                      "0",
-                    )}
-                  </span>
-                  <h2
-                    id={`faq-cat-${ci}`}
-                    className="text-3xl leading-none tracking-wide text-white uppercase sm:text-4xl"
-                    style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                  >
-                    {category.title}
-                  </h2>
-                </div>
-                <div className="border-t border-white/10">
-                  {category.items.map((item, i) => (
-                    <FaqItem key={item.question} q={item.question} a={item.answer} index={i} />
-                  ))}
-                </div>
-              </section>
-            ))}
           </div>
         </div>
       </div>
@@ -554,11 +685,11 @@ function FAQPage() {
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "Preguntas Frecuentes | runluv® — FAQ" },
+      { title: "Preguntas frecuentes | runluv®" },
       {
         name: "description",
         content:
-          "Resuelve todas tus dudas sobre runluv®. Inscripción, categorías, estaciones funcionales, precios, espectadores y resultados. Todo lo que necesitas saber para competir.",
+          "Resuelve tus dudas sobre runluv®: inscripciones, modalidades, preparación, horarios, seguridad, espectadores y resultados.",
       },
     ],
   }),

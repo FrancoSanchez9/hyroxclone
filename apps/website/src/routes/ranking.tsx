@@ -3,6 +3,7 @@ import { useReducer, useMemo } from "react";
 import { m } from "framer-motion";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { resultsData, races, divisions, workouts } from "@/data/results";
+import { SEASON_NAME } from "@/data/season";
 import {
   RankingFilters,
   type FilterState,
@@ -26,7 +27,7 @@ const initialState: FilterState = {
   workout: workouts[0],
   lastName: "",
   firstName: "",
-  gender: "Men",
+  gender: "All",
   ageGroup: "All",
   nationality: "All",
   pageSize: 25,
@@ -60,7 +61,6 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
         ...initialState,
         race: state.race,
         division: state.division,
-        workout: state.workout,
         pageSize: state.pageSize,
       };
     default:
@@ -156,7 +156,7 @@ function RankingPage() {
             className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.3em]"
             style={{ color: ACCENT }}
           >
-            Temporada 2026–2027
+            {SEASON_NAME}
           </m.span>
           <AnimatedTitle
             text="RESULTADOS OFICIALES"

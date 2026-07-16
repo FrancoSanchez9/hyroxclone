@@ -17,8 +17,8 @@ export function EventHero({ event }: { event: RunluvEvent }) {
           style={{ filter: "grayscale(100%)", outline: "1px solid rgba(255,255,255,0.1)" }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/20" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent" />
 
       {/* Back link */}
       <div className="absolute top-0 left-0 right-0 pt-28 px-6">
@@ -74,14 +74,14 @@ export function EventHero({ event }: { event: RunluvEvent }) {
           <div className="mt-7 flex flex-wrap items-center gap-4">
             <a
               href="#registro"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-160 ease-out-strong hover:brightness-95 active:scale-[0.96]"
               style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
             >
               ¡Regístrate ahora!
             </a>
             <a
               href="#detalles"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96]"
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-160 hover:border-white hover:bg-white/8 active:scale-[0.96]"
             >
               Más información
             </a>

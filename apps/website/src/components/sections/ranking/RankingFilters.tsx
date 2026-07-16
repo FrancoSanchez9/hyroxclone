@@ -1,4 +1,5 @@
-import { type Dispatch } from "react";
+import { type Dispatch, useState } from "react";
+import { ChevronDown, X } from "lucide-react";
 import { races, divisions, workouts, ageGroups, nationalities } from "@/data/results";
 import { Select } from "./Select";
 import { TextInput } from "./TextInput";
@@ -38,45 +39,120 @@ interface RankingFiltersProps {
 }
 
 export function RankingFilters({ state, dispatch, onReset }: RankingFiltersProps) {
+  const [moreFiltersOpen, setMoreFiltersOpen] = useState(false);
   const { race, division, workout, lastName, firstName, gender, ageGroup, nationality, pageSize } =
     state;
+
+  const activeFilters: Array<{ key: string; label: string; action: FilterAction }> = [];
+
+  if (workout !== workouts[0]) {
+    activeFilters.push({
+      key: "workout",
+      label: `Desafío: ${workout}`,
+      action: { type: "SET_WORKOUT", value: workouts[0] },
+    });
+  }
+  if (gender !== "All") {
+    activeFilters.push({
+      key: "gender",
+      label: `Género: ${gender === "Men" ? "Varonil" : "Femenil"}`,
+      action: { type: "SET_GENDER", value: "All" },
+    });
+  }
+  if (ageGroup !== "All") {
+    activeFilters.push({
+      key: "ageGroup",
+      label: `Edad: ${ageGroup}`,
+      action: { type: "SET_AGE_GROUP", value: "All" },
+    });
+  }
+  if (nationality !== "All") {
+    activeFilters.push({
+      key: "nationality",
+      label: `País: ${nationality}`,
+      action: { type: "SET_NATIONALITY", value: "All" },
+    });
+  }
+  if (lastName) {
+    activeFilters.push({
+      key: "lastName",
+      label: `Apellido: ${lastName}`,
+      action: { type: "SET_LAST_NAME", value: "" },
+    });
+  }
+  if (firstName) {
+    activeFilters.push({
+      key: "firstName",
+      label: `Nombre: ${firstName}`,
+      action: { type: "SET_FIRST_NAME", value: "" },
+    });
+  }
 
   return (
     <section
       style={{ background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
-      className="py-7 px-4 sm:px-6 lg:px-8"
+      className="px-4 py-6 sm:px-6 sm:py-7 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-5 flex items-center justify-between">
+        <div className="mb-5 flex items-center justify-between gap-4">
           <h2
             className="text-[1.6rem] leading-none tracking-wider text-white uppercase"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             Listas de resultados
           </h2>
-          <button
-            type="button"
-            onClick={onReset}
-            className="cursor-pointer text-[10px] font-bold uppercase tracking-widest text-white/25 hover:text-white/60 transition-colors active:scale-[0.96] transition-transform"
-          >
-            Limpiar filtros
-          </button>
+          {activeFilters.length > 0 && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="inline-flex min-h-11 cursor-pointer items-center justify-center px-2 text-xs font-bold uppercase tracking-widest text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
+            >
+              Limpiar filtros
+            </button>
+          )}
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Select
             label="Evento"
             value={race}
             options={races}
             onChange={(v) => dispatch({ type: "SET_RACE", value: v })}
           />
-          <div className="col-span-2 sm:col-span-1 md:col-span-2">
-            <Select
-              label="Modalidad"
-              value={division}
-              options={divisions}
-              onChange={(v) => dispatch({ type: "SET_DIVISION", value: v })}
-            />
-          </div>
+          <Select
+            label="Modalidad"
+            value={division}
+            options={divisions}
+            onChange={(v) => dispatch({ type: "SET_DIVISION", value: v })}
+          />
+        </div>
+
+        <button
+          type="button"
+          aria-expanded={moreFiltersOpen}
+          aria-controls="ranking-more-filters"
+          onClick={() => setMoreFiltersOpen((open) => !open)}
+          className="mt-3 flex min-h-11 w-full items-center justify-between border border-white/20 bg-white/[0.03] px-3 text-sm font-bold text-white transition-[background-color,border-color,transform] duration-150 hover:border-white/35 hover:bg-white/[0.06] active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent md:hidden"
+        >
+          <span className="flex items-center gap-2">
+            Más filtros
+            {activeFilters.length > 0 && (
+              <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white px-1.5 text-xs tabular-nums text-black">
+                {activeFilters.length}
+              </span>
+            )}
+          </span>
+          <ChevronDown
+            size={18}
+            aria-hidden="true"
+            className={`transition-transform duration-150 ${moreFiltersOpen ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        <div
+          id="ranking-more-filters"
+          className={`${moreFiltersOpen ? "grid" : "hidden"} mt-3 grid-cols-1 gap-3 sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid-cols-5`}
+        >
           <Select
             label="Desafío"
             value={workout}
@@ -86,7 +162,11 @@ export function RankingFilters({ state, dispatch, onReset }: RankingFiltersProps
           <Select
             label="Género"
             value={gender}
-            options={["Todos", "Varonil", "Femenil"]}
+            options={[
+              { value: "All", label: "Todos" },
+              { value: "Men", label: "Varonil" },
+              { value: "Women", label: "Femenil" },
+            ]}
             onChange={(v) => dispatch({ type: "SET_GENDER", value: v })}
           />
           <Select
@@ -119,6 +199,35 @@ export function RankingFilters({ state, dispatch, onReset }: RankingFiltersProps
             options={PAGE_SIZES.map(String)}
             onChange={(v) => dispatch({ type: "SET_PAGE_SIZE", value: Number(v) })}
           />
+        </div>
+
+        <div className="mt-3 md:hidden">
+          {activeFilters.length > 0 ? (
+            <>
+              <p className="mb-2 text-xs font-semibold text-white/70" aria-live="polite">
+                {activeFilters.length}{" "}
+                {activeFilters.length === 1 ? "filtro aplicado" : "filtros aplicados"}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {activeFilters.map((filter) => (
+                  <button
+                    key={filter.key}
+                    type="button"
+                    onClick={() => dispatch(filter.action)}
+                    className="inline-flex min-h-10 max-w-full items-center gap-2 border border-white/25 bg-white/[0.05] px-3 text-left text-xs font-semibold text-white/80 transition-[background-color,border-color,transform] duration-150 hover:border-white/45 hover:bg-white/[0.08] active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
+                    aria-label={`Quitar filtro ${filter.label}`}
+                  >
+                    <span className="truncate">{filter.label}</span>
+                    <X className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="text-xs text-white/70" aria-live="polite">
+              Sin filtros adicionales
+            </p>
+          )}
         </div>
       </div>
     </section>

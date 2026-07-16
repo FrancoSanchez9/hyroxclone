@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { seasonPass, seasonCircuits } from "@/data/events";
+import { SEASON_NAME } from "@/data/season";
 import { ACCENT } from "@/lib/theme";
 
 const perks = [
@@ -23,7 +24,7 @@ export function SeasonPassSection() {
               className="mb-4 text-xs font-bold uppercase tracking-[0.3em]"
               style={{ color: ACCENT }}
             >
-              Pase de Temporada 2026
+              Pase · {SEASON_NAME}
             </p>
             <h2
               className="text-[clamp(3rem,8vw,6rem)] font-normal uppercase leading-[0.9] tracking-wide text-white text-balance"

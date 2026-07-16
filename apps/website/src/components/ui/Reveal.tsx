@@ -1,4 +1,4 @@
-import { m } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { EASE } from "@/lib/theme";
@@ -13,13 +13,19 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <m.div
       className={cn(className)}
-      initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-90px" }}
-      transition={{ duration: 0.7, ease: EASE, delay }}
+      transition={{
+        duration: shouldReduceMotion ? 0 : 0.28,
+        ease: EASE,
+        delay: shouldReduceMotion ? 0 : Math.min(delay, 0.12),
+      }}
     >
       {children}
     </m.div>

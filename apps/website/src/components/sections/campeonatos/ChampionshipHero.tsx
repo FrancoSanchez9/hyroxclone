@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ACCENT } from "@/lib/theme";
+import { SEASON_NAME, SEASON_YEAR_RANGE } from "@/data/season";
 
 const STATS = [
   { value: "4", label: "Sedes clasificatorias" },
   { value: "1", label: "Gran Final" },
-  { value: "2027", label: "Primera temporada" },
+  { value: SEASON_YEAR_RANGE, label: "Primera temporada" },
 ];
 
 export function ChampionshipHero() {
@@ -34,7 +35,7 @@ export function ChampionshipHero() {
           style={{ animationDelay: "0s", color: ACCENT }}
         >
           <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: ACCENT }} />
-          Temporada nacional 2027
+          {SEASON_NAME} · México
         </span>
 
         <h1

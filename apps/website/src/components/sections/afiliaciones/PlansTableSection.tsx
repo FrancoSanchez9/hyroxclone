@@ -1,180 +1,178 @@
-import { m } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
+import { ArrowRight } from "lucide-react";
 import { CellValue } from "@/components/sections/afiliaciones/CellValue";
-import { cn } from "@/lib/utils";
-import { EASE } from "@/lib/theme";
 
 const plans = [
-  { key: "trainingClub", name: "Training Club", recommended: false },
-  { key: "performanceCentre", name: "Performance Centre", recommended: true },
-  { key: "performanceAcademy", name: "Performance Academy", recommended: false },
+  {
+    key: "runningClub",
+    name: "Running Club",
+    eyebrow: "Comunidad",
+    description: "Para clubes que quieren acercar experiencias runluv® a sus corredores.",
+  },
+  {
+    key: "performanceCentre",
+    name: "Performance Centre",
+    eyebrow: "Entrenamiento",
+    description: "Una colaboración activa con acompañamiento y experiencias locales.",
+  },
+  {
+    key: "performanceAcademy",
+    name: "Performance Academy",
+    eyebrow: "Alto rendimiento",
+    description: "Para espacios que desarrollan preparación especializada y comunidad deportiva.",
+  },
 ] as const;
 
 const tableFeatures = [
-  { label: "Uso del logo", trainingClub: true, performanceCentre: true, performanceAcademy: true },
   {
-    label: "Localizador oficial",
-    trainingClub: true,
+    label: "Perfil en el directorio",
+    runningClub: true,
     performanceCentre: true,
     performanceAcademy: true,
   },
   {
-    label: "Acceso HYROX365",
-    trainingClub: false,
+    label: "Recursos de comunicación",
+    runningClub: true,
     performanceCentre: true,
     performanceAcademy: true,
   },
   {
-    label: "Cursos de coaches",
-    trainingClub: false,
+    label: "Activaciones locales",
+    runningClub: false,
     performanceCentre: true,
     performanceAcademy: true,
   },
   {
-    label: "Equipamiento certificado",
-    trainingClub: false,
+    label: "Acompañamiento de lanzamiento",
+    runningClub: false,
+    performanceCentre: true,
+    performanceAcademy: true,
+  },
+  {
+    label: "Experiencias con la comunidad",
+    runningClub: false,
     performanceCentre: false,
     performanceAcademy: true,
   },
   {
-    label: "Precio afiliación anual",
-    trainingClub: "€500–€800",
-    performanceCentre: "€1,000–€1,500",
-    performanceAcademy: "€2,000+",
+    label: "Alcance inicial",
+    runningClub: "Comunidad",
+    performanceCentre: "Entrenamiento",
+    performanceAcademy: "Especializado",
   },
 ];
 
 export function PlansTableSection() {
   return (
-    <section className="py-20 px-6 border-t border-[#2a2a2a]">
-      <div className="mx-auto max-w-6xl">
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="mb-12"
-        >
-          <Badge variant="yellow" className="mb-4">
-            PLANES
-          </Badge>
-          <h2
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            className="text-[clamp(2rem,6vw,3.5rem)] leading-none tracking-tight text-white"
-          >
-            NIVELES DE AFILIACIÓN
-          </h2>
-        </m.div>
+    <section
+      id="modelo"
+      className="scroll-mt-24 border-b border-rl-border-subtle bg-black px-6 py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-rl-accent">
+              Modelo de colaboración
+            </p>
+            <h2 className="max-w-3xl text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.9] tracking-[0.01em] text-white">
+              El nivel correcto para tu siguiente paso
+            </h2>
+          </div>
+          <p className="max-w-lg text-sm leading-relaxed text-rl-text-secondary">
+            Esta comparación es una guía inicial. Las inclusiones y condiciones finales se definen
+            después de conocer tu sede, comunidad y objetivos.
+          </p>
+        </div>
 
-        {/* Mobile: stacked cards (avoids the wide table's horizontal scroll) */}
-        <div className="grid gap-4 md:hidden">
+        <div className="grid gap-px bg-rl-border-subtle md:hidden">
           {plans.map((plan) => (
-            <div
-              key={plan.key}
-              className={cn(
-                "rounded-xl border p-5",
-                plan.recommended
-                  ? "border-white/30 bg-white/[0.04]"
-                  : "border-[#2a2a2a] bg-[#111111]",
-              )}
-            >
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <h3
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                  className="text-2xl tracking-wide text-white"
-                >
-                  {plan.name}
-                </h3>
-                {plan.recommended && (
-                  <Badge variant="yellow" className="shrink-0 text-[10px]">
-                    RECOMENDADO
-                  </Badge>
-                )}
-              </div>
-              <ul className="flex flex-col gap-2.5">
+            <article key={plan.key} className="relative bg-rl-surface-raised p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-rl-accent">
+                {plan.eyebrow}
+              </p>
+              <h3 className="mt-4 text-4xl leading-none text-white">{plan.name}</h3>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-rl-text-secondary">
+                {plan.description}
+              </p>
+              <dl className="mt-7 border-t border-rl-border-subtle">
                 {tableFeatures.map((row) => (
-                  <li
+                  <div
                     key={row.label}
-                    className="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-2.5 text-sm last:border-b-0 last:pb-0"
+                    className="flex min-h-12 items-center justify-between gap-4 border-b border-rl-border-subtle py-3 text-sm"
                   >
-                    <span className="text-white/60">{row.label}</span>
-                    <span className="shrink-0 text-right">
+                    <dt className="text-rl-text-secondary">{row.label}</dt>
+                    <dd className="shrink-0 text-right">
                       <CellValue value={row[plan.key]} />
-                    </span>
-                  </li>
+                    </dd>
+                  </div>
                 ))}
-              </ul>
-            </div>
+              </dl>
+            </article>
           ))}
         </div>
 
-        {/* Desktop: comparison table */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="hidden overflow-x-auto md:block"
-        >
-          <table className="w-full min-w-[640px] border-collapse">
+        <div className="hidden overflow-x-auto md:block">
+          <table className="w-full min-w-[760px] border-collapse">
             <thead>
               <tr>
                 <th
                   scope="col"
-                  className="border border-[#2a2a2a] bg-[#111111] px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest text-white/50 w-1/4"
+                  className="w-[25%] border border-rl-border-subtle bg-rl-surface-raised p-5 text-left text-xs font-bold uppercase tracking-[0.18em] text-rl-text-muted"
                 >
-                  Característica
+                  Incluye
                 </th>
-                <th
-                  scope="col"
-                  className="border border-[#2a2a2a] bg-[#111111] px-5 py-4 text-center text-xs font-semibold uppercase tracking-widest text-white/70 w-1/4"
-                >
-                  Training Club
-                </th>
-                <th
-                  scope="col"
-                  className="border border-[#ffffff]/30 bg-[#ffffff]/5 px-5 py-4 text-center w-1/4"
-                >
-                  <div className="flex flex-col items-center gap-1">
-                    <Badge variant="yellow" className="text-[10px]">
-                      RECOMENDADO
-                    </Badge>
-                    <span
-                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                      className="text-base tracking-wide text-[#ffffff]"
-                    >
-                      Performance Centre
+                {plans.map((plan) => (
+                  <th
+                    key={plan.key}
+                    scope="col"
+                    className="relative w-[25%] border border-rl-border-subtle bg-rl-surface-raised p-5 text-left align-top"
+                  >
+                    <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-rl-accent">
+                      {plan.eyebrow}
                     </span>
-                  </div>
-                </th>
-                <th
-                  scope="col"
-                  className="border border-[#2a2a2a] bg-[#111111] px-5 py-4 text-center text-xs font-semibold uppercase tracking-widest text-white/70 w-1/4"
-                >
-                  Performance Academy
-                </th>
+                    <span className="mt-3 block text-3xl leading-none text-white">{plan.name}</span>
+                    <span className="mt-3 block max-w-xs text-xs font-normal leading-relaxed text-rl-text-secondary">
+                      {plan.description}
+                    </span>
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {tableFeatures.map((row, i) => (
-                <tr key={row.label} className={i % 2 === 0 ? "bg-[#0e0e0e]" : "bg-[#111111]"}>
-                  <td className="border border-[#2a2a2a] px-5 py-3.5 text-sm text-white/70">
+              {tableFeatures.map((row) => (
+                <tr key={row.label}>
+                  <th
+                    scope="row"
+                    className="border border-rl-border-subtle bg-rl-surface-canvas px-5 py-4 text-left text-sm font-medium text-rl-text-secondary"
+                  >
                     {row.label}
-                  </td>
-                  <td className="border border-[#2a2a2a] px-5 py-3.5 text-center">
-                    <CellValue value={row.trainingClub} />
-                  </td>
-                  <td className="border border-[#ffffff]/20 bg-[#ffffff]/[0.03] px-5 py-3.5 text-center">
-                    <CellValue value={row.performanceCentre} />
-                  </td>
-                  <td className="border border-[#2a2a2a] px-5 py-3.5 text-center">
-                    <CellValue value={row.performanceAcademy} />
-                  </td>
+                  </th>
+                  {plans.map((plan) => (
+                    <td
+                      key={plan.key}
+                      className="border border-rl-border-subtle bg-rl-surface-canvas px-5 py-4 text-center"
+                    >
+                      <CellValue value={row[plan.key]} />
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
-        </m.div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-start justify-between gap-5 border-t border-rl-border-subtle pt-7 sm:flex-row sm:items-center">
+          <p className="max-w-xl text-sm leading-relaxed text-rl-text-secondary">
+            ¿No sabes qué nivel corresponde a tu sede? Cuéntanos cómo entrenan y te ayudamos a
+            identificar el mejor encaje.
+          </p>
+          <a
+            href="#afiliacion"
+            className="inline-flex min-h-12 shrink-0 items-center gap-2 bg-rl-accent px-6 text-sm font-bold uppercase tracking-widest text-black transition-[filter,transform] duration-160 hover:brightness-95 active:scale-[0.96]"
+          >
+            Solicitar una propuesta
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );

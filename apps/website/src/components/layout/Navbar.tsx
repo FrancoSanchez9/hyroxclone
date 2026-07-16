@@ -5,7 +5,7 @@ import { m, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems, topRightLinks } from "@/data/navigation";
 import { cn } from "@/lib/utils";
-import logoSrc from "@/assets/logo-mark.png";
+import logoSrc from "@/assets/logo-mark.webp";
 import { ACCENT } from "@/lib/theme";
 
 export function Navbar() {

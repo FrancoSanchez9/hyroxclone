@@ -32,6 +32,18 @@
   --color-rl-muted: #666666;
   --color-rl-border: rgba(255, 255, 255, 0.08);
 
+  /* Semantic color roles — prefer these in new or touched components. */
+  --color-rl-surface-canvas: #000000;
+  --color-rl-surface-subtle: #0a0a0a;
+  --color-rl-surface-raised: #111111;
+  --color-rl-surface-overlay: #1a1a1a;
+  --color-rl-text-primary: #ffffff;
+  --color-rl-text-secondary: rgba(255, 255, 255, 0.72);
+  --color-rl-text-muted: rgba(255, 255, 255, 0.56);
+  --color-rl-border-subtle: rgba(255, 255, 255, 0.12);
+  --color-rl-border-strong: rgba(255, 255, 255, 0.28);
+  --color-rl-focus: rgba(255, 255, 255, 0.92);
+
   --font-display: "Bebas Neue", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 
@@ -40,6 +52,29 @@
 }
 
 @layer base {
+  :root {
+    /* Interaction motion stays crisp and consistent across the product UI. */
+    --motion-duration-instant: 100ms;
+    --motion-duration-fast: 160ms;
+    --motion-duration-ui: 220ms;
+    --motion-duration-reveal: 280ms;
+    --motion-ease-enter: var(--ease-out-strong);
+    --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+    /* Shared layer contract; prevents local z-index escalation. */
+    --z-content: 0;
+    --z-sticky: 30;
+    --z-navigation: 40;
+    --z-overlay: 50;
+    --z-progress: 60;
+    --z-toast: 70;
+    --z-skip-link: 100;
+
+    --scrollbar-track: var(--color-rl-surface-canvas);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.28);
+    --scrollbar-thumb-hover: rgba(212, 255, 0, 0.72);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -50,23 +85,9 @@
     scroll-padding-top: 88px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
   body {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--color-rl-surface-canvas);
+    color: var(--color-rl-text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -85,7 +106,7 @@
 
   /* Global focus ring — one token, entire app covered */
   :focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline: 2px solid var(--color-rl-focus);
     outline-offset: 2px;
   }
 
@@ -106,8 +127,8 @@
   }
 
   ::selection {
-    background: #d4ff00;
-    color: #000;
+    background: var(--color-rl-accent);
+    color: var(--color-rl-surface-canvas);
   }
 
   h1,
@@ -120,13 +141,35 @@
     text-wrap: balance;
   }
 
-  /* Hide the scrollbar — the top progress bar shows position instead */
+  /* Keep scroll position discoverable on desktop; the top progress bar remains complementary. */
   html {
-    scrollbar-width: none; /* Firefox */
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: thin;
   }
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+  html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  html::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  html::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border: 2px solid var(--scrollbar-track);
+    border-radius: 999px;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  @media (max-width: 767px) {
+    html {
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   }
 }
 

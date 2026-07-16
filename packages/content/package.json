@@ -1,0 +1,9 @@
+{
+  "name": "@runluv/content",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./season": "./src/season.ts"
+  }
+}

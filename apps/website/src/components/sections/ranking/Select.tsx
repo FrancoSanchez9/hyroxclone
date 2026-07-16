@@ -1,5 +1,7 @@
 import { ChevronDown } from "lucide-react";
 
+type SelectOption = string | { value: string; label: string };
+
 export function Select({
   label,
   value,
@@ -8,27 +10,31 @@ export function Select({
 }: {
   label: string;
   value: string;
-  options: string[];
+  options: SelectOption[];
   onChange: (v: string) => void;
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-white/70">{label}</span>
       <div className="relative">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full appearance-none border border-white/15 bg-[#111] px-3 py-2.5 pr-8 text-sm text-white focus:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent transition-[border-color] duration-150"
+          className="min-h-11 w-full appearance-none border border-white/20 bg-[#111] px-3 py-2.5 pr-10 text-sm text-white transition-[border-color] duration-150 focus:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
         >
-          {options.map((o) => (
-            <option key={o} value={o} style={{ background: "#111" }}>
-              {o}
-            </option>
-          ))}
+          {options.map((option) => {
+            const optionValue = typeof option === "string" ? option : option.value;
+            const optionLabel = typeof option === "string" ? option : option.label;
+            return (
+              <option key={optionValue} value={optionValue} style={{ background: "#111" }}>
+                {optionLabel}
+              </option>
+            );
+          })}
         </select>
         <ChevronDown
-          size={13}
-          className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-white/50"
+          size={16}
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/70"
           aria-hidden="true"
         />
       </div>

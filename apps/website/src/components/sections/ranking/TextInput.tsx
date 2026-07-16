@@ -13,23 +13,23 @@ export function TextInput({
 }) {
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-white/70">{label}</span>
       <div className="relative">
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full border border-white/15 bg-[#111] px-3 py-2.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent transition-[border-color] duration-150"
+          className="min-h-11 w-full border border-white/20 bg-[#111] px-3 py-2.5 pr-12 text-sm text-white placeholder-white/60 transition-[border-color] duration-150 focus:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
         />
         {value && (
           <button
             type="button"
             onClick={() => onChange("")}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/50 hover:text-white/60 transition-colors"
-            aria-label="Limpiar"
+            className="absolute right-0 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-rl-accent"
+            aria-label={`Limpiar ${label.toLowerCase()}`}
           >
-            <X size={13} />
+            <X size={16} aria-hidden="true" />
           </button>
         )}
       </div>

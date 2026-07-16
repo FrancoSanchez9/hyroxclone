@@ -1,3 +1,5 @@
+import { SEASON_EVENT_DATES } from "./season";
+
 export interface PriceTier {
   label: string;
   price: number;
@@ -41,8 +43,8 @@ export const upcomingEvents: RunluvEvent[] = [
     city: "Amozoc",
     venue: "Autódromo Internacional Miguel E. Abed",
     address: "Amozoc, Puebla",
-    date: "2027-09-12",
-    endDate: "2027-09-12",
+    date: SEASON_EVENT_DATES.puebla,
+    endDate: SEASON_EVENT_DATES.puebla,
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/puebla-2026",
@@ -69,8 +71,8 @@ export const upcomingEvents: RunluvEvent[] = [
     city: "Tlaquepaque",
     venue: "Autódromo Hermanos Gallo",
     address: "Tlaquepaque, Jalisco",
-    date: "2027-10-10",
-    endDate: "2027-10-10",
+    date: SEASON_EVENT_DATES.guadalajara,
+    endDate: SEASON_EVENT_DATES.guadalajara,
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/guadalajara-2026",
@@ -96,8 +98,8 @@ export const upcomingEvents: RunluvEvent[] = [
     city: "León",
     venue: "Autódromo de León",
     address: "León, Guanajuato",
-    date: "2027-11-07",
-    endDate: "2027-11-07",
+    date: SEASON_EVENT_DATES.leon,
+    endDate: SEASON_EVENT_DATES.leon,
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/leon-2026",
@@ -123,8 +125,8 @@ export const upcomingEvents: RunluvEvent[] = [
     city: "Apodaca",
     venue: "Autódromo Monterrey",
     address: "Apodaca, Nuevo León",
-    date: "2027-11-28",
-    endDate: "2027-11-28",
+    date: SEASON_EVENT_DATES.monterrey,
+    endDate: SEASON_EVENT_DATES.monterrey,
     country: "México",
     categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
     registrationUrl: "/eventos/monterrey-2026",
@@ -150,8 +152,8 @@ export const upcomingEvents: RunluvEvent[] = [
     city: "Iztacalco",
     venue: "Autódromo Hermanos Rodríguez",
     address: "Iztacalco, Ciudad de México",
-    date: "2028-02-13",
-    endDate: "2028-02-13",
+    date: SEASON_EVENT_DATES.cdmx,
+    endDate: SEASON_EVENT_DATES.cdmx,
     country: "México",
     categories: [
       "La Última Vuelta",

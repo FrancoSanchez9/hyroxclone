@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check, Minus, Plus, Pencil } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
 import { cn } from "@/lib/utils";
@@ -30,17 +30,20 @@ const STEP_LABELS = ["División", "Categoría", "Pases"];
 
 const gridStagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.03, delayChildren: 0.02 } },
 };
 const cardItem = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.16, ease: EASE } },
 };
 const panel = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
-  transition: { duration: 0.3, ease: EASE },
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.16, ease: EASE } },
+  exit: {
+    opacity: 0,
+    y: -4,
+    transition: { duration: 0.08, ease: [0.4, 0, 1, 1] as const },
+  },
 };
 
 interface EventRegistrationSectionProps {
@@ -68,9 +71,10 @@ function StepSummary({
       layout
       type="button"
       onClick={onEdit}
-      initial={{ opacity: 0 }}
+      initial={false}
       animate={{ opacity: 1 }}
-      className="group flex w-full cursor-pointer items-center justify-between border border-white/10 bg-white/[0.02] px-5 py-3.5 text-left transition-colors duration-150 hover:border-rl-accent/40"
+      transition={{ duration: 0.16, ease: EASE }}
+      className="group flex w-full cursor-pointer items-center justify-between border border-white/10 bg-white/2 px-5 py-3.5 text-left transition-[border-color,transform] duration-(--motion-duration-fast) hover:border-rl-accent/40 active:scale-[0.96]"
     >
       <span className="flex items-center gap-3">
         <span
@@ -100,6 +104,7 @@ export function EventRegistrationSection({
   onSelectCategory,
   onChangeQuantity,
 }: EventRegistrationSectionProps) {
+  const shouldReduceMotion = Boolean(useReducedMotion());
   // Which step the runner is actively editing (overrides the natural flow).
   const [editing, setEditing] = useState<1 | 2 | 3 | null>(null);
   const derived: 1 | 2 | 3 = selectedCategory ? 3 : selectedDivision ? 2 : 1;
@@ -136,7 +141,7 @@ export function EventRegistrationSection({
                 <div className="flex items-center gap-2">
                   <div
                     className={cn(
-                      "flex h-7 w-7 shrink-0 items-center justify-center border text-xs font-bold tabular-nums transition-colors duration-300",
+                      "flex h-7 w-7 shrink-0 items-center justify-center border text-xs font-bold tabular-nums transition-colors duration-(--motion-duration-ui)",
                       done || isActive
                         ? "border-rl-accent text-black"
                         : "border-white/20 text-white/50",
@@ -147,7 +152,7 @@ export function EventRegistrationSection({
                   </div>
                   <span
                     className={cn(
-                      "hidden text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 sm:inline",
+                      "hidden text-[10px] font-bold uppercase tracking-widest transition-colors duration-(--motion-duration-ui) sm:inline",
                       done || isActive ? "text-white" : "text-white/50",
                     )}
                   >
@@ -161,7 +166,7 @@ export function EventRegistrationSection({
                       style={{ background: ACCENT }}
                       initial={false}
                       animate={{ width: derived > stepNo ? "100%" : "0%" }}
-                      transition={{ duration: 0.4, ease: EASE }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: EASE }}
                     />
                   </div>
                 )}
@@ -197,9 +202,9 @@ export function EventRegistrationSection({
                         onSelectDivision(cat);
                         setEditing(null);
                       }}
-                      whileHover={{ y: -4 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                      whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                      transition={{ duration: 0.16, ease: EASE }}
                       className={cn(
                         "group relative flex cursor-pointer flex-col items-start gap-1 overflow-hidden border p-4 text-left transition-colors duration-200",
                         selected
@@ -258,11 +263,15 @@ export function EventRegistrationSection({
                     <m.button
                       key={cat}
                       type="button"
-                      initial={{ opacity: 0, scale: 0.85 }}
+                      initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.04, type: "spring", stiffness: 500, damping: 26 }}
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.94 }}
+                      transition={{
+                        delay: shouldReduceMotion ? 0 : i * 0.03,
+                        duration: 0.18,
+                        ease: EASE,
+                      }}
+                      whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
                       onClick={() => {
                         onSelectCategory(cat);
                         setEditing(null);
@@ -300,14 +309,15 @@ export function EventRegistrationSection({
                 <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-white/50">
                   Paso 3 — ¿Cuántos pases?
                 </p>
-                <div className="inline-flex items-center border border-white/15 bg-white/[0.03]">
+                <div className="inline-flex items-center border border-white/15 bg-white/3">
                   <m.button
                     type="button"
                     aria-label="Quitar un pase"
                     disabled={quantity <= 1}
                     onClick={() => onChangeQuantity(quantity - 1)}
-                    whileTap={{ scale: 0.85 }}
-                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
+                    whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                    transition={{ duration: 0.16, ease: EASE }}
+                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-rl-text-secondary transition-colors duration-(--motion-duration-fast) hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
                   >
                     <Minus size={20} />
                   </m.button>
@@ -318,10 +328,10 @@ export function EventRegistrationSection({
                     <AnimatePresence mode="popLayout" initial={false}>
                       <m.span
                         key={quantity}
-                        initial={{ y: 14, opacity: 0 }}
+                        initial={shouldReduceMotion ? { opacity: 0 } : { y: 8, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -14, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: EASE }}
+                        exit={shouldReduceMotion ? { opacity: 0 } : { y: -8, opacity: 0 }}
+                        transition={{ duration: shouldReduceMotion ? 0.08 : 0.16, ease: EASE }}
                         className="text-2xl tabular-nums text-white"
                         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                       >
@@ -334,8 +344,9 @@ export function EventRegistrationSection({
                     aria-label="Agregar un pase"
                     disabled={quantity >= MAX_PASSES}
                     onClick={() => onChangeQuantity(quantity + 1)}
-                    whileTap={{ scale: 0.85 }}
-                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-white/70 transition-colors hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
+                    whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                    transition={{ duration: 0.16, ease: EASE }}
+                    className="flex h-12 w-12 cursor-pointer items-center justify-center text-rl-text-secondary transition-colors duration-(--motion-duration-fast) hover:text-rl-accent disabled:cursor-not-allowed disabled:text-white/15"
                   >
                     <Plus size={20} />
                   </m.button>
@@ -355,13 +366,17 @@ export function EventRegistrationSection({
                     {event.prices.map((tier, i) => (
                       <m.div
                         key={tier.label}
-                        initial={{ opacity: 0, x: -16 }}
+                        initial={shouldReduceMotion ? false : { opacity: 0, x: -8 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
+                        transition={{
+                          delay: shouldReduceMotion ? 0 : i * 0.03,
+                          duration: shouldReduceMotion ? 0 : 0.22,
+                          ease: EASE,
+                        }}
                         className={cn(
                           "relative flex items-center justify-between overflow-hidden border px-5 py-4 transition-colors duration-200",
                           tier.available
-                            ? "border-rl-accent/40 bg-rl-accent/[0.06]"
+                            ? "border-rl-accent/40 bg-rl-accent/6"
                             : "border-white/10 opacity-45",
                         )}
                       >

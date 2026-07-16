@@ -9,7 +9,7 @@ export function FaqItem({ q, a, index }: { q: string; a: string; index: number }
     <div
       className={cn(
         "border-b border-white/10 last:border-0 transition-colors duration-200",
-        open && "bg-white/[0.03]",
+        open && "bg-white/3",
       )}
     >
       <button
@@ -59,9 +59,7 @@ export function FaqItem({ q, a, index }: { q: string; a: string; index: number }
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="overflow-hidden"
           >
-            <p className="max-w-2xl pb-6 pl-[4.25rem] pr-2 text-sm leading-relaxed text-white/60">
-              {a}
-            </p>
+            <p className="max-w-2xl pb-6 pl-18 pr-2 text-sm leading-relaxed text-white/60">{a}</p>
           </m.div>
         )}
       </AnimatePresence>

@@ -114,10 +114,10 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
                     height={700}
                     alt={event.venue}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[600ms] ease-out-strong group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-600 ease-out-strong group-hover:scale-105"
                   />
                 )}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent" />
                 {/* franja de carrera */}
                 <div
                   className="pointer-events-none absolute inset-y-0 left-0 w-1.5"
@@ -204,7 +204,7 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"
-                className="min-h-[18rem] w-full flex-1"
+                className="min-h-72 w-full flex-1"
               />
               {event.mapsUrl && (
                 <a

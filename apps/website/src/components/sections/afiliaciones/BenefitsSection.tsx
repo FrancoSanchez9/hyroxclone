@@ -1,95 +1,88 @@
-import { m } from "framer-motion";
-import { TrendingUp, Award, BookOpen, Package, Users, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
-import { Card, CardHeader, CardContent } from "@/components/ui/Card";
-import { EASE } from "@/lib/theme";
+import { BookOpen, CalendarDays, MapPin, Megaphone, Network, Users } from "lucide-react";
 
 const benefits = [
   {
-    icon: TrendingUp,
-    title: "Más atletas",
+    icon: Users,
+    title: "Más comunidad",
     description:
-      "Atrae a una comunidad de miles de atletas HYROX que buscan un lugar para entrenar.",
+      "Conecta con corredores que buscan un lugar para prepararse, compartir objetivos y entrenar en equipo.",
   },
   {
-    icon: Award,
-    title: "Reconocimiento oficial",
-    description: "Aparece en el localizador oficial HYROX y recibe tráfico orgánico de atletas.",
+    icon: MapPin,
+    title: "Presencia visible",
+    description:
+      "Haz que tu sede sea fácil de descubrir dentro del directorio de gimnasios de runluv®.",
   },
   {
     icon: BookOpen,
-    title: "Formación exclusiva",
-    description: "Acceso a la plataforma HYROX365 con contenido de entrenamiento certificado.",
+    title: "Recursos para activar",
+    description:
+      "Recibe ideas y materiales para convertir el interés por la carrera en sesiones dentro de tu gimnasio.",
   },
   {
-    icon: Package,
-    title: "Equipamiento certificado",
-    description: "Descuentos en equipamiento oficial HYROX y Centr para tu box.",
+    icon: CalendarDays,
+    title: "Experiencias locales",
+    description:
+      "Crea entrenamientos, retos y encuentros que mantengan a tu comunidad en movimiento.",
   },
   {
-    icon: Users,
-    title: "Red global",
-    description: "Forma parte de una comunidad de más de 5,000 gimnasios en más de 40 países.",
+    icon: Network,
+    title: "Conexión entre sedes",
+    description:
+      "Forma relaciones con otros espacios y equipos que comparten la misma cultura de entrenamiento.",
   },
   {
-    icon: Zap,
-    title: "Marketing",
-    description: "Apoyo de HYROX para promoción local, eventos y campañas digitales.",
+    icon: Megaphone,
+    title: "Comunicación compartida",
+    description:
+      "Coordina mensajes y activaciones de marca con una narrativa clara para tus atletas.",
   },
 ];
 
 export function BenefitsSection() {
   return (
-    <section className="py-20 px-6 border-t border-[#2a2a2a]">
-      <div className="mx-auto max-w-6xl">
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="mb-12"
-        >
-          <Badge variant="yellow" className="mb-4">
-            BENEFICIOS
-          </Badge>
-          <h2
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            className="text-[clamp(2rem,6vw,3.5rem)] leading-none tracking-tight text-white"
-          >
-            BENEFICIOS DE AFILIARTE
-          </h2>
-        </m.div>
+    <section className="border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-rl-accent">
+              Lo que suma a tu sede
+            </p>
+            <h2 className="max-w-xl text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.9] tracking-[0.01em] text-white">
+              Una alianza que se nota en tu comunidad
+            </h2>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-rl-text-secondary">
+              No se trata sólo de colocar un logotipo. Diseñamos una relación útil para tu equipo,
+              tus atletas y el crecimiento de tu sede.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {benefits.map((benefit, i) => {
-            const Icon = benefit.icon;
-            return (
-              <m.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: EASE }}
-              >
-                <Card hover className="h-full">
-                  <CardHeader className="pb-3">
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center bg-[#ffffff]/10">
-                      <Icon className="h-5 w-5 text-[#ffffff]" />
-                    </div>
-                    <h3
-                      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-                      className="text-xl tracking-wide text-white"
-                    >
-                      {benefit.title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm leading-relaxed text-white/60">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              </m.div>
-            );
-          })}
+          <div className="grid border-l border-t border-rl-border-subtle sm:grid-cols-2">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <article
+                  key={benefit.title}
+                  className="group min-h-56 border-b border-r border-rl-border-subtle bg-rl-surface-raised p-6 transition-[background-color] duration-160 hover:bg-rl-surface-overlay sm:p-7"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="flex h-11 w-11 items-center justify-center border border-rl-accent/40 bg-rl-accent/8 text-rl-accent">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="font-mono text-xs text-rl-text-muted">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-8 text-2xl leading-none tracking-wide text-white">
+                    {benefit.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-rl-text-secondary">
+                    {benefit.description}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

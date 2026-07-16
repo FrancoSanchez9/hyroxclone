@@ -8,8 +8,8 @@ import { ACCENT, EASE } from "@/lib/theme";
 type Mode = "signin" | "signup";
 
 const inputCls =
-  "w-full border border-white/15 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 transition-[border-color] duration-150 focus:border-rl-accent focus:outline-none";
-const labelCls = "text-[10px] font-bold uppercase tracking-widest text-white/50";
+  "w-full border border-white/20 bg-white/[0.04] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/60 transition-[border-color] duration-150 focus:border-rl-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent";
+const labelCls = "text-xs font-bold uppercase tracking-widest text-white/70";
 
 /** Traduce los errores de Supabase (en inglés) a algo legible en español. */
 function friendlyError(e: unknown): string {

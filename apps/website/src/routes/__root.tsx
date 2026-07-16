@@ -1,10 +1,13 @@
-import { createRootRoute, Outlet, HeadContent, Scripts } from "@tanstack/react-router";
-import { Toaster } from "sonner";
+import { lazy, Suspense } from "react";
+import { createRootRoute, Outlet, HeadContent, Scripts, ClientOnly } from "@tanstack/react-router";
 import { LazyMotion, MotionConfig, domAnimation, useReducedMotion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
+import { SEASON_NAME, SEASON_START_YEAR } from "@/data/season";
 import "@/globals.css";
+
+const DeferredToaster = lazy(() => import("sonner").then(({ Toaster }) => ({ default: Toaster })));
 
 // JSON-LD structured data — moved here from the old index.html so it ships in the
 // SSR'd <head> of every route. Kept as plain objects and serialized inline below.
@@ -94,7 +97,7 @@ const FAQ_SCHEMA = {
       name: "¿Cuándo y dónde son los eventos runluv®?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "La primera temporada runluv® inicia en 2027 con sedes clasificatorias en los autódromos de Puebla, Guadalajara, León y Monterrey, y la Gran Final en el Autódromo Hermanos Rodríguez de la Ciudad de México.",
+        text: `La ${SEASON_NAME.toLowerCase()} de runluv® inicia en ${SEASON_START_YEAR} con sedes clasificatorias en los autódromos de Puebla, Guadalajara, León y Monterrey, y la Gran Final en el Autódromo Hermanos Rodríguez de la Ciudad de México.`,
       },
     },
     {
@@ -136,18 +139,22 @@ function RootLayout() {
         </main>
         <Footer />
         <CookieBanner />
-        <Toaster
-          position="bottom-right"
-          theme="dark"
-          toastOptions={{
-            style: {
-              background: "#1a1a1a",
-              border: "1px solid #2a2a2a",
-              color: "#f5f5f5",
-              fontFamily: "'Inter', sans-serif",
-            },
-          }}
-        />
+        <ClientOnly>
+          <Suspense fallback={null}>
+            <DeferredToaster
+              position="bottom-right"
+              theme="dark"
+              toastOptions={{
+                style: {
+                  background: "var(--color-rl-surface-overlay)",
+                  border: "1px solid var(--color-rl-border-strong)",
+                  color: "var(--color-rl-text-primary)",
+                  fontFamily: "var(--font-sans)",
+                },
+              }}
+            />
+          </Suspense>
+        </ClientOnly>
       </MotionConfig>
     </LazyMotion>
   );
@@ -192,8 +199,7 @@ export const Route = createRootRoute({
       { title: "runluv® — Corre los autódromos de México y descubre tu límite" },
       {
         name: "description",
-        content:
-          "runluv® transforma los autódromos de México en pistas para corredores. Elige tu reto — La Última Vuelta, Cada Paso Cuenta, 5K o 10K — y vive la temporada 2027: Puebla, Guadalajara, León, Monterrey y la Gran Final en CDMX.",
+        content: `runluv® transforma los autódromos de México en pistas para corredores. Elige tu reto — La Última Vuelta, Cada Paso Cuenta, 5K o 10K — y vive la ${SEASON_NAME.toLowerCase()}: Puebla, Guadalajara, León, Monterrey y la Gran Final en CDMX.`,
       },
       { name: "robots", content: "index, follow, max-snippet:-1, max-image-preview:large" },
       // Open Graph — og:url / og:image / twitter:image apuntan temporalmente a
@@ -209,8 +215,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:description",
-        content:
-          "Running sobre los autódromos de México. Elige tu reto — La Última Vuelta, Cada Paso Cuenta, 5K o 10K — y vive la temporada 2027 con la Gran Final en el Autódromo Hermanos Rodríguez.",
+        content: `Running sobre los autódromos de México. Elige tu reto — La Última Vuelta, Cada Paso Cuenta, 5K o 10K — y vive la ${SEASON_NAME.toLowerCase()} con la Gran Final en el Autódromo Hermanos Rodríguez.`,
       },
       { property: "og:image", content: "https://runluv.vercel.app/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
@@ -225,8 +230,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:description",
-        content:
-          "Running sobre los autódromos de México. Elige tu reto y vive la temporada 2027. Resiste hasta el final.",
+        content: `Running sobre los autódromos de México. Elige tu reto y vive la ${SEASON_NAME.toLowerCase()}. Resiste hasta el final.`,
       },
       { name: "twitter:image", content: "https://runluv.vercel.app/og-image.jpg" },
     ],

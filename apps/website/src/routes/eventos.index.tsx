@@ -3,6 +3,7 @@ import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { upcomingEvents, divisions } from "@/data/events";
+import { SEASON_NAME } from "@/data/season";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { cn } from "@/lib/utils";
 import { ACCENT, EASE } from "@/lib/theme";
@@ -191,7 +192,7 @@ function EventosPage() {
             style={{ color: ACCENT }}
           >
             <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: ACCENT }} />
-            Temporada 2026–2027
+            {SEASON_NAME}
           </m.span>
           <AnimatedTitle
             text="EVENTOS OFICIALES MÉXICO"

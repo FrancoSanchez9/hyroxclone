@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import { m, AnimatePresence, type Variants } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, RotateCcw, ChevronLeft, Share2 } from "lucide-react";
 import { toast } from "sonner";
@@ -352,23 +352,49 @@ async function generateShareImage(data: ShareCardData): Promise<Blob> {
   });
 }
 
-const slideVariants: Variants = {
-  enter: { opacity: 0, x: 48, filter: "blur(4px)" },
-  center: {
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.45, ease: EASE, staggerChildren: 0.08 },
-  },
-  exit: { opacity: 0, x: -48, filter: "blur(4px)", transition: { duration: 0.22, ease: EASE } },
-};
+const EXIT_EASE = [0.4, 0, 1, 1] as const;
+const ANSWER_CONFIRMATION_MS = 220;
 
-const sectionV: Variants = {
-  enter: { opacity: 0, y: 24 },
-  center: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-};
+function getSlideVariants(shouldReduceMotion: boolean): Variants {
+  if (shouldReduceMotion) {
+    return {
+      enter: { opacity: 1 },
+      center: { opacity: 1, transition: { duration: 0 } },
+      exit: { opacity: 0, transition: { duration: 0.08 } },
+    };
+  }
+
+  return {
+    enter: { opacity: 0, x: 16 },
+    center: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.16, ease: EASE },
+    },
+    exit: {
+      opacity: 0,
+      x: -8,
+      transition: { duration: 0.08, ease: EXIT_EASE },
+    },
+  };
+}
+
+function getSectionVariants(shouldReduceMotion: boolean): Variants {
+  return shouldReduceMotion
+    ? {
+        enter: { opacity: 1 },
+        center: { opacity: 1, transition: { duration: 0 } },
+      }
+    : {
+        enter: { opacity: 0, y: 8 },
+        center: { opacity: 1, y: 0, transition: { duration: 0.22, ease: EASE } },
+      };
+}
 
 export function QuizSection() {
+  const shouldReduceMotion = Boolean(useReducedMotion());
+  const slideVariants = getSlideVariants(shouldReduceMotion);
+  const sectionV = getSectionVariants(shouldReduceMotion);
   const [started, setStarted] = useState(false); // intro screen before question 1
   const [step, setStep] = useState(0); // 0-13 = questions, 14 = result
   const [brujulaAnswers, setBrujulaAnswers] = useState<(LetterOption | null)[]>(() =>
@@ -391,7 +417,7 @@ export function QuizSection() {
     clearAdvance();
     advanceTimer.current = window.setTimeout(() => {
       setStep((s) => Math.min(s + 1, TOTAL_QUESTIONS));
-    }, 450);
+    }, ANSWER_CONFIRMATION_MS);
   }, [clearAdvance]);
   useEffect(() => clearAdvance, [clearAdvance]);
 
@@ -611,9 +637,13 @@ export function QuizSection() {
                     <span key={line.text} aria-hidden="true" className="block overflow-hidden">
                       <m.span
                         className="block text-[clamp(2.6rem,8vw,5.5rem)]"
-                        initial={{ y: "110%" }}
+                        initial={shouldReduceMotion ? false : { y: "105%" }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 0.7, ease: EASE, delay: 0.1 + i * 0.1 }}
+                        transition={{
+                          duration: shouldReduceMotion ? 0 : 0.28,
+                          ease: EASE,
+                          delay: shouldReduceMotion ? 0 : 0.03 + i * 0.04,
+                        }}
                         style={line.accent ? { color: ACCENT } : undefined}
                       >
                         {line.text}
@@ -623,9 +653,13 @@ export function QuizSection() {
                 </h1>
 
                 <m.p
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.22,
+                    ease: EASE,
+                    delay: shouldReduceMotion ? 0 : 0.1,
+                  }}
                   className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg"
                 >
                   Responde algunas preguntas y descubre tu arquetipo de corredor, tu ADN runluv® y
@@ -633,9 +667,13 @@ export function QuizSection() {
                 </m.p>
 
                 <m.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.22,
+                    ease: EASE,
+                    delay: shouldReduceMotion ? 0 : 0.14,
+                  }}
                   className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
                 >
                   {[
@@ -659,9 +697,13 @@ export function QuizSection() {
 
                 {/* Animated start line */}
                 <m.div
-                  initial={{ opacity: 0 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, ease: EASE, delay: 0.55 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.2,
+                    ease: EASE,
+                    delay: shouldReduceMotion ? 0 : 0.18,
+                  }}
                   className="relative mt-8 h-px w-full max-w-md overflow-hidden bg-white/10"
                   aria-hidden="true"
                 >
@@ -676,9 +718,13 @@ export function QuizSection() {
                 <m.button
                   type="button"
                   onClick={() => setStarted(true)}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.22,
+                    ease: EASE,
+                    delay: shouldReduceMotion ? 0 : 0.2,
+                  }}
                   className="mt-10 inline-flex items-center gap-2 px-9 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
                   style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.3)" }}
                 >
@@ -716,7 +762,7 @@ export function QuizSection() {
                       style={{ background: ACCENT }}
                       initial={false}
                       animate={{ width: `${((step + 1) / TOTAL_QUESTIONS) * 100}%` }}
-                      transition={{ duration: 0.5, ease: EASE }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: EASE }}
                     />
                   </div>
                 </div>
@@ -745,24 +791,22 @@ export function QuizSection() {
                 {/* Options — selecting auto-advances */}
                 <div role="radiogroup" className="space-y-3">
                   {isBrujula
-                    ? BRUJULA_QUESTIONS[step].options.map((opt, i) => (
+                    ? BRUJULA_QUESTIONS[step].options.map((opt) => (
                         <QuizOption
                           key={opt.letter}
                           id={opt.letter}
                           letter={opt.letter}
                           label={opt.label}
-                          index={i}
                           selected={brujulaAnswers[step] === opt.letter}
                           onSelect={handleSelectBrujula}
                         />
                       ))
-                    : NIVEL_QUESTIONS[nivelIndex].options.map((opt, i) => (
+                    : NIVEL_QUESTIONS[nivelIndex].options.map((opt) => (
                         <QuizOption
                           key={opt.letter}
                           id={String(opt.score)}
                           letter={opt.letter}
                           label={opt.label}
-                          index={i}
                           selected={nivelAnswers[nivelIndex] === opt.score}
                           onSelect={(s) => handleSelectNivel(Number(s))}
                         />
@@ -838,9 +882,13 @@ export function QuizSection() {
                       {result.sortedBrujula.map(([dir, pct], i) => (
                         <m.div
                           key={dir}
-                          initial={{ opacity: 0, x: -8 }}
+                          initial={shouldReduceMotion ? false : { opacity: 0, x: -8 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.1, duration: 0.35, ease: EASE }}
+                          transition={{
+                            delay: shouldReduceMotion ? 0 : i * 0.03,
+                            duration: shouldReduceMotion ? 0 : 0.22,
+                            ease: EASE,
+                          }}
                         >
                           <div className="mb-1 flex items-center justify-between">
                             <span className="text-xs font-semibold uppercase tracking-widest text-white/70">
@@ -854,9 +902,13 @@ export function QuizSection() {
                             <m.div
                               className="h-full"
                               style={{ background: i === 0 ? ACCENT : "rgba(255,255,255,0.8)" }}
-                              initial={{ width: "0%" }}
+                              initial={shouldReduceMotion ? false : { width: "0%" }}
                               animate={{ width: `${pct}%` }}
-                              transition={{ delay: i * 0.1 + 0.1, duration: 0.7, ease: EASE }}
+                              transition={{
+                                delay: shouldReduceMotion ? 0 : i * 0.03 + 0.05,
+                                duration: shouldReduceMotion ? 0 : 0.28,
+                                ease: EASE,
+                              }}
                             />
                           </div>
                         </m.div>
