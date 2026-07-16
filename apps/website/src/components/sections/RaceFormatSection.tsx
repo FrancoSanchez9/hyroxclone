@@ -3,6 +3,7 @@ import { m, useInView } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/Badge";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { EASE } from "@/lib/animation";
 import { ACCENT } from "@/lib/theme";
 
@@ -81,9 +82,16 @@ function ModalityCard({
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.55, delay: index * 0.1, ease: EASE }}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -6, boxShadow: "0 28px 70px rgba(212,255,0,0.12)" }}
     >
-      <div className="relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10">
+      <div
+        className="spotlight-card relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+          e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+        }}
+      >
         {/* Full-bleed photo — grayscale until hover */}
         <img
           src={modality.imageUrl}
@@ -111,8 +119,8 @@ function ModalityCard({
           {modality.number}
         </span>
 
-        {/* Content — bottom anchored, one clean column */}
-        <div className="relative z-10 flex flex-col gap-3 p-6">
+        {/* Content — bottom anchored, frosted glass over the photo */}
+        <div className="relative z-10 flex flex-col gap-3 border-t border-white/10 bg-black/25 p-6 backdrop-blur-md">
           <span
             className="text-4xl leading-none tracking-wide uppercase sm:text-6xl"
             style={{ fontFamily: "'Bebas Neue', sans-serif", color: ACCENT }}
@@ -157,7 +165,7 @@ function ModalityCard({
 
           <Link
             to="/eventos"
-            className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+            className="btn-sheen mt-2 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
             style={{ background: ACCENT }}
           >
             Inscríbete <span aria-hidden="true">→</span>
@@ -177,17 +185,8 @@ export function RaceFormatSection() {
       className="relative w-full overflow-hidden py-20 md:py-28"
       style={{ background: "linear-gradient(180deg, #000 0%, #0d0d0d 30%, #101204 100%)" }}
     >
-      {/* Floating accent glows — motion-graphics backdrop */}
-      <div
-        aria-hidden="true"
-        className="animate-blob pointer-events-none absolute -left-48 top-24 h-[32rem] w-[32rem] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.09), transparent 70%)" }}
-      />
-      <div
-        aria-hidden="true"
-        className="animate-blob-slow pointer-events-none absolute -right-56 bottom-0 h-[38rem] w-[38rem] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.06), transparent 70%)" }}
-      />
+      {/* Aurora backdrop — replaces the old single-color blobs */}
+      <AuroraBackground intensity="subtle" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <m.div

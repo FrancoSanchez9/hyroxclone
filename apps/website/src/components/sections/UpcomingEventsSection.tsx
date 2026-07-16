@@ -6,6 +6,7 @@ import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { Link } from "@tanstack/react-router";
 import { m } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { ACCENT } from "@/lib/theme";
 
 function formatDateRange(dateStr: string, endDateStr?: string): string {
@@ -41,7 +42,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
       initial={{ clipPath: "inset(0 100% 0 0)" }}
       whileInView={{ clipPath: "inset(0 0% 0 0)" }}
       viewport={{ once: true, margin: "-80px" }}
-      whileHover={{ y: -4, boxShadow: "0 24px 60px rgba(212,255,0,0.1)" }}
+      whileHover={{ y: -4, boxShadow: "0 24px 60px rgba(212,255,0,0.16)" }}
       transition={{
         clipPath: { duration: 0.9, ease: [0.23, 1, 0.32, 1] },
         default: { duration: 0.22, ease: [0.23, 1, 0.32, 1] },
@@ -65,12 +66,9 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
 
       <div className="relative z-10 flex flex-col gap-6 p-8 md:p-12">
         <div className="flex flex-wrap items-start justify-between gap-4">
-          <span
-            className="inline-block px-3 py-1 text-xs font-bold tracking-widest text-black uppercase"
-            style={{ background: ACCENT }}
-          >
+          <Badge variant="accent" className="tracking-widest">
             DESTACADO
-          </span>
+          </Badge>
           {event.soldOut && (
             <Badge variant="dark" className="border border-white/20">
               SOLD OUT
@@ -126,7 +124,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
           ) : (
             <a
               href={event.registrationUrl}
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-out-strong active:scale-[0.96]"
+              className="btn-sheen inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-out-strong active:scale-[0.96]"
               style={{ background: ACCENT }}
             >
               ¡Regístrate ahora!
@@ -141,7 +139,10 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
 function EventCard({ event }: { event: RunluvEvent }) {
   return (
     <m.div
-      whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(0,0,0,0.5)" }}
+      whileHover={{
+        y: -4,
+        boxShadow: "0 16px 40px rgba(0,0,0,0.5), 0 0 32px rgba(212,255,0,0.08)",
+      }}
       transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
       className="h-full group"
     >
@@ -228,8 +229,12 @@ export function UpcomingEventsSection() {
   const remainingEvents = upcomingEvents.filter((e) => !e.featured);
 
   return (
-    <section className="w-full py-20 md:py-28" style={{ background: "#0a0a0a" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      className="relative w-full overflow-hidden py-20 md:py-28"
+      style={{ background: "#0a0a0a" }}
+    >
+      <AuroraBackground intensity="subtle" className="opacity-40" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 md:mb-16">
           <AnimatedTitle
             text="PRÓXIMAS CARRERAS"

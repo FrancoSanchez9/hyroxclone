@@ -3,6 +3,7 @@ import { m, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { getNextEvent } from "@/data/events";
 import { CountdownStrip } from "@/components/sections/CountdownStrip";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { ACCENT } from "@/lib/theme";
 
 const TITLE_LINES: { text: string; accent?: boolean; outline?: boolean }[] = [
@@ -43,11 +44,13 @@ export function HeroSection() {
 
       {/* Overlays */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/85" />
+      {/* Aurora — lime/emerald/cyan fields drifting over the darkened photo */}
+      <AuroraBackground intensity="strong" className="z-[2] opacity-70" />
       {/* Breathing lime energy */}
       <div
-        className="hero-glow pointer-events-none absolute inset-0"
+        className="hero-glow pointer-events-none absolute inset-0 z-[3]"
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,255,0,0.08) 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,255,0,0.10) 0%, rgba(0,230,138,0.04) 45%, transparent 70%)`,
         }}
       />
       {/* One-shot diagonal light streak (behind the text, over the image) */}
@@ -119,8 +122,8 @@ export function HeroSection() {
         >
           <Link
             to={event.registrationUrl}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
-            style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.25)" }}
+            className="btn-sheen inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+            style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.3)" }}
           >
             Regístrate a {event.name}
           </Link>

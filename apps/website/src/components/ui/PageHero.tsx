@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 
 interface PageHeroProps {
   title: string;
@@ -43,6 +44,8 @@ export function PageHero({ title, subtitle, badge, inverted = false, children }:
 
   return (
     <section style={{ background: bg }} className="relative w-full pt-32 pb-16 overflow-hidden">
+      {/* Aurora atmosphere — dark heroes only; the inverted (white) variant keeps its clean field */}
+      {!inverted && <AuroraBackground intensity="subtle" className="opacity-45" />}
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         {badge && (
           <span

@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
+import { m, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { ACCENT } from "@/lib/theme";
 import { SEASON_NAME, SEASON_YEAR_RANGE } from "@/data/season";
 
@@ -10,24 +12,30 @@ const STATS = [
 ];
 
 export function ChampionshipHero() {
+  // Photo scrolls slower than the copy (same pattern as the home hero): the CSS
+  // push-in stays on the img, the JS parallax lives on the wrapper.
+  const { scrollY } = useScroll();
+  const photoY = useTransform(scrollY, [0, 700], [0, 120]);
+
   return (
     <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
-      {/* Background — iconic circuit */}
-      <img
-        src="/images/1532444458054-01a7dd3e9fca-1920.webp"
-        width={1920}
-        height={1184}
-        alt=""
+      {/* Background — iconic circuit (parallax layer) */}
+      <m.div
+        className="pointer-events-none absolute inset-x-0 -top-[12%] h-[115%]"
+        style={{ y: photoY }}
         aria-hidden="true"
-        loading="eager"
-        className="hero-zoom pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-20 grayscale"
-      />
+      >
+        <img
+          src="/images/1532444458054-01a7dd3e9fca-1920.webp"
+          width={1920}
+          height={1184}
+          alt=""
+          loading="eager"
+          className="hero-zoom h-full w-full object-cover object-center opacity-20 grayscale"
+        />
+      </m.div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
-      <div
-        aria-hidden="true"
-        className="animate-blob pointer-events-none absolute -right-40 top-0 h-[30rem] w-[30rem] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.1), transparent 70%)" }}
-      />
+      <AuroraBackground intensity="strong" className="opacity-60" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <span

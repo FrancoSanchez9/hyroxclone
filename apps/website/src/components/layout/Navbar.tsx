@@ -57,9 +57,9 @@ export function Navbar() {
         style={
           scrolled
             ? {
-                backdropFilter: "blur(14px)",
-                WebkitBackdropFilter: "blur(14px)",
-                backgroundColor: "rgba(0,0,0,0.92)",
+                backdropFilter: "blur(20px) saturate(150%)",
+                WebkitBackdropFilter: "blur(20px) saturate(150%)",
+                backgroundColor: "rgba(0,0,0,0.62)",
               }
             : undefined
         }
@@ -130,7 +130,7 @@ export function Navbar() {
             </Link>
             <Link
               to="/eventos"
-              className="px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-rl-accent transition-[filter,transform] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+              className="btn-sheen px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-rl-accent transition-[filter,transform] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
               style={{ boxShadow: "0 0 24px rgba(212,255,0,0.25)" }}
             >
               Inscripciones

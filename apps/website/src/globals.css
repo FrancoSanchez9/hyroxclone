@@ -30,6 +30,12 @@
   --color-rl-white: #ffffff;
   --color-rl-accent: #d4ff00;
   --color-rl-muted: #666666;
+
+  /* Aurora range — the accent stretched into a gradient family for atmospheric
+     backdrops. Lime is the brand anchor; emerald/cyan only appear blurred. */
+  --color-rl-aurora-lime: #d4ff00;
+  --color-rl-aurora-emerald: #00e68a;
+  --color-rl-aurora-cyan: #00d5ff;
   --color-rl-border: rgba(255, 255, 255, 0.08);
 
   /* Semantic color roles — prefer these in new or touched components. */
@@ -69,10 +75,6 @@
     --z-progress: 60;
     --z-toast: 70;
     --z-skip-link: 100;
-
-    --scrollbar-track: var(--color-rl-surface-canvas);
-    --scrollbar-thumb: rgba(255, 255, 255, 0.28);
-    --scrollbar-thumb-hover: rgba(212, 255, 0, 0.72);
   }
 
   * {
@@ -141,35 +143,13 @@
     text-wrap: balance;
   }
 
-  /* Keep scroll position discoverable on desktop; the top progress bar remains complementary. */
+  /* No native scrollbar — the lime progress bar at the top is the scroll indicator. */
   html {
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-    scrollbar-width: thin;
+    scrollbar-width: none;
   }
   html::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  html::-webkit-scrollbar-track {
-    background: var(--scrollbar-track);
-  }
-  html::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border: 2px solid var(--scrollbar-track);
-    border-radius: 999px;
-  }
-  html::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbar-thumb-hover);
-  }
-
-  @media (max-width: 767px) {
-    html {
-      scrollbar-width: none;
-    }
-    html::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
+    width: 0;
+    height: 0;
   }
 }
 
@@ -269,6 +249,141 @@
 
   .glow-white-sm {
     box-shadow: 0 0 24px rgba(255, 255, 255, 0.08);
+  }
+
+  /* ──────────────────────────────────────────────────────────────────────
+     AURORA BACKDROP — three blurred color fields drifting on independent
+     orbits. Pure CSS (SSR-safe, runs before hydration) and compositor-only:
+     the blur is static, only transform/opacity animate.
+     ────────────────────────────────────────────────────────────────────── */
+  @keyframes aurora-drift-a {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.7;
+    }
+    33% {
+      transform: translate3d(8%, -6%, 0) scale(1.15);
+      opacity: 1;
+    }
+    66% {
+      transform: translate3d(-5%, 4%, 0) scale(0.95);
+      opacity: 0.55;
+    }
+  }
+  @keyframes aurora-drift-b {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translate3d(-10%, 8%, 0) scale(1.2);
+      opacity: 0.95;
+    }
+  }
+  @keyframes aurora-drift-c {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate3d(7%, 9%, 0) scale(0.9);
+      opacity: 0.85;
+    }
+  }
+  .aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  .aurora-a {
+    background: radial-gradient(circle, rgba(212, 255, 0, 0.32), transparent 65%);
+    animation: aurora-drift-a 18s ease-in-out infinite;
+  }
+  .aurora-b {
+    background: radial-gradient(circle, rgba(0, 230, 138, 0.26), transparent 65%);
+    animation: aurora-drift-b 26s ease-in-out infinite;
+  }
+  .aurora-c {
+    background: radial-gradient(circle, rgba(0, 213, 255, 0.18), transparent 65%);
+    animation: aurora-drift-c 32s ease-in-out infinite;
+  }
+
+  /* ── GLASS SURFACE — frosted panel with a luminous top edge ── */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-panel {
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+    }
+  }
+
+  /* ── ACCENT GLOWS ── */
+  .glow-accent {
+    box-shadow: 0 0 60px rgba(212, 255, 0, 0.14);
+  }
+  .glow-accent-sm {
+    box-shadow: 0 0 28px rgba(212, 255, 0, 0.22);
+  }
+
+  /* ── BUTTON SHEEN — a light streak crosses the CTA on hover ── */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    inset: -20% -40%;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-sheen:hover::after {
+      transform: translateX(120%);
+      transition: transform 700ms var(--ease-out-strong);
+    }
+  }
+
+  /* ── SPOTLIGHT CARD — border/halo follows the cursor (needs --mx/--my set
+        from a mousemove handler on the card) ── */
+  .spotlight-card {
+    position: relative;
+  }
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(212, 255, 0, 0.14),
+      transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 300ms var(--ease-out-strong);
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
   }
 
   /* ── FLOATING GRADIENT BLOB (motion-graphics backdrop) ── */

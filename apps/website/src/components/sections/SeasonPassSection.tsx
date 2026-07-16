@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { seasonPass, seasonCircuits } from "@/data/events";
 import { SEASON_NAME } from "@/data/season";
 import { ACCENT } from "@/lib/theme";
@@ -16,8 +17,9 @@ export function SeasonPassSection() {
   const tier = seasonPass.prices?.[0];
 
   return (
-    <section className="w-full" style={{ background: "#000" }}>
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
+    <section className="relative w-full overflow-hidden" style={{ background: "#000" }}>
+      <AuroraBackground intensity="subtle" />
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <p
@@ -52,7 +54,7 @@ export function SeasonPassSection() {
             </ul>
           </div>
 
-          <div className="border border-white/12 bg-white/[0.03] p-8 sm:p-10">
+          <div className="glass-panel glow-accent p-8 sm:p-10">
             <div className="flex items-end gap-3">
               <span
                 className="text-[clamp(3rem,7vw,4.5rem)] leading-none text-white"
@@ -91,7 +93,7 @@ export function SeasonPassSection() {
             <Link
               to="/checkout"
               search={{ event: seasonPass.id, division: "", category: "", qty: 1 }}
-              className="mt-8 inline-flex w-full items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+              className="btn-sheen mt-8 inline-flex w-full items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
               style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
             >
               Quiero el pase de temporada

@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
+import { m, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { RaceTrack } from "./RaceTrack";
+import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { ACCENT } from "@/lib/theme";
 
 const TITLE_LINES: { text: string; accent?: boolean }[] = [
@@ -10,18 +12,21 @@ const TITLE_LINES: { text: string; accent?: boolean }[] = [
 ];
 
 export function LaCarreraHeroSection() {
+  // Multi-layer parallax: the lane texture drifts fastest, the racetrack
+  // illustration lags behind the copy — depth without any extra assets.
+  const { scrollY } = useScroll();
+  const lanesY = useTransform(scrollY, [0, 700], [0, 140]);
+  const trackY = useTransform(scrollY, [0, 700], [0, -70]);
+
   return (
     <section className="relative w-full overflow-hidden bg-[#0a0a0a] px-6 pb-16 pt-32 md:pt-40">
-      {/* Ambient glow + lane texture */}
-      <div
+      {/* Aurora atmosphere + lane texture (parallax layer) */}
+      <AuroraBackground intensity="subtle" />
+      <m.div
         aria-hidden="true"
-        className="animate-blob pointer-events-none absolute -left-40 top-0 h-[30rem] w-[30rem] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(212,255,0,0.08), transparent 70%)" }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-x-0 -top-[10%] h-[120%]"
         style={{
+          y: lanesY,
           backgroundImage:
             "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.025) 119px, rgba(255,255,255,0.025) 120px)",
         }}
@@ -83,10 +88,12 @@ export function LaCarreraHeroSection() {
           </div>
         </div>
 
-        {/* Racetrack */}
-        <div className="hero-rise" style={{ animationDelay: "0.3s" }}>
-          <RaceTrack className="w-full" />
-        </div>
+        {/* Racetrack — counter-parallax layer for depth */}
+        <m.div style={{ y: trackY }}>
+          <div className="hero-rise" style={{ animationDelay: "0.3s" }}>
+            <RaceTrack className="w-full" />
+          </div>
+        </m.div>
       </div>
     </section>
   );

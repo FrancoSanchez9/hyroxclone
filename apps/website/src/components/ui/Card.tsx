@@ -1,18 +1,28 @@
 import { cn } from "@/lib/utils";
 
-type CardVariant = "default" | "highlight";
+type CardVariant = "default" | "highlight" | "glass";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
   hover?: boolean;
+  /** Ambient lime glow around the card (aurora design system). */
+  glow?: boolean;
 }
 
-function Card({ className, variant = "default", hover = false, ...props }: CardProps) {
+function Card({
+  className,
+  variant = "default",
+  hover = false,
+  glow = false,
+  ...props
+}: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-lg border bg-[#1a1a1a] border-[#2a2a2a] text-white texture-grain",
+        "rounded-lg text-white",
+        variant === "glass" ? "glass-panel" : "border bg-[#1a1a1a] border-[#2a2a2a] texture-grain",
         variant === "highlight" && "border-t-2 border-t-[#ffffff]",
+        glow && "glow-accent",
         hover &&
           "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-[#ffffff]",
         className,

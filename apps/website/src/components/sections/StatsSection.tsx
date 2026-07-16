@@ -96,7 +96,16 @@ export function StatsSection() {
         backgroundSize: "28px 28px",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      {/* Drifting emerald shade keeps the flat lime field alive (compositor-only) */}
+      <div
+        aria-hidden="true"
+        className="animate-blob-slow pointer-events-none absolute -top-1/2 left-1/4 h-[42rem] w-[42rem] rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(0,120,60,0.22), transparent 70%)",
+          filter: "blur(70px)",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <m.div
           className="mb-14 text-center"
           initial={{ opacity: 0, y: 20 }}
