@@ -5,7 +5,7 @@ import { ArrowRight, RotateCcw, ChevronLeft, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { EASE } from "@/lib/animation";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { trackEvent } from "@/lib/analytics";
 import { QuizLeadForm, type QuizLead } from "./QuizLeadForm";
 import {
@@ -504,10 +504,9 @@ export function QuizSection() {
         levelPct: Math.round(result.nivelScore),
       });
 
-      if (!supabase) return;
-      void supabase
-        .from("quiz_results")
-        .insert({
+      void getSupabase().then(async (supabase) => {
+        if (!supabase) return;
+        const { error } = await supabase.from("quiz_results").insert({
           name: data.name,
           descubrir: Math.round(result.brujula.descubrir),
           resistir: Math.round(result.brujula.resistir),
@@ -519,11 +518,10 @@ export function QuizSection() {
           archetype: result.archetype.name,
           recommended_modality: result.primary.name,
           affinities: result.modalities.map((mo) => ({ name: mo.name, affinity: mo.affinity })),
-        })
-        .then(({ error }) => {
-          // ponytail: fallo silencioso — guardar nunca debe romper la UX del quiz.
-          if (error) console.warn("quiz_results insert:", error.message);
         });
+        // ponytail: fallo silencioso — guardar nunca debe romper la UX del quiz.
+        if (error) console.warn("quiz_results insert:", error.message);
+      });
     },
     [result],
   );

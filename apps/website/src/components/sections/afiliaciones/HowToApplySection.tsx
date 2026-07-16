@@ -23,7 +23,7 @@ const steps = [
 
 export function HowToApplySection() {
   return (
-    <section className="border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24">
+    <section className="rl-deferred-section border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>

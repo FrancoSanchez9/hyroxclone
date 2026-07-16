@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { m } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { EASE } from "@/lib/theme";
 
 const STORAGE_KEY = "runluv-newsletter-subs:v1";
@@ -32,12 +32,11 @@ function saveSubscriber(email: string, city: string) {
   existing.push({ email, city, date: new Date().toISOString() });
   localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
   // Fire-and-forget a Supabase — no-op sin env vars; el PK de email deduplica.
-  void supabase
-    ?.from("leads")
-    .insert({ email, city, source: "newsletter" })
-    .then(({ error }) => {
-      if (error && error.code !== "23505") console.warn("leads insert:", error.message);
-    });
+  void getSupabase().then(async (supabase) => {
+    if (!supabase) return;
+    const { error } = await supabase.from("leads").insert({ email, city, source: "newsletter" });
+    if (error && error.code !== "23505") console.warn("leads insert:", error.message);
+  });
 }
 
 type State = {

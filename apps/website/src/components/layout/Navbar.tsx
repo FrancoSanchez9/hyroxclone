@@ -1,21 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Drawer } from "vaul";
-import { m, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems, topRightLinks } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 import logoSrc from "@/assets/logo-mark.webp";
-import { ACCENT } from "@/lib/theme";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileDialogRef = useRef<HTMLDialogElement>(null);
   const { pathname: currentPath } = useLocation();
-
-  // Scroll-progress bar
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -35,12 +29,25 @@ export function Navbar() {
     }
   };
 
+  const openMobileMenu = () => {
+    const dialog = mobileDialogRef.current;
+    if (!dialog?.open) dialog?.showModal();
+    setMobileOpen(true);
+  };
+
+  const closeMobileMenu = () => {
+    const dialog = mobileDialogRef.current;
+    if (!dialog?.open || dialog.dataset.closing === "true") return;
+    dialog.dataset.closing = "true";
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 160;
+    window.setTimeout(() => dialog.close(), delay);
+  };
+
   return (
     <>
-      <m.div
+      <div
         aria-hidden="true"
-        className="fixed top-0 left-0 right-0 z-50 h-[3px] origin-left"
-        style={{ scaleX: progress, background: ACCENT }}
+        className="rl-scroll-progress fixed top-0 right-0 left-0 z-60 h-[3px] origin-left bg-rl-accent"
       />
       <header
         className={cn(
@@ -100,11 +107,13 @@ export function Navbar() {
           </div>
 
           {/* Action buttons — hidden only at the top of the home hero */}
-          <m.div
-            className="hidden md:flex items-center gap-2"
-            animate={{ opacity: hideActions ? 0 : 1, y: hideActions ? -8 : 0 }}
-            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-            style={{ pointerEvents: hideActions ? "none" : "auto" }}
+          <div
+            className={cn(
+              "hidden items-center gap-2 transition-[opacity,transform] duration-220 ease-out-strong md:flex",
+              hideActions
+                ? "pointer-events-none -translate-y-2 opacity-0"
+                : "translate-y-0 opacity-100",
+            )}
             aria-hidden={hideActions}
           >
             <Link
@@ -126,88 +135,95 @@ export function Navbar() {
             >
               Inscripciones
             </Link>
-          </m.div>
+          </div>
 
-          <Drawer.Root open={mobileOpen} onOpenChange={setMobileOpen}>
-            <Drawer.Trigger asChild>
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] md:hidden"
+            aria-label="Abrir menú"
+            aria-controls="mobile-navigation"
+            aria-expanded={mobileOpen}
+            onClick={openMobileMenu}
+          >
+            <Menu size={22} />
+          </button>
+
+          <dialog
+            ref={mobileDialogRef}
+            id="mobile-navigation"
+            aria-labelledby="mobile-navigation-title"
+            className="mobile-nav-dialog fixed inset-x-0 top-auto bottom-0 m-0 flex max-h-[90dvh] w-full max-w-none flex-col rounded-t-2xl border border-white/10 bg-[#0a0a0a] p-0 text-white outline-none md:hidden"
+            onClose={() => {
+              delete mobileDialogRef.current?.dataset.closing;
+              setMobileOpen(false);
+            }}
+            onCancel={(event) => {
+              event.preventDefault();
+              closeMobileMenu();
+            }}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) closeMobileMenu();
+            }}
+          >
+            <div className="flex justify-center pt-3 pb-1">
+              <div className="h-1 w-10 rounded-full bg-white/20" />
+            </div>
+
+            <div className="flex items-center justify-between px-6 py-3 border-b border-white/10">
+              <h2 id="mobile-navigation-title" className="sr-only">
+                Navegación principal
+              </h2>
+              <img
+                src={logoSrc}
+                alt="RunLuv"
+                width={413}
+                height={119}
+                className="h-8 w-auto brightness-[1.1]"
+                loading="lazy"
+              />
               <button
                 type="button"
-                className="md:hidden flex items-center justify-center w-11 h-11 text-white/70 hover:text-[#ffffff] transition-colors duration-150"
-                aria-label="Open menu"
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
+                className="flex h-10 w-10 items-center justify-center text-white/60 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96]"
+                aria-label="Cerrar menú"
+                onClick={closeMobileMenu}
               >
-                <Menu size={22} />
+                <X size={20} />
               </button>
-            </Drawer.Trigger>
+            </div>
 
-            <Drawer.Portal>
-              <Drawer.Overlay className="fixed inset-0 bg-black/70 z-40" />
-              <Drawer.Content
-                className="fixed bottom-0 left-0 right-0 z-50 flex flex-col rounded-t-2xl outline-none"
-                style={{
-                  backgroundColor: "#0a0a0a",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  maxHeight: "90dvh",
-                }}
-              >
-                <div className="flex justify-center pt-3 pb-1">
-                  <div className="h-1 w-10 rounded-full bg-white/20" />
-                </div>
+            <div className="overflow-y-auto flex-1 pb-safe">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.href ?? "/"}
+                  onClick={closeMobileMenu}
+                  className="block min-h-14 border-b border-white/10 px-6 py-4 text-base font-semibold uppercase tracking-wide text-white/70 transition-colors duration-150 hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-                <div className="flex items-center justify-between px-6 py-3 border-b border-white/10">
-                  <img
-                    src={logoSrc}
-                    alt="RunLuv"
-                    width={413}
-                    height={119}
-                    className="h-8 w-auto brightness-[1.1]"
-                    loading="lazy"
-                  />
-                  <Drawer.Close asChild>
-                    <button
-                      type="button"
-                      // eslint-disable-next-line jsx-a11y/no-autofocus
-                      autoFocus
-                      className="flex items-center justify-center w-10 h-10 text-white/60 hover:text-[#ffffff] transition-colors duration-150"
-                      aria-label="Close menu"
-                    >
-                      <X size={20} />
-                    </button>
-                  </Drawer.Close>
-                </div>
-
-                <div className="overflow-y-auto flex-1 pb-safe">
-                  {navItems.map((item) => (
-                    <Drawer.Close key={item.label} asChild>
-                      <Link
-                        to={item.href ?? "/"}
-                        className="block px-6 py-4 text-base text-white/70 hover:text-[#ffffff] uppercase tracking-wide font-semibold transition-colors duration-150 border-b border-white/10"
-                      >
-                        {item.label}
-                      </Link>
-                    </Drawer.Close>
-                  ))}
-
-                  <div className="px-6 pt-6 pb-8 flex flex-col gap-3">
-                    {topRightLinks.map((link, i) => (
-                      <Drawer.Close key={link.label} asChild>
-                        <Link
-                          to={link.href}
-                          className={cn(
-                            "px-5 py-3 text-center text-sm font-bold uppercase tracking-widest transition-[filter,background-color,border-color] duration-[160ms] active:scale-[0.96]",
-                            i === 1
-                              ? "bg-rl-accent text-black hover:brightness-95"
-                              : "border border-rl-accent/50 text-rl-accent hover:bg-rl-accent/10",
-                          )}
-                        >
-                          {link.label}
-                        </Link>
-                      </Drawer.Close>
-                    ))}
-                  </div>
-                </div>
-              </Drawer.Content>
-            </Drawer.Portal>
-          </Drawer.Root>
+              <div className="px-6 pt-6 pb-8 flex flex-col gap-3">
+                {topRightLinks.map((link, i) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={closeMobileMenu}
+                    className={cn(
+                      "min-h-12 px-5 py-3 text-center text-sm font-bold uppercase tracking-widest transition-[filter,background-color,border-color,transform] duration-[160ms] active:scale-[0.96]",
+                      i === 1
+                        ? "bg-rl-accent text-black hover:brightness-95"
+                        : "border border-rl-accent/50 text-rl-accent hover:bg-rl-accent/10",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </dialog>
         </nav>
       </header>
     </>

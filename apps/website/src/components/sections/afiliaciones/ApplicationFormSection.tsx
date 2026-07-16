@@ -1,6 +1,5 @@
 import { type ChangeEvent, type FormEvent, type ReactNode, useState } from "react";
 import { ArrowRight, Building2, ChevronDown, Mail, Users } from "lucide-react";
-import { toast } from "sonner";
 
 type Fields = {
   gymName: string;
@@ -76,9 +75,11 @@ export function ApplicationFormSection() {
     ].join("\n");
 
     window.location.href = `mailto:contacto@runluv.mx?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    toast.info("Solicitud preparada", {
-      description: "Revisa el mensaje en tu aplicación de correo y presiona enviar.",
-    });
+    void import("sonner").then(({ toast }) =>
+      toast.info("Solicitud preparada", {
+        description: "Revisa el mensaje en tu aplicación de correo y presiona enviar.",
+      }),
+    );
   }
 
   const fieldProps = (key: keyof Fields) => ({
@@ -92,7 +93,10 @@ export function ApplicationFormSection() {
   });
 
   return (
-    <section id="afiliacion" className="scroll-mt-24 bg-rl-surface-raised px-6 py-20 sm:py-24">
+    <section
+      id="afiliacion"
+      className="rl-deferred-section scroll-mt-24 bg-rl-surface-raised px-6 py-20 sm:py-24"
+    >
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
         <div>
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-rl-accent">

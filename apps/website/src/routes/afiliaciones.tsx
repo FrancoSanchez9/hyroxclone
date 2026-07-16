@@ -13,35 +13,47 @@ function AffiliationsHero() {
   ];
 
   return (
-    <section className="relative isolate min-h-[44rem] overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
+    <section className="relative isolate min-h-svh overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
       <img
-        src="/images/1476480862126-209bfaa8edc8-1920.webp"
-        alt=""
-        aria-hidden="true"
-        width={1920}
-        height={1280}
+        src="/images/1552674605-db6ffd4facb5-1600.webp"
+        srcSet="/images/1552674605-db6ffd4facb5-500.webp 500w, /images/1552674605-db6ffd4facb5-900.webp 900w, /images/1552674605-db6ffd4facb5-1600.webp 1600w"
+        sizes="100vw"
+        alt="Corredores entrenan al amanecer sobre una pista al aire libre"
+        width={1600}
+        height={1067}
         loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-[58%_center] grayscale outline -outline-offset-1 outline-white/10"
+        fetchPriority="high"
+        decoding="async"
+        className="affiliations-hero-image absolute inset-0 h-full w-full object-cover object-[48%_center] grayscale outline -outline-offset-1 outline-white/10 sm:object-center"
       />
-      <div className="absolute inset-0 bg-linear-to-r from-black via-black/85 to-black/25" />
-      <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/65 to-black/10 lg:bg-linear-to-r lg:from-black lg:via-black/80 lg:to-black/15" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/85 via-transparent to-black/35" />
       <div
         className="texture-grain pointer-events-none absolute inset-0 opacity-60"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(44rem-5rem)] max-w-7xl flex-col justify-end px-6 pb-10 pt-24 sm:min-h-[calc(46rem-5rem)] sm:pb-14 lg:px-8">
+      <div
+        className="absolute top-25 right-6 z-10 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[0.22em] text-white/55 sm:flex lg:right-8"
+        aria-hidden="true"
+      >
+        <span>Pista</span>
+        <span className="h-px w-14 bg-white/35" />
+        <span className="text-rl-accent">Kilómetro 01</span>
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-6 pb-7 pt-24 sm:min-h-[calc(46rem-5rem)] sm:pb-14 lg:px-8">
         <div className="max-w-4xl">
           <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.28em] text-rl-accent">
             <span className="h-2 w-2 bg-rl-accent" aria-hidden="true" />
             Afiliaciones runluv®
           </p>
-          <h1 className="max-w-4xl text-[clamp(3.5rem,9vw,7.75rem)] leading-[0.88] tracking-[0.01em] text-white">
-            Convierte tu gimnasio en el <span className="text-rl-accent">punto de partida</span>
+          <h1 className="max-w-4xl text-[clamp(3.35rem,9vw,7.75rem)] leading-[0.88] tracking-[0.01em] text-white">
+            Convierte tu comunidad en el <span className="text-rl-accent">punto de partida</span>
           </h1>
           <p className="mt-7 max-w-2xl text-base leading-relaxed text-rl-text-secondary sm:text-lg">
-            Conecta tu espacio con corredores, experiencias y herramientas que fortalecen la
-            comunidad alrededor del entrenamiento y la pista.
+            Haz de tu sede una base para corredores: entrenamiento, experiencias y una comunidad
+            conectada con la pista.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -60,18 +72,20 @@ function AffiliationsHero() {
           </div>
         </div>
 
-        <div className="mt-12 grid max-w-4xl grid-cols-1 border-y border-white/20 sm:grid-cols-3">
+        <div className="mt-8 grid max-w-4xl grid-cols-3 border-y border-white/20 sm:mt-12">
           {signals.map((item) => (
             <div
               key={item.value}
-              className="flex min-h-20 items-center gap-3 border-white/20 px-4 py-4 sm:border-l sm:first:border-l-0"
+              className="flex min-h-20 flex-col items-start justify-center gap-2 border-l border-white/20 px-3 py-3 first:border-l-0 sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-4"
             >
               <item.icon className="h-5 w-5 shrink-0 text-rl-accent" aria-hidden="true" />
               <p>
-                <span className="block text-sm font-bold uppercase tracking-wider text-white">
+                <span className="block text-[11px] font-bold uppercase tracking-wider text-white sm:text-sm">
                   {item.value}
                 </span>
-                <span className="mt-0.5 block text-xs text-rl-text-secondary">{item.label}</span>
+                <span className="mt-0.5 hidden text-xs text-rl-text-secondary sm:block">
+                  {item.label}
+                </span>
               </p>
             </div>
           ))}

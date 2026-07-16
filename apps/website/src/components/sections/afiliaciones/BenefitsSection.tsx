@@ -41,7 +41,7 @@ const benefits = [
 
 export function BenefitsSection() {
   return (
-    <section className="border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24">
+    <section className="rl-deferred-section border-b border-rl-border-subtle bg-rl-surface-canvas px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">

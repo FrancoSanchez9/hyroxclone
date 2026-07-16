@@ -434,4 +434,93 @@
   .animate-scroll-cue {
     animation: scroll-cue 1.9s ease-in-out infinite;
   }
+
+  /* Native scroll progress avoids a per-frame React/Motion subscription. */
+  @keyframes rl-scroll-progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .rl-scroll-progress {
+    transform: scaleX(0);
+  }
+  @supports (animation-timeline: scroll()) {
+    .rl-scroll-progress {
+      animation: rl-scroll-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  /* Native <dialog> provides focus trapping and Escape semantics without Vaul. */
+  dialog.mobile-nav-dialog:not([open]) {
+    display: none;
+  }
+  .mobile-nav-dialog {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--motion-duration-fast) var(--motion-ease-enter),
+      transform var(--motion-duration-ui) var(--motion-ease-enter);
+  }
+  .mobile-nav-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.76);
+    opacity: 1;
+    transition: opacity var(--motion-duration-fast) var(--motion-ease-enter);
+  }
+  .mobile-nav-dialog[data-closing="true"] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition-timing-function: var(--motion-ease-exit);
+    transition-duration: var(--motion-duration-fast);
+  }
+  .mobile-nav-dialog[data-closing="true"]::backdrop {
+    opacity: 0;
+    transition-timing-function: var(--motion-ease-exit);
+  }
+  @starting-style {
+    .mobile-nav-dialog[open] {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    .mobile-nav-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+  html:has(.mobile-nav-dialog[open]) {
+    overflow: hidden;
+  }
+
+  .cookie-banner {
+    transform: translateY(0);
+    transition: transform var(--motion-duration-ui) var(--motion-ease-enter);
+  }
+  .cookie-banner[data-closing="true"] {
+    transform: translateY(100%);
+    transition-duration: var(--motion-duration-fast);
+    transition-timing-function: var(--motion-ease-exit);
+  }
+  @starting-style {
+    .cookie-banner {
+      transform: translateY(100%);
+    }
+  }
+
+  /* One compositor-only camera settle makes the running scene feel cinematic. */
+  @keyframes affiliations-hero-settle {
+    from {
+      transform: scale(1.045);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .affiliations-hero-image {
+    animation: affiliations-hero-settle 1.1s var(--motion-ease-enter) both;
+  }
+
+  /* Skip layout/paint for long sections until they approach the viewport. */
+  .rl-deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
 }

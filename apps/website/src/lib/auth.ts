@@ -12,7 +12,7 @@
 
 import { useEffect, useState } from "react";
 import type { Session as SupabaseSession } from "@supabase/supabase-js";
-import { supabase } from "./supabase";
+import { getSupabase } from "./supabase";
 
 export type Role = "admin" | "runner";
 
@@ -50,6 +50,7 @@ function toSession(sb: SupabaseSession | null): Session | null {
 }
 
 export async function getSession(): Promise<Session | null> {
+  const supabase = await getSupabase();
   if (!supabase) return null;
   const { data } = await supabase.auth.getSession();
   return toSession(data.session);
@@ -64,6 +65,7 @@ export async function isAdmin(): Promise<boolean> {
 }
 
 export async function signInWithPassword(email: string, password: string): Promise<Session> {
+  const supabase = await getSupabase();
   if (!supabase) throw new AuthUnavailableError();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
@@ -82,6 +84,7 @@ export async function signUpWithPassword(
   password: string,
   name: string,
 ): Promise<{ session: Session | null; needsConfirmation: boolean }> {
+  const supabase = await getSupabase();
   if (!supabase) throw new AuthUnavailableError();
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -94,6 +97,7 @@ export async function signUpWithPassword(
 
 /** Redirige a Google; la sesión se resuelve al volver en /auth/callback. */
 export async function signInWithGoogle(): Promise<void> {
+  const supabase = await getSupabase();
   if (!supabase) throw new AuthUnavailableError();
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -103,6 +107,7 @@ export async function signInWithGoogle(): Promise<void> {
 }
 
 export async function signOut(): Promise<void> {
+  const supabase = await getSupabase();
   if (!supabase) return;
   await supabase.auth.signOut();
 }
@@ -121,16 +126,32 @@ export function useSession(): { session: Session | null; loading: boolean } {
   });
 
   useEffect(() => {
-    if (!supabase) {
-      setState({ session: null, loading: false });
-      return;
-    }
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, sb) => {
-      setState({ session: toSession(sb), loading: false });
-    });
-    return () => subscription.unsubscribe();
+    let cancelled = false;
+    let unsubscribe: (() => void) | undefined;
+
+    void getSupabase()
+      .then((supabase) => {
+        if (cancelled) return;
+        if (!supabase) {
+          setState({ session: null, loading: false });
+          return;
+        }
+
+        const {
+          data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, sb) => {
+          if (!cancelled) setState({ session: toSession(sb), loading: false });
+        });
+        unsubscribe = () => subscription.unsubscribe();
+      })
+      .catch(() => {
+        if (!cancelled) setState({ session: null, loading: false });
+      });
+
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
   }, []);
 
   return state;

@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { ACCENT } from "@/lib/theme";
 
 /**
@@ -15,14 +15,6 @@ function AuthCallbackPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Capturado en un local: el narrowing de `supabase` no sobrevive dentro de los
-    // callbacks diferidos de abajo.
-    const client = supabase;
-    if (!client) {
-      setError("Supabase no está configurado.");
-      return;
-    }
-
     // Si el proveedor devolvió un error, viene en la query — no tiene caso esperar.
     const params = new URLSearchParams(window.location.search);
     const oauthError = params.get("error_description") ?? params.get("error");
@@ -31,24 +23,38 @@ function AuthCallbackPage() {
       return;
     }
 
-    const {
-      data: { subscription },
-    } = client.auth.onAuthStateChange((_event, session) => {
-      if (!session) return; // aún canjeando el código
-      const role = session.user.app_metadata?.role === "admin" ? "admin" : "runner";
-      void navigate({ to: role === "admin" ? "/admin" : "/dashboard", replace: true });
+    let cancelled = false;
+    let unsubscribe: (() => void) | undefined;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
+    void getSupabase().then((client) => {
+      if (cancelled) return;
+      if (!client) {
+        setError("Supabase no está configurado.");
+        return;
+      }
+
+      const {
+        data: { subscription },
+      } = client.auth.onAuthStateChange((_event, session) => {
+        if (!session) return; // aún canjeando el código
+        const role = session.user.app_metadata?.role === "admin" ? "admin" : "runner";
+        void navigate({ to: role === "admin" ? "/admin" : "/dashboard", replace: true });
+      });
+      unsubscribe = () => subscription.unsubscribe();
+
+      // Red de seguridad: si en 10s no hubo sesión, el canje falló silenciosamente.
+      timeout = setTimeout(() => {
+        void client.auth.getSession().then(({ data }) => {
+          if (!data.session && !cancelled) setError("No pudimos completar el inicio de sesión.");
+        });
+      }, 10_000);
     });
 
-    // Red de seguridad: si en 10s no hubo sesión, el canje falló silenciosamente.
-    const timeout = setTimeout(() => {
-      void client.auth.getSession().then(({ data }) => {
-        if (!data.session) setError("No pudimos completar el inicio de sesión.");
-      });
-    }, 10_000);
-
     return () => {
-      subscription.unsubscribe();
-      clearTimeout(timeout);
+      cancelled = true;
+      unsubscribe?.();
+      if (timeout) clearTimeout(timeout);
     };
   }, [navigate]);
 

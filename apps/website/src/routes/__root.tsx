@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { createRootRoute, Outlet, HeadContent, Scripts, ClientOnly } from "@tanstack/react-router";
-import { LazyMotion, MotionConfig, domAnimation, useReducedMotion } from "framer-motion";
+import { LazyMotion, MotionConfig, useReducedMotion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
@@ -8,6 +8,43 @@ import { SEASON_NAME, SEASON_START_YEAR } from "@/data/season";
 import "@/globals.css";
 
 const DeferredToaster = lazy(() => import("sonner").then(({ Toaster }) => ({ default: Toaster })));
+const loadMotionFeatures = () =>
+  import("@/lib/motion-features").then(({ default: features }) => features);
+
+function IdleToaster() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const idleWindow = window as unknown as {
+      requestIdleCallback?: typeof window.requestIdleCallback;
+      cancelIdleCallback?: typeof window.cancelIdleCallback;
+    };
+    if (idleWindow.requestIdleCallback) {
+      const id = idleWindow.requestIdleCallback(() => setReady(true), { timeout: 2500 });
+      return () => idleWindow.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(() => setReady(true), 1500);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <DeferredToaster
+        position="bottom-right"
+        theme="dark"
+        toastOptions={{
+          style: {
+            background: "var(--color-rl-surface-overlay)",
+            border: "1px solid var(--color-rl-border-strong)",
+            color: "var(--color-rl-text-primary)",
+            fontFamily: "var(--font-sans)",
+          },
+        }}
+      />
+    </Suspense>
+  );
+}
 
 // JSON-LD structured data — moved here from the old index.html so it ships in the
 // SSR'd <head> of every route. Kept as plain objects and serialized inline below.
@@ -125,7 +162,7 @@ const WEBPAGE_SCHEMA = {
 function RootLayout() {
   const shouldReduceMotion = useReducedMotion();
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={loadMotionFeatures}>
       <MotionConfig reducedMotion={shouldReduceMotion ? "always" : "never"}>
         <a
           href="#main-content"
@@ -140,20 +177,7 @@ function RootLayout() {
         <Footer />
         <CookieBanner />
         <ClientOnly>
-          <Suspense fallback={null}>
-            <DeferredToaster
-              position="bottom-right"
-              theme="dark"
-              toastOptions={{
-                style: {
-                  background: "var(--color-rl-surface-overlay)",
-                  border: "1px solid var(--color-rl-border-strong)",
-                  color: "var(--color-rl-text-primary)",
-                  fontFamily: "var(--font-sans)",
-                },
-              }}
-            />
-          </Suspense>
+          <IdleToaster />
         </ClientOnly>
       </MotionConfig>
     </LazyMotion>
