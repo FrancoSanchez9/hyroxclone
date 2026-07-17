@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { m } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { type RunluvEvent } from "@/data/events";
-import { ACCENT, EASE } from "@/lib/theme";
+import { ACCENT } from "@/lib/theme";
 
 function useCountdown(targetMs: number) {
   const [now, setNow] = useState(() => Date.now());
@@ -53,13 +52,9 @@ export function CountdownStrip({ event, registerHref }: CountdownStripProps) {
 
   return (
     <div className="overflow-hidden">
-      <m.div
-        className="flex flex-col md:flex-row md:items-stretch"
+      <div
+        className="countdown-enter flex flex-col md:flex-row md:items-stretch"
         style={{ background: ACCENT }}
-        initial={{ transform: "translateX(-100%)" }}
-        whileInView={{ transform: "translateX(0%)" }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
       >
         {/* Next race label */}
         <div className="flex flex-col justify-center gap-0.5 px-6 py-4 md:py-6 md:pl-8">
@@ -107,7 +102,7 @@ export function CountdownStrip({ event, registerHref }: CountdownStripProps) {
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         )}
-      </m.div>
+      </div>
     </div>
   );
 }

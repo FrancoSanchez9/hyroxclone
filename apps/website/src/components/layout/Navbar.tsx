@@ -114,7 +114,7 @@ export function Navbar() {
                 ? "pointer-events-none -translate-y-2 opacity-0"
                 : "translate-y-0 opacity-100",
             )}
-            aria-hidden={hideActions}
+            inert={hideActions}
           >
             <Link
               to="/tu-nivel"

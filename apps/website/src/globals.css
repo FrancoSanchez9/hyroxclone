@@ -445,24 +445,25 @@
     from {
       opacity: 0;
       transform: translateY(115%);
-      filter: blur(16px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
   @keyframes hero-rise {
     from {
       opacity: 0;
       transform: translateY(26px);
-      filter: blur(8px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
+    }
+  }
+  @keyframes hero-parallax {
+    to {
+      transform: translate3d(0, 180px, 0);
     }
   }
   @keyframes hero-zoom {
@@ -528,6 +529,13 @@
     opacity: 0;
     animation: hero-rise 0.85s var(--ease-out-strong) both;
   }
+  @supports (animation-timeline: scroll()) {
+    .hero-parallax {
+      animation: hero-parallax linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 900px;
+    }
+  }
   /* Slow cinematic push-in on the backdrop image (parallax stays on the wrapper). */
   .hero-zoom {
     animation: hero-zoom 2.8s var(--ease-out-strong) both;
@@ -548,6 +556,18 @@
   }
   .animate-scroll-cue {
     animation: scroll-cue 1.9s ease-in-out infinite;
+  }
+
+  @keyframes countdown-enter {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .countdown-enter {
+    animation: countdown-enter 0.9s var(--ease-out-strong) 0.5s both;
   }
 
   /* Native scroll progress avoids a per-frame React/Motion subscription. */

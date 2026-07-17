@@ -1,7 +1,7 @@
-import { m, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
-import { EASE } from "@/lib/animation";
 import { ACCENT } from "@/lib/theme";
+import { useInViewOnce } from "@/lib/useInViewOnce";
 
 interface AnimatedTitleProps {
   text: string;
@@ -10,14 +10,6 @@ interface AnimatedTitleProps {
   accent?: string[];
 }
 
-const word = {
-  hidden: { y: "110%" },
-  visible: (i: number) => ({
-    y: 0,
-    transition: { duration: 0.26, ease: EASE, delay: i * 0.035 },
-  }),
-};
-
 /**
  * Section heading with a per-word mask reveal on scroll into view.
  * The observer lives on the h2 — the masked words are clipped at their
@@ -25,14 +17,13 @@ const word = {
  */
 export function AnimatedTitle({ text, className, accent = [] }: AnimatedTitleProps) {
   const words = text.split(" ");
-  const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLHeadingElement>(null);
+  const inView = useInViewOnce(ref, "0px 0px -60px");
 
   return (
-    <m.h2
+    <h2
+      ref={ref}
       aria-label={text}
-      initial={shouldReduceMotion ? "visible" : "hidden"}
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
       className={cn("uppercase leading-none tracking-wide", className)}
       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
     >
@@ -42,17 +33,21 @@ export function AnimatedTitle({ text, className, accent = [] }: AnimatedTitlePro
           aria-hidden="true"
           className="inline-block overflow-hidden pb-[0.06em] -mb-[0.06em] align-bottom"
         >
-          <m.span
-            className="inline-block"
-            variants={word}
-            custom={i}
-            style={accent.includes(w) ? { color: ACCENT } : undefined}
+          <span
+            className={cn(
+              "inline-block transition-transform duration-260 ease-out-strong",
+              inView ? "translate-y-0" : "translate-y-[110%]",
+            )}
+            style={{
+              transitionDelay: `${i * 35}ms`,
+              ...(accent.includes(w) ? { color: ACCENT } : {}),
+            }}
           >
             {w}
-          </m.span>
+          </span>
           {i < words.length - 1 ? " " : null}
         </span>
       ))}
-    </m.h2>
+    </h2>
   );
 }

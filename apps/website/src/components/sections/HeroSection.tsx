@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { m, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { getNextEvent } from "@/data/events";
 import { CountdownStrip } from "@/components/sections/CountdownStrip";
@@ -14,8 +13,6 @@ const TITLE_LINES: { text: string; accent?: boolean; outline?: boolean }[] = [
 
 export function HeroSection() {
   const event = getNextEvent();
-  const { scrollY } = useScroll();
-  const parallaxY = useTransform(scrollY, [0, 900], [0, 180]);
 
   return (
     <section
@@ -23,12 +20,9 @@ export function HeroSection() {
       style={{ background: "#000" }}
       aria-label="Hero"
     >
-      {/* Background — framer drives the scroll parallax on the wrapper; the CSS
-          push-in (.hero-zoom) lives on the img so the two transforms never clash
-          and the zoom still runs before JS hydrates. */}
-      <m.div
-        className="pointer-events-none absolute inset-x-0 -top-[15%] h-[115%] w-full"
-        style={{ y: parallaxY }}
+      {/* Native scroll-driven parallax keeps Motion out of the critical route. */}
+      <div
+        className="hero-parallax pointer-events-none absolute inset-x-0 -top-[15%] h-[115%] w-full"
         aria-hidden="true"
       >
         <img
@@ -40,7 +34,7 @@ export function HeroSection() {
           fetchPriority="high"
           className="hero-zoom h-full w-full object-cover object-center opacity-45"
         />
-      </m.div>
+      </div>
 
       {/* Overlays */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/85" />
@@ -92,7 +86,7 @@ export function HeroSection() {
               <span
                 className="hero-line text-[clamp(3.2rem,11vw,9rem)]"
                 style={{
-                  animationDelay: `${(0.15 + i * 0.13).toFixed(2)}s`,
+                  animationDelay: `${(0.15 + i * 0.05).toFixed(2)}s`,
                   ...(line.accent
                     ? { color: ACCENT }
                     : line.outline
@@ -118,7 +112,7 @@ export function HeroSection() {
 
         <div
           className="hero-rise mt-9 flex flex-wrap items-center justify-center gap-4"
-          style={{ animationDelay: "0.75s" }}
+          style={{ animationDelay: "0.45s" }}
         >
           <Link
             to={event.registrationUrl}

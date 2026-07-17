@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/Card";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
+import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@tanstack/react-router";
-import { m } from "framer-motion";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
 import { ACCENT } from "@/lib/theme";
@@ -38,17 +38,7 @@ function formatDateRange(dateStr: string, endDateStr?: string): string {
 
 function FeaturedEventCard({ event }: { event: RunluvEvent }) {
   return (
-    <m.div
-      initial={{ clipPath: "inset(0 100% 0 0)" }}
-      whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-      viewport={{ once: true, margin: "-80px" }}
-      whileHover={{ y: -4, boxShadow: "0 24px 60px rgba(212,255,0,0.16)" }}
-      transition={{
-        clipPath: { duration: 0.9, ease: [0.23, 1, 0.32, 1] },
-        default: { duration: 0.22, ease: [0.23, 1, 0.32, 1] },
-      }}
-      className="relative w-full overflow-hidden rounded-lg border border-white/10"
-    >
+    <div className="relative w-full overflow-hidden rounded-lg border border-white/10 transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(212,255,0,0.16)]">
       {event.imageUrl && (
         <img
           src={event.imageUrl}
@@ -132,20 +122,13 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
           )}
         </div>
       </div>
-    </m.div>
+    </div>
   );
 }
 
 function EventCard({ event }: { event: RunluvEvent }) {
   return (
-    <m.div
-      whileHover={{
-        y: -4,
-        boxShadow: "0 16px 40px rgba(0,0,0,0.5), 0 0 32px rgba(212,255,0,0.08)",
-      }}
-      transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-      className="h-full group"
-    >
+    <div className="group h-full transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.5),0_0_32px_rgba(212,255,0,0.08)]">
       <Card hover className="flex flex-col h-full overflow-hidden">
         {event.imageUrl && (
           <div className="relative h-36 overflow-hidden">
@@ -220,7 +203,7 @@ function EventCard({ event }: { event: RunluvEvent }) {
           )}
         </CardFooter>
       </Card>
-    </m.div>
+    </div>
   );
 }
 
@@ -247,9 +230,9 @@ export function UpcomingEventsSection() {
         </div>
 
         {featuredEvent && (
-          <div className="mb-10">
+          <Reveal className="mb-10">
             <FeaturedEventCard event={featuredEvent} />
-          </div>
+          </Reveal>
         )}
 
         {remainingEvents.length > 0 && (

@@ -1,10 +1,7 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/Badge";
 import { AnimatedTitle } from "@/components/ui/AnimatedTitle";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
-import { EASE } from "@/lib/animation";
 import { ACCENT } from "@/lib/theme";
 
 const modalities = [
@@ -65,25 +62,9 @@ const modalities = [
   },
 ] as const;
 
-function ModalityCard({
-  modality,
-  index,
-}: {
-  modality: (typeof modalities)[number];
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
+function ModalityCard({ modality }: { modality: (typeof modalities)[number] }) {
   return (
-    <m.div
-      ref={ref}
-      className="group h-full"
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-      transition={{ duration: 0.55, delay: index * 0.1, ease: EASE }}
-      whileHover={{ y: -6, boxShadow: "0 28px 70px rgba(212,255,0,0.12)" }}
-    >
+    <div className="group h-full transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1.5 hover:shadow-[0_28px_70px_rgba(212,255,0,0.12)]">
       <div
         className="spotlight-card relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10"
         onMouseMove={(e) => {
@@ -172,14 +153,11 @@ function ModalityCard({
           </Link>
         </div>
       </div>
-    </m.div>
+    </div>
   );
 }
 
 export function RaceFormatSection() {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
-
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
@@ -189,13 +167,7 @@ export function RaceFormatSection() {
       <AuroraBackground intensity="subtle" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <m.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: 24 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.38, ease: EASE }}
-          className="mb-14 text-center"
-        >
+        <div className="mb-14 text-center">
           <Badge variant="outline" className="mb-5 border-white/25 text-white/55 tracking-[0.2em]">
             DESAFÍOS
           </Badge>
@@ -207,23 +179,17 @@ export function RaceFormatSection() {
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/50 sm:text-base text-balance">
             Tres modalidades diseñadas para diferentes formas de correr y competir.
           </p>
-        </m.div>
+        </div>
 
         {/* Modality cards — 3 columns on desktop */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {modalities.map((modality, index) => (
-            <ModalityCard key={modality.id} modality={modality} index={index} />
+          {modalities.map((modality) => (
+            <ModalityCard key={modality.id} modality={modality} />
           ))}
         </div>
 
         {/* Footer CTA */}
-        <m.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.38, delay: 0.28, ease: EASE }}
-          className="mt-12 flex justify-center"
-        >
+        <div className="mt-12 flex justify-center">
           <a
             href="/la-carrera"
             className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.15em] text-white/55 transition-colors duration-200 hover:text-white active:scale-[0.96]"
@@ -236,7 +202,7 @@ export function RaceFormatSection() {
               →
             </span>
           </a>
-        </m.div>
+        </div>
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
-import { m, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { EASE } from "@/lib/theme";
+import { useInViewOnce } from "@/lib/useInViewOnce";
 
-/** Fades + lifts its children into view once, on scroll. Respects reduced motion via MotionConfig. */
+/** Fades + lifts its children into view once without loading a motion runtime. */
 export function Reveal({
   children,
   className,
@@ -13,21 +12,20 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInViewOnce(ref, "0px 0px -90px");
 
   return (
-    <m.div
-      className={cn(className)}
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-90px" }}
-      transition={{
-        duration: shouldReduceMotion ? 0 : 0.28,
-        ease: EASE,
-        delay: shouldReduceMotion ? 0 : Math.min(delay, 0.12),
-      }}
+    <div
+      ref={ref}
+      className={cn(
+        "transition-[opacity,transform] duration-280 ease-out-strong",
+        inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+        className,
+      )}
+      style={{ transitionDelay: `${Math.min(delay, 0.12) * 1000}ms` }}
     >
       {children}
-    </m.div>
+    </div>
   );
 }

@@ -1,8 +1,5 @@
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { EASE } from "@/lib/theme";
 import { ACCENT } from "@/lib/theme";
 
 const bullets = [
@@ -12,23 +9,11 @@ const bullets = [
 ];
 
 export function WhatIsRunluvSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
-
   return (
-    <section ref={sectionRef} className="w-full" style={{ background: "#0a0a0a" }}>
+    <section className="w-full" style={{ background: "#0a0a0a" }}>
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-16">
-          <m.div
-            className="flex-1 flex flex-col justify-center"
-            initial={{ opacity: 0, x: -60, filter: "blur(8px)" }}
-            animate={
-              inView
-                ? { opacity: 1, x: 0, filter: "blur(0px)" }
-                : { opacity: 0, x: -60, filter: "blur(8px)" }
-            }
-            transition={{ duration: 0.7, ease: EASE }}
-          >
+          <div className="flex flex-1 flex-col justify-center">
             <h2
               className="text-[clamp(3.5rem,9vw,7.5rem)] font-normal leading-none tracking-wide text-white uppercase text-balance"
               style={{ fontFamily: "'Bebas Neue', sans-serif" }}
@@ -46,14 +31,11 @@ export function WhatIsRunluvSection() {
               </span>
               ?
             </h2>
-          </m.div>
+          </div>
 
-          <m.div
+          <div
             className="lg:w-[45%] relative overflow-hidden rounded-lg"
             style={{ minHeight: "360px" }}
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={inView ? { clipPath: "inset(0 0 0% 0)" } : { clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
           >
             <img
               src="/images/1552674605-db6ffd4facb5-900x600.webp"
@@ -71,16 +53,11 @@ export function WhatIsRunluvSection() {
                 LA EXPERIENCIA RUNLUV®
               </p>
             </div>
-          </m.div>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-20">
-          <m.div
-            className="flex-1 flex flex-col gap-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-          >
+          <div className="flex flex-1 flex-col gap-6">
             <p className="text-lg leading-relaxed text-white/80 sm:text-xl text-pretty">
               runluv® es una experiencia de running que transforma los autódromos en escenarios
               donde corredores de todos los niveles descubren hasta dónde son capaces de llegar.
@@ -122,7 +99,7 @@ export function WhatIsRunluvSection() {
                 Encuentra tu desafío
               </Link>
             </div>
-          </m.div>
+          </div>
         </div>
 
         {/* Sport marquee — constant motion, linear by definition */}

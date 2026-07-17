@@ -1,6 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { createRootRoute, Outlet, HeadContent, Scripts, ClientOnly } from "@tanstack/react-router";
-import { LazyMotion, MotionConfig, useReducedMotion } from "framer-motion";
+import {
+  createRootRoute,
+  Outlet,
+  HeadContent,
+  Scripts,
+  ClientOnly,
+  useLocation,
+} from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/ui/CookieBanner";
@@ -8,8 +14,31 @@ import { SEASON_NAME, SEASON_START_YEAR } from "@/data/season";
 import "@/globals.css";
 
 const DeferredToaster = lazy(() => import("sonner").then(({ Toaster }) => ({ default: Toaster })));
-const loadMotionFeatures = () =>
-  import("@/lib/motion-features").then(({ default: features }) => features);
+const DeferredMotionProvider = lazy(() =>
+  import("@/components/ui/MotionProvider").then(({ MotionProvider }) => ({
+    default: MotionProvider,
+  })),
+);
+
+const MOTION_ROUTES = [
+  "/admin",
+  "/athletes",
+  "/auth/login",
+  "/campeonatos",
+  "/checkout",
+  "/contacto",
+  "/cookies",
+  "/dashboard",
+  "/elite-15",
+  "/eventos",
+  "/gimnasios",
+  "/la-carrera",
+  "/preparacion",
+  "/privacidad",
+  "/ranking",
+  "/terminos",
+  "/tu-nivel",
+] as const;
 
 function IdleToaster() {
   const [ready, setReady] = useState(false);
@@ -159,28 +188,42 @@ const WEBPAGE_SCHEMA = {
   inLanguage: "es-MX",
 };
 
-function RootLayout() {
-  const shouldReduceMotion = useReducedMotion();
+function RouteOutlet() {
+  const { pathname } = useLocation();
+  const needsMotion = MOTION_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+
+  if (!needsMotion) return <Outlet />;
+
   return (
-    <LazyMotion features={loadMotionFeatures}>
-      <MotionConfig reducedMotion={shouldReduceMotion ? "always" : "never"}>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:uppercase focus:tracking-widest focus:text-black focus:bg-white focus:outline-2 focus:outline-black focus:outline-offset-2"
-        >
-          Saltar al contenido
-        </a>
-        <Navbar />
-        <main id="main-content">
-          <Outlet />
-        </main>
-        <Footer />
-        <CookieBanner />
-        <ClientOnly>
-          <IdleToaster />
-        </ClientOnly>
-      </MotionConfig>
-    </LazyMotion>
+    <Suspense fallback={null}>
+      <DeferredMotionProvider>
+        <Outlet />
+      </DeferredMotionProvider>
+    </Suspense>
+  );
+}
+
+function RootLayout() {
+  return (
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:uppercase focus:tracking-widest focus:text-black focus:bg-white focus:outline-2 focus:outline-black focus:outline-offset-2"
+      >
+        Saltar al contenido
+      </a>
+      <Navbar />
+      <main id="main-content">
+        <RouteOutlet />
+      </main>
+      <Footer />
+      <CookieBanner />
+      <ClientOnly>
+        <IdleToaster />
+      </ClientOnly>
+    </>
   );
 }
 
