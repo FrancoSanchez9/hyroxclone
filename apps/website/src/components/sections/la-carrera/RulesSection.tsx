@@ -26,8 +26,9 @@ export function RulesSection() {
     <section
       className="w-full py-20 md:py-28"
       style={{
-        background: "#0d0d0d",
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
+        background: "var(--color-rl-surface-subtle)",
+        backgroundImage:
+          "radial-gradient(circle, color-mix(in srgb, var(--color-white) 5%, transparent) 1px, transparent 1px)",
         backgroundSize: "26px 26px",
       }}
     >
@@ -54,7 +55,7 @@ export function RulesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: idx * 0.1, ease: EASE }}
-              className="flex h-full flex-col gap-4 border border-white/10 bg-black/40 p-6 backdrop-blur-sm"
+              className="flex h-full flex-col gap-4 border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm"
             >
               <div
                 className="flex h-11 w-11 items-center justify-center"

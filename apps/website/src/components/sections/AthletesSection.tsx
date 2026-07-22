@@ -53,7 +53,7 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       className="group relative overflow-hidden"
-      style={{ background: "#111" }}
+      style={{ background: "var(--color-rl-surface-raised)" }}
     >
       <div className="relative h-72 overflow-hidden">
         <img
@@ -64,9 +64,9 @@ function AthleteCard({ athlete, index }: { athlete: (typeof athletes)[number]; i
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover object-top grayscale transition-[transform,filter] duration-500 ease-out-strong group-hover:scale-105 group-hover:grayscale-0"
-          style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+          style={{ outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
         <div
           className="absolute top-3 right-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-black"
           style={{ background: ACCENT }}
@@ -105,7 +105,10 @@ export function AthletesSection() {
   const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
 
   return (
-    <section className="w-full py-20 md:py-28" style={{ background: "#000" }}>
+    <section
+      className="w-full py-20 md:py-28"
+      style={{ background: "var(--color-rl-surface-canvas)" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <m.div
           ref={headerRef}

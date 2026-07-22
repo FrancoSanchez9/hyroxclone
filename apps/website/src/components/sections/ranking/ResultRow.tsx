@@ -66,18 +66,18 @@ export function ResultRow({
       style={
         r.rank === 1
           ? {
-              borderLeft: "3px solid rgba(255,255,255,0.85)",
-              background: "rgba(255,255,255,0.055)",
+              borderLeft: "3px solid color-mix(in srgb, var(--color-white) 85%, transparent)",
+              background: "color-mix(in srgb, var(--color-white) 5.5%, transparent)",
             }
           : r.rank === 2
             ? {
-                borderLeft: "3px solid rgba(255,255,255,0.35)",
-                background: "rgba(255,255,255,0.025)",
+                borderLeft: "3px solid color-mix(in srgb, var(--color-white) 35%, transparent)",
+                background: "color-mix(in srgb, var(--color-white) 2.5%, transparent)",
               }
             : r.rank === 3
               ? {
-                  borderLeft: "3px solid rgba(255,255,255,0.15)",
-                  background: "rgba(255,255,255,0.012)",
+                  borderLeft: "3px solid color-mix(in srgb, var(--color-white) 15%, transparent)",
+                  background: "color-mix(in srgb, var(--color-white) 1.2%, transparent)",
                 }
               : { borderLeft: "3px solid transparent" }
       }
@@ -85,20 +85,24 @@ export function ResultRow({
       {/* Rank */}
       <td className="px-3 py-3.5">
         {r.rank === 1 ? (
-          <div className="inline-flex h-8 w-8 items-center justify-center bg-white text-xs font-bold text-black tabular-nums">
+          <div className="inline-flex h-8 w-8 items-center justify-center bg-rl-text-primary text-xs font-bold text-rl-surface-canvas tabular-nums">
             1
           </div>
         ) : r.rank === 2 ? (
           <div
             className="inline-flex h-8 w-8 items-center justify-center text-xs font-bold text-white tabular-nums"
-            style={{ border: "1.5px solid rgba(255,255,255,0.55)" }}
+            style={{
+              border: "1.5px solid color-mix(in srgb, var(--color-white) 55%, transparent)",
+            }}
           >
             2
           </div>
         ) : r.rank === 3 ? (
           <div
             className="inline-flex h-8 w-8 items-center justify-center text-xs font-bold text-white/75 tabular-nums"
-            style={{ border: "1.5px solid rgba(255,255,255,0.22)" }}
+            style={{
+              border: "1.5px solid color-mix(in srgb, var(--color-white) 22%, transparent)",
+            }}
           >
             3
           </div>
@@ -176,13 +180,13 @@ export function ResultRow({
           </span>
           <div
             className="h-px w-14 overflow-hidden"
-            style={{ background: "rgba(255,255,255,0.06)" }}
+            style={{ background: "color-mix(in srgb, var(--color-white) 6%, transparent)" }}
           >
             <div
               className="h-full"
               style={{
                 width: `${barW}%`,
-                background: r.rank === 1 ? ACCENT : "#ffffff",
+                background: r.rank === 1 ? ACCENT : "var(--color-white)",
                 opacity: r.rank === 1 ? 0.9 : 0.18 + 0.22 * (1 - (r.rank - 1) / 15),
               }}
             />

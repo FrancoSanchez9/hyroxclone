@@ -52,25 +52,13 @@ const SITE_SECTIONS = [
 
 const demoToast = () => toast("Demo — los cambios no se guardan todavía");
 
+const MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
 function MonthDate({ dateStr }: { dateStr: string }) {
   const d = new Date(dateStr + "T00:00:00");
-  const months = [
-    "Ene",
-    "Feb",
-    "Mar",
-    "Abr",
-    "May",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dic",
-  ];
   return (
     <span className="tabular-nums text-white/60">
-      {d.getDate()} {months[d.getMonth()]} {d.getFullYear()}
+      {d.getDate()} {MONTHS[d.getMonth()]} {d.getFullYear()}
     </span>
   );
 }
@@ -79,7 +67,7 @@ function AdminPage() {
   const navigate = useNavigate();
   const { session } = useSession();
   const [tab, setTab] = useState<TabId>("resumen");
-  const [visible, setVisible] = useState<Record<string, boolean>>(
+  const [visible, setVisible] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(SITE_SECTIONS.map((s) => [s.id, true])),
   );
 
@@ -90,8 +78,11 @@ function AdminPage() {
 
   return (
     <div
-      className="min-h-screen px-6 pb-24 pt-32 md:pt-36"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 70%, #101204 100%)" }}
+      className="min-h-dvh px-6 pb-24 pt-32 md:pt-36"
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-subtle) 70%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
@@ -308,7 +299,11 @@ function AdminPage() {
                       {/* Toggle */}
                       <span
                         className="relative h-6 w-11 shrink-0 rounded-full transition-colors duration-200"
-                        style={{ background: on ? ACCENT : "rgba(255,255,255,0.15)" }}
+                        style={{
+                          background: on
+                            ? ACCENT
+                            : "color-mix(in srgb, var(--color-white) 15%, transparent)",
+                        }}
                         aria-hidden="true"
                       >
                         <span

@@ -187,30 +187,30 @@ export function getNivelLabel(score: number): { level: number; label: string; de
     return {
       level: 1,
       label: "Nivel 1 — Inicio",
-      desc: "Estás comenzando. Cualquier paso que des hoy es el primero.",
+      desc: "Estás en la línea de salida. Cualquier paso que des hoy es el primero de tu carrera.",
     };
   if (score < 45)
     return {
       level: 2,
       label: "Nivel 2 — Base",
-      desc: "Tienes una base inicial. Puedes asumir un primer desafío.",
+      desc: "Ya calentaste motores. Estás en condiciones de tomar la salida en tu primer desafío.",
     };
   if (score < 65)
     return {
       level: 3,
       label: "Nivel 3 — Desarrollo",
-      desc: "Puedes asumir retos intermedios y seguir creciendo.",
+      desc: "Tu zancada ya es constante. Puedes atacar retos intermedios y seguir subiendo de nivel.",
     };
   if (score < 85)
     return {
       level: 4,
       label: "Nivel 4 — Resistencia",
-      desc: "Puedes asumir desafíos que requieren administrar tu energía y sostenerte.",
+      desc: "Sabes administrar tu energía y sostener el ritmo. El fondo es tu terreno.",
     };
   return {
     level: 5,
     label: "Nivel 5 — Alto rendimiento",
-    desc: "Puedes asumir retos avanzados y exigentes.",
+    desc: "Estás en modo competencia. Los retos más exigentes del circuito son para ti.",
   };
 }
 

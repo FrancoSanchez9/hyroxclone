@@ -18,7 +18,7 @@ export function ChampionshipHero() {
   const photoY = useTransform(scrollY, [0, 700], [0, 120]);
 
   return (
-    <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
+    <section className="stay-dark relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       {/* Background — iconic circuit (parallax layer) */}
       <m.div
         className="pointer-events-none absolute inset-x-0 -top-[12%] h-[115%]"
@@ -34,7 +34,7 @@ export function ChampionshipHero() {
           className="hero-zoom h-full w-full object-cover object-center opacity-20 grayscale"
         />
       </m.div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
       <AuroraBackground intensity="strong" className="opacity-60" />
 
       <div className="relative z-10 mx-auto max-w-7xl">

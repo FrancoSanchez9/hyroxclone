@@ -22,7 +22,7 @@ export function FaqItem({ q, a, index }: { q: string; a: string; index: number }
           className="w-10 shrink-0 tabular-nums text-3xl leading-none transition-colors duration-200"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            color: open ? ACCENT : "rgba(255,255,255,0.25)",
+            color: open ? ACCENT : "color-mix(in srgb, var(--color-white) 25%, transparent)",
           }}
           aria-hidden="true"
         >
@@ -36,7 +36,9 @@ export function FaqItem({ q, a, index }: { q: string; a: string; index: number }
         </span>
         <span
           className={cn("shrink-0 transition-transform duration-200", open && "rotate-45")}
-          style={{ color: open ? ACCENT : "rgba(255,255,255,0.4)" }}
+          style={{
+            color: open ? ACCENT : "color-mix(in srgb, var(--color-white) 40%, transparent)",
+          }}
           aria-hidden="true"
         >
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
@@ -53,8 +55,11 @@ export function FaqItem({ q, a, index }: { q: string; a: string; index: number }
         {open && (
           <m.div
             key="content"
+            // react-doctor-disable-next-line react-doctor/no-layout-property-animation -- FLIP-optimized AnimatePresence enter/exit, not per-frame layout
             initial={{ height: 0, opacity: 0 }}
+            // react-doctor-disable-next-line react-doctor/no-layout-property-animation -- FLIP-optimized AnimatePresence enter/exit, not per-frame layout
             animate={{ height: "auto", opacity: 1 }}
+            // react-doctor-disable-next-line react-doctor/no-layout-property-animation -- FLIP-optimized AnimatePresence enter/exit, not per-frame layout
             exit={{ height: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="overflow-hidden"

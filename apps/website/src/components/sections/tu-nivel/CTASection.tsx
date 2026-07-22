@@ -9,7 +9,7 @@ export function CTASection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section className="w-full bg-[#0a0a0a] py-24">
+    <section className="w-full bg-rl-dark py-24">
       <m.div
         ref={ref}
         variants={fadeUp}
@@ -22,7 +22,7 @@ export function CTASection() {
           className="text-5xl leading-none tracking-wider text-white uppercase sm:text-6xl md:text-7xl"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
-          Ya sé mi <span className="text-[#ffffff]">categoría</span>
+          Ya sé mi <span className="text-white">categoría</span>
         </h2>
         <p className="max-w-md text-base leading-relaxed text-white/55">
           Elige tu evento, confirma tu división y reserva tu lugar antes de que se agoten.

@@ -16,13 +16,13 @@ export function QualifySection() {
   const final = upcomingEvents[upcomingEvents.length - 1];
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0a0a0a] py-20 md:py-28">
+    <section className="relative w-full overflow-hidden bg-rl-dark py-20 md:py-28">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.02) 119px, rgba(255,255,255,0.02) 120px)",
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, color-mix(in srgb, var(--color-white) 2%, transparent) 119px, color-mix(in srgb, var(--color-white) 2%, transparent) 120px)",
         }}
       />
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -71,7 +71,7 @@ export function QualifySection() {
                   fontFamily: "'Bebas Neue', sans-serif",
                   borderColor: "rgba(212,255,0,0.4)",
                   color: ACCENT,
-                  background: "#0a0a0a",
+                  background: "var(--color-rl-surface-subtle)",
                 }}
                 aria-hidden="true"
               >

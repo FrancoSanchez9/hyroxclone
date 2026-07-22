@@ -26,7 +26,7 @@ export function CookieBanner() {
   return (
     <div
       data-closing={state === "closing" || undefined}
-      className="cookie-banner fixed right-0 bottom-0 left-0 z-50 border-t border-white/15 bg-[#111111] px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-10px_40px_rgba(0,0,0,0.55)] sm:px-6 sm:py-4"
+      className="cookie-banner fixed right-0 bottom-0 left-0 z-50 border-t border-white/15 bg-rl-card px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-10px_40px_rgba(0,0,0,0.55)] sm:px-6 sm:py-4"
       role="region"
       aria-labelledby="cookie-banner-title"
     >

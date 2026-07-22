@@ -14,6 +14,7 @@ function AuthCallbackPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
+  // react-doctor-disable-next-line react-doctor/effect-needs-cleanup -- cleanup already returned below (unsubscribe + clearTimeout)
   useEffect(() => {
     // Si el proveedor devolvió un error, viene en la query — no tiene caso esperar.
     const params = new URLSearchParams(window.location.search);
@@ -60,8 +61,11 @@ function AuthCallbackPage() {
 
   return (
     <section
-      className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-6 text-center"
-      style={{ background: "linear-gradient(160deg, #000 0%, #0a0a0a 45%, #101204 100%)" }}
+      className="flex min-h-dvh w-full flex-col items-center justify-center gap-6 px-6 text-center"
+      style={{
+        background:
+          "linear-gradient(160deg, var(--color-rl-surface-canvas) 0%, var(--color-rl-surface-subtle) 45%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       {error ? (
         <>

@@ -11,7 +11,10 @@ export function RankingPodium({ top3, race, division }: RankingPodiumProps) {
   if (top3.length < 3) return null;
 
   return (
-    <div className="hidden md:block" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+    <div
+      className="hidden md:block"
+      style={{ borderBottom: "1px solid color-mix(in srgb, var(--color-white) 6%, transparent)" }}
+    >
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <p className="mb-10 text-center text-xs font-bold tracking-widest text-white/70 uppercase">
           {race} · {division}

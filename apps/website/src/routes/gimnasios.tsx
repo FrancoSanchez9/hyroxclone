@@ -92,11 +92,14 @@ function GimnasiasPage() {
 
   return (
     <div
-      className="min-h-screen text-white"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 70%, #101204 100%)" }}
+      className="min-h-dvh text-white"
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-subtle) 70%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       {/* Hero */}
-      <section className="relative overflow-hidden px-6 pb-14 pt-32 md:pt-40">
+      <section className="stay-dark relative overflow-hidden px-6 pb-14 pt-32 md:pt-40">
         <m.img
           src="/images/1517649763962-0c623066013b-1920.webp"
           width={1920}
@@ -109,7 +112,7 @@ function GimnasiasPage() {
           animate={{ scale: 1 }}
           transition={{ duration: 2.4, ease: EASE }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
         <div
           aria-hidden="true"
           className="animate-blob pointer-events-none absolute -right-40 top-0 h-[30rem] w-[30rem] rounded-full"

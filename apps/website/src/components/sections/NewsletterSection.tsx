@@ -91,10 +91,10 @@ export function NewsletterSection() {
   return (
     <section
       style={{
-        background: "#0a0a0a",
+        background: "var(--color-rl-surface-subtle)",
         backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.018) 3px, rgba(255,255,255,0.018) 4px)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+          "repeating-linear-gradient(0deg, transparent, transparent 3px, color-mix(in srgb, var(--color-white) 1.8%, transparent) 3px, color-mix(in srgb, var(--color-white) 1.8%, transparent) 4px)",
+        borderTop: "1px solid color-mix(in srgb, var(--color-white) 8%, transparent)",
       }}
     >
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
@@ -116,8 +116,8 @@ export function NewsletterSection() {
               SUSCRÍBETE AL{" "}
               <span
                 style={{
-                  background: "#ffffff",
-                  color: "#000",
+                  background: "var(--color-rl-text-primary)",
+                  color: "var(--color-rl-surface-canvas)",
                   padding: "0 8px",
                   display: "inline-block",
                 }}
@@ -132,9 +132,9 @@ export function NewsletterSection() {
                 <li key={p} className="flex items-center gap-3">
                   <span
                     className="flex items-center justify-center w-5 h-5 shrink-0"
-                    style={{ background: "#ffffff" }}
+                    style={{ background: "var(--color-rl-text-primary)" }}
                   >
-                    <Check className="h-3 w-3 text-black" aria-hidden="true" />
+                    <Check className="h-3 w-3 text-rl-surface-canvas" aria-hidden="true" />
                   </span>
                   <span className="text-sm text-white/65">{p}</span>
                 </li>
@@ -153,9 +153,9 @@ export function NewsletterSection() {
               <output aria-live="polite" className="flex flex-col items-start gap-4">
                 <span
                   className="flex items-center justify-center w-12 h-12"
-                  style={{ background: "#ffffff" }}
+                  style={{ background: "var(--color-rl-text-primary)" }}
                 >
-                  <Check className="h-6 w-6 text-black" aria-hidden="true" />
+                  <Check className="h-6 w-6 text-rl-surface-canvas" aria-hidden="true" />
                 </span>
                 <p
                   className="text-3xl font-normal text-white uppercase"
@@ -187,10 +187,10 @@ export function NewsletterSection() {
                     aria-describedby={emailError ? "nl-email-error" : undefined}
                     onChange={(e) => dispatch({ type: "setEmail", value: e.target.value })}
                     placeholder="tu@correo.com"
-                    className="h-12 px-4 text-sm text-black placeholder-black/55 outline-none w-full"
+                    className="h-12 px-4 text-sm text-rl-text-primary placeholder:text-rl-text-muted outline-none w-full border border-rl-border-subtle"
                     style={{
-                      background: "#ffffff",
-                      border: emailError ? "2px solid #ff4444" : "2px solid transparent",
+                      background: "var(--color-rl-surface-raised)",
+                      border: emailError ? "2px solid #ff4444" : undefined,
                     }}
                   />
                   {emailError && (
@@ -215,18 +215,18 @@ export function NewsletterSection() {
                       aria-invalid={cityError}
                       aria-describedby={cityError ? "nl-city-error" : undefined}
                       onChange={(e) => dispatch({ type: "setCity", value: e.target.value })}
-                      className="h-12 w-full appearance-none px-4 pr-10 text-sm outline-none"
+                      className="h-12 w-full appearance-none px-4 pr-10 text-sm outline-none border border-rl-border-subtle"
                       style={{
-                        background: "#ffffff",
-                        color: city ? "#000" : "rgba(0,0,0,0.4)",
-                        border: cityError ? "2px solid #ff4444" : "2px solid transparent",
+                        background: "var(--color-rl-surface-raised)",
+                        color: city ? "var(--color-rl-text-primary)" : "var(--color-rl-text-muted)",
+                        border: cityError ? "2px solid #ff4444" : undefined,
                       }}
                     >
                       <option value="" disabled>
                         Selecciona tu ciudad
                       </option>
                       {CITIES.map((c) => (
-                        <option key={c} value={c} style={{ color: "#000" }}>
+                        <option key={c} value={c} style={{ color: "var(--color-rl-text-primary)" }}>
                           {c}
                         </option>
                       ))}
@@ -241,7 +241,7 @@ export function NewsletterSection() {
                     >
                       <path
                         d="M2 5l5 5 5-5"
-                        stroke="#000"
+                        stroke="var(--color-rl-text-primary)"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -258,7 +258,7 @@ export function NewsletterSection() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="mt-1 h-12 w-full px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/85 transition-[background-color] duration-150 active:scale-[0.96]"
+                  className="mt-1 h-12 w-full px-8 text-sm font-bold uppercase tracking-widest text-rl-surface-canvas bg-rl-text-primary hover:bg-rl-text-primary/85 transition-[background-color] duration-150 active:scale-[0.96]"
                 >
                   Suscribirme
                 </button>

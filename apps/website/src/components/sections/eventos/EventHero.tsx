@@ -6,7 +6,7 @@ import { ACCENT } from "@/lib/theme";
 
 export function EventHero({ event }: { event: RunluvEvent }) {
   return (
-    <div className="relative h-[72vh] min-h-[560px] overflow-hidden">
+    <div className="stay-dark relative h-[72vh] min-h-[560px] overflow-hidden">
       {event.imageUrl && (
         <img
           src={event.imageUrl}
@@ -77,7 +77,7 @@ export function EventHero({ event }: { event: RunluvEvent }) {
               className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-160 ease-out-strong hover:brightness-95 active:scale-[0.96]"
               style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.2)" }}
             >
-              ¡Regístrate ahora!
+              ¡Inscríbete ahora!
             </a>
             <a
               href="#detalles"

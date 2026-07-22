@@ -9,119 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VoluntarioRouteImport } from './routes/voluntario'
-import { Route as TuNivelRouteImport } from './routes/tu-nivel'
-import { Route as TerminosRouteImport } from './routes/terminos'
-import { Route as RankingRouteImport } from './routes/ranking'
-import { Route as PrivacidadRouteImport } from './routes/privacidad'
-import { Route as PreparacionRouteImport } from './routes/preparacion'
-import { Route as LaCarreraRouteImport } from './routes/la-carrera'
-import { Route as GimnasiosRouteImport } from './routes/gimnasios'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as Elite15RouteImport } from './routes/elite-15'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as CheckoutRouteImport } from './routes/checkout'
-import { Route as CampeonatosRouteImport } from './routes/campeonatos'
-import { Route as AthletesRouteImport } from './routes/athletes'
-import { Route as AfiliacionesRouteImport } from './routes/afiliaciones'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AfiliacionesRouteImport } from './routes/afiliaciones'
+import { Route as AthletesRouteImport } from './routes/athletes'
+import { Route as CampeonatosRouteImport } from './routes/campeonatos'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as Elite15RouteImport } from './routes/elite-15'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as GimnasiosRouteImport } from './routes/gimnasios'
+import { Route as LaCarreraRouteImport } from './routes/la-carrera'
+import { Route as PreparacionRouteImport } from './routes/preparacion'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as RankingRouteImport } from './routes/ranking'
+import { Route as TerminosRouteImport } from './routes/terminos'
+import { Route as TuNivelRouteImport } from './routes/tu-nivel'
+import { Route as VoluntarioRouteImport } from './routes/voluntario'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as EventosIndexRouteImport } from './routes/eventos.index'
 import { Route as EventosEventIdRouteImport } from './routes/eventos.$eventId'
-import { Route as AuthLoginRouteImport } from './routes/auth.login'
-import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 
-const VoluntarioRoute = VoluntarioRouteImport.update({
-  id: '/voluntario',
-  path: '/voluntario',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TuNivelRoute = TuNivelRouteImport.update({
-  id: '/tu-nivel',
-  path: '/tu-nivel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerminosRoute = TerminosRouteImport.update({
-  id: '/terminos',
-  path: '/terminos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RankingRoute = RankingRouteImport.update({
-  id: '/ranking',
-  path: '/ranking',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacidadRoute = PrivacidadRouteImport.update({
-  id: '/privacidad',
-  path: '/privacidad',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PreparacionRoute = PreparacionRouteImport.update({
-  id: '/preparacion',
-  path: '/preparacion',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LaCarreraRoute = LaCarreraRouteImport.update({
-  id: '/la-carrera',
-  path: '/la-carrera',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GimnasiosRoute = GimnasiosRouteImport.update({
-  id: '/gimnasios',
-  path: '/gimnasios',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Elite15Route = Elite15RouteImport.update({
-  id: '/elite-15',
-  path: '/elite-15',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiesRoute = CookiesRouteImport.update({
-  id: '/cookies',
-  path: '/cookies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactoRoute = ContactoRouteImport.update({
-  id: '/contacto',
-  path: '/contacto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CampeonatosRoute = CampeonatosRouteImport.update({
-  id: '/campeonatos',
-  path: '/campeonatos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AthletesRoute = AthletesRouteImport.update({
-  id: '/athletes',
-  path: '/athletes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AfiliacionesRoute = AfiliacionesRouteImport.update({
-  id: '/afiliaciones',
-  path: '/afiliaciones',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -129,9 +44,104 @@ const SplatRoute = SplatRouteImport.update({
   path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AfiliacionesRoute = AfiliacionesRouteImport.update({
+  id: '/afiliaciones',
+  path: '/afiliaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AthletesRoute = AthletesRouteImport.update({
+  id: '/athletes',
+  path: '/athletes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampeonatosRoute = CampeonatosRouteImport.update({
+  id: '/campeonatos',
+  path: '/campeonatos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Elite15Route = Elite15RouteImport.update({
+  id: '/elite-15',
+  path: '/elite-15',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GimnasiosRoute = GimnasiosRouteImport.update({
+  id: '/gimnasios',
+  path: '/gimnasios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaCarreraRoute = LaCarreraRouteImport.update({
+  id: '/la-carrera',
+  path: '/la-carrera',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreparacionRoute = PreparacionRouteImport.update({
+  id: '/preparacion',
+  path: '/preparacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RankingRoute = RankingRouteImport.update({
+  id: '/ranking',
+  path: '/ranking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminosRoute = TerminosRouteImport.update({
+  id: '/terminos',
+  path: '/terminos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TuNivelRoute = TuNivelRouteImport.update({
+  id: '/tu-nivel',
+  path: '/tu-nivel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoluntarioRoute = VoluntarioRouteImport.update({
+  id: '/voluntario',
+  path: '/voluntario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventosIndexRoute = EventosIndexRouteImport.update({
@@ -142,16 +152,6 @@ const EventosIndexRoute = EventosIndexRouteImport.update({
 const EventosEventIdRoute = EventosEventIdRouteImport.update({
   id: '/eventos/$eventId',
   path: '/eventos/$eventId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/auth/callback',
-  path: '/auth/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -344,130 +344,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/voluntario': {
-      id: '/voluntario'
-      path: '/voluntario'
-      fullPath: '/voluntario'
-      preLoaderRoute: typeof VoluntarioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tu-nivel': {
-      id: '/tu-nivel'
-      path: '/tu-nivel'
-      fullPath: '/tu-nivel'
-      preLoaderRoute: typeof TuNivelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terminos': {
-      id: '/terminos'
-      path: '/terminos'
-      fullPath: '/terminos'
-      preLoaderRoute: typeof TerminosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ranking': {
-      id: '/ranking'
-      path: '/ranking'
-      fullPath: '/ranking'
-      preLoaderRoute: typeof RankingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacidad': {
-      id: '/privacidad'
-      path: '/privacidad'
-      fullPath: '/privacidad'
-      preLoaderRoute: typeof PrivacidadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/preparacion': {
-      id: '/preparacion'
-      path: '/preparacion'
-      fullPath: '/preparacion'
-      preLoaderRoute: typeof PreparacionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/la-carrera': {
-      id: '/la-carrera'
-      path: '/la-carrera'
-      fullPath: '/la-carrera'
-      preLoaderRoute: typeof LaCarreraRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gimnasios': {
-      id: '/gimnasios'
-      path: '/gimnasios'
-      fullPath: '/gimnasios'
-      preLoaderRoute: typeof GimnasiosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/elite-15': {
-      id: '/elite-15'
-      path: '/elite-15'
-      fullPath: '/elite-15'
-      preLoaderRoute: typeof Elite15RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookies': {
-      id: '/cookies'
-      path: '/cookies'
-      fullPath: '/cookies'
-      preLoaderRoute: typeof CookiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contacto': {
-      id: '/contacto'
-      path: '/contacto'
-      fullPath: '/contacto'
-      preLoaderRoute: typeof ContactoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/campeonatos': {
-      id: '/campeonatos'
-      path: '/campeonatos'
-      fullPath: '/campeonatos'
-      preLoaderRoute: typeof CampeonatosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/athletes': {
-      id: '/athletes'
-      path: '/athletes'
-      fullPath: '/athletes'
-      preLoaderRoute: typeof AthletesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/afiliaciones': {
-      id: '/afiliaciones'
-      path: '/afiliaciones'
-      fullPath: '/afiliaciones'
-      preLoaderRoute: typeof AfiliacionesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -477,11 +358,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/afiliaciones': {
+      id: '/afiliaciones'
+      path: '/afiliaciones'
+      fullPath: '/afiliaciones'
+      preLoaderRoute: typeof AfiliacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/athletes': {
+      id: '/athletes'
+      path: '/athletes'
+      fullPath: '/athletes'
+      preLoaderRoute: typeof AthletesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campeonatos': {
+      id: '/campeonatos'
+      path: '/campeonatos'
+      fullPath: '/campeonatos'
+      preLoaderRoute: typeof CampeonatosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite-15': {
+      id: '/elite-15'
+      path: '/elite-15'
+      fullPath: '/elite-15'
+      preLoaderRoute: typeof Elite15RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gimnasios': {
+      id: '/gimnasios'
+      path: '/gimnasios'
+      fullPath: '/gimnasios'
+      preLoaderRoute: typeof GimnasiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/la-carrera': {
+      id: '/la-carrera'
+      path: '/la-carrera'
+      fullPath: '/la-carrera'
+      preLoaderRoute: typeof LaCarreraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preparacion': {
+      id: '/preparacion'
+      path: '/preparacion'
+      fullPath: '/preparacion'
+      preLoaderRoute: typeof PreparacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ranking': {
+      id: '/ranking'
+      path: '/ranking'
+      fullPath: '/ranking'
+      preLoaderRoute: typeof RankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminos': {
+      id: '/terminos'
+      path: '/terminos'
+      fullPath: '/terminos'
+      preLoaderRoute: typeof TerminosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tu-nivel': {
+      id: '/tu-nivel'
+      path: '/tu-nivel'
+      fullPath: '/tu-nivel'
+      preLoaderRoute: typeof TuNivelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/voluntario': {
+      id: '/voluntario'
+      path: '/voluntario'
+      fullPath: '/voluntario'
+      preLoaderRoute: typeof VoluntarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eventos/': {
@@ -496,20 +510,6 @@ declare module '@tanstack/react-router' {
       path: '/eventos/$eventId'
       fullPath: '/eventos/$eventId'
       preLoaderRoute: typeof EventosEventIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/auth/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/auth/callback'
-      fullPath: '/auth/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

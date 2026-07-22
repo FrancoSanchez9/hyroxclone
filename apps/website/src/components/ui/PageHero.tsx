@@ -17,8 +17,8 @@ function highlightRunluv(title: string, inverted: boolean) {
       <span
         key={part.toUpperCase()}
         style={{
-          background: inverted ? "#000000" : "#ffffff",
-          color: inverted ? "#ffffff" : "#000",
+          background: inverted ? "#000000" : "var(--color-rl-text-primary)",
+          color: inverted ? "#ffffff" : "var(--color-rl-surface-canvas)",
           padding: "0 10px",
           display: "inline-block",
         }}
@@ -40,7 +40,7 @@ function highlightRunluv(title: string, inverted: boolean) {
 export function PageHero({ title, subtitle, badge, inverted = false, children }: PageHeroProps) {
   const bg = inverted
     ? `repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(0,0,0,0.018) 40px, rgba(0,0,0,0.018) 41px), #ffffff`
-    : `repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px), #0a0a0a`;
+    : `repeating-linear-gradient(-45deg, transparent, transparent 40px, color-mix(in srgb, var(--color-white) 1.5%, transparent) 40px, color-mix(in srgb, var(--color-white) 1.5%, transparent) 41px), var(--color-rl-surface-subtle)`;
 
   return (
     <section style={{ background: bg }} className="relative w-full pt-32 pb-16 overflow-hidden">
@@ -52,8 +52,8 @@ export function PageHero({ title, subtitle, badge, inverted = false, children }:
             className="hero-rise mb-4 inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest"
             style={{
               animationDelay: "0s",
-              background: inverted ? "#000000" : "#ffffff",
-              color: inverted ? "#ffffff" : "#000000",
+              background: inverted ? "#000000" : "var(--color-rl-text-primary)",
+              color: inverted ? "#ffffff" : "var(--color-rl-surface-canvas)",
             }}
           >
             {badge}

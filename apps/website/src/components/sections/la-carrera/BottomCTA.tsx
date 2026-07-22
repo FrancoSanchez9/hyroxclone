@@ -7,7 +7,10 @@ export function BottomCTA() {
   return (
     <section
       className="relative w-full overflow-hidden py-24"
-      style={{ background: "linear-gradient(180deg, #0d0d0d 0%, #101204 100%)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       <div
         aria-hidden="true"
@@ -28,7 +31,7 @@ export function BottomCTA() {
           Encuentra tu <span style={{ color: ACCENT }}>carrera</span>
         </h2>
         <p className="max-w-prose text-base leading-relaxed text-white/55">
-          Cinco autódromos. Una temporada. Elige tu ciudad, elige tu desafío y regístrate.
+          Cinco autódromos. Una temporada. Elige tu ciudad, elige tu desafío e inscríbete.
         </p>
         <Link
           to="/eventos"

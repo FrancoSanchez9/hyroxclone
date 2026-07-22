@@ -38,7 +38,7 @@ function formatDateRange(dateStr: string, endDateStr?: string): string {
 
 function FeaturedEventCard({ event }: { event: RunluvEvent }) {
   return (
-    <div className="relative w-full overflow-hidden rounded-lg border border-white/10 transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(212,255,0,0.16)]">
+    <div className="stay-dark relative w-full overflow-hidden rounded-lg border border-white/10 transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(212,255,0,0.16)]">
       {event.imageUrl && (
         <img
           src={event.imageUrl}
@@ -51,8 +51,8 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
           style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/80 to-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/80 to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
 
       <div className="relative z-10 flex flex-col gap-6 p-8 md:p-12">
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -117,7 +117,7 @@ function FeaturedEventCard({ event }: { event: RunluvEvent }) {
               className="btn-sheen inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black hover:brightness-95 transition-[transform,filter] duration-[160ms] ease-out-strong active:scale-[0.96]"
               style={{ background: ACCENT }}
             >
-              ¡Regístrate ahora!
+              ¡Inscríbete ahora!
             </a>
           )}
         </div>
@@ -140,9 +140,11 @@ function EventCard({ event }: { event: RunluvEvent }) {
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-              style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+              style={{
+                outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/70" />
           </div>
         )}
         <CardHeader className="pb-3">
@@ -197,7 +199,7 @@ function EventCard({ event }: { event: RunluvEvent }) {
               to={event.registrationUrl}
               className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-rl-accent hover:text-white transition-colors duration-150"
             >
-              Regístrate
+              Inscríbete
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           )}
@@ -214,7 +216,7 @@ export function UpcomingEventsSection() {
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
-      style={{ background: "#0a0a0a" }}
+      style={{ background: "var(--color-rl-surface-subtle)" }}
     >
       <AuroraBackground intensity="subtle" className="opacity-40" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

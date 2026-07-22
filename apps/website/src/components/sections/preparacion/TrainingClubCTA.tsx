@@ -7,7 +7,10 @@ export function TrainingClubCTA() {
   return (
     <section
       className="relative w-full overflow-hidden py-24"
-      style={{ background: "linear-gradient(180deg, #0d0d0d 0%, #101204 100%)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       <div
         aria-hidden="true"

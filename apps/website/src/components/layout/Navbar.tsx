@@ -3,6 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { navItems, topRightLinks } from "@/data/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import logoSrc from "@/assets/logo-mark.webp";
 
 export function Navbar() {
@@ -52,14 +53,15 @@ export function Navbar() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-40 transition-[background-color,box-shadow,border-color] duration-200",
-          scrolled && "shadow-lg shadow-black/60",
+          scrolled && "shadow-lg shadow-rl-black/60",
         )}
         style={
           scrolled
             ? {
                 backdropFilter: "blur(20px) saturate(150%)",
                 WebkitBackdropFilter: "blur(20px) saturate(150%)",
-                backgroundColor: "rgba(0,0,0,0.62)",
+                backgroundColor:
+                  "color-mix(in srgb, var(--color-rl-surface-canvas) 62%, transparent)",
               }
             : undefined
         }
@@ -68,8 +70,8 @@ export function Navbar() {
         <nav
           className="flex items-center justify-between px-6 md:px-10 h-20"
           style={{
-            backgroundColor: scrolled ? "transparent" : "#000",
-            borderBottom: "1px solid rgba(255,255,255,0.10)",
+            backgroundColor: scrolled ? "transparent" : "var(--color-rl-surface-canvas)",
+            borderBottom: "1px solid var(--color-rl-border-subtle)",
           }}
         >
           <Link to="/" onClick={handleLogoClick} className="flex items-center shrink-0">
@@ -78,7 +80,7 @@ export function Navbar() {
               alt="RunLuv"
               width={413}
               height={119}
-              className="h-10 w-auto brightness-[1.1]"
+              className="rl-logo h-10 w-auto brightness-[1.1]"
               loading="eager"
             />
           </Link>
@@ -106,124 +108,132 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Action buttons — hidden only at the top of the home hero */}
-          <div
-            className={cn(
-              "hidden items-center gap-2 transition-[opacity,transform] duration-220 ease-out-strong md:flex",
-              hideActions
-                ? "pointer-events-none -translate-y-2 opacity-0"
-                : "translate-y-0 opacity-100",
-            )}
-            inert={hideActions}
-          >
-            <Link
-              to="/tu-nivel"
-              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-rl-accent border border-rl-accent/50 transition-[background-color,border-color,transform] duration-[160ms] ease-out-strong hover:bg-rl-accent/10 hover:border-rl-accent active:scale-[0.96]"
+          {/* Right cluster: acciones + toggle de tema + menú móvil */}
+          <div className="flex shrink-0 items-center gap-2">
+            {/* Action buttons — hidden only at the top of the home hero */}
+            <div
+              className={cn(
+                "hidden items-center gap-2 transition-[opacity,transform] duration-220 ease-out-strong md:flex",
+                hideActions
+                  ? "pointer-events-none -translate-y-2 opacity-0"
+                  : "translate-y-0 opacity-100",
+              )}
+              inert={hideActions}
             >
-              Tu reto
-            </Link>
-            <Link
-              to="/ranking"
-              className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-white/80 border border-white/25 transition-[background-color,border-color,color,transform] duration-[160ms] ease-out-strong hover:border-white hover:text-white active:scale-[0.96]"
+              <Link
+                to="/tu-nivel"
+                className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-rl-accent border border-rl-accent/50 transition-[background-color,border-color,transform] duration-[160ms] ease-out-strong hover:bg-rl-accent/10 hover:border-rl-accent active:scale-[0.96]"
+              >
+                Tu reto
+              </Link>
+              <Link
+                to="/ranking"
+                className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-white/80 border border-white/25 transition-[background-color,border-color,color,transform] duration-[160ms] ease-out-strong hover:border-white hover:text-white active:scale-[0.96]"
+              >
+                Ranking
+              </Link>
+              <Link
+                to="/eventos"
+                className="btn-sheen px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-rl-accent transition-[filter,transform] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
+                style={{ boxShadow: "0 0 24px rgba(212,255,0,0.25)" }}
+              >
+                Inscripciones
+              </Link>
+            </div>
+
+            <ThemeToggle />
+            <button
+              type="button"
+              className="flex h-11 w-11 items-center justify-center text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] md:hidden"
+              aria-label="Abrir menú"
+              aria-controls="mobile-navigation"
+              aria-expanded={mobileOpen}
+              onClick={openMobileMenu}
             >
-              Ranking
-            </Link>
-            <Link
-              to="/eventos"
-              className="btn-sheen px-5 py-2 text-xs font-bold uppercase tracking-widest text-black bg-rl-accent transition-[filter,transform] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96]"
-              style={{ boxShadow: "0 0 24px rgba(212,255,0,0.25)" }}
-            >
-              Inscripciones
-            </Link>
+              <Menu size={22} />
+            </button>
           </div>
 
-          <button
-            type="button"
-            className="flex h-11 w-11 items-center justify-center text-white/70 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96] md:hidden"
-            aria-label="Abrir menú"
-            aria-controls="mobile-navigation"
-            aria-expanded={mobileOpen}
-            onClick={openMobileMenu}
-          >
-            <Menu size={22} />
-          </button>
+          {
+            // react-doctor-disable-next-line react-doctor/no-noninteractive-element-interactions -- native <dialog> backdrop-click convenience; Escape (onCancel) + focus trap already cover keyboard/AT users
+            <dialog
+              ref={mobileDialogRef}
+              id="mobile-navigation"
+              aria-labelledby="mobile-navigation-title"
+              className="mobile-nav-dialog fixed inset-x-0 top-auto bottom-0 m-0 flex max-h-[90dvh] w-full max-w-none flex-col rounded-t-2xl border border-white/10 bg-rl-surface-subtle p-0 text-white outline-none md:hidden"
+              onClose={() => {
+                delete mobileDialogRef.current?.dataset.closing;
+                setMobileOpen(false);
+              }}
+              onCancel={(event) => {
+                event.preventDefault();
+                closeMobileMenu();
+              }}
+              // react-doctor-disable-next-line react-doctor/no-noninteractive-element-interactions -- native <dialog> backdrop-click convenience; Escape (onCancel) + focus trap already cover keyboard/AT users
+              onClick={(event) => {
+                if (event.target === event.currentTarget) closeMobileMenu();
+              }}
+            >
+              <div className="flex justify-center pt-3 pb-1">
+                <div className="h-1 w-10 rounded-full bg-white/20" />
+              </div>
 
-          <dialog
-            ref={mobileDialogRef}
-            id="mobile-navigation"
-            aria-labelledby="mobile-navigation-title"
-            className="mobile-nav-dialog fixed inset-x-0 top-auto bottom-0 m-0 flex max-h-[90dvh] w-full max-w-none flex-col rounded-t-2xl border border-white/10 bg-[#0a0a0a] p-0 text-white outline-none md:hidden"
-            onClose={() => {
-              delete mobileDialogRef.current?.dataset.closing;
-              setMobileOpen(false);
-            }}
-            onCancel={(event) => {
-              event.preventDefault();
-              closeMobileMenu();
-            }}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) closeMobileMenu();
-            }}
-          >
-            <div className="flex justify-center pt-3 pb-1">
-              <div className="h-1 w-10 rounded-full bg-white/20" />
-            </div>
-
-            <div className="flex items-center justify-between px-6 py-3 border-b border-white/10">
-              <h2 id="mobile-navigation-title" className="sr-only">
-                Navegación principal
-              </h2>
-              <img
-                src={logoSrc}
-                alt="RunLuv"
-                width={413}
-                height={119}
-                className="h-8 w-auto brightness-[1.1]"
-                loading="lazy"
-              />
-              <button
-                type="button"
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-                className="flex h-10 w-10 items-center justify-center text-white/60 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96]"
-                aria-label="Cerrar menú"
-                onClick={closeMobileMenu}
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="overflow-y-auto flex-1 pb-safe">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href ?? "/"}
+              <div className="flex items-center justify-between px-6 py-3 border-b border-white/10">
+                <h2 id="mobile-navigation-title" className="sr-only">
+                  Navegación principal
+                </h2>
+                <img
+                  src={logoSrc}
+                  alt="RunLuv"
+                  width={413}
+                  height={119}
+                  className="rl-logo h-8 w-auto brightness-[1.1]"
+                  loading="lazy"
+                />
+                <button
+                  type="button"
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
+                  autoFocus
+                  className="flex h-10 w-10 items-center justify-center text-white/60 transition-[color,transform] duration-150 hover:text-white active:scale-[0.96]"
+                  aria-label="Cerrar menú"
                   onClick={closeMobileMenu}
-                  className="block min-h-14 border-b border-white/10 px-6 py-4 text-base font-semibold uppercase tracking-wide text-white/70 transition-colors duration-150 hover:text-white"
                 >
-                  {item.label}
-                </Link>
-              ))}
+                  <X size={20} />
+                </button>
+              </div>
 
-              <div className="px-6 pt-6 pb-8 flex flex-col gap-3">
-                {topRightLinks.map((link, i) => (
+              <div className="overflow-y-auto flex-1 pb-safe">
+                {navItems.map((item) => (
                   <Link
-                    key={link.label}
-                    to={link.href}
+                    key={item.label}
+                    to={item.href ?? "/"}
                     onClick={closeMobileMenu}
-                    className={cn(
-                      "min-h-12 px-5 py-3 text-center text-sm font-bold uppercase tracking-widest transition-[filter,background-color,border-color,transform] duration-[160ms] active:scale-[0.96]",
-                      i === 1
-                        ? "bg-rl-accent text-black hover:brightness-95"
-                        : "border border-rl-accent/50 text-rl-accent hover:bg-rl-accent/10",
-                    )}
+                    className="block min-h-14 border-b border-white/10 px-6 py-4 text-base font-semibold uppercase tracking-wide text-white/70 transition-colors duration-150 hover:text-white"
                   >
-                    {link.label}
+                    {item.label}
                   </Link>
                 ))}
+
+                <div className="px-6 pt-6 pb-8 flex flex-col gap-3">
+                  {topRightLinks.map((link, i) => (
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      onClick={closeMobileMenu}
+                      className={cn(
+                        "min-h-12 px-5 py-3 text-center text-sm font-bold uppercase tracking-widest transition-[filter,background-color,border-color,transform] duration-[160ms] active:scale-[0.96]",
+                        i === 1
+                          ? "bg-rl-accent text-black hover:brightness-95"
+                          : "border border-rl-accent/50 text-rl-accent hover:bg-rl-accent/10",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          </dialog>
+            </dialog>
+          }
         </nav>
       </header>
     </>

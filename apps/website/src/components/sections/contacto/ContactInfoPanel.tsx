@@ -31,10 +31,7 @@ export function ContactInfoPanel() {
 
       <div className="flex flex-col gap-5">
         <a href="mailto:hola@runluv.mx" className="flex items-center gap-4 group">
-          <span
-            className="flex items-center justify-center w-10 h-10 shrink-0 text-white/60 group-hover:text-black group-hover:bg-white transition-[background-color,color] duration-150"
-            style={{ background: "rgba(255,255,255,0.08)" }}
-          >
+          <span className="flex items-center justify-center w-10 h-10 shrink-0 bg-white/[0.06] text-white/60 group-hover:text-black group-hover:bg-rl-accent transition-[background-color,color] duration-150">
             <Mail className="h-4 w-4" />
           </span>
           <div>
@@ -48,10 +45,7 @@ export function ContactInfoPanel() {
         </a>
 
         <div className="flex items-center gap-4">
-          <span
-            className="flex items-center justify-center w-10 h-10 shrink-0 text-white/60"
-            style={{ background: "rgba(255,255,255,0.08)" }}
-          >
+          <span className="flex items-center justify-center w-10 h-10 shrink-0 bg-white/[0.06] text-white/60">
             <MapPin className="h-4 w-4" />
           </span>
           <div>
@@ -68,10 +62,7 @@ export function ContactInfoPanel() {
           rel="noopener noreferrer"
           className="flex items-center gap-4 group"
         >
-          <span
-            className="flex items-center justify-center w-10 h-10 shrink-0 text-white/60 group-hover:text-black group-hover:bg-white transition-[background-color,color] duration-150"
-            style={{ background: "rgba(255,255,255,0.08)" }}
-          >
+          <span className="flex items-center justify-center w-10 h-10 shrink-0 bg-white/[0.06] text-white/60 group-hover:text-black group-hover:bg-rl-accent transition-[background-color,color] duration-150">
             <InstagramIcon />
           </span>
           <div>
@@ -83,13 +74,7 @@ export function ContactInfoPanel() {
         </a>
       </div>
 
-      <div
-        className="p-6 text-sm text-white/60 leading-relaxed"
-        style={{
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
+      <div className="p-6 text-sm text-white/60 leading-relaxed bg-white/[0.06] border border-white/[0.08]">
         <p className="font-semibold text-white/80 uppercase tracking-widest text-xs mb-2">
           ¿Eres patrocinador?
         </p>

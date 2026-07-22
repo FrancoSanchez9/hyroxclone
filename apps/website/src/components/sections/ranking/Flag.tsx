@@ -24,7 +24,7 @@ export function Flag({
       aria-hidden={label ? undefined : "true"}
       loading="lazy"
       className={cn("inline-block h-[15px] w-5 shrink-0 object-cover", className)}
-      style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+      style={{ outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)" }}
     />
   );
 }

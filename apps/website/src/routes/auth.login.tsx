@@ -38,6 +38,7 @@ function LoginPage() {
   const [confirmSent, setConfirmSent] = useState(false);
 
   const goHome = (role: "admin" | "runner") =>
+    // react-doctor-disable-next-line react-doctor/tanstack-start-no-navigate-in-render -- only invoked from the async handleSubmit event handler, never during render
     navigate({ to: role === "admin" ? "/admin" : "/dashboard" });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,14 +76,18 @@ function LoginPage() {
       await signInWithGoogle();
     } catch (err) {
       setError(friendlyError(err));
+      // react-doctor-disable-next-line react-doctor/no-loading-flag-reset-outside-finally -- on success the browser redirects away, so there's nothing to reset
       setBusy(false);
     }
   };
 
   return (
     <section
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-6 py-24"
-      style={{ background: "linear-gradient(160deg, #000 0%, #0a0a0a 45%, #101204 100%)" }}
+      className="relative flex min-h-dvh w-full items-center justify-center overflow-hidden px-6 py-24"
+      style={{
+        background:
+          "linear-gradient(160deg, var(--color-rl-surface-canvas) 0%, var(--color-rl-surface-subtle) 45%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       <div
         aria-hidden="true"
@@ -94,7 +99,7 @@ function LoginPage() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.03) 119px, rgba(255,255,255,0.03) 120px)",
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, color-mix(in srgb, var(--color-white) 3%, transparent) 119px, color-mix(in srgb, var(--color-white) 3%, transparent) 120px)",
         }}
       />
 
@@ -248,7 +253,7 @@ function LoginPage() {
               type="button"
               onClick={handleGoogle}
               disabled={busy}
-              className="flex w-full items-center justify-center gap-3 bg-white px-8 py-4 text-sm font-semibold text-[#1f1f1f] transition-[transform,background-color] duration-[160ms] ease-out-strong hover:bg-white/90 active:scale-[0.96] disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-3 bg-rl-text-primary px-8 py-4 text-sm font-semibold text-rl-surface-canvas transition-[transform,background-color] duration-[160ms] ease-out-strong hover:bg-rl-text-primary/90 active:scale-[0.96] disabled:opacity-60"
             >
               <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
                 <path

@@ -127,9 +127,9 @@ function RankingPage() {
   }
 
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div style={{ background: "var(--color-rl-surface-subtle)", minHeight: "100dvh" }}>
       {/* Hero */}
-      <section className="relative overflow-hidden px-6 pb-12 pt-32 md:pt-40">
+      <section className="stay-dark relative overflow-hidden px-6 pb-12 pt-32 md:pt-40">
         <m.img
           src="/images/1461896836934-ffe607ba8211-1920.webp"
           width={1920}
@@ -142,7 +142,7 @@ function RankingPage() {
           animate={{ scale: 1 }}
           transition={{ duration: 2.4, ease: [0.23, 1, 0.32, 1] }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0a0a0a]" />
         <div
           aria-hidden="true"
           className="animate-blob pointer-events-none absolute -right-40 top-0 h-[30rem] w-[30rem] rounded-full"

@@ -36,7 +36,7 @@ export const Route = createFileRoute("/")({
     meta: seo({
       title: "runluv® · Corre los autódromos de México y descubre tu límite",
       description:
-        "runluv® transforma los autódromos de México en pistas para corredores. Elige tu reto, corre el circuito y vuelve por más cada temporada. Regístrate en el próximo evento.",
+        "runluv® transforma los autódromos de México en pistas para corredores. Elige tu reto, corre el circuito y vuelve por más cada temporada. Inscríbete en el próximo evento.",
       keywords:
         "runluv, carrera, running México, autódromo, correr en pista F1, Hermanos Rodríguez, eventos deportivos México, maratón",
     }),

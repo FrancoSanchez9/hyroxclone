@@ -12,7 +12,7 @@ const eventMonth = new Intl.DateTimeFormat("es-MX", {
 
 const labelClass = "mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-white/70";
 const inputClass =
-  "min-h-12 w-full border border-rl-border-strong bg-black/30 px-4 text-sm text-white outline-none transition-[background-color,border-color] duration-160 placeholder:text-rl-text-muted hover:border-white/40 focus:border-rl-accent focus:bg-black/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent";
+  "min-h-12 w-full border border-rl-border-strong bg-white/[0.04] px-4 text-sm text-white outline-none transition-[background-color,border-color] duration-160 placeholder:text-rl-text-muted hover:border-white/40 focus:border-rl-accent focus:bg-white/[0.07] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent";
 
 export function VolunteerFormSection() {
   const form = useForm({

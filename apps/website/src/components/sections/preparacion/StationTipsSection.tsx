@@ -23,10 +23,10 @@ const tips = [
 export function StationTipsSection() {
   return (
     <section
-      className="w-full bg-[#0d0d0d] py-20 md:py-28"
+      className="w-full bg-rl-dark py-20 md:py-28"
       style={{
         backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.02) 31px, rgba(255,255,255,0.02) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.02) 31px, rgba(255,255,255,0.02) 32px)",
+          "repeating-linear-gradient(0deg, transparent, transparent 31px, color-mix(in srgb, var(--color-white) 2%, transparent) 31px, color-mix(in srgb, var(--color-white) 2%, transparent) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, color-mix(in srgb, var(--color-white) 2%, transparent) 31px, color-mix(in srgb, var(--color-white) 2%, transparent) 32px)",
       }}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -56,7 +56,7 @@ export function StationTipsSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: idx * 0.1, ease: EASE }}
               whileHover={{ y: -4 }}
-              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-black/40 p-6 backdrop-blur-sm transition-colors duration-200 hover:border-t-rl-accent"
+              className="flex h-full flex-col gap-3 border border-white/10 border-t-2 border-t-transparent bg-white/[0.04] p-6 backdrop-blur-sm transition-colors duration-200 hover:border-t-rl-accent"
             >
               <div className="flex items-center justify-between gap-2">
                 <h3

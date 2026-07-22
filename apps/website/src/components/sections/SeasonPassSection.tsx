@@ -17,7 +17,10 @@ export function SeasonPassSection() {
   const tier = seasonPass.prices?.[0];
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: "#000" }}>
+    <section
+      className="relative w-full overflow-hidden"
+      style={{ background: "var(--color-rl-surface-canvas)" }}
+    >
       <AuroraBackground intensity="subtle" />
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">

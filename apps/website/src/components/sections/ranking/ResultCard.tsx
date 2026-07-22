@@ -53,11 +53,14 @@ export function ResultCard({
       className="border border-white/15 bg-white/[0.02] p-4"
       style={
         isWinner
-          ? { borderLeft: `3px solid ${ACCENT}`, background: "rgba(255,255,255,0.05)" }
+          ? {
+              borderLeft: `3px solid ${ACCENT}`,
+              background: "color-mix(in srgb, var(--color-white) 5%, transparent)",
+            }
           : r.rank === 2
-            ? { borderLeft: "3px solid rgba(255,255,255,0.4)" }
+            ? { borderLeft: "3px solid color-mix(in srgb, var(--color-white) 40%, transparent)" }
             : r.rank === 3
-              ? { borderLeft: "3px solid rgba(255,255,255,0.18)" }
+              ? { borderLeft: "3px solid color-mix(in srgb, var(--color-white) 18%, transparent)" }
               : { borderLeft: "3px solid transparent" }
       }
     >
@@ -66,9 +69,13 @@ export function ResultCard({
           <div
             className={cn(
               "inline-flex h-10 w-10 shrink-0 items-center justify-center text-sm font-bold tabular-nums",
-              isWinner ? "bg-white text-black" : "text-white",
+              isWinner ? "bg-rl-text-primary text-rl-surface-canvas" : "text-white",
             )}
-            style={isWinner ? undefined : { border: "1.5px solid rgba(255,255,255,0.4)" }}
+            style={
+              isWinner
+                ? undefined
+                : { border: "1.5px solid color-mix(in srgb, var(--color-white) 40%, transparent)" }
+            }
             aria-label={`Posición ${r.rank}`}
           >
             {r.rank}
@@ -106,7 +113,7 @@ export function ResultCard({
         </div>
       </div>
 
-      <details className="group mt-4 border border-white/15 bg-black/20">
+      <details className="group mt-4 border border-white/15 bg-white/[0.03]">
         <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-3 py-2 text-white transition-[background-color] duration-150 hover:bg-white/[0.05] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent [&::-webkit-details-marker]:hidden">
           <span>
             <span className="block text-sm font-bold">Detalle por estación</span>
@@ -128,7 +135,9 @@ export function ResultCard({
               <div
                 key={key}
                 className="border-b border-white/10 p-3 last:border-b-0 sm:odd:border-r"
-                style={{ background: `rgba(255,255,255,${alpha * 0.1})` }}
+                style={{
+                  background: `color-mix(in srgb, var(--color-white) ${alpha * 10}%, transparent)`,
+                }}
               >
                 <div className="flex items-start justify-between gap-3">
                   <span className="text-xs font-bold uppercase tracking-wide text-white/80">

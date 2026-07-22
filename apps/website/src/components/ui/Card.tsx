@@ -20,11 +20,13 @@ function Card({
     <div
       className={cn(
         "rounded-lg text-white",
-        variant === "glass" ? "glass-panel" : "border bg-[#1a1a1a] border-[#2a2a2a] texture-grain",
-        variant === "highlight" && "border-t-2 border-t-[#ffffff]",
+        variant === "glass"
+          ? "glass-panel"
+          : "rl-surface-card border bg-rl-card2 border-white/15 texture-grain",
+        variant === "highlight" && "border-t-2 border-t-white",
         glow && "glow-accent",
         hover &&
-          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-[#ffffff]",
+          "transition-[outline-color] duration-200 outline outline-1 outline-transparent hover:outline-white",
         className,
       )}
       {...props}

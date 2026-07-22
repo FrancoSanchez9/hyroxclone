@@ -20,6 +20,12 @@ function longDate(dateStr: string) {
   return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+const DASHBOARD_SHORTCUTS = [
+  { Icon: Compass, label: "¿Cuál es tu reto?", sub: "Descúbrelo en 2 minutos", to: "/tu-nivel" },
+  { Icon: Ticket, label: "Inscripciones", sub: "Elige tu carrera", to: "/eventos" },
+  { Icon: Trophy, label: "Ranking", sub: "Resultados oficiales", to: "/ranking" },
+] as const;
+
 function DashboardPage() {
   const navigate = useNavigate();
   const { session } = useSession();
@@ -33,16 +39,13 @@ function DashboardPage() {
     void navigate({ to: "/auth/login" });
   };
 
-  const shortcuts = [
-    { Icon: Compass, label: "¿Cuál es tu reto?", sub: "Descúbrelo en 2 minutos", to: "/tu-nivel" },
-    { Icon: Ticket, label: "Inscripciones", sub: "Elige tu carrera", to: "/eventos" },
-    { Icon: Trophy, label: "Ranking", sub: "Resultados oficiales", to: "/ranking" },
-  ] as const;
-
   return (
     <div
-      className="min-h-screen px-6 pb-24 pt-32 md:pt-36"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 70%, #101204 100%)" }}
+      className="min-h-dvh px-6 pb-24 pt-32 md:pt-36"
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-subtle) 70%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       <div className="mx-auto max-w-5xl">
         {/* Header */}
@@ -93,7 +96,7 @@ function DashboardPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
-          className="relative mt-10 overflow-hidden border border-white/10"
+          className="stay-dark relative mt-10 overflow-hidden border border-white/10"
         >
           {nextEvent.imageUrl && (
             <img
@@ -106,7 +109,7 @@ function DashboardPage() {
               className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-25 grayscale"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40" />
+          <div className="absolute inset-0 bg-linear-to-r from-black via-black/80 to-black/40" />
           <div className="relative z-10 flex flex-col gap-4 p-8 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p
@@ -145,7 +148,7 @@ function DashboardPage() {
 
         {/* Shortcuts */}
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {shortcuts.map((s, i) => (
+          {DASHBOARD_SHORTCUTS.map((s, i) => (
             <m.div
               key={s.label}
               initial={{ opacity: 0, y: 20 }}

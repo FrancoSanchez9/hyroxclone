@@ -81,16 +81,18 @@ function TrainingCard({ card, index }: { card: (typeof trainingCards)[number]; i
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+              style={{
+                outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/70" />
             <div className="absolute bottom-3 left-4">
               <Icon size={24} className="text-[#ffffff]" aria-hidden="true" />
             </div>
           </div>
         )}
         <CardHeader>
-          {!imageUrl && <Icon size={32} className="text-[#ffffff]" aria-hidden="true" />}
+          {!imageUrl && <Icon size={32} className="text-white" aria-hidden="true" />}
           <h3
             className="mt-4 text-2xl leading-none tracking-wider text-white uppercase"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
@@ -123,9 +125,10 @@ export function TrainingSection() {
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
       style={{
-        background: "linear-gradient(180deg, #101204 0%, #0d0d0d 25%, #000 100%)",
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-overlay) 0%, var(--color-rl-surface-subtle) 25%, var(--color-rl-surface-canvas) 100%)",
         backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.025) 31px, rgba(255,255,255,0.025) 32px), linear-gradient(180deg, #101204 0%, #0d0d0d 25%, #000 100%)",
+          "repeating-linear-gradient(0deg, transparent, transparent 31px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 31px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 32px), repeating-linear-gradient(90deg, transparent, transparent 31px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 31px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 32px), linear-gradient(180deg, var(--color-rl-surface-overlay) 0%, var(--color-rl-surface-subtle) 25%, var(--color-rl-surface-canvas) 100%)",
       }}
     >
       <div

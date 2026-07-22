@@ -38,7 +38,7 @@ export function HowToApplySection() {
             </p>
             <a
               href="#afiliacion"
-              className="mt-8 inline-flex min-h-12 items-center gap-2 bg-white px-6 text-sm font-bold uppercase tracking-widest text-black transition-[background-color,transform] duration-160 hover:bg-rl-accent active:scale-[0.96]"
+              className="mt-8 inline-flex min-h-12 items-center gap-2 bg-rl-accent px-6 text-sm font-bold uppercase tracking-widest text-black transition-[filter,transform] duration-160 hover:brightness-95 active:scale-[0.96]"
             >
               Iniciar solicitud
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -4,7 +4,10 @@ import { formatDateLong } from "@/lib/formatDate";
 
 export function EventDetailsPanel({ event }: { event: RunluvEvent }) {
   return (
-    <div className="border-b border-white/10" style={{ background: "#111111" }}>
+    <div
+      className="border-b border-white/10"
+      style={{ background: "var(--color-rl-surface-raised)" }}
+    >
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
           {[

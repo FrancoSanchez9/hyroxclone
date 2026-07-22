@@ -25,7 +25,7 @@ const EMPTY: Fields = {
 
 const REQUIRED: (keyof Fields)[] = ["gymName", "manager", "email", "city", "type"];
 const inputBase =
-  "min-h-12 w-full border bg-black/35 px-4 text-sm text-white placeholder:text-rl-text-muted outline-none transition-[border-color,background-color,box-shadow] duration-160 hover:border-rl-border-strong focus:border-rl-accent focus:bg-black/55 focus:ring-2 focus:ring-rl-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent";
+  "min-h-12 w-full border bg-white/[0.04] px-4 text-sm text-white placeholder:text-rl-text-muted outline-none transition-[border-color,background-color,box-shadow] duration-160 hover:border-rl-border-strong focus:border-rl-accent focus:bg-white/[0.07] focus:ring-2 focus:ring-rl-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent";
 const okBorder = "border-rl-border-strong";
 const errBorder = "border-red-400";
 const labelCls = "text-xs font-bold uppercase tracking-[0.16em] text-rl-text-secondary";
@@ -137,7 +137,7 @@ export function ApplicationFormSection() {
           </p>
         </div>
 
-        <div className="border border-rl-border-strong bg-black/25 p-5 sm:p-8 lg:p-10">
+        <div className="border border-rl-border-strong bg-white/[0.03] p-5 sm:p-8 lg:p-10">
           <form className="space-y-6" onSubmit={handleSubmit} noValidate>
             <div className="flex items-center justify-between gap-4 border-b border-rl-border-subtle pb-5">
               <div>
@@ -243,7 +243,7 @@ export function ApplicationFormSection() {
               <textarea
                 {...fieldProps("message")}
                 rows={4}
-                className={`w-full resize-y border bg-black/35 px-4 py-3 text-sm text-white placeholder:text-rl-text-muted outline-none transition-[border-color,background-color,box-shadow] duration-160 hover:border-rl-border-strong focus:border-rl-accent focus:bg-black/55 focus:ring-2 focus:ring-rl-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent ${okBorder}`}
+                className={`w-full resize-y border bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-rl-text-muted outline-none transition-[border-color,background-color,box-shadow] duration-160 hover:border-rl-border-strong focus:border-rl-accent focus:bg-white/[0.07] focus:ring-2 focus:ring-rl-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent ${okBorder}`}
                 placeholder="Comunidad, objetivos o ideas para colaborar…"
               />
             </Field>

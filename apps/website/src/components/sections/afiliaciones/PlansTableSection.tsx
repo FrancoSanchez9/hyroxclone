@@ -65,7 +65,7 @@ export function PlansTableSection() {
   return (
     <section
       id="modelo"
-      className="rl-deferred-section scroll-mt-24 border-b border-rl-border-subtle bg-black px-6 py-20 sm:py-24"
+      className="rl-deferred-section scroll-mt-24 border-b border-rl-border-subtle bg-rl-dark px-6 py-20 sm:py-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { PageHero } from "@/components/ui/PageHero";
 
 export interface LegalSection {
@@ -25,10 +25,10 @@ export function LegalLayout({
   sections,
 }: LegalLayoutProps) {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
+    <main className="min-h-dvh bg-rl-dark text-white">
       <PageHero badge={badge} title={title} subtitle={subtitle} />
 
-      <section className="px-6 py-16 border-t border-[#2a2a2a]">
+      <section className="px-6 py-16 border-t border-white/15">
         <div className="mx-auto max-w-3xl">
           <p className="mb-12 text-xs uppercase tracking-widest text-white/50">
             Última actualización: {lastUpdated}
@@ -40,7 +40,7 @@ export function LegalLayout({
 
           <div className="space-y-12">
             {sections.map((section, i) => (
-              <motion.div
+              <m.div
                 key={section.heading}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -55,13 +55,13 @@ export function LegalLayout({
                     letterSpacing: "0.02em",
                   }}
                 >
-                  <span className="text-[#ffffff]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-white">{String(i + 1).padStart(2, "0")}</span>
                   {section.heading}
                 </h2>
-                <div className="space-y-4 text-[15px] leading-relaxed text-white/70 [&_a]:text-[#ffffff] [&_a]:underline [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:marker:text-[#ffffff]">
+                <div className="space-y-4 text-[15px] leading-relaxed text-white/70 [&_a]:text-white [&_a]:underline [&_strong]:text-white [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_li]:marker:text-white">
                   {section.content}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

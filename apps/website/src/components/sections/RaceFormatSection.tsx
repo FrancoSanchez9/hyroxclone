@@ -66,7 +66,7 @@ function ModalityCard({ modality }: { modality: (typeof modalities)[number] }) {
   return (
     <div className="group h-full transition-[transform,box-shadow] duration-220 ease-out-strong hover:-translate-y-1.5 hover:shadow-[0_28px_70px_rgba(212,255,0,0.12)]">
       <div
-        className="spotlight-card relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10"
+        className="spotlight-card stay-dark relative flex h-full min-h-[560px] flex-col justify-end overflow-hidden rounded-lg border border-white/10"
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
@@ -84,7 +84,7 @@ function ModalityCard({ modality }: { modality: (typeof modalities)[number] }) {
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center grayscale transition-[transform,filter] duration-700 ease-out-strong group-hover:scale-105 group-hover:grayscale-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/20" />
 
         {/* Giant outlined number */}
         <span
@@ -161,7 +161,10 @@ export function RaceFormatSection() {
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
-      style={{ background: "linear-gradient(180deg, #000 0%, #0d0d0d 30%, #101204 100%)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-canvas) 0%, var(--color-rl-surface-subtle) 30%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       {/* Aurora backdrop — replaces the old single-color blobs */}
       <AuroraBackground intensity="subtle" />

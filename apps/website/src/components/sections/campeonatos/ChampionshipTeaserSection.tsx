@@ -3,14 +3,14 @@ import { ACCENT, EASE } from "@/lib/theme";
 
 export function ChampionshipTeaserSection() {
   return (
-    <section className="w-full bg-[#0d0d0d] py-20 md:py-28">
+    <section className="w-full bg-rl-dark py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, ease: EASE }}
-          className="relative overflow-hidden border border-white/10"
+          className="stay-dark relative overflow-hidden border border-white/10"
         >
           {/* Iconic circuit backdrop */}
           <img
@@ -23,7 +23,7 @@ export function ChampionshipTeaserSection() {
             decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-25 grayscale"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/50" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black via-black/80 to-black/50" />
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"

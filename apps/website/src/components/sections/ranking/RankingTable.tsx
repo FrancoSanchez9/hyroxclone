@@ -60,7 +60,10 @@ export function RankingTable({
       {/* Desktop: scrollable table */}
       <div
         className="hidden overflow-x-auto rounded-none md:block"
-        style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.08) transparent" }}
+        style={{
+          scrollbarWidth: "thin",
+          scrollbarColor: "color-mix(in srgb, var(--color-white) 8%, transparent) transparent",
+        }}
       >
         <table className="w-full min-w-[1020px] border-collapse text-left">
           <thead>
@@ -174,7 +177,9 @@ export function RankingTable({
                   onClick={() => dispatch({ type: "SET_PAGE", value: p })}
                   className={cn(
                     "h-11 min-w-11 cursor-pointer px-2 text-xs font-bold transition-[background-color,color,transform] duration-150 active:scale-[0.96]",
-                    p === page ? "bg-white text-black" : "text-white/70 hover:text-white",
+                    p === page
+                      ? "bg-rl-text-primary text-rl-surface-canvas"
+                      : "text-white/70 hover:text-white",
                   )}
                 >
                   {p}

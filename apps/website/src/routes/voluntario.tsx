@@ -6,7 +6,7 @@ import { VolunteerFaqSection } from "@/components/sections/voluntario/VolunteerF
 
 function VolunteerHero() {
   return (
-    <section className="relative isolate min-h-[44rem] overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
+    <section className="stay-dark relative isolate min-h-[44rem] overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
       <img
         src="/images/1532444458054-01a7dd3e9fca-1920.webp"
         alt=""
@@ -80,7 +80,7 @@ function VolunteerHero() {
 
 function VoluntarioPage() {
   return (
-    <div className="min-h-screen bg-rl-surface-canvas text-white">
+    <div className="min-h-dvh bg-rl-surface-canvas text-white">
       <VolunteerHero />
       <VolunteerBenefitsSection />
       <VolunteerFormSection />

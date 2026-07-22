@@ -5,15 +5,15 @@ import { PlansTableSection } from "@/components/sections/afiliaciones/PlansTable
 import { HowToApplySection } from "@/components/sections/afiliaciones/HowToApplySection";
 import { ApplicationFormSection } from "@/components/sections/afiliaciones/ApplicationFormSection";
 
-function AffiliationsHero() {
-  const signals = [
-    { icon: Users, value: "Comunidad", label: "corredores que entrenan contigo" },
-    { icon: MapPin, value: "Presencia", label: "un lugar dentro del ecosistema" },
-    { icon: Megaphone, value: "Activaciones", label: "experiencias que mueven tu sede" },
-  ];
+const AFFILIATIONS_SIGNALS = [
+  { icon: Users, value: "Comunidad", label: "corredores que entrenan contigo" },
+  { icon: MapPin, value: "Presencia", label: "un lugar dentro del ecosistema" },
+  { icon: Megaphone, value: "Activaciones", label: "experiencias que mueven tu sede" },
+];
 
+function AffiliationsHero() {
   return (
-    <section className="relative isolate min-h-svh overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
+    <section className="stay-dark relative isolate min-h-svh overflow-hidden border-b border-rl-border-subtle bg-rl-surface-canvas pt-20 sm:min-h-[46rem]">
       <img
         src="/images/1552674605-db6ffd4facb5-1600.webp"
         srcSet="/images/1552674605-db6ffd4facb5-500.webp 500w, /images/1552674605-db6ffd4facb5-900.webp 900w, /images/1552674605-db6ffd4facb5-1600.webp 1600w"
@@ -73,7 +73,7 @@ function AffiliationsHero() {
         </div>
 
         <div className="mt-8 grid max-w-4xl grid-cols-3 border-y border-white/20 sm:mt-12">
-          {signals.map((item) => (
+          {AFFILIATIONS_SIGNALS.map((item) => (
             <div
               key={item.value}
               className="flex min-h-20 flex-col items-start justify-center gap-2 border-l border-white/20 px-3 py-3 first:border-l-0 sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-4"
@@ -97,7 +97,7 @@ function AffiliationsHero() {
 
 function AfiliacionesPage() {
   return (
-    <div className="min-h-screen bg-rl-surface-canvas text-white">
+    <div className="min-h-dvh bg-rl-surface-canvas text-white">
       <AffiliationsHero />
       <BenefitsSection />
       <PlansTableSection />

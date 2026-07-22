@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/Button";
 
 function NotFoundPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] px-4 text-center">
+    <main className="flex min-h-dvh flex-col items-center justify-center bg-rl-dark px-4 text-center">
       <p
-        className="text-[clamp(8rem,30vw,18rem)] leading-none text-[#ffffff]"
+        className="text-[clamp(8rem,30vw,18rem)] leading-none text-white"
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
       >
         404

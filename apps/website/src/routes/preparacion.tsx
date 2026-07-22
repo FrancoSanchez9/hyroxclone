@@ -11,7 +11,7 @@ import { ACCENT, EASE } from "@/lib/theme";
 
 function PrepHero() {
   return (
-    <section className="relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
+    <section className="stay-dark relative w-full overflow-hidden px-6 pb-14 pt-32 md:pt-40">
       <m.img
         src="/images/1476480862126-209bfaa8edc8-1920.webp"
         width={1920}
@@ -24,7 +24,7 @@ function PrepHero() {
         animate={{ scale: 1 }}
         transition={{ duration: 2.4, ease: EASE }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-[#0d0d0d]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0d0d0d]" />
       <div
         aria-hidden="true"
         className="animate-blob pointer-events-none absolute -left-40 top-0 h-[30rem] w-[30rem] rounded-full"

@@ -19,7 +19,7 @@ export function LaCarreraHeroSection() {
   const trackY = useTransform(scrollY, [0, 700], [0, -70]);
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0a0a0a] px-6 pb-16 pt-32 md:pt-40">
+    <section className="relative w-full overflow-hidden bg-rl-dark px-6 pb-16 pt-32 md:pt-40">
       {/* Aurora atmosphere + lane texture (parallax layer) */}
       <AuroraBackground intensity="subtle" />
       <m.div
@@ -28,7 +28,7 @@ export function LaCarreraHeroSection() {
         style={{
           y: lanesY,
           backgroundImage:
-            "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.025) 119px, rgba(255,255,255,0.025) 120px)",
+            "repeating-linear-gradient(90deg, transparent, transparent 119px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 119px, color-mix(in srgb, var(--color-white) 2.5%, transparent) 120px)",
         }}
       />
 

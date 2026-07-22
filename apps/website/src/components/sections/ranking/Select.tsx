@@ -20,13 +20,17 @@ export function Select({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="min-h-11 w-full appearance-none border border-white/20 bg-[#111] px-3 py-2.5 pr-10 text-sm text-white transition-[border-color] duration-150 focus:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
+          className="min-h-11 w-full appearance-none border border-white/20 bg-rl-card px-3 py-2.5 pr-10 text-sm text-white transition-[border-color] duration-150 focus:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rl-accent"
         >
           {options.map((option) => {
             const optionValue = typeof option === "string" ? option : option.value;
             const optionLabel = typeof option === "string" ? option : option.label;
             return (
-              <option key={optionValue} value={optionValue} style={{ background: "#111" }}>
+              <option
+                key={optionValue}
+                value={optionValue}
+                style={{ background: "var(--color-rl-surface-raised)" }}
+              >
                 {optionLabel}
               </option>
             );

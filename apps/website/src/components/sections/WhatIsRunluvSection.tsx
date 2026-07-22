@@ -10,7 +10,7 @@ const bullets = [
 
 export function WhatIsRunluvSection() {
   return (
-    <section className="w-full" style={{ background: "#0a0a0a" }}>
+    <section className="w-full" style={{ background: "var(--color-rl-surface-subtle)" }}>
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-16">
           <div className="flex flex-1 flex-col justify-center">
@@ -45,9 +45,11 @@ export function WhatIsRunluvSection() {
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-center"
-              style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+              style={{
+                outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
               <p className="text-xs font-bold uppercase tracking-widest text-rl-accent">
                 LA EXPERIENCIA RUNLUV®
@@ -88,7 +90,7 @@ export function WhatIsRunluvSection() {
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 to="/la-carrera"
-                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
+                className="inline-flex items-center justify-center h-12 px-7 text-sm font-bold uppercase tracking-widest text-rl-surface-canvas bg-rl-text-primary hover:bg-rl-text-primary/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
               >
                 Descubre la carrera
               </Link>
@@ -117,7 +119,8 @@ export function WhatIsRunluvSection() {
                           : {
                               fontFamily: "'Bebas Neue', sans-serif",
                               color: "transparent",
-                              WebkitTextStroke: "1.5px rgba(255,255,255,0.5)",
+                              WebkitTextStroke:
+                                "1.5px color-mix(in srgb, var(--color-white) 50%, transparent)",
                             }
                       }
                     >

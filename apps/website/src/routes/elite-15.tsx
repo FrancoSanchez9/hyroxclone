@@ -110,7 +110,7 @@ const elite15Athletes = [
 
 function Elite15Page() {
   return (
-    <div style={{ background: "#000", minHeight: "100vh" }}>
+    <div style={{ background: "var(--color-rl-surface-canvas)", minHeight: "100dvh" }}>
       <PageHero
         inverted
         title="ELITE 15"
@@ -128,7 +128,7 @@ function Elite15Page() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: EASE }}
             >
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-4">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-white mb-4">
                 Sobre el programa
               </p>
               <h2
@@ -159,11 +159,14 @@ function Elite15Page() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
               className="p-8"
-              style={{ background: "#111", border: "1px solid rgba(255,255,255,0.3)" }}
+              style={{
+                background: "var(--color-rl-surface-raised)",
+                border: "1px solid color-mix(in srgb, var(--color-white) 30%, transparent)",
+              }}
             >
               <div
-                className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-black mb-6"
-                style={{ background: "#ffffff" }}
+                className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest text-rl-surface-canvas mb-6"
+                style={{ background: "var(--color-rl-text-primary)" }}
               >
                 Formato Elite
               </div>
@@ -181,14 +184,14 @@ function Elite15Page() {
                     <span
                       className="w-7 h-7 flex items-center justify-center text-xs font-bold shrink-0"
                       style={{
-                        background: i === 3 ? "#ffffff" : "#333",
-                        color: i === 3 ? "#000" : "#fff",
+                        background: i === 3 ? "var(--color-rl-text-primary)" : "#333",
+                        color: i === 3 ? "var(--color-rl-surface-canvas)" : "#fff",
                       }}
                     >
                       {i === 3 ? <Star className="h-3.5 w-3.5" aria-hidden="true" /> : i + 1}
                     </span>
                     <span
-                      className={`text-sm ${i === 3 ? "text-[#ffffff] font-semibold" : "text-white/60"}`}
+                      className={`text-sm ${i === 3 ? "text-white font-semibold" : "text-white/60"}`}
                     >
                       {stage}
                     </span>
@@ -201,7 +204,7 @@ function Elite15Page() {
       </section>
 
       {/* Qualification criteria */}
-      <section style={{ background: "#0a0a0a" }} className="py-20 md:py-28">
+      <section style={{ background: "var(--color-rl-surface-subtle)" }} className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <m.div
             initial={{ opacity: 0, y: 24 }}
@@ -210,7 +213,7 @@ function Elite15Page() {
             transition={{ duration: 0.5, ease: EASE }}
             className="mb-14"
           >
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-white mb-3">
               Cómo clasificar
             </p>
             <h2
@@ -229,11 +232,14 @@ function Elite15Page() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.05, ease: "easeOut" }}
                 className="p-6"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.08)" }}
+                style={{
+                  background: "var(--color-rl-surface-raised)",
+                  border: "1px solid color-mix(in srgb, var(--color-white) 8%, transparent)",
+                }}
               >
                 <div
-                  className="w-8 h-8 flex items-center justify-center text-sm font-bold text-black mb-4"
-                  style={{ background: "#ffffff" }}
+                  className="w-8 h-8 flex items-center justify-center text-sm font-bold text-rl-surface-canvas mb-4"
+                  style={{ background: "var(--color-rl-text-primary)" }}
                 >
                   {i + 1}
                 </div>
@@ -260,7 +266,7 @@ function Elite15Page() {
             transition={{ duration: 0.5, ease: EASE }}
             className="mb-14"
           >
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-white mb-3">
               {SEASON_NAME}
             </p>
             <h2
@@ -280,15 +286,18 @@ function Elite15Page() {
                 transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
                 className="flex items-center gap-4 p-4"
                 style={{
-                  background: i === 0 || i === 5 ? "rgba(255,255,255,0.08)" : "#111",
-                  border: `1px solid ${i === 0 || i === 5 ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.08)"}`,
+                  background:
+                    i === 0 || i === 5
+                      ? "color-mix(in srgb, var(--color-white) 8%, transparent)"
+                      : "var(--color-rl-surface-raised)",
+                  border: `1px solid ${i === 0 || i === 5 ? "color-mix(in srgb, var(--color-white) 30%, transparent)" : "color-mix(in srgb, var(--color-white) 8%, transparent)"}`,
                 }}
               >
                 <span
                   className="w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0"
                   style={{
-                    background: i === 0 || i === 5 ? "#ffffff" : "#222",
-                    color: i === 0 || i === 5 ? "#000" : "#fff",
+                    background: i === 0 || i === 5 ? "var(--color-rl-text-primary)" : "#222",
+                    color: i === 0 || i === 5 ? "var(--color-rl-surface-canvas)" : "#fff",
                   }}
                 >
                   {athlete.rank}
@@ -303,8 +312,8 @@ function Elite15Page() {
                     </h3>
                     {(i === 0 || i === 5) && (
                       <span
-                        className="text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider text-black"
-                        style={{ background: "#ffffff" }}
+                        className="text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider text-rl-surface-canvas"
+                        style={{ background: "var(--color-rl-text-primary)" }}
                       >
                         Líder
                       </span>
@@ -320,7 +329,7 @@ function Elite15Page() {
                     {athlete.division}
                   </p>
                   <span
-                    className="text-lg font-normal text-[#ffffff] tabular-nums"
+                    className="text-lg font-normal text-white tabular-nums"
                     style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                   >
                     {athlete.bestTime}
@@ -333,7 +342,7 @@ function Elite15Page() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#0a0a0a" }} className="py-20">
+      <section style={{ background: "var(--color-rl-surface-subtle)" }} className="py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <m.div
             initial={{ opacity: 0, y: 24 }}
@@ -353,7 +362,7 @@ function Elite15Page() {
             </p>
             <Link
               to="/eventos"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-rl-surface-canvas bg-rl-text-primary hover:bg-rl-text-primary/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
             >
               Encuentra un evento
             </Link>

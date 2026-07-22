@@ -106,7 +106,7 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
               transition={{ duration: 0.5, ease: EASE }}
               className="flex flex-col overflow-hidden border border-white/10"
             >
-              <div className="group relative h-56 overflow-hidden sm:h-64">
+              <div className="stay-dark group relative h-56 overflow-hidden sm:h-64">
                 {event.imageUrl && (
                   <img
                     src={event.imageUrl}
@@ -203,7 +203,7 @@ export function EventContentSections({ event }: { event: RunluvEvent }) {
                 )}&output=embed`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"
+                sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"
                 className="min-h-72 w-full flex-1"
               />
               {event.mapsUrl && (

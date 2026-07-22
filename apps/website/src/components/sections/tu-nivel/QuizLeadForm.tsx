@@ -48,7 +48,7 @@ export function QuizLeadForm({ onSubmit }: { onSubmit: (lead: QuizLead) => void 
         Desbloquea tu <span style={{ color: ACCENT }}>ADN runluv®</span>
       </h2>
       <p className="mt-4 text-sm leading-relaxed text-white/60">
-        Antes de revelar tu resultado, dinos cómo te gustaría que te llamemos.
+        Terminaste el recorrido. Dinos cómo quieres que te llamemos y revela tu resultado.
       </p>
 
       <form onSubmit={handleSubmit} noValidate className="mt-8 flex flex-col gap-2">
@@ -72,7 +72,9 @@ export function QuizLeadForm({ onSubmit }: { onSubmit: (lead: QuizLead) => void 
           aria-describedby={error ? "ql-name-err" : "ql-name-hint"}
           className={fieldCls}
           style={{
-            borderColor: error ? "#f87171" : "rgba(255,255,255,0.15)",
+            borderColor: error
+              ? "#f87171"
+              : "color-mix(in srgb, var(--color-white) 15%, transparent)",
             outlineColor: ACCENT,
           }}
           placeholder="Tu nombre o apodo"
@@ -83,7 +85,7 @@ export function QuizLeadForm({ onSubmit }: { onSubmit: (lead: QuizLead) => void 
           </p>
         ) : (
           <p id="ql-name-hint" className="text-[11px] leading-relaxed text-white/40">
-            Este nombre aparecerá en tu imagen cuando la compartas.
+            Este nombre aparecerá en tu resultado y en la imagen que compartas.
           </p>
         )}
 

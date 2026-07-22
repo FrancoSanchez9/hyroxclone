@@ -13,9 +13,10 @@ const SUBJECTS = [
   "Otro",
 ];
 
-const inputClass = "h-12 w-full px-4 text-sm text-black placeholder-black/55 outline-none bg-white";
+const inputClass =
+  "h-12 w-full px-4 text-sm text-rl-text-primary placeholder:text-rl-text-muted outline-none bg-rl-surface-raised";
 const errorBorder = "border-2 border-red-400";
-const normalBorder = "border-2 border-transparent";
+const normalBorder = "border-2 border-rl-border-subtle";
 
 interface ContactFormProps {
   state: ContactState;
@@ -36,9 +37,9 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
         <div className="flex flex-col items-start gap-5 pt-4">
           <span
             className="flex items-center justify-center w-14 h-14"
-            style={{ background: "#ffffff" }}
+            style={{ background: "var(--color-rl-surface-raised)" }}
           >
-            <Check className="h-7 w-7 text-black" />
+            <Check className="h-7 w-7 text-rl-text-primary" />
           </span>
           <h2
             className="text-4xl text-white uppercase"
@@ -124,13 +125,16 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
                   dispatch({ type: "setField", field: "subject", value: e.target.value })
                 }
                 className={`h-12 w-full appearance-none px-4 pr-10 text-sm outline-none ${errors.subject ? errorBorder : normalBorder}`}
-                style={{ background: "#fff", color: subject ? "#000" : "rgba(0,0,0,0.4)" }}
+                style={{
+                  background: "var(--color-rl-surface-raised)",
+                  color: subject ? "var(--color-rl-text-primary)" : "var(--color-rl-text-muted)",
+                }}
               >
                 <option value="" disabled>
                   Selecciona un asunto
                 </option>
                 {SUBJECTS.map((s) => (
-                  <option key={s} value={s} style={{ color: "#000" }}>
+                  <option key={s} value={s} style={{ color: "var(--color-rl-text-primary)" }}>
                     {s}
                   </option>
                 ))}
@@ -145,7 +149,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
               >
                 <path
                   d="M2 5l5 5 5-5"
-                  stroke="#000"
+                  stroke="var(--color-rl-text-primary)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -175,7 +179,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
                 dispatch({ type: "setField", field: "message", value: e.target.value })
               }
               placeholder="Cuéntanos en qué podemos ayudarte..."
-              className={`w-full px-4 py-3 text-sm text-black placeholder-black/55 outline-none resize-none bg-white ${errors.message ? errorBorder : normalBorder}`}
+              className={`w-full px-4 py-3 text-sm text-rl-text-primary placeholder:text-rl-text-muted outline-none resize-none bg-rl-surface-raised ${errors.message ? errorBorder : normalBorder}`}
             />
             {errors.message && (
               <p role="alert" className="text-xs text-red-400">
@@ -186,7 +190,7 @@ export function ContactForm({ state, dispatch, onSubmit }: ContactFormProps) {
 
           <button
             type="submit"
-            className="mt-1 h-12 w-full px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/85 transition-[background-color] duration-150 active:scale-[0.96]"
+            className="mt-1 h-12 w-full px-8 text-sm font-bold uppercase tracking-widest text-black bg-rl-accent hover:brightness-95 transition-[filter] duration-150 active:scale-[0.96]"
           >
             Enviar mensaje
           </button>

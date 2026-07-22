@@ -90,7 +90,10 @@ export function RankingFilters({ state, dispatch, onReset }: RankingFiltersProps
 
   return (
     <section
-      style={{ background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+      style={{
+        background: "var(--color-rl-surface-subtle)",
+        borderBottom: "1px solid color-mix(in srgb, var(--color-white) 7%, transparent)",
+      }}
       className="px-4 py-6 sm:px-6 sm:py-7 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
@@ -137,7 +140,7 @@ export function RankingFilters({ state, dispatch, onReset }: RankingFiltersProps
           <span className="flex items-center gap-2">
             Más filtros
             {activeFilters.length > 0 && (
-              <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-white px-1.5 text-xs tabular-nums text-black">
+              <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-rl-text-primary px-1.5 text-xs tabular-nums text-rl-surface-canvas">
                 {activeFilters.length}
               </span>
             )}

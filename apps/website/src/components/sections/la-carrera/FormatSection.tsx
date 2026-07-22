@@ -28,7 +28,10 @@ export function FormatSection() {
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-raised) 100%)",
+      }}
     >
       {/* Faded circuit backdrop */}
       <img
@@ -41,7 +44,7 @@ export function FormatSection() {
         decoding="async"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-[0.12] grayscale"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0d0d0d]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-rl-dark via-transparent to-rl-card" />
       <div
         aria-hidden="true"
         className="animate-blob-slow pointer-events-none absolute -right-48 top-20 h-[32rem] w-[32rem] rounded-full"

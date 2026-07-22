@@ -21,7 +21,12 @@ function useCountdown(targetMs: number) {
 
 function formatEventDate(dateStr: string): string {
   return new Date(dateStr + "T00:00:00")
-    .toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" })
+    .toLocaleDateString("es-MX", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      timeZone: "America/Mexico_City",
+    })
     .replace(".", "")
     .toUpperCase();
 }
@@ -93,12 +98,12 @@ export function CountdownStrip({ event, registerHref }: CountdownStripProps) {
         {/* Register block — inverted within the strip */}
         {registerHref ? (
           <a href={registerHref} className={registerClass} style={{ color: ACCENT }}>
-            Regístrate
+            Inscríbete
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </a>
         ) : (
           <Link to={event.registrationUrl} className={registerClass} style={{ color: ACCENT }}>
-            Regístrate
+            Inscríbete
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         )}

@@ -52,7 +52,7 @@ function EventDetailPage() {
 
   if (!event) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] text-white gap-6">
+      <div className="flex min-h-dvh flex-col items-center justify-center bg-rl-dark text-white gap-6">
         <p
           className="px-6 text-center text-4xl font-normal sm:text-6xl"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
@@ -92,7 +92,10 @@ function EventDetailPage() {
   };
 
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh" }} className="text-white">
+    <div
+      style={{ background: "var(--color-rl-surface-subtle)", minHeight: "100dvh" }}
+      className="text-white"
+    >
       <EventHero event={event} />
 
       <CountdownStrip event={event} registerHref="#registro" />
@@ -105,7 +108,7 @@ function EventDetailPage() {
           {/* LEFT COLUMN — tabbed to cut the scroll */}
           <div className="min-w-0">
             {/* Tab bar — sticky under the details panel */}
-            <div className="sticky top-16 z-20 -mx-4 mb-10 border-b border-white/10 bg-[#0a0a0a]/95 px-4 backdrop-blur-sm sm:-mx-6 sm:px-6">
+            <div className="sticky top-16 z-20 -mx-4 mb-10 border-b border-white/10 bg-rl-dark/95 px-4 backdrop-blur-sm sm:-mx-6 sm:px-6">
               <div className="flex gap-1 overflow-x-auto">
                 {TABS.map((t) => {
                   const active = tab === t.id;
@@ -169,7 +172,10 @@ function EventDetailPage() {
           <div className="lg:relative">
             <div className="lg:sticky lg:top-28 flex flex-col gap-0 border border-white/15">
               {/* Price header */}
-              <div className="px-6 py-6 border-b border-white/10" style={{ background: "#111" }}>
+              <div
+                className="px-6 py-6 border-b border-white/10"
+                style={{ background: "var(--color-rl-surface-raised)" }}
+              >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
                   Precio actual
                 </p>
@@ -190,7 +196,10 @@ function EventDetailPage() {
               </div>
 
               {/* Register button */}
-              <div className="px-6 py-6 flex flex-col gap-4" style={{ background: "#0d0d0d" }}>
+              <div
+                className="px-6 py-6 flex flex-col gap-4"
+                style={{ background: "var(--color-rl-surface-subtle)" }}
+              >
                 {event.soldOut ? (
                   <div
                     className="flex items-center justify-center h-14 text-sm font-bold uppercase tracking-widest text-black/40"
@@ -224,7 +233,9 @@ function EventDetailPage() {
                 {/* Selection summary */}
                 {(selectedDivision || selectedCategory) && (
                   <m.div
+                    // react-doctor-disable-next-line react-doctor/no-layout-property-animation -- FLIP-optimized mount reveal, not per-frame layout
                     initial={{ opacity: 0, height: 0 }}
+                    // react-doctor-disable-next-line react-doctor/no-layout-property-animation -- FLIP-optimized mount reveal, not per-frame layout
                     animate={{ opacity: 1, height: "auto" }}
                     transition={{ ease: EASE, duration: 0.3 }}
                     className="border-t border-white/10 pt-4 flex flex-col gap-2"
@@ -260,7 +271,7 @@ function EventDetailPage() {
               {/* What's included */}
               <div
                 className="px-6 py-6 border-t border-white/10 flex flex-col gap-3"
-                style={{ background: "#111" }}
+                style={{ background: "var(--color-rl-surface-raised)" }}
               >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
                   Incluye

@@ -43,7 +43,7 @@ export function DivisionsDetailSection() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section className="w-full bg-[#0a0a0a] py-20 md:py-28">
+    <section className="w-full bg-rl-dark py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <m.div
           ref={ref}
@@ -79,7 +79,7 @@ export function DivisionsDetailSection() {
                 custom={idx + 1}
               >
                 <Card className="w-full overflow-hidden">
-                  <CardHeader className="border-b border-[#2a2a2a] pb-4">
+                  <CardHeader className="border-b border-white/15 pb-4">
                     <div className="flex items-center gap-4">
                       <span
                         className="inline-block h-3 w-3 shrink-0"

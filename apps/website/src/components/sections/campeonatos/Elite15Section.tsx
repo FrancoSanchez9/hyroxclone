@@ -20,7 +20,10 @@ export function Elite15Section() {
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%)" }}
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-subtle) 0%, var(--color-rl-surface-raised) 100%)",
+      }}
     >
       <div
         aria-hidden="true"
@@ -54,7 +57,7 @@ export function Elite15Section() {
             whileInView={{ clipPath: "inset(0 0 0% 0)" }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="relative min-h-[280px] overflow-hidden lg:min-h-full"
+            className="stay-dark relative min-h-[280px] overflow-hidden lg:min-h-full"
           >
             <img
               src="/images/1552674605-db6ffd4facb5-900.webp"
@@ -65,7 +68,7 @@ export function Elite15Section() {
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover object-center grayscale"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6">
               <p
                 className="text-4xl uppercase leading-none tracking-wide sm:text-5xl"

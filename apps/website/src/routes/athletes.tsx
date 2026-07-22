@@ -71,7 +71,7 @@ const worldRecords = [
 
 function AthletesPage() {
   return (
-    <div style={{ background: "#000", minHeight: "100vh" }}>
+    <div style={{ background: "var(--color-rl-surface-canvas)", minHeight: "100dvh" }}>
       <PageHero
         inverted
         title="ATHLETES"
@@ -106,7 +106,7 @@ function AthletesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
                 className="group relative overflow-hidden"
-                style={{ background: "#111" }}
+                style={{ background: "var(--color-rl-surface-raised)" }}
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -117,18 +117,20 @@ function AthletesPage() {
                     loading="lazy"
                     decoding="async"
                     className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                    style={{ outline: "1px solid rgba(255,255,255,0.1)" }}
+                    style={{
+                      outline: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
                   <div
-                    className="absolute top-3 left-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-black"
-                    style={{ background: "#ffffff" }}
+                    className="absolute top-3 left-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-rl-surface-canvas"
+                    style={{ background: "var(--color-rl-text-primary)" }}
                   >
                     {athlete.division}
                   </div>
                   <div
-                    className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-sm font-bold text-black"
-                    style={{ background: "#fff" }}
+                    className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-sm font-bold text-rl-surface-canvas"
+                    style={{ background: "var(--color-rl-text-primary)" }}
                   >
                     #{athlete.rank}
                   </div>
@@ -149,7 +151,7 @@ function AthletesPage() {
                       Best Time
                     </span>
                     <span
-                      className="text-xl font-normal tabular-nums text-[#ffffff]"
+                      className="text-xl font-normal tabular-nums text-white"
                       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                     >
                       {athlete.bestTime}
@@ -163,7 +165,7 @@ function AthletesPage() {
       </section>
 
       {/* World Records */}
-      <section style={{ background: "#0a0a0a" }} className="py-20 md:py-28">
+      <section style={{ background: "var(--color-rl-surface-subtle)" }} className="py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <m.div
             initial={{ opacity: 0, y: 24 }}
@@ -172,9 +174,7 @@ function AthletesPage() {
             transition={{ duration: 0.5, ease: EASE }}
             className="mb-12"
           >
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-3">
-              All Time
-            </p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-white mb-3">All Time</p>
             <h2
               className="text-5xl md:text-7xl font-normal leading-none text-white uppercase"
               style={{ fontFamily: "'Bebas Neue', sans-serif" }}
@@ -192,10 +192,13 @@ function AthletesPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
                 className="p-6 flex items-center justify-between"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.08)" }}
+                style={{
+                  background: "var(--color-rl-surface-raised)",
+                  border: "1px solid color-mix(in srgb, var(--color-white) 8%, transparent)",
+                }}
               >
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-[#ffffff] mb-1">
+                  <p className="text-xs font-bold uppercase tracking-widest text-white mb-1">
                     {record.division}
                   </p>
                   <h3
@@ -207,7 +210,7 @@ function AthletesPage() {
                   <p className="text-xs text-white/50 mt-0.5">{record.year}</p>
                 </div>
                 <span
-                  className="text-3xl font-normal tabular-nums text-[#ffffff]"
+                  className="text-3xl font-normal tabular-nums text-white"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   {record.time}
@@ -227,7 +230,7 @@ function AthletesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffffff] mb-4">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-white mb-4">
               Elite Program
             </p>
             <h2
@@ -242,7 +245,7 @@ function AthletesPage() {
             </p>
             <Link
               to="/elite-15"
-              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-black bg-white hover:bg-white/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
+              className="inline-flex items-center justify-center h-12 px-8 text-sm font-bold uppercase tracking-widest text-rl-surface-canvas bg-rl-text-primary hover:bg-rl-text-primary/90 transition-[transform,background-color] duration-[160ms] ease-out-strong active:scale-[0.96]"
             >
               Learn About Elite 15
             </Link>

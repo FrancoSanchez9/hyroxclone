@@ -46,7 +46,7 @@ export const upcomingEvents: RunluvEvent[] = [
     date: SEASON_EVENT_DATES.puebla,
     endDate: SEASON_EVENT_DATES.puebla,
     country: "México",
-    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
+    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K"],
     registrationUrl: "/eventos/puebla-2026",
     imageUrl: "/images/1596460658047-1826d5921c56-1200x700.webp",
     featured: true,
@@ -74,7 +74,7 @@ export const upcomingEvents: RunluvEvent[] = [
     date: SEASON_EVENT_DATES.guadalajara,
     endDate: SEASON_EVENT_DATES.guadalajara,
     country: "México",
-    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
+    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K"],
     registrationUrl: "/eventos/guadalajara-2026",
     imageUrl: "/images/1526676537331-7747bf8278fc-1200x700.webp",
     about:
@@ -101,7 +101,7 @@ export const upcomingEvents: RunluvEvent[] = [
     date: SEASON_EVENT_DATES.leon,
     endDate: SEASON_EVENT_DATES.leon,
     country: "México",
-    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
+    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K"],
     registrationUrl: "/eventos/leon-2026",
     imageUrl: "/images/1556764420-e37ef4cdfa5c-1200x700.webp",
     about:
@@ -128,7 +128,7 @@ export const upcomingEvents: RunluvEvent[] = [
     date: SEASON_EVENT_DATES.monterrey,
     endDate: SEASON_EVENT_DATES.monterrey,
     country: "México",
-    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "Doubles", "Teams"],
+    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K"],
     registrationUrl: "/eventos/monterrey-2026",
     imageUrl: "/images/1532444458054-01a7dd3e9fca-1200x700.webp",
     about:
@@ -155,15 +155,7 @@ export const upcomingEvents: RunluvEvent[] = [
     date: SEASON_EVENT_DATES.cdmx,
     endDate: SEASON_EVENT_DATES.cdmx,
     country: "México",
-    categories: [
-      "La Última Vuelta",
-      "Cada Paso Cuenta",
-      "5K",
-      "10K",
-      "LUV Pro",
-      "Doubles",
-      "Teams",
-    ],
+    categories: ["La Última Vuelta", "Cada Paso Cuenta", "5K", "10K", "LUV Pro"],
     registrationUrl: "/eventos/cdmx-2027",
     imageUrl: "/images/1532444458054-01a7dd3e9fca-1200x700.webp",
     about:

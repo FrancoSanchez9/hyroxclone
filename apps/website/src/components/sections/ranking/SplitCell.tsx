@@ -27,7 +27,9 @@ export function SplitCell({
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         className="relative flex h-10 w-full items-center justify-center px-1 transition-[background-color] duration-100 hover:bg-white/8 cursor-default"
-        style={{ background: `rgba(255,255,255,${bgAlpha})` }}
+        style={{
+          background: `color-mix(in srgb, var(--color-white) ${bgAlpha * 100}%, transparent)`,
+        }}
         aria-label={`${stationLabel}: ${stationTime}`}
       >
         {isBest && (
@@ -40,7 +42,9 @@ export function SplitCell({
         )}
         <span
           className="tabular-nums text-[11px] font-semibold"
-          style={{ color: `rgba(255,255,255,${textOpacity})` }}
+          style={{
+            color: `color-mix(in srgb, var(--color-white) ${textOpacity * 100}%, transparent)`,
+          }}
         >
           {stationTime}
         </span>
@@ -51,7 +55,7 @@ export function SplitCell({
           initial={{ opacity: 0, y: 5, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.12 }}
-          className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 whitespace-nowrap border border-white/18 bg-[#1c1c1c] px-4 py-3 shadow-2xl shadow-black/70"
+          className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-30 whitespace-nowrap border border-white/18 bg-rl-card2 px-4 py-3 shadow-2xl shadow-black/70"
         >
           <p className="mb-2 text-[9px] font-bold uppercase tracking-widest text-white/50">
             {stationLabel}

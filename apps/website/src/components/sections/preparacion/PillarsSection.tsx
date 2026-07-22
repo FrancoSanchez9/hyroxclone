@@ -37,9 +37,10 @@ const pillars = [
 export function PillarsSection() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#0d0d0d] py-20 md:py-28"
+      className="relative w-full overflow-hidden bg-rl-dark py-20 md:py-28"
       style={{
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
+        backgroundImage:
+          "radial-gradient(circle, color-mix(in srgb, var(--color-white) 5%, transparent) 1px, transparent 1px)",
         backgroundSize: "28px 28px",
       }}
     >
@@ -54,7 +55,7 @@ export function PillarsSection() {
         decoding="async"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-[0.1] grayscale"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-transparent to-[#0d0d0d]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-rl-dark via-transparent to-rl-dark" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 max-w-2xl">
           <p

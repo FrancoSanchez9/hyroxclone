@@ -38,10 +38,10 @@ const phases = [
 export function TimelineSection() {
   return (
     <section
-      className="w-full bg-[#0a0a0a] py-20 md:py-28"
+      className="w-full bg-rl-dark py-20 md:py-28"
       style={{
         backgroundImage:
-          "repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.02) 119px, rgba(255,255,255,0.02) 120px)",
+          "repeating-linear-gradient(90deg, transparent, transparent 119px, color-mix(in srgb, var(--color-white) 2%, transparent) 119px, color-mix(in srgb, var(--color-white) 2%, transparent) 120px)",
       }}
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

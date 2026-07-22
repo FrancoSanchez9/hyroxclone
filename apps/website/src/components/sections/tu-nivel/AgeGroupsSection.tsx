@@ -31,7 +31,7 @@ export function AgeGroupsSection() {
   const proIndex = AGE_BRACKETS.indexOf(PRO_MAX_AGE_GROUP);
 
   return (
-    <section className="w-full bg-[#0d0d0d] py-20 md:py-28">
+    <section className="w-full bg-rl-dark py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <m.div
           ref={ref}
@@ -41,7 +41,7 @@ export function AgeGroupsSection() {
           custom={0}
           className="mb-10 text-center"
         >
-          <Badge variant="dark" className="mb-4 border border-[#2a2a2a]">
+          <Badge variant="dark" className="mb-4 border border-white/15">
             Edades
           </Badge>
           <h2
@@ -69,7 +69,7 @@ export function AgeGroupsSection() {
             return (
               <div
                 key={bracket}
-                className="flex items-center justify-between gap-3 border border-[#2a2a2a] bg-[#111111] px-4 py-3"
+                className="flex items-center justify-between gap-3 border border-white/15 bg-rl-card px-4 py-3"
               >
                 <span
                   className="uppercase tracking-widest text-white"
@@ -106,38 +106,38 @@ export function AgeGroupsSection() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           custom={1}
-          className="hidden overflow-x-auto rounded-none border border-[#2a2a2a] md:block"
+          className="hidden overflow-x-auto rounded-none border border-white/15 md:block"
         >
           <table className="w-full min-w-[640px] text-sm">
             <thead>
-              <tr className="bg-white">
+              <tr className="bg-rl-text-primary">
                 <th
                   scope="col"
-                  className="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-widest text-black"
+                  className="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-widest text-rl-surface-canvas"
                 >
                   Grupo de edad
                 </th>
                 <th
                   scope="col"
-                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-black"
+                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-rl-surface-canvas"
                 >
                   Open
                 </th>
                 <th
                   scope="col"
-                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-black"
+                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-rl-surface-canvas"
                 >
                   Pro
                 </th>
                 <th
                   scope="col"
-                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-black"
+                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-rl-surface-canvas"
                 >
                   Doubles
                 </th>
                 <th
                   scope="col"
-                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-black"
+                  className="px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-rl-surface-canvas"
                 >
                   Relay
                 </th>
@@ -151,7 +151,7 @@ export function AgeGroupsSection() {
                   <tr
                     key={bracket}
                     className={cn(
-                      "border-b border-[#2a2a2a] transition-colors duration-100 hover:bg-white/[0.03]",
+                      "border-b border-white/15 transition-colors duration-100 hover:bg-white/[0.03]",
                       idx === AGE_BRACKETS.length - 1 && "border-b-0",
                     )}
                   >
@@ -164,7 +164,7 @@ export function AgeGroupsSection() {
                       </span>
                     </td>
                     <td className="px-5 py-3.5 text-center">
-                      <Check className="h-4 w-4 text-[#ffffff] mx-auto" aria-hidden="true" />
+                      <Check className="h-4 w-4 text-white mx-auto" aria-hidden="true" />
                     </td>
                     <td className="px-5 py-3.5 text-center">
                       {isProAvailable ? (

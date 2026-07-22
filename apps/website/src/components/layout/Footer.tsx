@@ -47,7 +47,12 @@ const footerColumns = [
 
 export function Footer() {
   return (
-    <footer style={{ background: "#000", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+    <footer
+      style={{
+        background: "var(--color-rl-surface-canvas)",
+        borderTop: "1px solid color-mix(in srgb, var(--color-white) 8%, transparent)",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         {/* Top: logo + columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
@@ -59,20 +64,20 @@ export function Footer() {
                 alt="runluv®"
                 width={413}
                 height={119}
-                className="h-8 w-auto mb-5"
+                className="rl-logo h-8 w-auto mb-5"
                 loading="lazy"
               />
             </Link>
-            <p className="text-sm text-white/60 leading-relaxed max-w-[220px]">
-              Running sobre los autódromos de Fórmula 1 de México.
-            </p>
             <div className="mt-6 flex gap-3">
               <a
                 href="https://www.instagram.com/runluv.mx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
+                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-white transition-[color,transform] duration-150 active:scale-[0.96]"
+                style={{
+                  background: "var(--color-rl-surface-raised)",
+                  border: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+                }}
                 aria-label="RunLuv en Instagram"
               >
                 <InstagramIcon />
@@ -81,8 +86,11 @@ export function Footer() {
                 href="https://www.linkedin.com/company/runluv"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-[#ffffff] transition-[color,transform] duration-150 active:scale-[0.96]"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.1)" }}
+                className="flex items-center justify-center w-11 h-11 text-white/60 hover:text-white transition-[color,transform] duration-150 active:scale-[0.96]"
+                style={{
+                  background: "var(--color-rl-surface-raised)",
+                  border: "1px solid color-mix(in srgb, var(--color-white) 10%, transparent)",
+                }}
                 aria-label="RunLuv en LinkedIn"
               >
                 <LinkedInIcon />
@@ -101,7 +109,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="text-sm text-white/60 hover:text-[#ffffff] transition-colors duration-150"
+                      className="text-sm text-white/60 hover:text-white transition-colors duration-150"
                     >
                       {link.label}
                     </Link>
@@ -115,25 +123,25 @@ export function Footer() {
         {/* Bottom bar */}
         <div
           className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ borderTop: "1px solid color-mix(in srgb, var(--color-white) 8%, transparent)" }}
         >
           <p className="text-xs text-white/55">© RunLuv® 2026 · Todos los derechos reservados</p>
           <div className="flex gap-6">
             <Link
               to="/privacidad"
-              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+              className="text-xs text-white/55 hover:text-white transition-colors duration-150"
             >
               Privacidad
             </Link>
             <Link
               to="/terminos"
-              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+              className="text-xs text-white/55 hover:text-white transition-colors duration-150"
             >
               Términos
             </Link>
             <Link
               to="/contacto"
-              className="text-xs text-white/55 hover:text-[#ffffff] transition-colors duration-150"
+              className="text-xs text-white/55 hover:text-white transition-colors duration-150"
             >
               Contacto
             </Link>

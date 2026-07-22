@@ -9,7 +9,7 @@ export function BeyondMexicoSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="w-full" style={{ background: "#000" }}>
+    <section ref={ref} className="w-full" style={{ background: "var(--color-rl-surface-canvas)" }}>
       <div className="mx-auto max-w-4xl px-4 py-24 sm:px-6 md:py-32">
         <m.div
           initial={{ opacity: 0, y: 24 }}

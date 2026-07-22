@@ -31,7 +31,7 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
     >
       <Link
         to={event.registrationUrl}
-        className="group relative block h-[240px] overflow-hidden md:h-[280px]"
+        className="stay-dark group relative block h-[240px] overflow-hidden md:h-[280px]"
       >
         {/* Full-bleed autódromo photo — always visible, color on hover */}
         {event.imageUrl && (
@@ -46,12 +46,12 @@ function EventRow({ event, index }: { event: (typeof upcomingEvents)[number]; in
           />
         )}
         {/* Legibility gradients */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/30" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-black via-black/70 to-black/30" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
 
         {/* Racing stripe — lime bar that widens on hover */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-1 transition-[width] duration-300 ease-out-strong group-hover:w-2"
+          className="pointer-events-none absolute inset-y-0 left-0 w-1 origin-left transition-transform duration-300 ease-out-strong group-hover:scale-x-[2]"
           style={{ background: ACCENT }}
         />
 
@@ -158,11 +158,14 @@ function EventosPage() {
 
   return (
     <div
-      className="min-h-screen text-white"
-      style={{ background: "linear-gradient(180deg, #000 0%, #0a0a0a 45%, #101204 100%)" }}
+      className="min-h-dvh text-white"
+      style={{
+        background:
+          "linear-gradient(180deg, var(--color-rl-surface-canvas) 0%, var(--color-rl-surface-subtle) 45%, var(--color-rl-surface-overlay) 100%)",
+      }}
     >
       {/* Hero — image-backed, dark, sport */}
-      <section className="relative overflow-hidden px-6 pb-0 pt-32 md:pt-40">
+      <section className="stay-dark relative overflow-hidden px-6 pb-0 pt-32 md:pt-40">
         {/* Background racetrack photo */}
         <m.img
           src="/images/1532444458054-01a7dd3e9fca-1920.webp"
@@ -176,7 +179,7 @@ function EventosPage() {
           animate={{ scale: 1 }}
           transition={{ duration: 2.4, ease: EASE }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0a0a0a]" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-[#0a0a0a]" />
         <div
           aria-hidden="true"
           className="animate-blob pointer-events-none absolute -left-40 -top-20 h-[28rem] w-[28rem] rounded-full"
@@ -232,7 +235,7 @@ function EventosPage() {
       </section>
 
       {/* Filters */}
-      <section className="sticky top-16 z-10 border-b border-white/10 bg-[#0a0a0a]/95 px-6 py-5 backdrop-blur-sm">
+      <section className="sticky top-16 z-10 border-b border-white/10 bg-rl-dark/95 px-6 py-5 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl flex-wrap gap-2">
           {FILTERS.map((filter) => {
             const isActive = activeFilter === filter;
@@ -243,7 +246,7 @@ function EventosPage() {
                 onClick={() => setActiveFilter(filter)}
                 className={cn(
                   "border px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-[background-color,border-color,color] duration-150 active:scale-[0.96]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rl-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rl-accent focus-visible:ring-offset-2 focus-visible:ring-offset-rl-dark",
                   isActive
                     ? "border-rl-accent bg-rl-accent text-black"
                     : "border-white/15 bg-transparent text-white/50 hover:border-white/50 hover:text-white",
@@ -283,7 +286,8 @@ function EventosPage() {
       <section
         className="relative overflow-hidden px-6 py-20"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(circle, color-mix(in srgb, var(--color-white) 5%, transparent) 1px, transparent 1px)",
           backgroundSize: "26px 26px",
         }}
       >

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { getNextEvent } from "@/data/events";
 import { CountdownStrip } from "@/components/sections/CountdownStrip";
 import { AuroraBackground } from "@/components/ui/AuroraBackground";
@@ -16,7 +16,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative flex min-h-screen w-full flex-col overflow-hidden"
+      className="stay-dark relative flex min-h-dvh w-full flex-col overflow-hidden"
       style={{ background: "#000" }}
       aria-label="Hero"
     >
@@ -37,7 +37,7 @@ export function HeroSection() {
       </div>
 
       {/* Overlays */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/85" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-black/25 to-black/85" />
       {/* Aurora — lime/emerald/cyan fields drifting over the darkened photo */}
       <AuroraBackground intensity="strong" className="z-[2] opacity-70" />
       {/* Breathing lime energy */}
@@ -68,50 +68,67 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-44 pt-32 text-center">
-        <p
-          className="hero-rise mb-6 text-xs font-bold uppercase tracking-[0.3em] text-white/80"
-          style={{ animationDelay: "0.05s" }}
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-44 pt-28 text-center sm:px-6 sm:pt-32">
+        {/* El titular ES el CTA hacia el test — sin apariencia de botón. */}
+        <Link
+          to="/tu-nivel"
+          aria-label="Descubre de qué estás hecho — haz el test y encuentra tu reto"
+          className="group flex flex-col items-center focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-8"
         >
-          Elige tu reto · Corre · Vuelve por más
-        </p>
-
-        <h1
-          aria-label="Descubre de qué estás hecho — runluv®"
-          className="uppercase leading-[0.92] tracking-tight text-white"
-          style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-        >
-          {TITLE_LINES.map((line, i) => (
-            <span key={line.text} aria-hidden="true" className="block overflow-hidden pb-[0.04em]">
+          <h1
+            aria-label="Descubre de qué estás hecho"
+            className="uppercase leading-[0.92] tracking-tight text-white transition-[filter] duration-200 group-hover:brightness-110"
+            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+          >
+            {TITLE_LINES.map((line, i) => (
               <span
-                className="hero-line text-[clamp(3.2rem,11vw,9rem)]"
-                style={{
-                  animationDelay: `${(0.15 + i * 0.05).toFixed(2)}s`,
-                  ...(line.accent
-                    ? { color: ACCENT }
-                    : line.outline
-                      ? {
-                          color: "transparent",
-                          WebkitTextStroke: "2px rgba(255,255,255,0.85)",
-                        }
-                      : {}),
-                }}
+                key={line.text}
+                aria-hidden="true"
+                className="block overflow-hidden pb-[0.04em]"
               >
-                {line.text}
+                <span
+                  className="hero-line text-[clamp(3.6rem,12vw,9rem)]"
+                  style={{
+                    animationDelay: `${(0.15 + i * 0.05).toFixed(2)}s`,
+                    ...(line.accent
+                      ? { color: ACCENT }
+                      : line.outline
+                        ? {
+                            color: "transparent",
+                            WebkitTextStroke: "2px rgba(255,255,255,0.85)",
+                          }
+                        : {}),
+                  }}
+                >
+                  {line.text}
+                </span>
               </span>
-            </span>
-          ))}
-        </h1>
+            ))}
+          </h1>
 
-        {/* Accent bar wipes in under the headline */}
-        <span
-          aria-hidden="true"
-          className="hero-underline mt-7 block h-[4px] w-28"
-          style={{ background: ACCENT, boxShadow: "0 0 24px rgba(212,255,0,0.55)" }}
-        />
+          {/* Accent bar wipes in under the headline; grows on hover as the only affordance */}
+          <span
+            aria-hidden="true"
+            className="hero-underline mt-6 block h-[4px] w-28 origin-left transition-transform duration-300 ease-out group-hover:scale-x-[1.571] sm:mt-7"
+            style={{ background: ACCENT, boxShadow: "0 0 24px rgba(212,255,0,0.55)" }}
+          />
+
+          {/* Affordance táctil: en móvil no hay hover, esta leyenda invita al tap */}
+          <span
+            aria-hidden="true"
+            className="hero-rise mt-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-white/70 transition-colors duration-200 group-hover:text-white"
+            style={{ animationDelay: "0.4s" }}
+          >
+            Descubre tu reto
+            <ArrowRight
+              className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
+              style={{ color: ACCENT }}
+            />
+          </span>
+        </Link>
 
         <div
-          className="hero-rise mt-9 flex flex-wrap items-center justify-center gap-4"
+          className="hero-rise mt-8 flex w-full flex-col items-stretch justify-center gap-4 sm:mt-9 sm:w-auto sm:flex-row sm:items-center"
           style={{ animationDelay: "0.45s" }}
         >
           <Link
@@ -119,13 +136,7 @@ export function HeroSection() {
             className="btn-sheen inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold uppercase tracking-widest text-black transition-[transform,filter] duration-[160ms] ease-out-strong hover:brightness-95 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
             style={{ background: ACCENT, boxShadow: "0 0 40px rgba(212,255,0,0.3)" }}
           >
-            Regístrate a {event.name}
-          </Link>
-          <Link
-            to="/tu-nivel"
-            className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold uppercase tracking-widest text-white border border-white/40 transition-[border-color,background-color] duration-[160ms] hover:border-white hover:bg-white/8 active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
-          >
-            ¿Cuál es tu reto?
+            Inscríbete a La Última Vuelta
           </Link>
         </div>
       </div>
